@@ -3,5 +3,25 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
-  }
+  },
+  "cSpell.words": [
+    "APPWRITTE",
+    "bienvenido",
+    "Clientes",
+    "Crear",
+    "Entrar",
+    "flatlist",
+    "Funcional",
+    "guardadas",
+    "Inicio",
+    "Musculacion",
+    "nativewind",
+    "nombre",
+    "Pizarra",
+    "Pressable",
+    "Prueba",
+    "rutina",
+    "Rutinas",
+    "utilizadas"
+  ]
 }

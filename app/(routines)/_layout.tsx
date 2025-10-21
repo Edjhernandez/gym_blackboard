@@ -21,60 +21,30 @@ const _layout = () => {
       }}
     >
       <Tabs.Screen
-        name="home"
+        name="functional"
         options={{
           tabBarIcon: ({ focused }) => (
             <>
               <TabIcon
                 focused={focused}
-                title="Inicio"
-                icon={icons.homeIcon}
-                iconFocused={icons.homeIconFocused}
+                title="Funcional"
+                icon={icons.functionalIcon}
+                iconFocused={icons.functionalIconFocused}
               />
             </>
           ),
         }}
       />
       <Tabs.Screen
-        name="routines"
+        name="bodyBuilding"
         options={{
           tabBarIcon: ({ focused }) => (
             <>
               <TabIcon
                 focused={focused}
-                title="Rutinas"
-                icon={icons.routineIcon}
-                iconFocused={icons.routineIconFocused}
-              />
-            </>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="blackboard"
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <>
-              <TabIcon
-                focused={focused}
-                title="Pizarra"
-                icon={icons.tvIcon}
-                iconFocused={icons.tvIconFocused}
-              />
-            </>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="clients"
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <>
-              <TabIcon
-                focused={focused}
-                title="Clientes"
-                icon={icons.personIcon}
-                iconFocused={icons.personIconFocused}
+                title="Musculacion"
+                icon={icons.bodyBuildingIcon}
+                iconFocused={icons.bodyBuildingIconFocused}
               />
             </>
           ),
