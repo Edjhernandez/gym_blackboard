@@ -7,7 +7,7 @@ export default function Index() {
   return (
     <View className="bg-dark h-full flex justify-center items-center">
       <Image source={images.logo180} />
-      <Text className="text-light">bienvenido MADRE</Text>
+      <Text className="text-light">bienvenido</Text>
       <TouchableOpacity
         className="bg-light p-2 rounded-xl"
         onPress={() => router.push("/(tabs)/home")}
