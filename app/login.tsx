@@ -1,3 +1,5 @@
+import { images } from "@/constants/images";
+import { Image } from "expo-image";
 import { Stack } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -105,10 +107,17 @@ export default function LoginScreen() {
         className="w-full bg-[#0F1724] border border-gray-700 rounded-xl py-3 flex-row items-center justify-center"
       >
         {/* Placeholder Google icon - replace with official SVG/Image if available */}
-        <View className="w-6 h-6 bg-white rounded-full mr-3 items-center justify-center">
+        {/* <View className="w-6 h-6 bg-white rounded-full mr-3 items-center justify-center">
           <Text className="text-black text-xs">G</Text>
-        </View>
-        <Text className="text-gray-100 font-medium">Ingresar con Google</Text>
+        </View> */}
+        <Image
+          source={images.google}
+          style={{
+            width: 60,
+            height: 20,
+          }}
+          className="w-full"
+        />
       </Pressable>
 
       <TouchableOpacity className="mt-6 items-center">
