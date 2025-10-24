@@ -116,7 +116,6 @@ export default function LoginScreen() {
             width: 60,
             height: 20,
           }}
-          className="w-full"
         />
       </Pressable>
 
