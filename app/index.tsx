@@ -1,6 +1,6 @@
 import { Redirect } from "expo-router";
 
 export default function Index() {
-  // Aquí puedes implementar la lógica para verificar si el usuario está autenticado.
+  // logic to determine if user is logged in would go here
   return <Redirect href="/login" />;
 }
