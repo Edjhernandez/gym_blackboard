@@ -57,12 +57,7 @@ Notes:
 - `ezpb_containers/pr_reviews/frontend/PR_0034_REVIEW_v002.md`
 - `ezpb_containers/pr_reviews/frontend/PR_0004_REVIEW_v003_RETROSPECTIVE.md`
 
-For real-world examples of this template in action, please refer to:
-
-- **Detailed issue analysis:** `ezpb_containers/pr_reviews/frontend/PR_0011_REVIEW_v001.md`
-- **Balanced positive feedback:** `ezpb_containers/pr_reviews/frontend/PR_0034_REVIEW_v001.md`
-- **Strict quality standards (recommended):** `ezpb_containers/pr_reviews/frontend/PR_0097_REVIEW_v001.md`
-
+For real-world examples of this template in action, see example review files in the `ezpb_containers/pr_reviews/frontend/` directory if available.
 ## Header Format
 
 Every review document must start with the following structured header:
