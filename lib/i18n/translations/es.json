@@ -1,0 +1,20 @@
+{
+    "accessibility": {
+        "show_password_label": "Mostrar contraseña",
+        "hide_password_label": "Ocultar contraseña"
+    },
+    "common": {
+        "logo": "Logo del GYM"
+    },
+    "login": {
+        "welcome": "Bienvenido Coach",
+        "email": "Correo Electrónico",
+        "enter_your_email": "Ingresa tu correo electrónico",
+        "password": "Contraseña",
+        "enter_your_password": "Ingresa tu contraseña",
+        "show_password": "Mostrar contraseña",
+        "hide_password": "Ocultar contraseña",
+        "submit": "Ingresar",
+        "forgot_password": "¿Olvidaste tu contraseña?"
+    }
+}
