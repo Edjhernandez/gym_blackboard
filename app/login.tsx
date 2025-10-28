@@ -78,8 +78,8 @@ export default function LoginScreen() {
           <TouchableOpacity
             accessibilityLabel={
               showPassword
-                ? t("accessibility.show_password_label")
-                : t("accessibility.hide_password_label")
+                ? t("accessibility.hide_password_label")
+                : t("accessibility.show_password_label")
             }
             onPress={() => setShowPassword(!showPassword)}
             className="p-2"
