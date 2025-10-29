@@ -4,7 +4,7 @@ Este archivo lista las issues propuestas (títulos, descripciones breves y label
 
 ---
 
-1. **Login — pantalla inicial (UI)**
+[X] 1. **Login — pantalla inicial (UI)**
 
 - Descripción: Diseño limpio con logo del gimnasio. Formulario de login (email/contraseña). Botones para autenticación con Google. Link a recuperación de clave.
 - Labels sugeridos: `type:feature`, `area:frontend`, `priority:high`
