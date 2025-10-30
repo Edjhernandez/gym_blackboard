@@ -11,12 +11,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        dark: "#0F1417",
-        light: "#ffffff",
-        tabBarLetters: "#99ABBD",
-        bgTabBar: "#1C2129",
-        buttonColor: "#007AFF",
-        yellow180: "#F2E30C",
+        primary: "#F2E30C",
+        secondary: "#595959",
+        background: {
+          primary: "#0D0D0D",
+          secondary: "#1A1A1A",
+        },
+        text: {
+          primary: "#E7EBDA",
+          secondary: "#D9D9D9",
+        },
+        status: {
+          success: "#28a745",
+          warning: "#ffc107",
+          error: "#dc3545",
+        },
       },
     },
   },
