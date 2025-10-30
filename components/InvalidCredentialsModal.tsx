@@ -32,12 +32,12 @@ const InvalidCredentialsModal: React.FC<InvalidCredentialsModalProps> = ({
 
           {/* Title */}
           <Text className="text-yellow-400 text-2xl font-bold text-center mb-2">
-            {t("invalid_credentials_popUp.title")}
+            {t("login.invalid_credentials_popUp.title")}
           </Text>
 
           {/* Message */}
           <Text className="text-white text-center mb-6">
-            {t("invalid_credentials_popUp.message")}
+            {t("login.invalid_credentials_popUp.message")}
           </Text>
 
           {/* Buttons */}
@@ -46,7 +46,7 @@ const InvalidCredentialsModal: React.FC<InvalidCredentialsModalProps> = ({
             onPress={onRecover}
           >
             <Text className="text-black text-center font-bold text-base">
-              {t("invalid_credentials_popUp.recover_password")}
+              {t("login.invalid_credentials_popUp.recover_password")}
             </Text>
           </TouchableOpacity>
 
@@ -55,7 +55,7 @@ const InvalidCredentialsModal: React.FC<InvalidCredentialsModalProps> = ({
             onPress={onRetry}
           >
             <Text className="text-white text-center font-bold text-base">
-              {t("invalid_credentials_popUp.try_again")}
+              {t("login.invalid_credentials_popUp.try_again")}
             </Text>
           </TouchableOpacity>
         </View>

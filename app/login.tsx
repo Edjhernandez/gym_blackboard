@@ -1,3 +1,4 @@
+import InvalidCredentialsModal from "@/components/InvalidCredentialsModal";
 import { images } from "@/constants/images";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Image } from "expo-image";
@@ -16,15 +17,18 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
 
   const onSubmit = async () => {
     // TODO: replace this stub with real auth (Firebase / Supabase) integration
     setLoading(true);
+
     try {
-      console.log("Signin with", { email, password });
-      // await signInWithEmail(email, password)
+      console.log("Signin with", { email, password }); // await signInWithEmail(email, password)
+      throw new Error("Invalid credentials"); // Simulate invalid credentials error
     } catch (err) {
-      console.error(err);
+      //console.error(err);
+      setIsErrorModalVisible(true);
     } finally {
       setLoading(false);
     }
@@ -32,7 +36,18 @@ export default function LoginScreen() {
 
   const onGoogle = async () => {
     // TODO: implement Google sign-in flow (Expo AuthSession / Firebase)
-    console.log("Google signin (stub)");
+    //console.log("Google signin (stub)");
+    setLoading(false);
+  };
+
+  const handleRecover = () => {
+    setIsErrorModalVisible(false);
+    // Navigate to password recovery screen or implement logic
+    console.log("Recover password");
+  };
+
+  const handleRetry = () => {
+    setIsErrorModalVisible(false);
   };
 
   return (
@@ -126,6 +141,11 @@ export default function LoginScreen() {
 
       {/* Bottom padding to avoid being too close to device bottom */}
       <View style={{ height: 40 }} />
+      <InvalidCredentialsModal
+        visible={isErrorModalVisible}
+        onRecover={handleRecover}
+        onRetry={handleRetry}
+      />
     </View>
   );
 }
