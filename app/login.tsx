@@ -81,7 +81,7 @@ export default function LoginScreen() {
           value={email}
           onChangeText={setEmail}
           placeholder={t("login.enter_your_email")}
-          placeholderTextColor="text-text-secondary"
+          placeholderTextColor="#595959"
           keyboardType="email-address"
           autoCapitalize="none"
           className="bg-background-secondary text-text-primary px-4 py-3 rounded-lg"
@@ -95,7 +95,7 @@ export default function LoginScreen() {
             value={password}
             onChangeText={setPassword}
             placeholder={t("login.enter_your_password")}
-            placeholderTextColor="text-text-secondary"
+            placeholderTextColor="#595959"
             secureTextEntry={!showPassword}
             autoCapitalize="none"
             className="flex-1 text-text-primary py-3"
