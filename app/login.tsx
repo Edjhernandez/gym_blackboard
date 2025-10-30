@@ -55,44 +55,50 @@ export default function LoginScreen() {
   };
 
   return (
-    <View className="flex-1 bg-[#1E1E1E] px-6 justify-center">
+    <View className="flex-1 bg-background-primary px-6 justify-center">
       {/* <Stack.Screen options={{ headerShown: false }} /> */}
 
       <View className="items-center mb-8">
-        <View className="w-20 h-20 rounded-lg bg-[#545C4B] items-center justify-center">
+        <View className="w-20 h-20 rounded-lg bg-background-primary items-center justify-center">
           {/* Placeholder for logo - replace with Image if you have an asset */}
-          <Text className="text-white font-bold">{t("common.logo")}</Text>
+          <Image
+            style={{
+              width: 100,
+              height: 100,
+            }}
+            source={images.logo180}
+          />
         </View>
       </View>
 
-      <Text className="text-white text-4xl font-bold mb-6">
+      <Text className="text-text-primary text-4xl font-bold mb-6">
         {t("login.welcome")}
       </Text>
 
       <View className="mb-4">
-        <Text className="text-gray-300 mb-2">{t("login.email")}</Text>
+        <Text className="text-text-primary mb-2">{t("login.email")}</Text>
         <TextInput
           value={email}
           onChangeText={setEmail}
           placeholder={t("login.enter_your_email")}
-          placeholderTextColor="#9CA3AF"
+          placeholderTextColor="text-text-secondary"
           keyboardType="email-address"
           autoCapitalize="none"
-          className="bg-[#181818] text-white px-4 py-3 rounded-lg"
+          className="bg-background-secondary text-text-primary px-4 py-3 rounded-lg"
         />
       </View>
 
       <View className="mb-4">
-        <Text className="text-gray-300 mb-2">{t("login.password")}</Text>
-        <View className="flex-row items-center bg-[#181818] rounded-lg px-4">
+        <Text className="text-text-primary mb-2">{t("login.password")}</Text>
+        <View className="flex-row items-center bg-background-secondary rounded-lg px-4">
           <TextInput
             value={password}
             onChangeText={setPassword}
             placeholder={t("login.enter_your_password")}
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor="text-text-secondary"
             secureTextEntry={!showPassword}
             autoCapitalize="none"
-            className="flex-1 text-white py-3"
+            className="flex-1 text-text-primary py-3"
           />
           <TouchableOpacity
             accessibilityLabel={
@@ -103,7 +109,7 @@ export default function LoginScreen() {
             onPress={() => setShowPassword(!showPassword)}
             className="p-2"
           >
-            <Text className="text-gray-300">
+            <Text className="text-text-secondary">
               {showPassword
                 ? t("login.hide_password")
                 : t("login.show_password")}
@@ -115,20 +121,20 @@ export default function LoginScreen() {
       <Pressable
         onPress={onSubmit}
         disabled={loading}
-        className="w-full bg-[#FDE047] rounded-xl py-4 items-center justify-center mt-2"
+        className="w-full bg-primary rounded-xl py-4 items-center justify-center mt-2"
       >
-        <Text className="text-black font-bold">{t("login.submit")}</Text>
+        <Text className="text-secondary font-bold">{t("login.submit")}</Text>
       </Pressable>
 
       <View className="flex-row items-center my-4">
-        <View className="flex-1 h-px bg-gray-700" />
-        <Text className="text-gray-400 mx-3">O</Text>
-        <View className="flex-1 h-px bg-gray-700" />
+        <View className="flex-1 h-px bg-background-secondary" />
+        <Text className="text-text-secondary mx-3">{t("login.or")}</Text>
+        <View className="flex-1 h-px bg-background-secondary" />
       </View>
 
       <Pressable
         onPress={onGoogle}
-        className="w-full bg-[#0F1724] border border-gray-700 rounded-xl py-3 flex-row items-center justify-center"
+        className="w-full bg-background-primary border border-secondary rounded-xl py-3 flex-row items-center justify-center"
       >
         <Image
           source={images.google}
@@ -141,7 +147,9 @@ export default function LoginScreen() {
 
       <Link href="/forgot-password" asChild>
         <Pressable className="mt-6 items-center">
-          <Text className="text-indigo-400">{t("login.forgot_password")}</Text>
+          <Text className="text-text-secondary">
+            {t("login.forgot_password")}
+          </Text>
         </Pressable>
       </Link>
 

@@ -5,9 +5,9 @@ import { StyleSheet, Text, View } from "react-native";
 
 const home = () => {
   return (
-    <View className="bg-dark h-full flex justify-start pt-12">
+    <View className="bg-background-primary h-full flex justify-start pt-12">
       <View className="flex flex-row justify-center items-center w-full h-40 px-4">
-        <Text className="text-light w-1/2">Hola! nombre del coach</Text>
+        <Text className="text-text-primary w-1/2">Hola! nombre del coach</Text>
         <Image
           style={{
             width: 100,

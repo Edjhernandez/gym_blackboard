@@ -16,6 +16,7 @@
         "hide_password": "Ocultar contraseña",
         "submit": "Ingresar",
         "forgot_password": "¿Olvidaste tu contraseña?",
+        "or": "ó",
         "invalid_credentials_popUp": {
             "title": "Credenciales Inválidas",
             "message": "El email o la contraseña que ingresaste no son correctos. ¿Olvidaste tu contraseña?",

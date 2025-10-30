@@ -17,7 +17,7 @@ const _layout = () => {
           height: 120,
         },
         tabBarBackground: () => (
-          <View className="flex-1 bg-background-primary border-t border-background-secondary -mt-3"></View>
+          <View className="flex-1 bg-background-primary border-t-[0.5px] border-background-secondary"></View>
         ),
       }}
     >

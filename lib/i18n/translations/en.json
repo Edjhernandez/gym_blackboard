@@ -16,6 +16,7 @@
         "hide_password": "Hide password",
         "submit": "Log In",
         "forgot_password": "Forgot your password?",
+        "or": "or",
         "invalid_credentials_popUp": {
             "title": "Invalid Credentials",
             "message": "The email or password you entered is incorrect. Forgot your password?",
