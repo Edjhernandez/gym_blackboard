@@ -2,6 +2,7 @@ import InvalidCredentialsModal from "@/components/InvalidCredentialsModal";
 import { images } from "@/constants/images";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Image } from "expo-image";
+import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Pressable,
@@ -12,6 +13,7 @@ import {
 } from "react-native";
 
 export default function LoginScreen() {
+  const router = useRouter();
   const { t } = useI18n();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,6 +45,7 @@ export default function LoginScreen() {
   const handleRecover = () => {
     setIsErrorModalVisible(false);
     // Navigate to password recovery screen or implement logic
+    router.push("/forgot-password");
     console.log("Recover password");
   };
 
@@ -135,9 +138,11 @@ export default function LoginScreen() {
         />
       </Pressable>
 
-      <TouchableOpacity className="mt-6 items-center">
-        <Text className="text-indigo-400">{t("login.forgot_password")}</Text>
-      </TouchableOpacity>
+      <Link href="/forgot-password" asChild>
+        <Pressable className="mt-6 items-center">
+          <Text className="text-indigo-400">{t("login.forgot_password")}</Text>
+        </Pressable>
+      </Link>
 
       {/* Bottom padding to avoid being too close to device bottom */}
       <View style={{ height: 40 }} />

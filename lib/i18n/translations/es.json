@@ -21,6 +21,14 @@
             "message": "El email o la contraseña que ingresaste no son correctos. ¿Olvidaste tu contraseña?",
             "recover_password": "Recuperar Contraseña",
             "try_again": "Volver a intentar"
+        },
+        "forgot_password_screen": {
+            "title": "Recuperar tu Contraseña",
+            "instruction": "Por favor ingresa tu dirección de correo electrónico para recibir un enlace de restablecimiento de contraseña.",
+            "email_input": "Email",
+            "email_placeholder": "tu-email@ejemplo.com",
+            "submit_button": "Enviar enlace",
+            "back_to_login": "Volver a Iniciar Sesión"
         }
     }
 }

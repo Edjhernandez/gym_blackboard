@@ -21,6 +21,14 @@
             "message": "The email or password you entered is incorrect. Forgot your password?",
             "recover_password": "Recover Password",
             "try_again": "try again"
+        },
+        "forgot_password_screen": {
+            "title": "Recover Your Password",
+            "instruction": "Please enter your email address to receive password reset instructions.",
+            "email_input": "Email",
+            "email_placeholder": "your-email@example.com",
+            "submit_button": "Send link",
+            "back_to_login": "Back to Login"
         }
     }
 }
