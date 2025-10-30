@@ -15,6 +15,12 @@
         "show_password": "Mostrar contraseña",
         "hide_password": "Ocultar contraseña",
         "submit": "Ingresar",
-        "forgot_password": "¿Olvidaste tu contraseña?"
+        "forgot_password": "¿Olvidaste tu contraseña?",
+        "invalid_credentials_popUp": {
+            "title": "Credenciales Inválidas",
+            "message": "El email o la contraseña que ingresaste no son correctos. ¿Olvidaste tu contraseña?",
+            "recover_password": "Recuperar Contraseña",
+            "try_again": "Volver a intentar"
+        }
     }
 }
