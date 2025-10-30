@@ -1,5 +1,5 @@
 import { useI18n } from "@/lib/hooks/useI18n";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 
@@ -8,8 +8,9 @@ export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState("");
 
   const onSendLink = () => {
-    // TODO: Implement logic to send password recovery link
-    console.log("Sending recovery link to:", email);
+    // Simulate a failure and navigate to the error screen
+    console.log("Simulating failed recovery for:", email);
+    router.push("/recovery-error");
   };
 
   return (

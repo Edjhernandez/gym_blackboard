@@ -29,6 +29,12 @@
             "email_placeholder": "your-email@example.com",
             "submit_button": "Send link",
             "back_to_login": "Back to Login"
+        },
+        "recovery_error_screen": {
+            "title": "Recovery Error",
+            "message": "There was a problem resetting your password. Please contact our support team for assistance.",
+            "contact_support": "Contact Support",
+            "back_to_login": "Back to Login"
         }
     }
 }

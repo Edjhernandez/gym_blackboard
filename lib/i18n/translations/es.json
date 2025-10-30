@@ -29,6 +29,12 @@
             "email_placeholder": "tu-email@ejemplo.com",
             "submit_button": "Enviar enlace",
             "back_to_login": "Volver a Iniciar Sesión"
+        },
+        "recovery_error_screen": {
+            "title": "Error de Recuperación",
+            "message": "Hubo un problema al restablecer tu contraseña. Por favor contacta a nuestro equipo de soporte para recibir asistencia.",
+            "contact_support": "Contactar Soporte",
+            "back_to_login": "Volver"
         }
     }
 }
