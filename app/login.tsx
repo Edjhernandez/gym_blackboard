@@ -147,7 +147,7 @@ export default function LoginScreen() {
 
       <Link href="/forgot-password" asChild>
         <Pressable className="mt-6 items-center">
-          <Text className="text-text-secondary">
+          <Text className="text-text-secondary underline">
             {t("login.forgot_password")}
           </Text>
         </Pressable>

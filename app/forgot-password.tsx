@@ -14,42 +14,42 @@ export default function ForgotPasswordScreen() {
   };
 
   return (
-    <View className="flex-1 bg-[#181818] px-6 justify-center">
-      <Text className="text-white text-4xl font-bold text-center mb-4">
+    <View className="flex-1 bg-background-primary px-6 justify-center">
+      <Text className="text-text-primary text-4xl font-bold text-center mb-4">
         {t("login.forgot_password_screen.title")}
       </Text>
 
-      <Text className="text-gray-300 text-center mb-8">
+      <Text className="text-text-primary text-center mb-8">
         {t("login.forgot_password_screen.instruction")}
       </Text>
 
       <View className="mb-4">
-        <Text className="text-gray-300 mb-2">
+        <Text className="text-text-secondary mb-2">
           {t("login.forgot_password_screen.email_input")}
         </Text>
         <TextInput
           value={email}
           onChangeText={setEmail}
           placeholder={t("login.forgot_password_screen.email_placeholder")}
-          placeholderTextColor="#9CA3AF"
+          placeholderTextColor="#595959"
           keyboardType="email-address"
           autoCapitalize="none"
-          className="bg-[#1E1E1E] text-white px-4 py-3 rounded-lg border border-yellow-400"
+          className="bg-background-secondary text-text-primary px-4 py-3 rounded-lg border border-primary"
         />
       </View>
 
       <Pressable
         onPress={onSendLink}
-        className="w-full bg-yellow-400 rounded-xl py-4 items-center justify-center mt-4"
+        className="w-full bg-primary rounded-xl py-4 items-center justify-center mt-4"
       >
-        <Text className="text-black font-bold">
+        <Text className="text-secondary font-bold">
           {t("login.forgot_password_screen.submit_button")}
         </Text>
       </Pressable>
 
       <Link href="/login" asChild>
         <Pressable className="mt-6 items-center">
-          <Text className="text-yellow-400">
+          <Text className="text-text-secondary underline">
             {t("login.forgot_password_screen.back_to_login")}
           </Text>
         </Pressable>
