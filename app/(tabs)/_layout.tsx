@@ -1,7 +1,7 @@
 import TabIcon from "@/components/TabIcon";
 import { icons } from "@/constants/icons";
 import { Tabs } from "expo-router";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const _layout = () => {
   return (
@@ -14,10 +14,11 @@ const _layout = () => {
           marginTop: 10,
         },
         tabBarStyle: {
-          backgroundColor: "#1C2129",
-          borderColor: "#1C2129",
           height: 120,
         },
+        tabBarBackground: () => (
+          <View className="flex-1 bg-background-primary border-t-[0.5px] border-background-secondary"></View>
+        ),
       }}
     >
       <Tabs.Screen

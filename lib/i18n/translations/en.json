@@ -15,6 +15,27 @@
         "show_password": "Show password",
         "hide_password": "Hide password",
         "submit": "Log In",
-        "forgot_password": "Forgot your password?"
+        "forgot_password": "Forgot your password?",
+        "or": "or",
+        "invalid_credentials_popUp": {
+            "title": "Invalid Credentials",
+            "message": "The email or password you entered is incorrect. Forgot your password?",
+            "recover_password": "Recover Password",
+            "try_again": "try again"
+        },
+        "forgot_password_screen": {
+            "title": "Recover Your Password",
+            "instruction": "Please enter your email address to receive password reset instructions.",
+            "email_input": "Email",
+            "email_placeholder": "your-email@example.com",
+            "submit_button": "Send link",
+            "back_to_login": "Back to Login"
+        },
+        "recovery_error_screen": {
+            "title": "Recovery Error",
+            "message": "There was a problem resetting your password. Please contact our support team for assistance.",
+            "contact_support": "Contact Support",
+            "back_to_login": "Back to Login"
+        }
     }
 }
