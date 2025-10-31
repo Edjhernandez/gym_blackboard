@@ -26,9 +26,9 @@ export default function LoginScreen() {
     setLoading(true);
 
     try {
-      //router.push("/(tabs)/home");
+      router.push("/(tabs)/home");
       console.log("Signin with", { email, password }); // await signInWithEmail(email, password)
-      throw new Error("Invalid credentials"); // Simulate invalid credentials error
+      //throw new Error("Invalid credentials"); // Simulate invalid credentials error
     } catch (err) {
       //console.error(err);
       setIsErrorModalVisible(true);
