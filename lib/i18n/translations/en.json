@@ -37,5 +37,10 @@
             "contact_support": "Contact Support",
             "back_to_login": "Back to Login"
         }
+    },
+    "home": {
+        "greeting": "Hello coach, {{name}}",
+        "your_most_used_routines": "Your most used routines",
+        "create_new_routine": "Create New Routine"
     }
 }
