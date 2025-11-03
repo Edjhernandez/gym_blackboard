@@ -1,7 +1,12 @@
 {
     "accessibility": {
         "show_password_label": "Show password",
-        "hide_password_label": "Hide password"
+        "hide_password_label": "Hide password",
+        "routine_label": "Routine {{name}}",
+        "project_to_tv_label": "Project to TV",
+        "edit_routine_label": "Edit Routine",
+        "delete_routine_label": "Delete Routine",
+        "go_back_label": "Go Back"
     },
     "common": {
         "logo": "Logo GYM"
@@ -48,5 +53,11 @@
         "greeting": "Hello coach, {{name}}",
         "your_most_used_routines": "Your most used routines",
         "create_new_routine": "Create New Routine"
+    },
+    "routine_action_popup": {
+        "project_to_tv_button": "Project to TV",
+        "edit_routine_button": "Edit Routine",
+        "delete_routine_button": "Delete Routine",
+        "go_back_button": "Go Back"
     }
 }
