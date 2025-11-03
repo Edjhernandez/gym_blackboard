@@ -1,84 +1,9 @@
 import RoutineCard from "@/components/RoutineCard";
+import { routines } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Image } from "expo-image";
 import React from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-
-// Mock Data
-const routines = [
-  {
-    id: "1",
-    title: "Día de Pecho y Tríceps",
-    details: "5 ejercicios, 60 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "2",
-    title: "Día de Pierna",
-    details: "6 ejercicios, 75 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "3",
-    title: "Espalda y Bíceps",
-    details: "5 ejercicios, 60 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "4",
-    title: "Día de Pecho y Tríceps",
-    details: "5 ejercicios, 60 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "5",
-    title: "Día de Pierna",
-    details: "6 ejercicios, 75 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "6",
-    title: "Espalda y Bíceps",
-    details: "5 ejercicios, 60 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "7",
-    title: "Día de Pecho y Tríceps",
-    details: "5 ejercicios, 60 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "8",
-    title: "Día de Pierna",
-    details: "6 ejercicios, 75 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "9",
-    title: "Espalda y Bíceps",
-    details: "5 ejercicios, 60 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "10",
-    title: "Día de Pecho y Tríceps",
-    details: "5 ejercicios, 60 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "11",
-    title: "Día de Pierna",
-    details: "6 ejercicios, 75 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-  {
-    id: "12",
-    title: "Espalda y Bíceps",
-    details: "5 ejercicios, 60 min",
-    image: require("../../assets/images/180logo.png"),
-  },
-];
 
 const home = () => {
   const { t } = useI18n();

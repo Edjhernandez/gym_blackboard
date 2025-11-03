@@ -1,9 +1,22 @@
 import TabIcon from "@/components/TabIcon";
-import { icons } from "@/constants/icons";
+import { useI18n } from "@/lib/hooks/useI18n";
 import { Tabs } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
+import {
+  TvIcon as BlackboardIconOutline,
+  HomeIcon as HomeIconOutline,
+  ClipboardDocumentListIcon as RoutineIconOutline,
+  Cog6ToothIcon as SettingsIconOutline,
+} from "react-native-heroicons/outline";
+import {
+  TvIcon as BlackboardIconSolid,
+  HomeIcon as HomeIconSolid,
+  ClipboardDocumentListIcon as RoutineIconSolid,
+  Cog6ToothIcon as SettingsIconSolid,
+} from "react-native-heroicons/solid";
 
 const _layout = () => {
+  const { t } = useI18n();
   return (
     <Tabs
       screenOptions={{
@@ -28,9 +41,9 @@ const _layout = () => {
             <>
               <TabIcon
                 focused={focused}
-                title="Inicio"
-                icon={icons.homeIcon}
-                iconFocused={icons.homeIconFocused}
+                title={t("navigation.home")}
+                IconOutline={HomeIconOutline}
+                IconSolid={HomeIconSolid}
               />
             </>
           ),
@@ -43,9 +56,9 @@ const _layout = () => {
             <>
               <TabIcon
                 focused={focused}
-                title="Rutinas"
-                icon={icons.routineIcon}
-                iconFocused={icons.routineIconFocused}
+                title={t("navigation.routines")}
+                IconOutline={RoutineIconOutline}
+                IconSolid={RoutineIconSolid}
               />
             </>
           ),
@@ -58,24 +71,24 @@ const _layout = () => {
             <>
               <TabIcon
                 focused={focused}
-                title="Pizarra"
-                icon={icons.tvIcon}
-                iconFocused={icons.tvIconFocused}
+                title={t("navigation.blackboard")}
+                IconOutline={BlackboardIconOutline}
+                IconSolid={BlackboardIconSolid}
               />
             </>
           ),
         }}
       />
       <Tabs.Screen
-        name="clients"
+        name="settings"
         options={{
           tabBarIcon: ({ focused }) => (
             <>
               <TabIcon
                 focused={focused}
-                title="Clientes"
-                icon={icons.personIcon}
-                iconFocused={icons.personIconFocused}
+                title={t("navigation.settings")}
+                IconOutline={SettingsIconOutline}
+                IconSolid={SettingsIconSolid}
               />
             </>
           ),
@@ -86,5 +99,3 @@ const _layout = () => {
 };
 
 export default _layout;
-
-const styles = StyleSheet.create({});

@@ -6,6 +6,12 @@
     "common": {
         "logo": "Logo GYM"
     },
+    "navigation": {
+        "home": "Home",
+        "routines": "Routines",
+        "blackboard": "Blackboard",
+        "settings": "Settings"
+    },
     "login": {
         "welcome": "Welcome Coach",
         "email": "Email",

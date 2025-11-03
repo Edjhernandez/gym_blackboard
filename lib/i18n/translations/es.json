@@ -6,6 +6,12 @@
     "common": {
         "logo": "Logo del gimnasio"
     },
+    "navigation:": {
+        "home": "Inicio",
+        "routines": "Rutinas",
+        "blackboard": "Pizarra",
+        "settings": "Configuraciones"
+    },
     "login": {
         "welcome": "Bienvenido Coach",
         "email": "Correo Electrónico",
