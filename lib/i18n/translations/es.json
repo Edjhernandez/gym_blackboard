@@ -1,10 +1,22 @@
 {
     "accessibility": {
         "show_password_label": "Mostrar contraseña",
-        "hide_password_label": "Ocultar contraseña"
+        "hide_password_label": "Ocultar contraseña",
+        "routine_label": "Rutina {{name}}",
+        "project_to_tv_label": "Proyectar a TV",
+        "edit_routine_label": "Editar Rutina",
+        "delete_routine_label": "Eliminar Rutina",
+        "go_back_label": "Volver",
+        "duplicate_routine_label": "Duplicar Rutina"
     },
     "common": {
         "logo": "Logo del gimnasio"
+    },
+    "navigation": {
+        "home": "Inicio",
+        "routines": "Rutinas",
+        "blackboard": "Pizarra",
+        "settings": "Configuraciones"
     },
     "login": {
         "welcome": "Bienvenido Coach",
@@ -37,5 +49,17 @@
             "contact_support": "Contactar Soporte",
             "back_to_login": "Volver"
         }
+    },
+    "home": {
+        "greeting": "Hola coach, {{name}}",
+        "your_most_used_routines": "Tus rutinas más usadas",
+        "create_new_routine": "Crear Nueva Rutina"
+    },
+    "routine_action_popup": {
+        "project_to_tv_button": "Proyectar a TV",
+        "edit_routine_button": "Editar Rutina",
+        "delete_routine_button": "Eliminar Rutina",
+        "go_back_button": "Volver",
+        "duplicate_routine_button": "Duplicar Rutina"
     }
 }

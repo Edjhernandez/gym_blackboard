@@ -1,14 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const clients = () => {
+const SettingsScreen = () => {
   return (
     <View>
-      <Text>clients</Text>
+      <Text>Settings</Text>
     </View>
   );
 };
 
-export default clients;
+export default SettingsScreen;
 
 const styles = StyleSheet.create({});
