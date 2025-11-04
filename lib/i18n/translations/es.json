@@ -6,7 +6,8 @@
         "project_to_tv_label": "Proyectar a TV",
         "edit_routine_label": "Editar Rutina",
         "delete_routine_label": "Eliminar Rutina",
-        "go_back_label": "Volver"
+        "go_back_label": "Volver",
+        "duplicate_routine_label": "Duplicar Rutina"
     },
     "common": {
         "logo": "Logo del gimnasio"
@@ -58,6 +59,7 @@
         "project_to_tv_button": "Proyectar a TV",
         "edit_routine_button": "Editar Rutina",
         "delete_routine_button": "Eliminar Rutina",
-        "go_back_button": "Volver"
+        "go_back_button": "Volver",
+        "duplicate_routine_button": "Duplicar Rutina"
     }
 }

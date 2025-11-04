@@ -6,7 +6,8 @@
         "project_to_tv_label": "Project to TV",
         "edit_routine_label": "Edit Routine",
         "delete_routine_label": "Delete Routine",
-        "go_back_label": "Go Back"
+        "go_back_label": "Go Back",
+        "duplicate_routine_label": "Duplicate Routine"
     },
     "common": {
         "logo": "Logo GYM"
@@ -58,6 +59,7 @@
         "project_to_tv_button": "Project to TV",
         "edit_routine_button": "Edit Routine",
         "delete_routine_button": "Delete Routine",
-        "go_back_button": "Go Back"
+        "go_back_button": "Go Back",
+        "duplicate_routine_button": "Duplicate Routine"
     }
 }

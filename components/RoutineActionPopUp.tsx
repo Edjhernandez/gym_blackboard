@@ -4,6 +4,7 @@ import React from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 import {
   ArrowUturnLeftIcon,
+  DocumentDuplicateIcon,
   MinusIcon,
   PencilSquareIcon,
   RssIcon,
@@ -33,7 +34,7 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
         intensity={130}
         tint="dark"
       >
-        <View className="flex-1 justify-start items-center px-6 bg-background-primary absolute top-[55%] left-0 right-0 bottom-0">
+        <View className="flex-1 justify-start items-center px-6 bg-background-primary absolute top-1/2 left-0 right-0 bottom-0">
           <MinusIcon
             size={30}
             color="#9CA3AF"
@@ -49,7 +50,7 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.project_to_tv_label")}
-            className="w-11/12 flex-row items-center justify-center rounded-xl py-4 bg-primary mb-3"
+            className="w-11/12 flex-row items-center justify-center rounded-xl py-3 bg-primary mb-3"
             onPress={() => setVisible?.(false)}
           >
             <RssIcon size={25} color="#595959" className="mr-4" />
@@ -62,7 +63,7 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.edit_routine_label")}
-            className="w-11/12 flex-row items-center justify-center rounded-xl py-4 bg-primary mb-3"
+            className="w-11/12 flex-row items-center justify-center rounded-xl py-3 bg-primary mb-3"
             onPress={() => setVisible?.(false)}
           >
             <PencilSquareIcon size={25} color="#595959" className="mr-4" />
@@ -71,11 +72,24 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
             </Text>
           </TouchableOpacity>
 
-          {/* Button 3: Eliminar Rutina */}
+          {/* Button 3: Duplicar Rutina */}
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel={t("accessibility.duplicate_routine_label")}
+            className="w-11/12 flex-row items-center justify-center rounded-xl py-3 bg-primary mb-3"
+            onPress={() => setVisible?.(false)}
+          >
+            <DocumentDuplicateIcon size={25} color="#595959" className="mr-4" />
+            <Text className="text-secondary font-extrabold text-xl ml-4">
+              {t("routine_action_popup.duplicate_routine_button")}
+            </Text>
+          </TouchableOpacity>
+
+          {/* Button 4: Eliminar Rutina */}
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.delete_routine_label")}
-            className="w-11/12 flex-row items-center justify-center rounded-xl py-4 bg-primary mb-3"
+            className="w-11/12 flex-row items-center justify-center rounded-xl py-3 bg-primary mb-3"
             onPress={() => setVisible?.(false)}
           >
             <TrashIcon size={25} color="#595959" className="mr-4" />
@@ -84,11 +98,11 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
             </Text>
           </TouchableOpacity>
 
-          {/* Button 4: Volver */}
+          {/* Button 5: Volver */}
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.back_label")}
-            className="w-11/12 flex-row items-center justify-center rounded-xl py-4 bg-background-secondary"
+            className="w-11/12 flex-row items-center justify-center rounded-xl py-3 bg-background-secondary"
             onPress={() => setVisible?.(false)}
           >
             <ArrowUturnLeftIcon size={25} color="#D9D9D9" className="mr-4" />
