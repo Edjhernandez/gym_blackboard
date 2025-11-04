@@ -16,7 +16,9 @@
         "home": "Inicio",
         "routines": "Rutinas",
         "blackboard": "Pizarra",
-        "settings": "Configuraciones"
+        "settings": "Configuraciones",
+        "functional": "Funcional",
+        "bodybuilding": "Musculación"
     },
     "login": {
         "welcome": "Bienvenido Coach",
@@ -61,5 +63,8 @@
         "delete_routine_button": "Eliminar Rutina",
         "go_back_button": "Volver",
         "duplicate_routine_button": "Duplicar Rutina"
+    },
+    "routines": {
+        "title": "Mis Rutinas"
     }
 }

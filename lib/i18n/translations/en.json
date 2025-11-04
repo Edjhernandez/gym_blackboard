@@ -16,7 +16,9 @@
         "home": "Home",
         "routines": "Routines",
         "blackboard": "Blackboard",
-        "settings": "Settings"
+        "settings": "Settings",
+        "functional": "Functional",
+        "bodybuilding": "Bodybuilding"
     },
     "login": {
         "welcome": "Welcome Coach",
@@ -61,5 +63,8 @@
         "delete_routine_button": "Delete Routine",
         "go_back_button": "Go Back",
         "duplicate_routine_button": "Duplicate Routine"
+    },
+    "routines": {
+        "title": "My Routines"
     }
 }
