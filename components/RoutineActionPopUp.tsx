@@ -101,7 +101,7 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
           {/* Button 5: Volver */}
           <TouchableOpacity
             accessibilityRole="button"
-            accessibilityLabel={t("accessibility.back_label")}
+            accessibilityLabel={t("accessibility.go_back_label")}
             className="w-11/12 flex-row items-center justify-center rounded-xl py-3 bg-background-secondary"
             onPress={() => setVisible?.(false)}
           >

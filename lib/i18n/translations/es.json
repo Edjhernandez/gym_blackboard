@@ -12,7 +12,7 @@
     "common": {
         "logo": "Logo del gimnasio"
     },
-    "navigation:": {
+    "navigation": {
         "home": "Inicio",
         "routines": "Rutinas",
         "blackboard": "Pizarra",
