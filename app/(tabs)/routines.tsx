@@ -1,10 +1,10 @@
-import { routines as allRoutines } from "@/DATA/data";
+import RoutineCard from "@/components/RoutineCard";
+import { routines } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { useRouter } from "expo-router";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import {
   FlatList,
-  Image,
   Pressable,
   Text,
   TouchableOpacity,
@@ -17,48 +17,35 @@ const Routines = () => {
   const router = useRouter();
   const [tab, setTab] = useState<"functional" | "bodybuilding">("functional");
 
-  // For demo purposes we don't actually filter by type in DATA; keep hook for future
-  const routines = useMemo(() => allRoutines, []);
-
-  const renderItem = ({ item }: { item: (typeof allRoutines)[0] }) => {
-    return (
-      <TouchableOpacity
-        onPress={() => router.push(`/`)}
-        className="w-full bg-background-secondary p-4 rounded-2xl my-2 flex-row items-center"
-      >
-        <View className="w-12 h-12 rounded-xl bg-black items-center justify-center mr-4">
-          <Image source={item.image} style={{ width: 34, height: 34 }} />
-        </View>
-        <View className="flex-1">
-          <Text className="text-white text-lg font-semibold">{item.title}</Text>
-          <Text className="text-text-secondary text-xs mt-1">
-            {item.details}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
-
   return (
-    <View className="flex-1 bg-black px-4 pt-10">
+    <View className="flex-1 bg-background-primary px-4 pt-10 justify-center items-center">
       {/* Header */}
-      <View className="items-center mb-4">
-        <Text className="text-white text-2xl font-bold">Mis Rutinas</Text>
+
+      <View className="items-center mb-4 w-full">
+        <Text className="text-white text-2xl font-bold">
+          {t("routines.title")}
+        </Text>
       </View>
 
       {/* Tabs */}
-      <View className="flex-row justify-center space-x-6 mb-4">
+      <View className="w-full flex-row justify-between ">
         <Pressable
           onPress={() => setTab("functional")}
-          className="items-center"
+          className={`items-center justify-end w-1/2 flex-1  rounded-s-xl border-[0.5px] border-text-secondary ${
+            tab === "functional" ? "bg-secondary " : "bg-background-secondary"
+          }`}
         >
           <Text
-            className={`text-base ${tab === "functional" ? "text-white font-semibold" : "text-gray-400"}`}
+            className={`text-base my-2 ${
+              tab === "functional"
+                ? "text-text-primary font-bold"
+                : "text-gray-600 font-semibold"
+            }`}
           >
-            Funcional
+            {t("navigation.functional")}
           </Text>
           {tab === "functional" ? (
-            <View className="h-0.5 bg-yellow-400 mt-2 rounded-full w-16" />
+            <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
           ) : (
             <View className="h-0.5 mt-2 w-16" />
           )}
@@ -66,40 +53,44 @@ const Routines = () => {
 
         <Pressable
           onPress={() => setTab("bodybuilding")}
-          className="items-center"
+          className={`items-center justify-end w-1/2 flex-1  rounded-s-xl border-[0.5px] border-text-secondary ${
+            tab === "bodybuilding" ? "bg-secondary " : "bg-background-secondary"
+          }`}
         >
           <Text
-            className={`text-base ${tab === "bodybuilding" ? "text-white font-semibold" : "text-gray-400"}`}
+            className={`text-base my-2 ${
+              tab === "bodybuilding"
+                ? "text-text-primary font-bold"
+                : "text-gray-600 font-semibold"
+            }`}
           >
-            Musculación
+            {t("navigation.bodybuilding")}
           </Text>
           {tab === "bodybuilding" ? (
-            <View className="h-0.5 bg-yellow-400 mt-2 rounded-full w-20" />
+            <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
           ) : (
             <View className="h-0.5 mt-2 w-20" />
           )}
         </Pressable>
       </View>
 
-      {/* Separator */}
-      <View className="h-px bg-gray-800 mb-4" />
-
       {/* List */}
-      <FlatList
-        data={routines}
-        keyExtractor={(i) => i.id}
-        renderItem={renderItem}
-        contentContainerStyle={{ paddingBottom: 120 }}
-        showsVerticalScrollIndicator={false}
-      />
-
+      <View className="w-full h-3/4 px-4 border-[0.5px] border-text-secondary rounded-e-lg pb-1 mb-3 pt-2">
+        <FlatList
+          data={routines}
+          renderItem={({ item }) => (
+            <RoutineCard title={item.title} details={item.details} />
+          )}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={true}
+        />
+      </View>
       {/* Floating Action Button */}
-      <TouchableOpacity
-        onPress={() => router.push("/")}
-        className="absolute bottom-6 right-6 w-16 h-16 rounded-full items-center justify-center"
-        style={{ backgroundColor: "#FDE047" }}
-      >
-        <PlusIcon color="#000" size={28} />
+      <TouchableOpacity className="w-3/4 flex-row py-4 rounded-full items-center justify-center gap-3 bg-primary">
+        <PlusIcon color="#595959" size={30} />
+        <Text className="text-secondary text-lg font-extrabold">
+          {t("home.create_new_routine")}
+        </Text>
       </TouchableOpacity>
     </View>
   );
