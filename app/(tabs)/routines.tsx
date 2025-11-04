@@ -31,7 +31,7 @@ const Routines = () => {
       <View className="w-full flex-row justify-between ">
         <Pressable
           onPress={() => setTab("functional")}
-          className={`items-center justify-end w-1/2 flex-1  rounded-s-xl border-[0.5px] border-text-secondary ${
+          className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
             tab === "functional" ? "bg-secondary " : "bg-background-secondary"
           }`}
         >
@@ -53,7 +53,7 @@ const Routines = () => {
 
         <Pressable
           onPress={() => setTab("bodybuilding")}
-          className={`items-center justify-end w-1/2 flex-1  rounded-s-xl border-[0.5px] border-text-secondary ${
+          className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
             tab === "bodybuilding" ? "bg-secondary " : "bg-background-secondary"
           }`}
         >
