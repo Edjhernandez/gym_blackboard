@@ -16,7 +16,9 @@
         "home": "Inicio",
         "routines": "Rutinas",
         "blackboard": "Pizarra",
-        "settings": "Configuraciones"
+        "settings": "Configuraciones",
+        "functional": "Funcional",
+        "bodybuilding": "Musculación"
     },
     "login": {
         "welcome": "Bienvenido Coach",
