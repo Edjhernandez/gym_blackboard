@@ -27,13 +27,13 @@ const RoutineCard = (props: TypeRoutineCardProps) => {
           <EllipsisVerticalIcon size={30} color="#9CA3AF" />
         </TouchableOpacity>
       </View>
-      {visible && (
-        <RoutineActionPopUp
-          routineTitle={title}
-          routineDetails={details}
-          setVisible={setVisible}
-        />
-      )}
+
+      <RoutineActionPopUp
+        visible={visible}
+        routineTitle={title}
+        routineDetails={details}
+        setVisible={setVisible}
+      />
     </>
   );
 };
