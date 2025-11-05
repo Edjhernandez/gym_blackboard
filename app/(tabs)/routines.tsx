@@ -22,7 +22,7 @@ const Routines = () => {
       {/* Header */}
 
       <View className="items-center mb-4 w-full">
-        <Text className="text-white text-2xl font-bold">
+        <Text className="text-text-primary text-2xl font-bold">
           {t("routines.title")}
         </Text>
       </View>

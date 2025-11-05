@@ -65,6 +65,11 @@
         "duplicate_routine_button": "Duplicar Rutina"
     },
     "routines": {
-        "title": "Mis Rutinas"
+        "title": "Mis Rutinas",
+        "create_new_routine": "Crear Nueva Rutina",
+        "name": "Nombre de la Rutina",
+        "name_placeholder": "Ej: Rutina de Lunes",
+        "amount_of_selected_exercises": "{{count}} - ejercicios seleccionados",
+        "include_warmup": "Incluir Calentamiento"
     }
 }

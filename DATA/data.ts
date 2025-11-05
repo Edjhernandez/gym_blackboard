@@ -5,6 +5,12 @@ export const DATAWarmUp: Exercise[] = [
   { name: "High Knees", id: "w2", exerciseType: "warm-Up", videoURL: "" },
   { name: "Torso twists", id: "w3", exerciseType: "warm-Up", videoURL: "" },
   { name: "Leg Swings", id: "w4", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Running", id: "w5", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Jumping Rope", id: "w6", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Ankle taps", id: "w7", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Butt kicks", id: "w8", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Jogging", id: "w9", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Air squats", id: "w10", exerciseType: "warm-Up", videoURL: "" },
 ];
 export const DATAFunctional: Exercise[] = [
   { name: "Squat", id: "f1", exerciseType: "functional", videoURL: "" },
