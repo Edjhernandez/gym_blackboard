@@ -116,54 +116,59 @@ export default function CreateRoutine() {
       </View>
 
       {/* routine type selector ===> functional or bodybuilding*/}
-      <View className="w-full flex-row justify-between mt-2 px-2">
-        <Pressable
-          onPress={() => setRoutineType("functional")}
-          className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
-            routineType === "functional"
-              ? "bg-secondary "
-              : "bg-background-secondary"
-          }`}
-        >
-          <Text
-            className={`text-base my-2 ${
+      <View className="mt-2 px-2 w-full flex-col justify-center items-center">
+        <Text className="text-text-primary font-semibold text-base mb-2">
+          {t("routines.select_routine_type")}
+        </Text>
+        <View className="w-full flex-row justify-between ">
+          <Pressable
+            onPress={() => setRoutineType("functional")}
+            className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
               routineType === "functional"
-                ? "text-text-primary font-bold"
-                : "text-gray-600 font-semibold"
+                ? "bg-secondary "
+                : "bg-background-secondary"
             }`}
           >
-            {t("navigation.functional")}
-          </Text>
-          {routineType === "functional" ? (
-            <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
-          ) : (
-            <View className="h-0.5 mt-2 w-16" />
-          )}
-        </Pressable>
+            <Text
+              className={`text-base my-2 ${
+                routineType === "functional"
+                  ? "text-text-primary font-bold"
+                  : "text-gray-600 font-semibold"
+              }`}
+            >
+              {t("navigation.functional")}
+            </Text>
+            {routineType === "functional" ? (
+              <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
+            ) : (
+              <View className="h-0.5 mt-2 w-16" />
+            )}
+          </Pressable>
 
-        <Pressable
-          onPress={() => setRoutineType("bodybuilding")}
-          className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
-            routineType === "bodybuilding"
-              ? "bg-secondary "
-              : "bg-background-secondary"
-          }`}
-        >
-          <Text
-            className={`text-base my-2 ${
+          <Pressable
+            onPress={() => setRoutineType("bodybuilding")}
+            className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
               routineType === "bodybuilding"
-                ? "text-text-primary font-bold"
-                : "text-gray-600 font-semibold"
+                ? "bg-secondary "
+                : "bg-background-secondary"
             }`}
           >
-            {t("navigation.bodybuilding")}
-          </Text>
-          {routineType === "bodybuilding" ? (
-            <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
-          ) : (
-            <View className="h-0.5 mt-2 w-20" />
-          )}
-        </Pressable>
+            <Text
+              className={`text-base my-2 ${
+                routineType === "bodybuilding"
+                  ? "text-text-primary font-bold"
+                  : "text-gray-600 font-semibold"
+              }`}
+            >
+              {t("navigation.bodybuilding")}
+            </Text>
+            {routineType === "bodybuilding" ? (
+              <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
+            ) : (
+              <View className="h-0.5 mt-2 w-20" />
+            )}
+          </Pressable>
+        </View>
       </View>
 
       {/* horizontal tabs - bodyPart selectors */}
@@ -276,7 +281,7 @@ export default function CreateRoutine() {
 
       {/* Exercise list */}
       <View
-        className="w-full px-2 max-h-[384px]"
+        className="w-full px-2 max-h-96"
         /*  style={{ paddingBottom: insets.bottom + 285 }} */
       >
         <View className="w-full border-[0.5px] border-text-secondary max-h-screen p-4 rounded-e-xl">
@@ -296,7 +301,10 @@ export default function CreateRoutine() {
             {t("common.reset")}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity className="w-1/2 flex-row items-center justify-center bg-primary p-5 rounded-2xl gap-3">
+        <TouchableOpacity
+          className="w-1/2 flex-row items-center justify-center bg-primary p-5 rounded-2xl gap-3"
+          onPress={() => router.push("/setting-routine")}
+        >
           <Text className="text-secondary text-xl font-bold">
             {t("common.continue")}
           </Text>
