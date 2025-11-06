@@ -80,6 +80,10 @@
             "legs": "Legs",
             "arms": "Arms",
             "abs": "Abs"
+        },
+        "settings_routine_screen": {
+            "sets": "Sets",
+            "reps": "Reps"
         }
     }
 }

@@ -80,6 +80,10 @@
             "legs": "Piernas",
             "arms": "Brazos",
             "abs": "Abdomen"
+        },
+        "settings_routine_screen": {
+            "sets": "Series",
+            "reps": "Repeticiones"
         }
     }
 }
