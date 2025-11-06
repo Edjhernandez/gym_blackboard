@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, Text } from "react-native";
 import { CheckIcon, MinusIcon } from "react-native-heroicons/outline";
 type TypeExerciseCardProps = {
   name: string;
@@ -27,5 +27,3 @@ export default function ExerciseCard(props: TypeExerciseCardProps) {
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({});
