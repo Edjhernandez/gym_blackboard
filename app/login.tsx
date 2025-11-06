@@ -71,7 +71,7 @@ export default function LoginScreen() {
         </View>
       </View>
 
-      <Text className="text-text-primary text-4xl font-bold mb-6">
+      <Text className="text-text-primary text-4xl text-center font-bold mb-6">
         {t("login.welcome")}
       </Text>
 

@@ -86,7 +86,10 @@ const Routines = () => {
         />
       </View>
       {/* Floating Action Button */}
-      <TouchableOpacity className="w-3/4 flex-row py-4 rounded-full items-center justify-center gap-3 bg-primary">
+      <TouchableOpacity
+        className="w-3/4 flex-row py-4 rounded-full items-center justify-center gap-3 bg-primary"
+        onPress={() => router.push("/create-routine")}
+      >
         <PlusIcon color="#595959" size={30} />
         <Text className="text-secondary text-lg font-extrabold">
           {t("home.create_new_routine")}
