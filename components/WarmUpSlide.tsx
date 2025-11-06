@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { Animated, Pressable, Text, View } from "react-native";
-import { Exercise } from "../types/types";
+import { WarmupExercise } from "../types/types";
 
 type TypeWarmUpSlideProps = {
   visible: boolean;
-  items: Exercise[];
+  items: WarmupExercise[];
   onCollapse?: () => void;
 };
 
