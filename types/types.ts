@@ -1,21 +1,24 @@
-import { ImageSourcePropType } from "react-native";
-
-export type TypeTabIconProps = {
-  icon: ImageSourcePropType;
-  iconFocused: ImageSourcePropType;
-  title: string;
-  focused: boolean;
+export type WarmupExercise = {
+  id: string;
+  name: string;
+  exerciseType: "warm-Up" | "functional" | "bodybuilding";
+  videoURL?: string;
 };
 
 export type Exercise = {
   id: string;
   name: string;
-  exerciseType: "warm-Up" | "functional" | "bodyBuilding";
-  videoURL: string;
+  exerciseType: "warm-Up" | "functional" | "bodybuilding";
+  bodyPart: "chest" | "back" | "legs" | "arms" | "abs";
+  videoURL?: string;
 };
 
 export type Routine = {
   id: string;
-  routineType: "functional" | "bodyBuilding";
+  routineType: "functional" | "bodybuilding";
   exercises: Exercise[];
+  name: string;
+  details: string;
+  hasWarmup: boolean;
+  warmupExercises?: WarmupExercise[];
 };

@@ -16,7 +16,7 @@
         "home": "Inicio",
         "routines": "Rutinas",
         "blackboard": "Pizarra",
-        "settings": "Configuraciones",
+        "settings": "Ajustes",
         "functional": "Funcional",
         "bodybuilding": "Musculación"
     },
@@ -65,6 +65,19 @@
         "duplicate_routine_button": "Duplicar Rutina"
     },
     "routines": {
-        "title": "Mis Rutinas"
+        "title": "Mis Rutinas",
+        "create_new_routine": "Crear Nueva Rutina",
+        "name": "Nombre de la Rutina",
+        "name_placeholder": "Ej: Rutina de Lunes",
+        "amount_of_selected_exercises": "{{count}} - ejercicios seleccionados",
+        "include_warmup": "Incluir Calentamiento",
+        "select_routine_type": "Seleccionar Tipo de Rutina",
+        "body_part": {
+            "chest": "Pecho",
+            "back": "Espalda",
+            "legs": "Piernas",
+            "arms": "Brazos",
+            "abs": "Abdomen"
+        }
     }
 }

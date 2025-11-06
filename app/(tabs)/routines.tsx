@@ -22,7 +22,7 @@ const Routines = () => {
       {/* Header */}
 
       <View className="items-center mb-4 w-full">
-        <Text className="text-white text-2xl font-bold">
+        <Text className="text-text-primary text-2xl font-bold">
           {t("routines.title")}
         </Text>
       </View>
@@ -86,7 +86,10 @@ const Routines = () => {
         />
       </View>
       {/* Floating Action Button */}
-      <TouchableOpacity className="w-3/4 flex-row py-4 rounded-full items-center justify-center gap-3 bg-primary">
+      <TouchableOpacity
+        className="w-3/4 flex-row py-4 rounded-full items-center justify-center gap-3 bg-primary"
+        onPress={() => router.push("/create-routine")}
+      >
         <PlusIcon color="#595959" size={30} />
         <Text className="text-secondary text-lg font-extrabold">
           {t("home.create_new_routine")}

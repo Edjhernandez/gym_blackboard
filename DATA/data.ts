@@ -1,40 +1,102 @@
-import { Exercise } from "@/types/types";
+import { Exercise, WarmupExercise } from "@/types/types";
 
-export const DATAWarmUp: Exercise[] = [
+export const DATAWarmUp: WarmupExercise[] = [
   { name: "Jumping Jacks", id: "w1", exerciseType: "warm-Up", videoURL: "" },
   { name: "High Knees", id: "w2", exerciseType: "warm-Up", videoURL: "" },
   { name: "Torso twists", id: "w3", exerciseType: "warm-Up", videoURL: "" },
   { name: "Leg Swings", id: "w4", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Running", id: "w5", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Jumping Rope", id: "w6", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Ankle taps", id: "w7", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Butt kicks", id: "w8", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Jogging", id: "w9", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Air squats", id: "w10", exerciseType: "warm-Up", videoURL: "" },
 ];
 export const DATAFunctional: Exercise[] = [
-  { name: "Squat", id: "f1", exerciseType: "functional", videoURL: "" },
-  { name: "Lunge", id: "f2", exerciseType: "functional", videoURL: "" },
-  { name: "Push-up", id: "f3", exerciseType: "functional", videoURL: "" },
-  { name: "Plank", id: "f4", exerciseType: "functional", videoURL: "" },
-];
-export const DATABodybuilding: Exercise[] = [
+  {
+    name: "Squat",
+    id: "f1",
+    exerciseType: "functional",
+    videoURL: "",
+    bodyPart: "legs",
+  },
+  {
+    name: "Lunge",
+    id: "f2",
+    exerciseType: "functional",
+    videoURL: "",
+    bodyPart: "legs",
+  },
+  {
+    name: "Push-up",
+    id: "f3",
+    exerciseType: "functional",
+    videoURL: "",
+    bodyPart: "chest",
+  },
+  {
+    name: "Plank",
+    id: "f4",
+    exerciseType: "functional",
+    videoURL: "",
+    bodyPart: "abs",
+  },
   {
     name: "Bench Press",
     id: "b1",
-    exerciseType: "bodyBuilding",
+    exerciseType: "bodybuilding",
+    bodyPart: "chest",
     videoURL: "",
   },
   {
     name: "Overhead Press",
     id: "b2",
-    exerciseType: "bodyBuilding",
+    exerciseType: "bodybuilding",
+    bodyPart: "arms",
     videoURL: "",
   },
   {
     name: "Bicep Curls",
     id: "b3",
-    exerciseType: "bodyBuilding",
+    exerciseType: "bodybuilding",
+    bodyPart: "arms",
     videoURL: "",
   },
   {
     name: "Hammer Curls",
     id: "b4",
-    exerciseType: "bodyBuilding",
+    exerciseType: "bodybuilding",
+    bodyPart: "arms",
+    videoURL: "",
+  },
+];
+export const DATABodybuilding: Exercise[] = [
+  {
+    name: "Bench Press",
+    id: "b1",
+    exerciseType: "bodybuilding",
+    bodyPart: "chest",
+    videoURL: "",
+  },
+  {
+    name: "Overhead Press",
+    id: "b2",
+    exerciseType: "bodybuilding",
+    bodyPart: "arms",
+    videoURL: "",
+  },
+  {
+    name: "Bicep Curls",
+    id: "b3",
+    exerciseType: "bodybuilding",
+    bodyPart: "arms",
+    videoURL: "",
+  },
+  {
+    name: "Hammer Curls",
+    id: "b4",
+    exerciseType: "bodybuilding",
+    bodyPart: "arms",
     videoURL: "",
   },
 ];
@@ -46,72 +108,60 @@ export const routines = [
     id: "1",
     title: "Día de Pecho y Tríceps",
     details: "5 ejercicios, 60 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "2",
     title: "Día de Pierna",
     details: "6 ejercicios, 75 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "3",
     title: "Espalda y Bíceps",
     details: "5 ejercicios, 60 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "4",
     title: "Día de Pecho y Tríceps",
     details: "5 ejercicios, 60 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "5",
     title: "Día de Pierna",
     details: "6 ejercicios, 75 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "6",
     title: "Espalda y Bíceps",
     details: "5 ejercicios, 60 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "7",
     title: "Día de Pecho y Tríceps",
     details: "5 ejercicios, 60 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "8",
     title: "Día de Pierna",
     details: "6 ejercicios, 75 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "9",
     title: "Espalda y Bíceps",
     details: "5 ejercicios, 60 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "10",
     title: "Día de Pecho y Tríceps",
     details: "5 ejercicios, 60 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "11",
     title: "Día de Pierna",
     details: "6 ejercicios, 75 min",
-    image: require("../assets/images/180logo.png"),
   },
   {
     id: "12",
     title: "Espalda y Bíceps",
     details: "5 ejercicios, 60 min",
-    image: require("../assets/images/180logo.png"),
   },
 ];

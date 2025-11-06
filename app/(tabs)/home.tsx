@@ -2,11 +2,13 @@ import RoutineCard from "@/components/RoutineCard";
 import { routines } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import React from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 
 const home = () => {
   const { t } = useI18n();
+  const router = useRouter();
   return (
     <View className="bg-background-primary flex-1">
       {/* Header */}
@@ -37,7 +39,7 @@ const home = () => {
         </View>
         <TouchableOpacity
           className=" bg-primary rounded-xl p-4 items-center"
-          onPress={() => console.log("Crear Nueva Rutina pressed")}
+          onPress={() => router.push("/create-routine")}
         >
           <Text className="text-secondary text-2xl font-bold">
             {t("home.create_new_routine")}
