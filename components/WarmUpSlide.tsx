@@ -48,7 +48,7 @@ export default function WarmUpSlide({
     }
   }, [visible, translateY, opacity]);
 
-  const hasSelection = true;
+  const hasSelection = items.length > 0;
 
   return (
     <AnimatedView
