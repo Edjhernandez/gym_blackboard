@@ -10,7 +10,9 @@
         "duplicate_routine_label": "Duplicar Rutina"
     },
     "common": {
-        "logo": "Logo del gimnasio"
+        "logo": "Logo del gimnasio",
+        "continue": "Continuar",
+        "reset": "Resetear"
     },
     "navigation": {
         "home": "Inicio",

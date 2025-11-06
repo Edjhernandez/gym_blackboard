@@ -9,9 +9,15 @@ import {
   Switch,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
-import { ArrowLeftIcon, ChevronDownIcon } from "react-native-heroicons/outline";
+import {
+  ArrowLeftIcon,
+  ArrowPathRoundedSquareIcon,
+  ArrowRightIcon,
+  ChevronDownIcon,
+} from "react-native-heroicons/outline";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -270,8 +276,8 @@ export default function CreateRoutine() {
 
       {/* Exercise list */}
       <View
-        className="w-full px-2"
-        style={{ paddingBottom: insets.bottom + 285 }}
+        className="w-full px-2 max-h-[384px]"
+        /*  style={{ paddingBottom: insets.bottom + 285 }} */
       >
         <View className="w-full border-[0.5px] border-text-secondary max-h-screen p-4 rounded-e-xl">
           <FlatList
@@ -280,6 +286,22 @@ export default function CreateRoutine() {
             keyExtractor={(item) => item.id}
           />
         </View>
+      </View>
+
+      {/* Buttons for continue and reset */}
+      <View className="w-full flex-row items-center justify-center mt-4 px-2 gap-2">
+        <TouchableOpacity className="w-1/2 flex-row items-center justify-center bg-primary p-5 rounded-2xl gap-3">
+          <ArrowPathRoundedSquareIcon size={24} color={"#595959"} />
+          <Text className="text-secondary text-xl font-bold">
+            {t("common.reset")}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity className="w-1/2 flex-row items-center justify-center bg-primary p-5 rounded-2xl gap-3">
+          <Text className="text-secondary text-xl font-bold">
+            {t("common.continue")}
+          </Text>
+          <ArrowRightIcon size={24} color={"#595959"} />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
