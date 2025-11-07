@@ -1,35 +1,26 @@
 import ExerciseCard from "@/components/ExerciseCard";
-import { DATABodybuilding, DATAFunctional, DATAWarmUp } from "@/DATA/data";
+import { DATAFunctional, DATAWarmUp } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { useRouter } from "expo-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FlatList,
   Pressable,
   Switch,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import {
   ArrowLeftIcon,
-  CheckIcon,
+  ArrowPathRoundedSquareIcon,
+  ArrowRightIcon,
   ChevronDownIcon,
 } from "react-native-heroicons/outline";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
-import { Exercise } from "../types/types";
-
-const GROUPS: { key: string; label: string; data: Exercise[] }[] = [
-  { key: "pecho", label: "Pecho", data: DATAFunctional },
-  { key: "espalda", label: "Espalda", data: DATABodybuilding },
-  { key: "piernas", label: "Piernas", data: DATAFunctional },
-  { key: "brazos", label: "Brazos", data: DATABodybuilding },
-  { key: "abdomen", label: "Abdomen", data: DATAFunctional },
-];
 
 export default function CreateRoutine() {
   const { t } = useI18n();
@@ -38,7 +29,7 @@ export default function CreateRoutine() {
 
   const [name, setName] = useState("");
   const [includeWarmup, setIncludeWarmup] = useState(false);
-  const [activeGroup, setActiveGroup] = useState<string>("pecho");
+
   const [selected, setSelected] = useState<Record<string, boolean>>({});
   const [openAccordion, setOpenAccordion] = useState(false);
   const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
@@ -51,58 +42,6 @@ export default function CreateRoutine() {
   useEffect(() => {
     setOpenAccordion(includeWarmup);
   }, [includeWarmup]);
-
-  const currentGroup = useMemo(
-    () => GROUPS.find((g) => g.key === activeGroup) || GROUPS[0],
-    [activeGroup]
-  );
-
-  const selectedCount = useMemo(
-    () => Object.values(selected).filter(Boolean).length,
-    [selected]
-  );
-
-  function toggleExercise(id: string) {
-    setSelected((s) => ({ ...s, [id]: !s[id] }));
-  }
-
-  function renderExercise({ item }: { item: Exercise }) {
-    const isChecked = !!selected[item.id];
-    return (
-      <TouchableOpacity
-        onPress={() => toggleExercise(item.id)}
-        className="flex-row items-center justify-between bg-[#0f1724] p-3 rounded-xl my-2"
-      >
-        <View className="flex-row items-center">
-          <TouchableOpacity
-            onPress={() => toggleExercise(item.id)}
-            className={`w-7 h-7 rounded-sm items-center justify-center mr-4 ${
-              isChecked ? "bg-primary" : "border border-gray-600"
-            }`}
-          >
-            {isChecked ? (
-              <CheckIcon color="#000" size={16} />
-            ) : (
-              <View style={{ width: 16, height: 16 }} />
-            )}
-          </TouchableOpacity>
-
-          <Text
-            className={`${
-              isChecked ? "text-white font-semibold" : "text-white"
-            }`}
-          >
-            {item.name}
-          </Text>
-        </View>
-
-        {/* optional meta */}
-        <Text className="text-text-secondary text-xs">
-          {item.exerciseType || ""}
-        </Text>
-      </TouchableOpacity>
-    );
-  }
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary items-center">
@@ -127,7 +66,7 @@ export default function CreateRoutine() {
           className="bg-background-secondary text-text-secondary rounded-lg px-4 py-3 mb-4"
         />
         <Text className="text-text-primary mb-3 text-center text-xl font-extrabold">
-          {t("routines.amount_of_selected_exercises", { count: selectedCount })}
+          {t("routines.amount_of_selected_exercises", { count: 0 })}
         </Text>
       </View>
 
@@ -176,54 +115,59 @@ export default function CreateRoutine() {
       </View>
 
       {/* routine type selector ===> functional or bodybuilding*/}
-      <View className="w-full flex-row justify-between mt-2 px-2">
-        <Pressable
-          onPress={() => setRoutineType("functional")}
-          className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
-            routineType === "functional"
-              ? "bg-secondary "
-              : "bg-background-secondary"
-          }`}
-        >
-          <Text
-            className={`text-base my-2 ${
+      <View className="mt-2 px-2 w-full flex-col justify-center items-center">
+        <Text className="text-text-primary font-semibold text-base mb-2">
+          {t("routines.select_routine_type")}
+        </Text>
+        <View className="w-full flex-row justify-between ">
+          <Pressable
+            onPress={() => setRoutineType("functional")}
+            className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
               routineType === "functional"
-                ? "text-text-primary font-bold"
-                : "text-gray-600 font-semibold"
+                ? "bg-secondary "
+                : "bg-background-secondary"
             }`}
           >
-            {t("navigation.functional")}
-          </Text>
-          {routineType === "functional" ? (
-            <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
-          ) : (
-            <View className="h-0.5 mt-2 w-16" />
-          )}
-        </Pressable>
+            <Text
+              className={`text-base my-2 ${
+                routineType === "functional"
+                  ? "text-text-primary font-bold"
+                  : "text-gray-600 font-semibold"
+              }`}
+            >
+              {t("navigation.functional")}
+            </Text>
+            {routineType === "functional" ? (
+              <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
+            ) : (
+              <View className="h-0.5 mt-2 w-16" />
+            )}
+          </Pressable>
 
-        <Pressable
-          onPress={() => setRoutineType("bodybuilding")}
-          className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
-            routineType === "bodybuilding"
-              ? "bg-secondary "
-              : "bg-background-secondary"
-          }`}
-        >
-          <Text
-            className={`text-base my-2 ${
+          <Pressable
+            onPress={() => setRoutineType("bodybuilding")}
+            className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
               routineType === "bodybuilding"
-                ? "text-text-primary font-bold"
-                : "text-gray-600 font-semibold"
+                ? "bg-secondary "
+                : "bg-background-secondary"
             }`}
           >
-            {t("navigation.bodybuilding")}
-          </Text>
-          {routineType === "bodybuilding" ? (
-            <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
-          ) : (
-            <View className="h-0.5 mt-2 w-20" />
-          )}
-        </Pressable>
+            <Text
+              className={`text-base my-2 ${
+                routineType === "bodybuilding"
+                  ? "text-text-primary font-bold"
+                  : "text-gray-600 font-semibold"
+              }`}
+            >
+              {t("navigation.bodybuilding")}
+            </Text>
+            {routineType === "bodybuilding" ? (
+              <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
+            ) : (
+              <View className="h-0.5 mt-2 w-20" />
+            )}
+          </Pressable>
+        </View>
       </View>
 
       {/* horizontal tabs - bodyPart selectors */}
@@ -336,8 +280,8 @@ export default function CreateRoutine() {
 
       {/* Exercise list */}
       <View
-        className="w-full px-2"
-        style={{ paddingBottom: insets.bottom + 285 }}
+        className="w-full px-2 max-h-96"
+        /*  style={{ paddingBottom: insets.bottom + 285 }} */
       >
         <View className="w-full border-[0.5px] border-text-secondary max-h-screen p-4 rounded-e-xl">
           <FlatList
@@ -346,6 +290,25 @@ export default function CreateRoutine() {
             keyExtractor={(item) => item.id}
           />
         </View>
+      </View>
+
+      {/* Buttons for continue and reset */}
+      <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3">
+        <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
+          <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
+          <Text className="text-primary text-base font-semibold">
+            {t("common.reset")}
+          </Text>
+        </Pressable>
+        <Pressable
+          className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
+          onPress={() => router.push("/setting-routine")}
+        >
+          <Text className="text-secondary text-base font-semibold">
+            {t("common.continue")}
+          </Text>
+          <ArrowRightIcon size={24} color={"#595959"} />
+        </Pressable>
       </View>
     </SafeAreaView>
   );
