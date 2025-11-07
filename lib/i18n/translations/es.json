@@ -7,7 +7,9 @@
         "edit_routine_label": "Editar Rutina",
         "delete_routine_label": "Eliminar Rutina",
         "go_back_label": "Volver",
-        "duplicate_routine_label": "Duplicar Rutina"
+        "duplicate_routine_label": "Duplicar Rutina",
+        "come_back_to_list_label": "Volver a la lista",
+        "save_routine_label": "Guardar Rutina"
     },
     "common": {
         "logo": "Logo del gimnasio",
@@ -83,7 +85,9 @@
         },
         "settings_routine_screen": {
             "sets": "Series",
-            "reps": "Repeticiones"
+            "reps": "Repeticiones",
+            "come_back_to_list": "Volver a la lista",
+            "save_routine": "Guardar Rutina"
         }
     }
 }

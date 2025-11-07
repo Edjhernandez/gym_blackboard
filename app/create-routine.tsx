@@ -9,7 +9,6 @@ import {
   Switch,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import {
@@ -294,22 +293,22 @@ export default function CreateRoutine() {
       </View>
 
       {/* Buttons for continue and reset */}
-      <View className="w-full flex-row items-center justify-center mt-4 px-2 gap-2">
-        <TouchableOpacity className="w-1/2 flex-row items-center justify-center bg-primary p-5 rounded-2xl gap-3">
-          <ArrowPathRoundedSquareIcon size={24} color={"#595959"} />
-          <Text className="text-secondary text-xl font-bold">
+      <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3">
+        <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
+          <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
+          <Text className="text-primary text-base font-semibold">
             {t("common.reset")}
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          className="w-1/2 flex-row items-center justify-center bg-primary p-5 rounded-2xl gap-3"
+        </Pressable>
+        <Pressable
+          className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
           onPress={() => router.push("/setting-routine")}
         >
-          <Text className="text-secondary text-xl font-bold">
+          <Text className="text-secondary text-base font-semibold">
             {t("common.continue")}
           </Text>
           <ArrowRightIcon size={24} color={"#595959"} />
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </SafeAreaView>
   );

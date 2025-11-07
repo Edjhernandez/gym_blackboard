@@ -7,7 +7,9 @@
         "edit_routine_label": "Edit Routine",
         "delete_routine_label": "Delete Routine",
         "go_back_label": "Go Back",
-        "duplicate_routine_label": "Duplicate Routine"
+        "duplicate_routine_label": "Duplicate Routine",
+        "come_back_to_list_label": "Come back to list",
+        "save_routine_label": "Save Routine"
     },
     "common": {
         "logo": "Logo GYM",
@@ -83,7 +85,9 @@
         },
         "settings_routine_screen": {
             "sets": "Sets",
-            "reps": "Reps"
+            "reps": "Reps",
+            "come_back_to_list": "Come back to list",
+            "save_routine": "Save Routine"
         }
     }
 }
