@@ -1,41 +1,60 @@
-import ExerciseCard from "@/components/ExerciseCard";
 import OptionRoutineButton from "@/components/OptionRoutineButton";
-import { DATAFunctional } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
-import { FlatList, Pressable, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import {
   ArrowLeftIcon,
   ArrowPathRoundedSquareIcon,
   ArrowRightIcon,
   FireIcon,
+  PlusCircleIcon, // Icono para el botón de agregar
 } from "react-native-heroicons/outline";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+// Definición de la estructura de un Bloque de Ejercicios
+interface ExerciseBlock {
+  id: number;
+  title: string;
+  targetRoute: string; // Ruta a la lista de ejercicios para este bloque
+}
 
 export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
-  const insets = useSafeAreaInsets();
-
   const [name, setName] = useState("");
-  const [includeWarmup, setIncludeWarmup] = useState(false);
 
-  const [selected, setSelected] = useState<Record<string, boolean>>({});
-  const [openAccordion, setOpenAccordion] = useState(false);
-  const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
-    "functional"
-  );
-  const [bodyPart, setBodyPart] = useState<
-    "chest" | "back" | "legs" | "arms" | "abs"
-  >("chest");
+  // 1. Estado para manejar los bloques de ejercicio
+  const [exerciseBlocks, setExerciseBlocks] = useState<ExerciseBlock[]>([
+    // Bloque inicial (Bloque 1)
+    {
+      id: 1,
+      title: t("routines.block_name", { number: 1 }),
+      targetRoute: "/listOfExercises",
+    },
+  ]);
 
-  useEffect(() => {
-    setOpenAccordion(includeWarmup);
-  }, [includeWarmup]);
+  // 2. Lógica para agregar un nuevo bloque
+  const addBlock = () => {
+    const newBlockId =
+      exerciseBlocks.length > 0
+        ? exerciseBlocks[exerciseBlocks.length - 1].id + 1
+        : 1;
+
+    const newBlock: ExerciseBlock = {
+      id: newBlockId,
+      // Usamos el número de bloque para el título dinámico
+      title: t("routines.block_name", { number: newBlockId }),
+      targetRoute: "/listOfExercises",
+    };
+
+    // Actualizamos el estado, añadiendo el nuevo bloque al final
+    setExerciseBlocks([...exerciseBlocks, newBlock]);
+  };
+
+  // Nota: Deberías asegurarte de que tu archivo de traducciones (i18n)
+  // tenga una clave como "routines.block_name" que acepte un placeholder {number}.
+  // Ejemplo: "routines.block_name": "Bloque {number}"
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary items-center">
@@ -49,224 +68,76 @@ export default function CreateRoutine() {
         </Text>
       </View>
 
-      {/* Routine Name input */}
-      <View className="w-full px-4">
-        <Text className="text-white mb-2">{t("routines.name")}</Text>
-        <TextInput
-          value={name}
-          onChangeText={setName}
-          placeholder={t("routines.name_placeholder")}
-          placeholderTextColor="#9CA3AF"
-          className="bg-background-secondary text-text-secondary rounded-lg px-4 py-3 mb-4"
-        />
-      </View>
-
-      {/* options buttons */}
-      <OptionRoutineButton title={t("routines.warmup")} Icon={FireIcon} />
-      <OptionRoutineButton title="Bloque 1" />
-
-      {/* routine type selector ===> functional or bodybuilding*/}
-      <View className="mt-2 px-2 w-full flex-col justify-center items-center">
-        <Text className="text-text-primary font-semibold text-base mb-2">
-          {t("routines.select_routine_type")}
-        </Text>
-        <View className="w-full flex-row justify-between ">
-          <Pressable
-            onPress={() => setRoutineType("functional")}
-            className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
-              routineType === "functional"
-                ? "bg-secondary "
-                : "bg-background-secondary"
-            }`}
-          >
-            <Text
-              className={`text-base my-2 ${
-                routineType === "functional"
-                  ? "text-text-primary font-bold"
-                  : "text-gray-600 font-semibold"
-              }`}
-            >
-              {t("navigation.functional")}
-            </Text>
-            {routineType === "functional" ? (
-              <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
-            ) : (
-              <View className="h-0.5 mt-2 w-16" />
-            )}
-          </Pressable>
-
-          <Pressable
-            onPress={() => setRoutineType("bodybuilding")}
-            className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
-              routineType === "bodybuilding"
-                ? "bg-secondary "
-                : "bg-background-secondary"
-            }`}
-          >
-            <Text
-              className={`text-base my-2 ${
-                routineType === "bodybuilding"
-                  ? "text-text-primary font-bold"
-                  : "text-gray-600 font-semibold"
-              }`}
-            >
-              {t("navigation.bodybuilding")}
-            </Text>
-            {routineType === "bodybuilding" ? (
-              <View className="h-0.5 bg-primary mt-2 rounded-full w-full" />
-            ) : (
-              <View className="h-0.5 mt-2 w-20" />
-            )}
-          </Pressable>
-        </View>
-      </View>
-
-      {/* horizontal tabs - bodyPart selectors */}
-      <View className="w-full px-2">
-        <View className="w-full border-[0.5px] border-text-secondary p-2">
-          <View className="w-full flex-row justify-between ">
-            {/* body part tabs */}
-            {/*  Chest */}
-            <Pressable
-              onPress={() => setBodyPart("chest")}
-              className={`items-center justify-end w-1/2 flex-1 rounded-xl  ${
-                bodyPart === "chest"
-                  ? "border-[0.5px] border-text-secondary "
-                  : "border-0"
-              }`}
-            >
-              <Text
-                className={`text-base my-2 ${
-                  bodyPart === "chest"
-                    ? "text-text-primary font-bold"
-                    : "text-gray-600 font-semibold"
-                }`}
-              >
-                {t("routines.body_part.chest")}
-              </Text>
-            </Pressable>
-
-            {/*  Back */}
-            <Pressable
-              onPress={() => setBodyPart("back")}
-              className={`items-center justify-end w-1/2 flex-1 rounded-xl  ${
-                bodyPart === "back"
-                  ? "border-[0.5px] border-text-secondary "
-                  : "border-0"
-              }`}
-            >
-              <Text
-                className={`text-base my-2 ${
-                  bodyPart === "back"
-                    ? "text-text-primary font-bold"
-                    : "text-gray-600 font-semibold"
-                }`}
-              >
-                {t("routines.body_part.back")}
-              </Text>
-            </Pressable>
-
-            {/*  Legs */}
-            <Pressable
-              onPress={() => setBodyPart("legs")}
-              className={`items-center justify-end w-1/2 flex-1 rounded-xl  ${
-                bodyPart === "legs"
-                  ? "border-[0.5px] border-text-secondary "
-                  : "border-0"
-              }`}
-            >
-              <Text
-                className={`text-base my-2 ${
-                  bodyPart === "legs"
-                    ? "text-text-primary font-bold"
-                    : "text-gray-600 font-semibold"
-                }`}
-              >
-                {t("routines.body_part.legs")}
-              </Text>
-            </Pressable>
-
-            {/*  Arms */}
-            <Pressable
-              onPress={() => setBodyPart("arms")}
-              className={`items-center justify-end w-1/2 flex-1 rounded-xl  ${
-                bodyPart === "arms"
-                  ? "border-[0.5px] border-text-secondary "
-                  : "border-0"
-              }`}
-            >
-              <Text
-                className={`text-base my-2 ${
-                  bodyPart === "arms"
-                    ? "text-text-primary font-bold"
-                    : "text-gray-600 font-semibold"
-                }`}
-              >
-                {t("routines.body_part.arms")}
-              </Text>
-            </Pressable>
-
-            {/*  Abs */}
-            <Pressable
-              onPress={() => setBodyPart("abs")}
-              className={`items-center justify-end w-1/2 flex-1 rounded-xl  ${
-                bodyPart === "abs"
-                  ? "border-[0.5px] border-text-secondary"
-                  : "border-0"
-              }`}
-            >
-              <Text
-                className={`text-base my-2 ${
-                  bodyPart === "abs"
-                    ? "text-text-primary font-bold"
-                    : "text-gray-600 font-semibold"
-                }`}
-              >
-                {t("routines.body_part.abs")}
-              </Text>
-            </Pressable>
-          </View>
-        </View>
-      </View>
-
-      {/* Exercise list */}
-      <View
-        className="w-full px-2 max-h-96"
-        /*  style={{ paddingBottom: insets.bottom + 285 }} */
-      >
-        <View className="w-full border-[0.5px] border-text-secondary max-h-screen p-4 rounded-e-xl">
-          <FlatList
-            data={DATAFunctional}
-            renderItem={({ item }) => <ExerciseCard name={item.name} />}
-            keyExtractor={(item) => item.id}
+      {/* Usamos ScrollView para permitir el desplazamiento cuando se agregan muchos bloques */}
+      <ScrollView className="w-full flex-1 px-4">
+        {/* Routine Name input */}
+        <View className="w-full">
+          <Text className="text-white mb-2">{t("routines.name")}</Text>
+          <TextInput
+            value={name}
+            onChangeText={setName}
+            placeholder={t("routines.name_placeholder")}
+            placeholderTextColor="#9CA3AF"
+            className="bg-background-secondary text-text-secondary rounded-lg px-4 py-3 mb-4"
           />
         </View>
-      </View>
 
-      {/* number of exercises selected */}
-      <View className="w-full px-4 mt-4">
-        <Text className="text-text-primary mb-3 text-center text-xl font-extrabold">
-          {t("routines.amount_of_selected_exercises", { count: 0 })}
-        </Text>
-      </View>
+        {/* Bloque de Calentamiento (Siempre estático) */}
+        <OptionRoutineButton
+          title={t("routines.warmup")}
+          Icon={FireIcon}
+          targetRoute="/warmUpExercises"
+        />
 
-      {/* Buttons for continue and reset */}
-      <View className="w-full flex-row items-center justify-center mt-2 px-6 gap-3">
-        <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
-          <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
-          <Text className="text-primary text-base font-semibold">
-            {t("common.reset")}
-          </Text>
-        </Pressable>
+        {/* 3. Renderizado Dinámico de Bloques de Ejercicio */}
+        {exerciseBlocks.map((block) => (
+          <OptionRoutineButton
+            key={block.id}
+            title={block.title}
+            // Pasamos el ID del bloque a la ruta para que la pantalla de ejercicios sepa a qué bloque pertenece
+            targetRoute="/listOfExercises"
+          />
+        ))}
+
+        {/* 4. Botón para Agregar Nuevo Bloque */}
         <Pressable
-          className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
-          onPress={() => router.push("/setting-routine")}
+          className="w-full flex-row items-center justify-center bg-transparent border-2 border-dashed border-text-primary/50 mt-4 p-4 rounded-xl"
+          onPress={addBlock}
         >
-          <Text className="text-secondary text-base font-semibold">
-            {t("common.continue")}
+          <PlusCircleIcon size={24} color="#E7EBDA" />
+          <Text className="text-text-primary text-lg font-semibold ml-3">
+            {t("routines.add_new_block")}
           </Text>
-          <ArrowRightIcon size={24} color={"#595959"} />
         </Pressable>
+      </ScrollView>
+
+      {/* Separator y Footer (se quedan fijos fuera del ScrollView) */}
+      <View className="w-full border-t border-background-secondary pt-4 pb-6 mt-4">
+        {/* number of exercises selected */}
+        <View className="w-full px-4">
+          <Text className="text-text-primary mb-3 text-center text-xl font-extrabold">
+            {t("routines.amount_of_selected_exercises", { count: 0 })}
+          </Text>
+        </View>
+
+        {/* Buttons for continue and reset */}
+        <View className="w-full flex-row items-center justify-center mt-2 px-6 gap-3">
+          <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
+            <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
+            <Text className="text-primary text-base font-semibold">
+              {t("common.reset")}
+            </Text>
+          </Pressable>
+          <Pressable
+            className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
+            onPress={() => router.push("/setting-routine")}
+          >
+            <Text className="text-secondary text-base font-semibold">
+              {t("common.continue")}
+            </Text>
+            <ArrowRightIcon size={24} color={"#595959"} />
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   );

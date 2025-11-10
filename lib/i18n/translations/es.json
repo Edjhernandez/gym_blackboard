@@ -88,6 +88,7 @@
             "reps": "Repeticiones",
             "come_back_to_list": "Volver a la lista",
             "save_routine": "Guardar Rutina"
-        }
+        },
+        "block_name": "Bloque {{number}}"
     }
 }
