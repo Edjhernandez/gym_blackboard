@@ -191,6 +191,12 @@ export default function listOfExercises() {
           />
         </View>
       </View>
+      {/* number of exercises selected */}
+      <View className="w-full px-4">
+        <Text className="text-text-primary mb-3 text-center text-xl font-extrabold">
+          {t("routines.amount_of_selected_exercises", { count: 0 })}
+        </Text>
+      </View>
     </SafeAreaView>
   );
 }

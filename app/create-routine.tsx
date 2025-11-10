@@ -52,10 +52,6 @@ export default function CreateRoutine() {
     setExerciseBlocks([...exerciseBlocks, newBlock]);
   };
 
-  // Nota: Deberías asegurarte de que tu archivo de traducciones (i18n)
-  // tenga una clave como "routines.block_name" que acepte un placeholder {number}.
-  // Ejemplo: "routines.block_name": "Bloque {number}"
-
   return (
     <SafeAreaView className="flex-1 bg-background-primary items-center">
       {/* Header */}
@@ -68,27 +64,25 @@ export default function CreateRoutine() {
         </Text>
       </View>
 
-      {/* Usamos ScrollView para permitir el desplazamiento cuando se agregan muchos bloques */}
-      <ScrollView className="w-full flex-1 px-4">
-        {/* Routine Name input */}
-        <View className="w-full">
-          <Text className="text-white mb-2">{t("routines.name")}</Text>
-          <TextInput
-            value={name}
-            onChangeText={setName}
-            placeholder={t("routines.name_placeholder")}
-            placeholderTextColor="#9CA3AF"
-            className="bg-background-secondary text-text-secondary rounded-lg px-4 py-3 mb-4"
-          />
-        </View>
-
-        {/* Bloque de Calentamiento (Siempre estático) */}
-        <OptionRoutineButton
-          title={t("routines.warmup")}
-          Icon={FireIcon}
-          targetRoute="/warmUpExercises"
+      {/* Routine Name input */}
+      <View className="w-full px-4 border-b-[0.5px] border-secondary">
+        <Text className="text-white mb-2">{t("routines.name")}</Text>
+        <TextInput
+          value={name}
+          onChangeText={setName}
+          placeholder={t("routines.name_placeholder")}
+          placeholderTextColor="#9CA3AF"
+          className="bg-background-secondary text-text-secondary rounded-lg px-4 py-3 mb-4"
         />
+      </View>
 
+      {/* Bloque de Calentamiento (Siempre estático) */}
+      <OptionRoutineButton
+        title={t("routines.warmup")}
+        Icon={FireIcon}
+        targetRoute="/warmUpExercises"
+      />
+      <ScrollView className="w-full">
         {/* 3. Renderizado Dinámico de Bloques de Ejercicio */}
         {exerciseBlocks.map((block) => (
           <OptionRoutineButton
@@ -101,7 +95,7 @@ export default function CreateRoutine() {
 
         {/* 4. Botón para Agregar Nuevo Bloque */}
         <Pressable
-          className="w-full flex-row items-center justify-center bg-transparent border-2 border-dashed border-text-primary/50 mt-4 p-4 rounded-xl"
+          className="w-3/4 flex-row items-center justify-center bg-background-secondary border-2 border-dashed border-text-primary/50 mt-4 p-4 rounded-xl"
           onPress={addBlock}
         >
           <PlusCircleIcon size={24} color="#E7EBDA" />
@@ -113,13 +107,6 @@ export default function CreateRoutine() {
 
       {/* Separator y Footer (se quedan fijos fuera del ScrollView) */}
       <View className="w-full border-t border-background-secondary pt-4 pb-6 mt-4">
-        {/* number of exercises selected */}
-        <View className="w-full px-4">
-          <Text className="text-text-primary mb-3 text-center text-xl font-extrabold">
-            {t("routines.amount_of_selected_exercises", { count: 0 })}
-          </Text>
-        </View>
-
         {/* Buttons for continue and reset */}
         <View className="w-full flex-row items-center justify-center mt-2 px-6 gap-3">
           <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">

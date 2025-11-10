@@ -89,6 +89,7 @@
             "come_back_to_list": "Come back to list",
             "save_routine": "Save Routine"
         },
-        "block_name": "Block {{number}}"
+        "block_name": "Block {{number}}",
+        "add_new_block": "Add Block"
     }
 }
