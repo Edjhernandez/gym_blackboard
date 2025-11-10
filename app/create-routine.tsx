@@ -1,21 +1,15 @@
 import ExerciseCard from "@/components/ExerciseCard";
-import { DATAFunctional, DATAWarmUp } from "@/DATA/data";
+import OptionRoutineButton from "@/components/OptionRoutineButton";
+import { DATAFunctional } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import {
-  FlatList,
-  Pressable,
-  Switch,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, Pressable, Text, TextInput, View } from "react-native";
 import {
   ArrowLeftIcon,
   ArrowPathRoundedSquareIcon,
   ArrowRightIcon,
-  ChevronDownIcon,
+  FireIcon,
 } from "react-native-heroicons/outline";
 import {
   SafeAreaView,
@@ -55,7 +49,7 @@ export default function CreateRoutine() {
         </Text>
       </View>
 
-      {/* Name input & exercises counter */}
+      {/* Routine Name input */}
       <View className="w-full px-4">
         <Text className="text-white mb-2">{t("routines.name")}</Text>
         <TextInput
@@ -65,54 +59,11 @@ export default function CreateRoutine() {
           placeholderTextColor="#9CA3AF"
           className="bg-background-secondary text-text-secondary rounded-lg px-4 py-3 mb-4"
         />
-        <Text className="text-text-primary mb-3 text-center text-xl font-extrabold">
-          {t("routines.amount_of_selected_exercises", { count: 0 })}
-        </Text>
       </View>
 
-      {/* warmup options */}
-      <View
-        className="w-full flex-col items-center justify-start border-y border-gray-700 px-3"
-        style={{ paddingBottom: openAccordion ? insets.bottom + 220 : 0 }}
-      >
-        <View className="flex-row items-center justify-between w-full">
-          <View className="flex-row items-center pl-1">
-            {/* icon placeholder */}
-            <Switch
-              value={includeWarmup}
-              onValueChange={setIncludeWarmup}
-              trackColor={{ false: "#595959", true: "#FFFF00" }}
-              thumbColor="#fff"
-              hitSlop={{ top: 15, bottom: 15, left: 10, right: 15 }}
-            />
-            <Text className="text-text-primary">
-              {t("routines.include_warmup")}
-            </Text>
-          </View>
-          <Pressable
-            className="mb-2"
-            onPress={() => setOpenAccordion(!openAccordion)}
-            hitSlop={{ top: 15, bottom: 15, left: 15, right: 10 }}
-          >
-            <View
-              className={`mt-2 ${openAccordion ? "rotate-180" : "rotate-0"}`}
-            >
-              <ChevronDownIcon color="#E7EBDA" size={28} />
-            </View>
-          </Pressable>
-        </View>
-        {openAccordion && (
-          <>
-            <View className="w-11/12 px-4 py-2 border-[0.5px] border-text-secondary rounded-lg flex justify-center mb-2">
-              <FlatList
-                data={DATAWarmUp}
-                renderItem={({ item }) => <ExerciseCard name={item.name} />}
-                keyExtractor={(item) => item.id}
-              />
-            </View>
-          </>
-        )}
-      </View>
+      {/* options buttons */}
+      <OptionRoutineButton title={t("routines.warmup")} Icon={FireIcon} />
+      <OptionRoutineButton title="Bloque 1" />
 
       {/* routine type selector ===> functional or bodybuilding*/}
       <View className="mt-2 px-2 w-full flex-col justify-center items-center">
@@ -292,8 +243,15 @@ export default function CreateRoutine() {
         </View>
       </View>
 
+      {/* number of exercises selected */}
+      <View className="w-full px-4 mt-4">
+        <Text className="text-text-primary mb-3 text-center text-xl font-extrabold">
+          {t("routines.amount_of_selected_exercises", { count: 0 })}
+        </Text>
+      </View>
+
       {/* Buttons for continue and reset */}
-      <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3">
+      <View className="w-full flex-row items-center justify-center mt-2 px-6 gap-3">
         <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
           <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
           <Text className="text-primary text-base font-semibold">

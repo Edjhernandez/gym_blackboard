@@ -74,7 +74,7 @@
         "name": "Routine Name",
         "name_placeholder": "E.g., Monday Routine",
         "amount_of_selected_exercises": "{{count}} - exercises selected",
-        "include_warmup": "Include Warm-up",
+        "warmup": "Warm-up",
         "select_routine_type": "Select Routine Type",
         "body_part": {
             "chest": "Chest",

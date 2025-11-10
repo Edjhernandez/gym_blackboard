@@ -74,7 +74,7 @@
         "name": "Nombre de la Rutina",
         "name_placeholder": "Ej: Rutina de Lunes",
         "amount_of_selected_exercises": "{{count}} - ejercicios seleccionados",
-        "include_warmup": "Incluir Calentamiento",
+        "warmup": "Calentamiento",
         "select_routine_type": "Seleccionar Tipo de Rutina",
         "body_part": {
             "chest": "Pecho",
