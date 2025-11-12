@@ -1,9 +1,7 @@
-import SettingExerciseCard from "@/components/SettingExerciseCard";
-import { DATAFunctional } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { useRouter } from "expo-router";
 import React from "react";
-import { FlatList, Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View } from "react-native";
 import { ArrowLeftIcon } from "react-native-heroicons/outline";
 
 import {
@@ -15,32 +13,52 @@ export default function SettingRoutineScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { t } = useI18n();
+  const [openWarmupSettings, setOpenWarmupSettings] = React.useState(false);
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary">
       {/* Header */}
-      <View className="w-full flex-row items-center justify-around py-4">
-        <Pressable className="ml-4" onPress={() => router.back()}>
-          <ArrowLeftIcon color="#E7EBDA" size={22} />
-        </Pressable>
+      <View className="w-full flex-col items-center mt-4">
+        <Text className="text-text-primary text-xl font-semibold">
+          {t("routines.settings_routine_screen.title")}
+        </Text>
+        <View className="w-full flex-row items-center justify-around py-4">
+          <Pressable
+            className="ml-4"
+            onPress={() => router.push("/create-routine")}
+          >
+            <ArrowLeftIcon color="#E7EBDA" size={22} />
+          </Pressable>
 
-        <TextInput
-          className="bg-background-secondary pl-3 text-xl font-bold text-text-primary border-[0.5px] border-text-secondary rounded-md w-3/4"
-          value="routineName"
-        ></TextInput>
+          <TextInput
+            className="bg-background-secondary pl-3 text-xl font-bold text-text-primary border-[0.5px] border-text-secondary rounded-md w-3/4"
+            value="routineName"
+          ></TextInput>
+        </View>
+      </View>
+
+      <View className="w-full flex-col justify-center items-center border-y-[0.5px] border-secondary py-5">
+        <Pressable onPress={() => setOpenWarmupSettings(!openWarmupSettings)}>
+          <Text className="text-text-primary text-xl font-bold">
+            Calentamiento
+          </Text>
+        </Pressable>
+        {openWarmupSettings && (
+          <Text className="text-text-secondary mt-2">culo</Text>
+        )}
       </View>
 
       {/* Body: ScrollView for exercises */}
-      <View className="flex-col px-3 pt-2">
-        {/* component settings exercise card */}
+      {/* <View className="flex-col px-3 pt-2">
+        
         <FlatList
           data={DATAFunctional}
           renderItem={({ item }) => <SettingExerciseCard name={item.name} />}
           keyExtractor={(item) => item.id}
         />
-      </View>
+      </View> */}
 
-      {/* Barra de acciones inferior fija */}
+      {/* save or delete buttons */}
       <View
         style={{ paddingBottom: insets.bottom }}
         className="absolute left-0 right-0 bottom-0 px-4 py-3 border-t-[0.5px] border-text-secondary bg-background-primary"
@@ -49,7 +67,7 @@ export default function SettingRoutineScreen() {
           <Pressable
             className="flex-1 rounded-md border border-primary px-4 py-3 items-center justify-center bg-transparent"
             accessibilityLabel={t("accessibility.go_back_to_list_label")}
-            onPress={() => router.back()}
+            onPress={() => router.push("/create-routine")}
           >
             <Text className="text-primary text-base font-medium">
               {t("routines.settings_routine_screen.come_back_to_list")}

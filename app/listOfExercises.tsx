@@ -1,23 +1,32 @@
 import { DATAFunctional } from "@/DATA/data";
 import ExerciseCard from "@/components/ExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
+import {
+  ArrowPathRoundedSquareIcon,
+  ArrowRightIcon,
+} from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function listOfExercises() {
   const { t } = useI18n();
+  const router = useRouter();
   const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
     "functional"
   );
   const [bodyPart, setBodyPart] = useState<
     "chest" | "back" | "legs" | "arms" | "abs"
   >("chest");
+  const [selectedExercises, setSelectedExercises] = React.useState<any[]>([]);
+
   return (
-    <SafeAreaView>
+    <SafeAreaView className="w-full bg-background-primary pt-4 flex-1">
+      {/* exercises list */}
       <View className="mt-2 px-2 w-full flex-col justify-center items-center">
-        <Text className="text-text-primary font-semibold text-base mb-2">
-          {t("routines.select_routine_type")}
+        <Text className="text-text-primary font-semibold text-xl mb-4">
+          {t("routines.select_exercises")}
         </Text>
         <View className="w-full flex-row justify-between ">
           <Pressable
@@ -179,23 +188,44 @@ export default function listOfExercises() {
       </View>
 
       {/* Exercise list */}
-      <View
-        className="w-full px-2 max-h-96"
-        /*  style={{ paddingBottom: insets.bottom + 285 }} */
-      >
+      <View className="w-full px-2">
         <View className="w-full border-[0.5px] border-text-secondary max-h-screen p-4 rounded-e-xl">
           <FlatList
             data={DATAFunctional}
             renderItem={({ item }) => <ExerciseCard name={item.name} />}
             keyExtractor={(item) => item.id}
+            contentContainerStyle={{ paddingBottom: 20 }}
           />
         </View>
       </View>
-      {/* number of exercises selected */}
-      <View className="w-full px-4">
-        <Text className="text-text-primary mb-3 text-center text-xl font-extrabold">
-          {t("routines.amount_of_selected_exercises", { count: 0 })}
-        </Text>
+
+      {/* number of selected exercises */}
+      <View className="w-full flex-col items-center bg-background-primary mt-3">
+        <View className="w-full flex-row justify-center gap-4">
+          <Text className="text-text-primary font-bold">
+            {selectedExercises.length}
+          </Text>
+          <Text className="text-text-secondary">
+            {t("warmup_exercises.selected_exercises")}
+          </Text>
+        </View>
+        <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3 mb-2">
+          <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
+            <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
+            <Text className="text-primary text-base font-semibold">
+              {t("common.reset")}
+            </Text>
+          </Pressable>
+          <Pressable
+            className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
+            onPress={() => router.push("/setting-routine")}
+          >
+            <Text className="text-secondary text-base font-semibold">
+              {t("common.continue")}
+            </Text>
+            <ArrowRightIcon size={24} color={"#595959"} />
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   );

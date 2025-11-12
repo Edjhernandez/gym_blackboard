@@ -76,7 +76,7 @@
         "name_placeholder": "E.g., Monday Routine",
         "amount_of_selected_exercises": "{{count}} - exercises selected",
         "warmup": "Warm-up",
-        "select_routine_type": "Select Routine Type",
+        "select_exercises": "Select Exercises",
         "body_part": {
             "chest": "Chest",
             "back": "Back",
@@ -88,7 +88,9 @@
             "sets": "Sets",
             "reps": "Reps",
             "come_back_to_list": "Come back to list",
-            "save_routine": "Save Routine"
+            "save_routine": "Save Routine",
+            "title": "Routine Settings",
+            "delete_routine": "Delete Routine"
         },
         "block_name": "Block {{number}}",
         "add_new_block": "Add Block"

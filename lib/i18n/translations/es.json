@@ -76,7 +76,7 @@
         "name_placeholder": "Ej: Rutina de Lunes",
         "amount_of_selected_exercises": "{{count}} - ejercicios seleccionados",
         "warmup": "Calentamiento",
-        "select_routine_type": "Seleccionar Tipo de Rutina",
+        "select_exercises": "Seleccionar Ejercicios",
         "body_part": {
             "chest": "Pecho",
             "back": "Espalda",
@@ -88,7 +88,9 @@
             "sets": "Series",
             "reps": "Repeticiones",
             "come_back_to_list": "Volver a la lista",
-            "save_routine": "Guardar Rutina"
+            "save_routine": "Guardar Rutina",
+            "title": "Configuración de la Rutina",
+            "delete_routine": "Eliminar Rutina"
         },
         "block_name": "Bloque {{number}}",
         "add_new_block": "Agregar Bloque"
