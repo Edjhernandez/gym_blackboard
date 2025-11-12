@@ -14,7 +14,8 @@
     "common": {
         "logo": "Logo del gimnasio",
         "continue": "Continuar",
-        "reset": "Resetear"
+        "reset": "Resetear",
+        "save": "Guardar"
     },
     "navigation": {
         "home": "Inicio",
@@ -91,5 +92,9 @@
         },
         "block_name": "Bloque {{number}}",
         "add_new_block": "Agregar Bloque"
+    },
+    "warmup_exercises": {
+        "title": "Ejercicios de Calentamiento",
+        "selected_exercises": "Ejercicios Seleccionados"
     }
 }

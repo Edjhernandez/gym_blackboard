@@ -11,6 +11,8 @@ export const DATAWarmUp: WarmupExercise[] = [
   { name: "Butt kicks", id: "w8", exerciseType: "warm-Up", videoURL: "" },
   { name: "Jogging", id: "w9", exerciseType: "warm-Up", videoURL: "" },
   { name: "Air squats", id: "w10", exerciseType: "warm-Up", videoURL: "" },
+  { name: "Hip rotation", id: "w11", exerciseType: "warm-Up", videoURL: "" },
+  { name: "High leg", id: "w12", exerciseType: "warm-Up", videoURL: "" },
 ];
 export const DATAFunctional: Exercise[] = [
   {

@@ -95,7 +95,7 @@ export default function CreateRoutine() {
 
         {/* 4. Botón para Agregar Nuevo Bloque */}
         <Pressable
-          className="w-3/4 flex-row items-center justify-center bg-background-secondary border-2 border-dashed border-text-primary/50 mt-4 p-4 rounded-xl"
+          className="w-3/4 flex-row items-center justify-center bg-background-secondary border-2 border-dashed border-text-primary/50 mt-4 p-4 rounded-xl mx-auto"
           onPress={addBlock}
         >
           <PlusCircleIcon size={24} color="#E7EBDA" />
