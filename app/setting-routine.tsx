@@ -70,7 +70,7 @@ export default function SettingRoutineScreen() {
             onPress={() => router.push("/create-routine")}
           >
             <Text className="text-primary text-base font-medium">
-              {t("routines.settings_routine_screen.come_back_to_list")}
+              {t("routines.settings_routine_screen.discard_routine")}
             </Text>
           </Pressable>
 
