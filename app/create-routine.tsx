@@ -56,7 +56,7 @@ export default function CreateRoutine() {
     <SafeAreaView className="flex-1 bg-background-primary items-center">
       {/* Header */}
       <View className="w-full flex-row items-center justify-start py-4">
-        <Pressable onPress={() => router.back()} className="ml-8">
+        <Pressable onPress={() => router.push("/(tabs)/home")} className="ml-8">
           <ArrowLeftIcon color="#E7EBDA" size={22} />
         </Pressable>
         <Text className="text-text-primary text-2xl font-bold ml-16">
