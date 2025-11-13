@@ -9,12 +9,24 @@
         "go_back_label": "Volver",
         "duplicate_routine_label": "Duplicar Rutina",
         "come_back_to_list_label": "Volver a la lista",
-        "save_routine_label": "Guardar Rutina"
+        "save_routine_label": "Guardar Rutina",
+        "no_transmission_label": "No se ha iniciado la transmisión",
+        "save_label": "Guardar",
+        "add_new_block_label": "Agregar Nuevo Bloque",
+        "warmup_label": "Calentamiento",
+        "chest_body_part_label": "Pecho",
+        "back_body_part_label": "Espalda",
+        "legs_body_part_label": "Piernas",
+        "arms_body_part_label": "Brazos",
+        "abs_body_part_label": "Abdomen",
+        "reset_label": "Resetear",
+        "continue_label": "Continuar"
     },
     "common": {
         "logo": "Logo del gimnasio",
         "continue": "Continuar",
-        "reset": "Resetear"
+        "reset": "Resetear",
+        "save": "Guardar"
     },
     "navigation": {
         "home": "Inicio",
@@ -74,8 +86,8 @@
         "name": "Nombre de la Rutina",
         "name_placeholder": "Ej: Rutina de Lunes",
         "amount_of_selected_exercises": "{{count}} - ejercicios seleccionados",
-        "include_warmup": "Incluir Calentamiento",
-        "select_routine_type": "Seleccionar Tipo de Rutina",
+        "warmup": "Calentamiento",
+        "select_exercises": "Seleccionar Ejercicios",
         "body_part": {
             "chest": "Pecho",
             "back": "Espalda",
@@ -87,7 +99,19 @@
             "sets": "Series",
             "reps": "Repeticiones",
             "come_back_to_list": "Volver a la lista",
-            "save_routine": "Guardar Rutina"
-        }
+            "save_routine": "Guardar Rutina",
+            "title": "Configuración de la Rutina",
+            "discard_routine": "Descartar Rutina",
+            "warmup_settings": "Configuración de Calentamiento"
+        },
+        "block_name": "Bloque {{number}}",
+        "add_new_block": "Agregar Bloque"
+    },
+    "warmup_exercises": {
+        "title": "Ejercicios de Calentamiento",
+        "selected_exercises": "Ejercicios Seleccionados"
+    },
+    "blackboard_screen": {
+        "no_transmission_message": "La transmisión aún no ha comenzado"
     }
 }

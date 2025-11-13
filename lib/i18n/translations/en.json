@@ -9,12 +9,24 @@
         "go_back_label": "Go Back",
         "duplicate_routine_label": "Duplicate Routine",
         "come_back_to_list_label": "Come back to list",
-        "save_routine_label": "Save Routine"
+        "save_routine_label": "Save Routine",
+        "no_transmission_label": "No transmission started",
+        "save_label": "Save",
+        "add_new_block_label": "Add New Block",
+        "warmup_label": "Warm-up",
+        "chest_body_part_label": "Chest",
+        "back_body_part_label": "Back",
+        "legs_body_part_label": "Legs",
+        "arms_body_part_label": "Arms",
+        "abs_body_part_label": "Abs",
+        "reset_label": "Reset",
+        "continue_label": "Continue"
     },
     "common": {
         "logo": "Logo GYM",
         "continue": "Continue",
-        "reset": "Reset"
+        "reset": "Reset",
+        "save": "Save"
     },
     "navigation": {
         "home": "Home",
@@ -74,8 +86,8 @@
         "name": "Routine Name",
         "name_placeholder": "E.g., Monday Routine",
         "amount_of_selected_exercises": "{{count}} - exercises selected",
-        "include_warmup": "Include Warm-up",
-        "select_routine_type": "Select Routine Type",
+        "warmup": "Warm-up",
+        "select_exercises": "Select Exercises",
         "body_part": {
             "chest": "Chest",
             "back": "Back",
@@ -87,7 +99,19 @@
             "sets": "Sets",
             "reps": "Reps",
             "come_back_to_list": "Come back to list",
-            "save_routine": "Save Routine"
-        }
+            "save_routine": "Save Routine",
+            "title": "Routine Settings",
+            "discard_routine": "Delete Routine",
+            "warmup_settings": "Warm-up Settings"
+        },
+        "block_name": "Block {{number}}",
+        "add_new_block": "Add Block"
+    },
+    "warmup_exercises": {
+        "title": "Warm-up Exercises",
+        "selected_exercises": "Selected Exercises"
+    },
+    "blackboard_screen": {
+        "no_transmission_message": "The transmission has not yet started"
     }
 }
