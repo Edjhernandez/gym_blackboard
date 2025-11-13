@@ -19,7 +19,9 @@ export default function listOfExercises() {
   const [bodyPart, setBodyPart] = useState<
     "chest" | "back" | "legs" | "arms" | "abs"
   >("chest");
-  const [selectedExercises, setSelectedExercises] = React.useState<any[]>([]);
+  const [selectedExercises, setSelectedExercises] = React.useState<string[]>(
+    []
+  );
 
   return (
     <SafeAreaView className="w-full bg-background-primary pt-4 flex-1">
@@ -36,6 +38,8 @@ export default function listOfExercises() {
                 ? "bg-secondary "
                 : "bg-background-secondary"
             }`}
+            accessibilityRole="button"
+            accessibilityState={{ selected: routineType === "functional" }}
           >
             <Text
               className={`text-base my-2 ${
@@ -60,6 +64,8 @@ export default function listOfExercises() {
                 ? "bg-secondary "
                 : "bg-background-secondary"
             }`}
+            accessibilityRole="button"
+            accessibilityState={{ selected: routineType === "bodybuilding" }}
           >
             <Text
               className={`text-base my-2 ${
@@ -92,6 +98,9 @@ export default function listOfExercises() {
                   ? "border-[0.5px] border-text-secondary "
                   : "border-0"
               }`}
+              accessibilityRole="button"
+              accessibilityState={{ selected: bodyPart === "chest" }}
+              accessibilityLabel={t("accessibility.chest_body_part_label")}
             >
               <Text
                 className={`text-base my-2 ${
@@ -112,6 +121,9 @@ export default function listOfExercises() {
                   ? "border-[0.5px] border-text-secondary "
                   : "border-0"
               }`}
+              accessibilityRole="button"
+              accessibilityState={{ selected: bodyPart === "back" }}
+              accessibilityLabel={t("accessibility.back_body_part_label")}
             >
               <Text
                 className={`text-base my-2 ${
@@ -132,6 +144,9 @@ export default function listOfExercises() {
                   ? "border-[0.5px] border-text-secondary "
                   : "border-0"
               }`}
+              accessibilityRole="button"
+              accessibilityState={{ selected: bodyPart === "legs" }}
+              accessibilityLabel={t("accessibility.legs_body_part_label")}
             >
               <Text
                 className={`text-base my-2 ${
@@ -152,6 +167,9 @@ export default function listOfExercises() {
                   ? "border-[0.5px] border-text-secondary "
                   : "border-0"
               }`}
+              accessibilityRole="button"
+              accessibilityState={{ selected: bodyPart === "arms" }}
+              accessibilityLabel={t("accessibility.arms_body_part_label")}
             >
               <Text
                 className={`text-base my-2 ${
@@ -172,6 +190,9 @@ export default function listOfExercises() {
                   ? "border-[0.5px] border-text-secondary"
                   : "border-0"
               }`}
+              accessibilityRole="button"
+              accessibilityState={{ selected: bodyPart === "abs" }}
+              accessibilityLabel={t("accessibility.abs_body_part_label")}
             >
               <Text
                 className={`text-base my-2 ${
@@ -210,7 +231,10 @@ export default function listOfExercises() {
           </Text>
         </View>
         <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3 mb-2">
-          <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
+          <Pressable
+            className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
+            accessibilityLabel={t("accessibility.reset_label")}
+          >
             <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
             <Text className="text-primary text-base font-semibold">
               {t("common.reset")}
@@ -219,6 +243,7 @@ export default function listOfExercises() {
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
             onPress={() => router.push("/create-routine")}
+            accessibilityLabel={t("accessibility.save_label")}
           >
             <Text className="text-secondary text-base font-semibold">
               {t("common.save")}

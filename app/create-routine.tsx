@@ -8,15 +8,14 @@ import {
   ArrowPathRoundedSquareIcon,
   ArrowRightIcon,
   FireIcon,
-  PlusCircleIcon, // Icono para el botón de agregar
+  PlusCircleIcon,
 } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// Definición de la estructura de un Bloque de Ejercicios
 interface ExerciseBlock {
   id: number;
   title: string;
-  targetRoute: string; // Ruta a la lista de ejercicios para este bloque
+  targetRoute: string;
 }
 
 export default function CreateRoutine() {
@@ -24,9 +23,7 @@ export default function CreateRoutine() {
   const router = useRouter();
   const [name, setName] = useState("");
 
-  // 1. Estado para manejar los bloques de ejercicio
   const [exerciseBlocks, setExerciseBlocks] = useState<ExerciseBlock[]>([
-    // Bloque inicial (Bloque 1)
     {
       id: 1,
       title: t("routines.block_name", { number: 1 }),
@@ -34,7 +31,6 @@ export default function CreateRoutine() {
     },
   ]);
 
-  // 2. Lógica para agregar un nuevo bloque
   const addBlock = () => {
     const newBlockId =
       exerciseBlocks.length > 0
@@ -43,12 +39,10 @@ export default function CreateRoutine() {
 
     const newBlock: ExerciseBlock = {
       id: newBlockId,
-      // Usamos el número de bloque para el título dinámico
       title: t("routines.block_name", { number: newBlockId }),
       targetRoute: "/listOfExercises",
     };
 
-    // Actualizamos el estado, añadiendo el nuevo bloque al final
     setExerciseBlocks([...exerciseBlocks, newBlock]);
   };
 
@@ -56,7 +50,11 @@ export default function CreateRoutine() {
     <SafeAreaView className="flex-1 bg-background-primary items-center">
       {/* Header */}
       <View className="w-full flex-row items-center justify-start py-4">
-        <Pressable onPress={() => router.push("/(tabs)/home")} className="ml-8">
+        <Pressable
+          onPress={() => router.push("/(tabs)/home")}
+          className="ml-8"
+          accessibilityLabel={t("accessibility.go_back_label")}
+        >
           <ArrowLeftIcon color="#E7EBDA" size={22} />
         </Pressable>
         <Text className="text-text-primary text-2xl font-bold ml-16">
@@ -76,27 +74,27 @@ export default function CreateRoutine() {
         />
       </View>
 
-      {/* Bloque de Calentamiento (Siempre estático) */}
+      {/* Warmup block always static */}
       <OptionRoutineButton
         title={t("routines.warmup")}
         Icon={FireIcon}
         targetRoute="/warmUpExercises"
       />
       <ScrollView className="w-full">
-        {/* 3. Renderizado Dinámico de Bloques de Ejercicio */}
+        {/* Dynamic rendering of exercise blocks */}
         {exerciseBlocks.map((block) => (
           <OptionRoutineButton
             key={block.id}
             title={block.title}
-            // Pasamos el ID del bloque a la ruta para que la pantalla de ejercicios sepa a qué bloque pertenece
             targetRoute="/listOfExercises"
           />
         ))}
 
-        {/* 4. Botón para Agregar Nuevo Bloque */}
+        {/* add new block button */}
         <Pressable
           className="w-3/4 flex-row items-center justify-center bg-background-secondary border-2 border-dashed border-text-primary/50 mt-4 p-4 rounded-xl mx-auto"
           onPress={addBlock}
+          accessibilityLabel={t("accessibility.add_new_block_label")}
         >
           <PlusCircleIcon size={24} color="#E7EBDA" />
           <Text className="text-text-primary text-lg font-semibold ml-3">
@@ -105,11 +103,14 @@ export default function CreateRoutine() {
         </Pressable>
       </ScrollView>
 
-      {/* Separator y Footer (se quedan fijos fuera del ScrollView) */}
+      {/* footer */}
       <View className="w-full border-t border-background-secondary pt-4 pb-6 mt-4">
         {/* Buttons for continue and reset */}
         <View className="w-full flex-row items-center justify-center mt-2 px-6 gap-3">
-          <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
+          <Pressable
+            className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
+            accessibilityLabel={t("accessibility.reset_label")}
+          >
             <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
             <Text className="text-primary text-base font-semibold">
               {t("common.reset")}
@@ -118,6 +119,7 @@ export default function CreateRoutine() {
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
             onPress={() => router.push("/setting-routine")}
+            accessibilityLabel={t("accessibility.continue_label")}
           >
             <Text className="text-secondary text-base font-semibold">
               {t("common.continue")}

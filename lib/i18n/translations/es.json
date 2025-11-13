@@ -10,7 +10,17 @@
         "duplicate_routine_label": "Duplicar Rutina",
         "come_back_to_list_label": "Volver a la lista",
         "save_routine_label": "Guardar Rutina",
-        "no_transmission_label": "No se ha iniciado la transmisión"
+        "no_transmission_label": "No se ha iniciado la transmisión",
+        "save_label": "Guardar",
+        "add_new_block_label": "Agregar Nuevo Bloque",
+        "warmup_label": "Calentamiento",
+        "chest_body_part_label": "Pecho",
+        "back_body_part_label": "Espalda",
+        "legs_body_part_label": "Piernas",
+        "arms_body_part_label": "Brazos",
+        "abs_body_part_label": "Abdomen",
+        "reset_label": "Resetear",
+        "continue_label": "Continuar"
     },
     "common": {
         "logo": "Logo del gimnasio",

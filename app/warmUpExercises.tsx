@@ -22,7 +22,10 @@ export default function WarmUpExercises() {
     <SafeAreaView className="flex-1 w-full bg-background-primary flex-col items-center pt-8">
       {/* Header */}
       <View className="w-full flex-row justify-around py-4 items-center px-6 mb-6">
-        <Pressable onPress={() => router.back()}>
+        <Pressable
+          onPress={() => router.back()}
+          accessibilityLabel={t("accessibility.go_back_label")}
+        >
           <ArrowLeftIcon size={28} color="#E7EBDA" />
         </Pressable>
         <Text className="text-text-primary text-xl font-semibold ml-2">
@@ -51,7 +54,10 @@ export default function WarmUpExercises() {
           </Text>
         </View>
         <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3 mb-2">
-          <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
+          <Pressable
+            className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
+            accessibilityLabel={t("accessibility.reset_label")}
+          >
             <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
             <Text className="text-primary text-base font-semibold">
               {t("common.reset")}
@@ -60,6 +66,7 @@ export default function WarmUpExercises() {
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
             onPress={() => router.push("/create-routine")}
+            accessibilityLabel={t("accessibility.save_label")}
           >
             <Text className="text-secondary text-base font-semibold">
               {t("common.save")}

@@ -16,6 +16,8 @@ export default function OptionRoutineButton(props: TypeOptionRoutineButton) {
       <Pressable
         className="flex-row items-center justify-between w-3/4 border-[0.5px] border-primary bg-secondary rounded-xl p-4"
         onPress={() => router.push(targetRoute)}
+        accessibilityRole="button"
+        accessibilityLabel={title}
       >
         <Text className="text-text-primary text-xl font-bold">{title}</Text>
         {Icon && <Icon color="#E7EBDA" size={28} />}

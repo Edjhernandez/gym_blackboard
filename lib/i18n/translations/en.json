@@ -10,7 +10,17 @@
         "duplicate_routine_label": "Duplicate Routine",
         "come_back_to_list_label": "Come back to list",
         "save_routine_label": "Save Routine",
-        "no_transmission_label": "No transmission started"
+        "no_transmission_label": "No transmission started",
+        "save_label": "Save",
+        "add_new_block_label": "Add New Block",
+        "warmup_label": "Warm-up",
+        "chest_body_part_label": "Chest",
+        "back_body_part_label": "Back",
+        "legs_body_part_label": "Legs",
+        "arms_body_part_label": "Arms",
+        "abs_body_part_label": "Abs",
+        "reset_label": "Reset",
+        "continue_label": "Continue"
     },
     "common": {
         "logo": "Logo GYM",

@@ -38,7 +38,8 @@ export default function SettingRoutineScreen() {
         <View className="w-full flex-row items-center justify-around py-4">
           <Pressable
             className="ml-4"
-            onPress={() => router.push("/create-routine")}
+            onPress={() => router.back()}
+            accessibilityLabel={t("accessibility.go_back_label")}
           >
             <ArrowLeftIcon color="#E7EBDA" size={22} />
           </Pressable>
@@ -51,7 +52,11 @@ export default function SettingRoutineScreen() {
       </View>
 
       <View className="w-full flex-col justify-center items-center border-y-[0.5px] border-secondary py-5">
-        <Pressable onPress={() => setOpenWarmupSettings(!openWarmupSettings)}>
+        <Pressable
+          onPress={() => setOpenWarmupSettings(!openWarmupSettings)}
+          accessibilityRole="button"
+          accessibilityLabel={t("accessibility.warmup_label")}
+        >
           <Text className="text-text-primary text-xl font-bold mt-4 mb-2">
             Calentamiento
           </Text>
@@ -78,7 +83,10 @@ export default function SettingRoutineScreen() {
             </View>
 
             <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3 mb-2">
-              <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
+              <Pressable
+                className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
+                accessibilityLabel={t("accessibility.reset_label")}
+              >
                 <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
                 <Text className="text-primary text-base font-semibold">
                   {t("common.reset")}
@@ -87,6 +95,7 @@ export default function SettingRoutineScreen() {
               <Pressable
                 className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
                 onPress={() => setOpenWarmupSettings(false)}
+                accessibilityLabel={t("accessibility.save_label")}
               >
                 <Text className="text-secondary text-base font-semibold">
                   {t("common.save")}
@@ -107,7 +116,7 @@ export default function SettingRoutineScreen() {
           <Pressable
             className="flex-1 rounded-md border border-primary px-4 py-3 items-center justify-center bg-transparent"
             accessibilityLabel={t("accessibility.go_back_to_list_label")}
-            onPress={() => router.push("/create-routine")}
+            onPress={() => router.back()}
           >
             <Text className="text-primary text-base font-medium">
               {t("routines.settings_routine_screen.discard_routine")}
