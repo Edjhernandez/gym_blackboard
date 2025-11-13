@@ -9,7 +9,8 @@
         "go_back_label": "Go Back",
         "duplicate_routine_label": "Duplicate Routine",
         "come_back_to_list_label": "Come back to list",
-        "save_routine_label": "Save Routine"
+        "save_routine_label": "Save Routine",
+        "no_transmission_label": "No transmission started"
     },
     "common": {
         "logo": "Logo GYM",
@@ -99,5 +100,8 @@
     "warmup_exercises": {
         "title": "Warm-up Exercises",
         "selected_exercises": "Selected Exercises"
+    },
+    "blackboard_screen": {
+        "no_transmission_message": "The transmission has not yet started"
     }
 }

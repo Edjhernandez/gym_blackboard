@@ -1,38 +1,23 @@
+import { useI18n } from "@/lib/hooks/useI18n";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-type Props = {
-  title?: string;
-  subtitle?: string;
-  iconSize?: number;
-  accentColor?: string;
-  // si lo usas con expo-router, puedes aceptar params aquí si lo exportas como screen
-};
-
-export default function LiveWaitScreen({
-  title = "Aún no se ha iniciado la transmisión",
-  subtitle = "Cuando el coach inicie una transmisión, la verás aquí en tiempo real.",
-  iconSize = 120,
-  accentColor = "#F59E0B", // amarillo/dorado (ajusta al tono del proyecto)
-}: Props) {
+export default function LiveWaitScreen() {
+  const { t } = useI18n();
   return (
-    <SafeAreaView className="flex-1 bg-black">
+    <SafeAreaView className="flex-1 bg-background-primary justify-center">
       <View className="flex-1 items-center justify-center px-6">
         <MaterialCommunityIcons
           name="television-off"
-          size={iconSize}
-          color={accentColor}
-          accessibilityLabel="Icono: transmisión no iniciada"
+          size={120}
+          color="#FFFF00"
+          accessibilityLabel={t("accessibility.no_transmission_label")}
         />
 
-        <Text className="mt-6 text-2xl font-semibold text-white text-center">
-          {title}
-        </Text>
-
-        <Text className="mt-3 text-base text-gray-300 text-center">
-          {subtitle}
+        <Text className="mt-6 text-2xl font-semibold text-text-primary text-center">
+          {t("blackboard_screen.no_transmission_message")}
         </Text>
       </View>
     </SafeAreaView>

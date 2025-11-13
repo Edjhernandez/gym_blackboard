@@ -9,7 +9,8 @@
         "go_back_label": "Volver",
         "duplicate_routine_label": "Duplicar Rutina",
         "come_back_to_list_label": "Volver a la lista",
-        "save_routine_label": "Guardar Rutina"
+        "save_routine_label": "Guardar Rutina",
+        "no_transmission_label": "No se ha iniciado la transmisión"
     },
     "common": {
         "logo": "Logo del gimnasio",
@@ -99,5 +100,8 @@
     "warmup_exercises": {
         "title": "Ejercicios de Calentamiento",
         "selected_exercises": "Ejercicios Seleccionados"
+    },
+    "blackboard_screen": {
+        "no_transmission_message": "La transmisión aún no ha comenzado"
     }
 }
