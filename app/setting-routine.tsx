@@ -1,8 +1,21 @@
+import SettingExerciseCard from "@/components/SettingExerciseCard";
+import { DATAFunctional } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Pressable, Text, TextInput, View } from "react-native";
-import { ArrowLeftIcon } from "react-native-heroicons/outline";
+import {
+  FlatList,
+  Modal,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import {
+  ArrowDownOnSquareIcon,
+  ArrowLeftIcon,
+  ArrowPathRoundedSquareIcon,
+} from "react-native-heroicons/outline";
 
 import {
   SafeAreaView,
@@ -39,24 +52,51 @@ export default function SettingRoutineScreen() {
 
       <View className="w-full flex-col justify-center items-center border-y-[0.5px] border-secondary py-5">
         <Pressable onPress={() => setOpenWarmupSettings(!openWarmupSettings)}>
-          <Text className="text-text-primary text-xl font-bold">
+          <Text className="text-text-primary text-xl font-bold mt-4 mb-2">
             Calentamiento
           </Text>
         </Pressable>
-        {openWarmupSettings && (
-          <Text className="text-text-secondary mt-2">culo</Text>
-        )}
-      </View>
 
-      {/* Body: ScrollView for exercises */}
-      {/* <View className="flex-col px-3 pt-2">
-        
-        <FlatList
-          data={DATAFunctional}
-          renderItem={({ item }) => <SettingExerciseCard name={item.name} />}
-          keyExtractor={(item) => item.id}
-        />
-      </View> */}
+        {/* Modal for warmup settings */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={openWarmupSettings}
+        >
+          <SafeAreaView className="flex-1 bg-background-primary">
+            <Text className="text-text-primary font-semibold text-xl text-center mt-4 mb-2">
+              {t("routines.settings_routine_screen.warmup_settings")}
+            </Text>
+            <View className="flex-1 px-3 pt-2">
+              <FlatList
+                data={DATAFunctional}
+                renderItem={({ item }) => (
+                  <SettingExerciseCard name={item.name} />
+                )}
+                keyExtractor={(item) => item.id}
+              />
+            </View>
+
+            <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3 mb-2">
+              <Pressable className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3">
+                <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
+                <Text className="text-primary text-base font-semibold">
+                  {t("common.reset")}
+                </Text>
+              </Pressable>
+              <Pressable
+                className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
+                onPress={() => setOpenWarmupSettings(false)}
+              >
+                <Text className="text-secondary text-base font-semibold">
+                  {t("common.save")}
+                </Text>
+                <ArrowDownOnSquareIcon size={24} color={"#595959"} />
+              </Pressable>
+            </View>
+          </SafeAreaView>
+        </Modal>
+      </View>
 
       {/* save or delete buttons */}
       <View

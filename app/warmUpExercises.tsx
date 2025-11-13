@@ -59,7 +59,7 @@ export default function WarmUpExercises() {
           </Pressable>
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
-            onPress={() => router.push("/setting-routine")}
+            onPress={() => router.push("/create-routine")}
           >
             <Text className="text-secondary text-base font-semibold">
               {t("common.save")}

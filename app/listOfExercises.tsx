@@ -5,8 +5,8 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import {
+  ArrowDownOnSquareIcon,
   ArrowPathRoundedSquareIcon,
-  ArrowRightIcon,
 } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -218,12 +218,12 @@ export default function listOfExercises() {
           </Pressable>
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
-            onPress={() => router.push("/setting-routine")}
+            onPress={() => router.push("/create-routine")}
           >
             <Text className="text-secondary text-base font-semibold">
-              {t("common.continue")}
+              {t("common.save")}
             </Text>
-            <ArrowRightIcon size={24} color={"#595959"} />
+            <ArrowDownOnSquareIcon size={24} color={"#595959"} />
           </Pressable>
         </View>
       </View>

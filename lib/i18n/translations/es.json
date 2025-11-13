@@ -90,7 +90,8 @@
             "come_back_to_list": "Volver a la lista",
             "save_routine": "Guardar Rutina",
             "title": "Configuración de la Rutina",
-            "discard_routine": "Descartar Rutina"
+            "discard_routine": "Descartar Rutina",
+            "warmup_settings": "Configuración de Calentamiento"
         },
         "block_name": "Bloque {{number}}",
         "add_new_block": "Agregar Bloque"
