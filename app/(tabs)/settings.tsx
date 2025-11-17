@@ -52,7 +52,7 @@ export default function SettingsScreen() {
               <Text
                 className={`${themeMode === "dark" ? "text-gray-900 font-medium" : "text-gray-600"}`}
               >
-                Dark
+                {t("settings.dark_mode")}
               </Text>
             </Pressable>
 
@@ -65,7 +65,7 @@ export default function SettingsScreen() {
               <Text
                 className={`${themeMode === "light" ? "text-gray-900 font-medium" : "text-gray-600"}`}
               >
-                Light
+                {t("settings.light_mode")}
               </Text>
             </Pressable>
 
@@ -78,7 +78,7 @@ export default function SettingsScreen() {
               <Text
                 className={`${themeMode === "system" ? "text-gray-900 font-medium" : "text-gray-600"}`}
               >
-                System
+                {t("settings.system_default")}
               </Text>
             </Pressable>
           </View>
@@ -124,7 +124,6 @@ export default function SettingsScreen() {
         <Text className="text-text-primary">{t("settings.about")}</Text>
 
         <Pressable
-          onPress={() => setLanguageModalVisible(true)}
           className="w-12 h-12 rounded-full items-center justify-center"
           accessibilityRole="button"
         >
@@ -138,7 +137,7 @@ export default function SettingsScreen() {
           onPress={() => setLogoutModalVisible(true)}
           className="w-full rounded-md border border-primary px-4 py-3 items-center justify-center bg-transparent"
           accessibilityRole="button"
-          accessibilityLabel="Cerrar sesión"
+          accessibilityLabel={t("accessibility.logout_button_label")}
         >
           <Text className="text-primary font-semibold">
             {t("settings.logout")}

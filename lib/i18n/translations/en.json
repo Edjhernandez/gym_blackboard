@@ -20,7 +20,8 @@
         "arms_body_part_label": "Arms",
         "abs_body_part_label": "Abs",
         "reset_label": "Reset",
-        "continue_label": "Continue"
+        "continue_label": "Continue",
+        "logout_button_label": "Log Out"
     },
     "common": {
         "logo": "Logo GYM",
@@ -123,9 +124,9 @@
         "language": "Language",
         "spanish": "Spanish",
         "english": "English",
-        "light_mode": "Light Mode",
-        "dark_mode": "Dark Mode",
-        "system_default": "System Default",
+        "light_mode": "Light",
+        "dark_mode": "Dark",
+        "system_default": "System",
         "about": "About",
         "logout": "Log Out",
         "confirm_logout_title": "Confirm Log Out",

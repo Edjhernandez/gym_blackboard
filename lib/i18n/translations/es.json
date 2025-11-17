@@ -20,7 +20,8 @@
         "arms_body_part_label": "Brazos",
         "abs_body_part_label": "Abdomen",
         "reset_label": "Resetear",
-        "continue_label": "Continuar"
+        "continue_label": "Continuar",
+        "logout_button_label": "Cerrar sesión"
     },
     "common": {
         "logo": "Logo del gimnasio",
@@ -123,13 +124,12 @@
         "language": "Idioma",
         "spanish": "Español",
         "english": "Inglés",
-        "light_mode": "Modo Claro",
-        "dark_mode": "Modo Oscuro",
-        "system_default": "Predeterminado del Sistema",
+        "light_mode": "Claro",
+        "dark_mode": "Oscuro",
+        "system_default": "Sistema",
         "about": "Acerca de",
         "logout": "Cerrar Sesión",
         "confirm_logout_title": "Confirmar Cierre de Sesión",
-        "confirm_logout_message": "¿Estás seguro de que deseas cerrar sesión?",
-        "confirm": "Confirmar"
+        "confirm_logout_message": "¿Estás seguro de que deseas cerrar sesión?"
     }
 }
