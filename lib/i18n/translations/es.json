@@ -26,7 +26,10 @@
         "logo": "Logo del gimnasio",
         "continue": "Continuar",
         "reset": "Resetear",
-        "save": "Guardar"
+        "save": "Guardar",
+        "coach": "Entrenador",
+        "cancel": "Cancelar",
+        "confirm": "Confirmar"
     },
     "navigation": {
         "home": "Inicio",
@@ -113,5 +116,20 @@
     },
     "blackboard_screen": {
         "no_transmission_message": "La transmisión aún no ha comenzado"
+    },
+    "settings": {
+        "appearance": "Apariencia",
+        "theme": "Modo",
+        "language": "Idioma",
+        "spanish": "Español",
+        "english": "Inglés",
+        "light_mode": "Modo Claro",
+        "dark_mode": "Modo Oscuro",
+        "system_default": "Predeterminado del Sistema",
+        "about": "Acerca de",
+        "logout": "Cerrar Sesión",
+        "confirm_logout_title": "Confirmar Cierre de Sesión",
+        "confirm_logout_message": "¿Estás seguro de que deseas cerrar sesión?",
+        "confirm": "Confirmar"
     }
 }

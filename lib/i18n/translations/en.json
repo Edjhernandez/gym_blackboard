@@ -26,7 +26,10 @@
         "logo": "Logo GYM",
         "continue": "Continue",
         "reset": "Reset",
-        "save": "Save"
+        "save": "Save",
+        "coach": "Coach",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
     },
     "navigation": {
         "home": "Home",
@@ -113,5 +116,19 @@
     },
     "blackboard_screen": {
         "no_transmission_message": "The transmission has not yet started"
+    },
+    "settings": {
+        "appearance": "Appearance",
+        "theme": "Theme",
+        "language": "Language",
+        "spanish": "Spanish",
+        "english": "English",
+        "light_mode": "Light Mode",
+        "dark_mode": "Dark Mode",
+        "system_default": "System Default",
+        "about": "About",
+        "logout": "Log Out",
+        "confirm_logout_title": "Confirm Log Out",
+        "confirm_logout_message": "Are you sure you want to log out?"
     }
 }
