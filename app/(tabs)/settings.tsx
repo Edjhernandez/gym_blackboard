@@ -1,76 +1,20 @@
 import { useI18n } from "@/lib/hooks/useI18n";
 import Octicons from "@expo/vector-icons/Octicons";
 import { Image } from "expo-image";
-import React, { useEffect, useState } from "react";
-import {
-  Modal,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View,
-  useColorScheme,
-} from "react-native";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import React, { useState } from "react";
+import { Modal, Pressable, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type ThemeMode = "system" | "light" | "dark";
 type Lang = "es" | "en";
 
-type Props = {
-  // datos perfil (puedes extraerlos desde tu store/context)
-  avatarUri?: string;
-  coachName?: string;
-  coachRoleLabel?: string;
-
-  onThemeChange?: (mode: ThemeMode) => void;
-  onLanguageChange?: (lang: Lang) => void;
-  onLogout?: () => Promise<void> | void;
-  onNavigateProfile?: () => void;
-  onNavigateAbout?: () => void;
-
-  // valores iniciales (si los gestionas desde aquí)
-  initialTheme?: ThemeMode;
-  initialLang?: Lang;
-  // optional: indicates current theme to pick correct background text colors, otherwise component uses neutral classes
-  darkModeActive?: boolean;
-};
-
-export default function SettingsScreen({
-  coachRoleLabel = "Tu Coach",
-  onThemeChange,
-  onLanguageChange,
-  onLogout,
-  onNavigateProfile,
-  onNavigateAbout,
-  initialTheme = "system",
-  initialLang = "es",
-  darkModeActive = false,
-}: Props) {
-  const insets = useSafeAreaInsets();
-  const colorScheme = useColorScheme();
+export default function SettingsScreen() {
   const { t } = useI18n();
 
-  // Local state (can mirror global state via handlers)
-  const [themeMode, setThemeMode] = useState<ThemeMode>(initialTheme);
-  const [lang, setLang] = useState<Lang>(initialLang);
+  const [themeMode, setThemeMode] = useState<ThemeMode>("system");
+  const [lang, setLang] = useState<Lang>("es");
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
-
-  useEffect(() => {
-    // call external handler if provided
-    if (onThemeChange) onThemeChange(themeMode);
-  }, [themeMode, onThemeChange]);
-
-  useEffect(() => {
-    if (onLanguageChange) onLanguageChange(lang);
-  }, [lang, onLanguageChange]);
-
-  const accentText = darkModeActive ? "text-yellow-400" : "text-yellow-500";
-
-  const sectionBorder = darkModeActive ? "border-gray-700" : "border-gray-200";
-  const subtitleText = darkModeActive ? "text-gray-300" : "text-gray-600";
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary px-4">
@@ -206,9 +150,7 @@ export default function SettingsScreen({
       <Modal visible={languageModalVisible} transparent animationType="slide">
         <View className="flex-1 bg-black/50 items-center justify-end">
           <View className="w-full bg-white dark:bg-gray-800 rounded-t-2xl p-4">
-            <Text
-              className={`text-lg font-semibold mb-4 ${darkModeActive ? "text-white" : "text-gray-900"}`}
-            >
+            <Text className="text-lg font-semibold mb-4 text-white">
               Seleccionar idioma
             </Text>
 
@@ -219,11 +161,7 @@ export default function SettingsScreen({
               }}
               className="py-3"
             >
-              <Text
-                className={`text-base ${lang === "es" ? "font-semibold " + accentText : subtitleText}`}
-              >
-                Español
-              </Text>
+              <Text className="text-base">Español</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -233,11 +171,7 @@ export default function SettingsScreen({
               }}
               className="py-3"
             >
-              <Text
-                className={`text-base ${lang === "en" ? "font-semibold " + accentText : subtitleText}`}
-              >
-                English
-              </Text>
+              <Text className="text-base">English</Text>
             </TouchableOpacity>
 
             <View className="mt-4">
