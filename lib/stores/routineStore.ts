@@ -9,8 +9,9 @@ type RoutineStore = {
 const initialRoutine: Routine = {
   id: "",
   name: "",
-  details: "",
+  exercisesAmount: 0,
   durationMinutes: 0,
+  isFavorite: false,
   category: "functional",
   warmup: [],
   blocks: [],

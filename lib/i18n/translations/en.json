@@ -74,8 +74,11 @@
     },
     "home": {
         "greeting": "Hello coach, {{name}}",
-        "your_most_used_routines": "Your most used routines",
-        "create_new_routine": "Create New Routine"
+        "your_most_used_routines": "Your favorite routines",
+        "create_new_routine": "Create New Routine",
+        "no_favorite_routines": "You have no favorite routines yet.",
+        "exercises_amount": "{{count}} exercises",
+        "duration_minutes": "{{count}} minutes"
     },
     "routine_action_popup": {
         "project_to_tv_button": "Project to TV",

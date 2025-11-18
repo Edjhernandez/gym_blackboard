@@ -1,6 +1,7 @@
 import SettingExerciseCard from "@/components/SettingExerciseCard";
 import { DATAFunctional } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
+import useRoutineStore from "@/lib/stores/routineStore";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
@@ -16,7 +17,6 @@ import {
   ArrowLeftIcon,
   ArrowPathRoundedSquareIcon,
 } from "react-native-heroicons/outline";
-
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -26,6 +26,7 @@ export default function SettingRoutineScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { t } = useI18n();
+  const { routine, setName } = useRoutineStore();
   const [openWarmupSettings, setOpenWarmupSettings] = React.useState(false);
 
   return (
@@ -46,7 +47,8 @@ export default function SettingRoutineScreen() {
 
           <TextInput
             className="bg-background-secondary pl-3 text-xl font-bold text-text-primary border-[0.5px] border-text-secondary rounded-md w-3/4"
-            value="routineName"
+            value={routine.name}
+            onChangeText={(text) => setName(text)}
           ></TextInput>
         </View>
       </View>

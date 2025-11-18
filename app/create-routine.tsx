@@ -1,5 +1,6 @@
 import OptionRoutineButton from "@/components/OptionRoutineButton";
 import { useI18n } from "@/lib/hooks/useI18n";
+import useRoutineStore from "@/lib/stores/routineStore";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
@@ -21,7 +22,8 @@ interface ExerciseBlock {
 export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
-  const [name, setName] = useState("");
+
+  const { routine, setName } = useRoutineStore();
 
   const [exerciseBlocks, setExerciseBlocks] = useState<ExerciseBlock[]>([
     {
@@ -66,8 +68,8 @@ export default function CreateRoutine() {
       <View className="w-full px-4 border-b-[0.5px] border-secondary">
         <Text className="text-white mb-2">{t("routines.name")}</Text>
         <TextInput
-          value={name}
-          onChangeText={setName}
+          value={routine.name}
+          onChangeText={(text) => setName(text)}
           placeholder={t("routines.name_placeholder")}
           placeholderTextColor="#9CA3AF"
           className="bg-background-secondary text-text-secondary rounded-lg px-4 py-3 mb-4"

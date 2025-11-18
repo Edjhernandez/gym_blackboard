@@ -9,8 +9,9 @@ export type Exercise = {
 export type Routine = {
   id: string;
   name: string;
-  details: string;
+  exercisesAmount: number;
   durationMinutes: number;
+  isFavorite: boolean;
   category: "functional" | "bodybuilding";
   warmup: Exercise[];
   blocks: {
