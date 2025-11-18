@@ -4,6 +4,8 @@ export type Exercise = {
   exerciseType: "warm-Up" | "functional" | "bodybuilding";
   bodyPart?: "chest" | "back" | "legs" | "arms" | "abs";
   videoURL?: string;
+  sets?: number;
+  reps?: number;
 };
 
 export type Routine = {

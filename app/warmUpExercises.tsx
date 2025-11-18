@@ -1,6 +1,7 @@
 import { DATAWarmUp } from "@/DATA/data";
 import ExerciseCard from "@/components/ExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
+import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -18,6 +19,13 @@ export default function WarmUpExercises() {
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
     []
   );
+  const { setWarmup } = useRoutineStore();
+
+  const handleSave = () => {
+    router.push("/create-routine");
+    setWarmup(selectedExercises);
+  };
+
   return (
     <SafeAreaView className="flex-1 w-full bg-background-primary flex-col items-center pt-8">
       {/* Header */}
@@ -37,7 +45,12 @@ export default function WarmUpExercises() {
       <View className="w-11/12 px-4 py-2 border-[0.5px] border-text-secondary rounded-lg flex-1">
         <FlatList
           data={DATAWarmUp}
-          renderItem={({ item }) => <ExerciseCard name={item.name} />}
+          renderItem={({ item }) => (
+            <ExerciseCard
+              exercise={item}
+              setSelectedExercises={setSelectedExercises}
+            />
+          )}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ paddingBottom: 20 }}
         />
@@ -65,7 +78,7 @@ export default function WarmUpExercises() {
           </Pressable>
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
-            onPress={() => router.push("/create-routine")}
+            onPress={handleSave}
             accessibilityLabel={t("accessibility.save_label")}
           >
             <Text className="text-secondary text-base font-semibold">

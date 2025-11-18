@@ -1,7 +1,7 @@
 import SettingExerciseCard from "@/components/SettingExerciseCard";
-import { DATAFunctional } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
+import { Exercise } from "@/types/types";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
@@ -26,8 +26,16 @@ export default function SettingRoutineScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { t } = useI18n();
-  const { routine, setName } = useRoutineStore();
+  const { routine, setName, setWarmup } = useRoutineStore();
   const [openWarmupSettings, setOpenWarmupSettings] = React.useState(false);
+  const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
+    routine.warmup
+  );
+
+  const handleSave = () => {
+    setOpenWarmupSettings(false);
+    setWarmup(selectedExercises);
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary">
@@ -71,14 +79,27 @@ export default function SettingRoutineScreen() {
           visible={openWarmupSettings}
         >
           <SafeAreaView className="flex-1 bg-background-primary">
-            <Text className="text-text-primary font-semibold text-xl text-center mt-4 mb-2">
-              {t("routines.settings_routine_screen.warmup_settings")}
-            </Text>
+            {/* Header */}
+            <View className="w-full p-4 flex-row items-center justify-around">
+              <Pressable
+                onPress={() => setOpenWarmupSettings(false)}
+                accessibilityLabel={t("accessibility.go_back_label")}
+              >
+                <ArrowLeftIcon color="#E7EBDA" size={22} />
+              </Pressable>
+              <Text className="text-text-primary font-semibold text-xl text-center">
+                {t("routines.settings_routine_screen.warmup_settings")}
+              </Text>
+            </View>
             <View className="flex-1 px-3 pt-2">
               <FlatList
-                data={DATAFunctional}
+                data={selectedExercises}
                 renderItem={({ item }) => (
-                  <SettingExerciseCard name={item.name} />
+                  <SettingExerciseCard
+                    exercise={item}
+                    setSelectedExercises={setSelectedExercises}
+                    selectedExercises={selectedExercises}
+                  />
                 )}
                 keyExtractor={(item) => item.id}
               />
@@ -96,7 +117,7 @@ export default function SettingRoutineScreen() {
               </Pressable>
               <Pressable
                 className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
-                onPress={() => setOpenWarmupSettings(false)}
+                onPress={handleSave}
                 accessibilityLabel={t("accessibility.save_label")}
               >
                 <Text className="text-secondary text-base font-semibold">
