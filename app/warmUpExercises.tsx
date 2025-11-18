@@ -1,7 +1,7 @@
 import { DATAWarmUp } from "@/DATA/data";
 import ExerciseCard from "@/components/ExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
-import { WarmupExercise } from "@/types/types";
+import { Exercise } from "@/types/types";
 import { useRouter } from "expo-router";
 import React from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
@@ -15,9 +15,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function WarmUpExercises() {
   const { t } = useI18n();
   const router = useRouter();
-  const [selectedExercises, setSelectedExercises] = React.useState<
-    WarmupExercise[]
-  >([]);
+  const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
+    []
+  );
   return (
     <SafeAreaView className="flex-1 w-full bg-background-primary flex-col items-center pt-8">
       {/* Header */}
