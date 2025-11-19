@@ -81,12 +81,6 @@ export default function SettingRoutineScreen() {
           <SafeAreaView className="flex-1 bg-background-primary">
             {/* Header */}
             <View className="w-full p-4 flex-row items-center justify-around">
-              <Pressable
-                onPress={() => setOpenWarmupSettings(false)}
-                accessibilityLabel={t("accessibility.go_back_label")}
-              >
-                <ArrowLeftIcon color="#E7EBDA" size={22} />
-              </Pressable>
               <Text className="text-text-primary font-semibold text-xl text-center">
                 {t("routines.settings_routine_screen.warmup_settings")}
               </Text>
@@ -109,10 +103,11 @@ export default function SettingRoutineScreen() {
               <Pressable
                 className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
                 accessibilityLabel={t("accessibility.reset_label")}
+                onPress={() => router.push("/warmUpExercises")}
               >
                 <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
                 <Text className="text-primary text-base font-semibold">
-                  {t("common.reset")}
+                  {t("routines.settings_routine_screen.come_back_to_list")}
                 </Text>
               </Pressable>
               <Pressable

@@ -8,18 +8,17 @@ import React from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import {
   ArrowDownOnSquareIcon,
-  ArrowLeftIcon,
   ArrowPathRoundedSquareIcon,
 } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function WarmUpExercises() {
+  const { routine, setWarmup } = useRoutineStore();
   const { t } = useI18n();
   const router = useRouter();
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    []
+    routine.warmup
   );
-  const { setWarmup } = useRoutineStore();
 
   const handleSave = () => {
     router.push("/create-routine");
@@ -29,13 +28,7 @@ export default function WarmUpExercises() {
   return (
     <SafeAreaView className="flex-1 w-full bg-background-primary flex-col items-center pt-8">
       {/* Header */}
-      <View className="w-full flex-row justify-around py-4 items-center px-6 mb-6">
-        <Pressable
-          onPress={() => router.back()}
-          accessibilityLabel={t("accessibility.go_back_label")}
-        >
-          <ArrowLeftIcon size={28} color="#E7EBDA" />
-        </Pressable>
+      <View className="w-full flex-row justify-around py-1 items-center px-6 mb-2">
         <Text className="text-text-primary text-xl font-semibold ml-2">
           {t("warmup_exercises.title")}
         </Text>
@@ -49,6 +42,8 @@ export default function WarmUpExercises() {
             <ExerciseCard
               exercise={item}
               setSelectedExercises={setSelectedExercises}
+              isSelected={selectedExercises.some((ex) => ex.id === item.id)}
+              selectedExercises={selectedExercises}
             />
           )}
           keyExtractor={(item) => item.id}

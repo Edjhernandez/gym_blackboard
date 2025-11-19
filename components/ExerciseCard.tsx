@@ -6,19 +6,30 @@ import { CheckIcon, MinusIcon } from "react-native-heroicons/outline";
 type TypeExerciseCardProps = {
   exercise: Exercise;
   setSelectedExercises?: React.Dispatch<React.SetStateAction<any[]>>;
+  isSelected: boolean;
+  selectedExercises: Exercise[];
 };
 
 export default function ExerciseCard(props: TypeExerciseCardProps) {
-  const { exercise, setSelectedExercises } = props;
-  const [isChecked, setIsChecked] = React.useState(false);
+  const { exercise, setSelectedExercises, isSelected, selectedExercises } =
+    props;
+  const [isChecked, setIsChecked] = React.useState(isSelected);
+
+  const isAlreadyAdded = selectedExercises.some(
+    (item) => item.id === exercise.id
+  );
 
   useEffect(() => {
     if (isChecked) {
-      setSelectedExercises?.((prev) => [...prev, exercise]);
+      if (!isAlreadyAdded) {
+        setSelectedExercises?.((prev) => [...prev, exercise]);
+      }
     } else {
-      setSelectedExercises?.((prev) =>
-        prev.filter((item) => item.name !== exercise.name)
-      );
+      if (isAlreadyAdded) {
+        setSelectedExercises?.((prev) =>
+          prev.filter((item) => item.name !== exercise.name)
+        );
+      }
     }
   }, [isChecked]);
 
