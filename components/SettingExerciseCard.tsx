@@ -26,11 +26,41 @@ export default function SettingExerciseCard(
   };
 
   const searchIndex = (id: string) => {
-    return selectedExercises.findIndex((ex) => ex.id === id);
+    return selectedExercises.findIndex((exercise) => exercise.id === id);
   };
 
-  const upPosition = () => {};
-  const downPosition = () => {};
+  const downPosition = (id: string, array: Exercise[]) => {
+    const newArray = [...array];
+    const index = searchIndex(id.toString());
+    const itemToMove = newArray[index];
+    newArray.splice(index, 1);
+    newArray.splice(index + 1, 0, itemToMove);
+    setSelectedExercises(newArray);
+  };
+
+  const upPosition = (id: string, array: Exercise[]) => {
+    const newArray = [...array];
+    const index = searchIndex(id.toString());
+    const itemToMove = newArray[index];
+    newArray.splice(index, 1);
+    newArray.splice(index - 1, 0, itemToMove);
+    setSelectedExercises(newArray);
+  };
+
+  const handleInput = () => {
+    const newArray = [...selectedExercises];
+    const index = searchIndex(exercise.id);
+    const updatedExercise = {
+      ...newArray,
+      [index]: {
+        ...exercise,
+        sets: parseInt(setsInput, 10),
+        reps: parseInt(repsInput, 10),
+      },
+    };
+    newArray[index] = updatedExercise[index];
+    setSelectedExercises(newArray);
+  };
 
   return (
     <View className="w-full bg-background-secondary rounded-xl p-3 mb-3 shadow-sm flex-row justify-between items-center">
@@ -58,12 +88,15 @@ export default function SettingExerciseCard(
             </Text>
             <TextInput
               value={setsInput}
-              onChangeText={setSetsInput}
+              onChangeText={(text) => setSetsInput(text)}
               keyboardType="number-pad"
-              placeholder="e.g. 3"
+              placeholder={t("common.example_placeholder", {
+                number: Math.floor(Math.random() * 5) + 1,
+              })}
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
+              onBlur={handleInput}
             />
           </View>
 
@@ -78,12 +111,15 @@ export default function SettingExerciseCard(
             </Text>
             <TextInput
               value={repsInput}
-              onChangeText={setRepsInput}
+              onChangeText={(text) => setRepsInput(text)}
               keyboardType="number-pad"
-              placeholder="e.g. 3"
+              placeholder={t("common.example_placeholder", {
+                number: Math.floor(Math.random() * 15) + 8,
+              })}
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
+              onBlur={handleInput}
             />
           </View>
         </View>
@@ -91,7 +127,7 @@ export default function SettingExerciseCard(
       <View className="w-11 flex-col items-end gap-4">
         <Pressable
           className="bg-background-primary rounded-md w-11 h-11 flex justify-center items-center"
-          onPress={upPosition}
+          onPress={() => upPosition(exercise.id, selectedExercises)}
           disabled={searchIndex(exercise.id) === 0}
         >
           <Entypo
@@ -102,7 +138,7 @@ export default function SettingExerciseCard(
         </Pressable>
         <Pressable
           className="bg-background-primary rounded-md w-11 h-11 flex justify-center items-center"
-          onPress={downPosition}
+          onPress={() => downPosition(exercise.id, selectedExercises)}
           disabled={searchIndex(exercise.id) === selectedExercises.length - 1}
         >
           <Entypo

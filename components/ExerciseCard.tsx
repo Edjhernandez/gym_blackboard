@@ -13,7 +13,6 @@ export default function ExerciseCard(props: TypeExerciseCardProps) {
   const [isChecked, setIsChecked] = React.useState(false);
 
   useEffect(() => {
-    isChecked ? console.log("checked") : console.log("not checked");
     if (isChecked) {
       setSelectedExercises?.((prev) => [...prev, exercise]);
     } else {
@@ -22,20 +21,6 @@ export default function ExerciseCard(props: TypeExerciseCardProps) {
       );
     }
   }, [isChecked]);
-
-  const handlePress = () => {
-    setIsChecked(!isChecked);
-    console.log(isChecked);
-    /* if (isChecked) {
-      selectedExercises?.length === 0
-        ? console.log("no exercises selected")
-        : setSelectedExercises?.((prev) =>
-            prev.filter((item) => item.name !== exercise.name)
-          );
-    } else {
-      setSelectedExercises?.((prev) => [...prev, exercise]);
-    } */
-  };
 
   return (
     <Pressable

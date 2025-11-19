@@ -30,7 +30,8 @@
         "save": "Guardar",
         "coach": "Entrenador",
         "cancel": "Cancelar",
-        "confirm": "Confirmar"
+        "confirm": "Confirmar",
+        "example_placeholder": "Ej: {{number}}"
     },
     "navigation": {
         "home": "Inicio",

@@ -30,7 +30,8 @@
         "save": "Save",
         "coach": "Coach",
         "cancel": "Cancel",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "example_placeholder": "e.g. {{number}}"
     },
     "navigation": {
         "home": "Home",
