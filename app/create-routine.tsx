@@ -12,28 +12,26 @@ import {
   XMarkIcon,
 } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { v4 as uuidv4 } from "uuid";
 
 export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
 
-  const { routine, setName, resetRoutine } = useRoutineStore();
+  const { routine, setName, resetRoutine, setEmptyBlock } = useRoutineStore();
 
-  const [exerciseBlocks, setExerciseBlocks] = useState<Block[]>([
-    {
-      title: t("routines.block_name", { number: 1 }),
-      exercises: [],
-    },
-  ]);
+  const [exerciseBlocks, setExerciseBlocks] = useState<Block[]>(routine.blocks);
 
   // Function to add a new exercise block
   const addBlock = () => {
     const newBlock: Block = {
-      title: t("routines.block_name", { number: exerciseBlocks.length + 1 }), //set a block number incrementally
+      id: uuidv4(),
+      title: t("routines.block_name", { title: exerciseBlocks.length + 1 }), //set a block number incrementally
       exercises: [],
     };
 
     setExerciseBlocks([...exerciseBlocks, newBlock]);
+    setEmptyBlock(newBlock);
   };
 
   const handleDiscard = () => {
@@ -41,6 +39,13 @@ export default function CreateRoutine() {
     resetRoutine();
     // Navigate back to home
     router.push("/(tabs)/home");
+  };
+
+  const handleContinue = () => {
+    // Update the routine store with the current blocks
+    //setBlocks(exerciseBlocks);
+    // Navigate to the routine settings screen
+    router.push("/setting-routine");
   };
 
   return (
@@ -69,12 +74,14 @@ export default function CreateRoutine() {
         title={t("routines.warmup")}
         Icon={FireIcon}
         targetRoute="/warmUpExercises"
+        id="warmup"
       />
       <ScrollView className="w-full">
         {/* Dynamic rendering of exercise blocks */}
         {exerciseBlocks.map((block) => (
           <OptionRoutineButton
-            key={block.title}
+            key={block.id}
+            id={block.id}
             title={block.title}
             targetRoute="/listOfExercises"
           />
@@ -109,7 +116,7 @@ export default function CreateRoutine() {
           </Pressable>
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
-            onPress={() => router.push("/setting-routine")}
+            onPress={handleContinue}
             accessibilityLabel={t("accessibility.continue_label")}
           >
             <Text className="text-secondary text-base font-semibold">

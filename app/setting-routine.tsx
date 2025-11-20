@@ -59,6 +59,7 @@ export default function SettingRoutineScreen() {
           data={routine.blocks}
           renderItem={({ item }) => <SettingButton title={item.title} />}
           className="w-full"
+          style={{ paddingBlockEnd: 1 }}
         />
       </View>
 

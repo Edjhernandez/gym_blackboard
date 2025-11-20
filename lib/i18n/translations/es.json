@@ -116,8 +116,9 @@
             "discard_routine": "Descartar Rutina",
             "warmup_settings": "Configuración de Calentamiento"
         },
-        "block_name": "Bloque {{number}}",
-        "add_new_block": "Agregar Bloque"
+        "setting_block": "Configuracion de {{title}}",
+        "add_new_block": "Agregar Bloque",
+        "block_name": "Bloque {{title}}"
     },
     "warmup_exercises": {
         "title": "Ejercicios de Calentamiento",

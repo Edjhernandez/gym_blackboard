@@ -3,18 +3,19 @@ import React from "react";
 import { Pressable, Text, View } from "react-native";
 
 type TypeOptionRoutineButton = {
+  id: string;
   title: string;
   targetRoute: Href;
   Icon?: React.ComponentType<{ size?: number; color?: string }>;
 };
 
 export default function OptionRoutineButton(props: TypeOptionRoutineButton) {
-  const { title, targetRoute, Icon } = props;
+  const { title, targetRoute, Icon, id } = props;
   const router = useRouter();
 
   const navigationPayload = {
     pathname: targetRoute,
-    params: { blockTitle: title },
+    params: { blockId: id },
   };
 
   return (
