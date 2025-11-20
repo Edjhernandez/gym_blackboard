@@ -4,7 +4,13 @@ import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import {
+  FlatList,
+  KeyboardAvoidingView,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 import {
   ArrowDownOnSquareIcon,
   ArrowPathRoundedSquareIcon,
@@ -46,7 +52,8 @@ export default function SettingWarmup() {
           {t("routines.settings_routine_screen.warmup_settings")}
         </Text>
       </View>
-      <View className="flex-1 px-3 pt-2">
+      {/* Exercises List */}
+      <KeyboardAvoidingView className="flex-1 px-3 pt-2" behavior="padding">
         <FlatList
           data={selectedExercises}
           renderItem={({ item }) => (
@@ -58,7 +65,7 @@ export default function SettingWarmup() {
           )}
           keyExtractor={(item) => item.id}
         />
-      </View>
+      </KeyboardAvoidingView>
 
       <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3 mb-2">
         <Pressable
