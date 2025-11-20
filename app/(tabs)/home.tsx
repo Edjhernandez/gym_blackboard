@@ -9,6 +9,7 @@ import { FlatList, Text, TouchableOpacity, View } from "react-native";
 const home = () => {
   const { t } = useI18n();
   const router = useRouter();
+  const favoriteRoutines = routines.filter((routine) => routine.isFavorite);
   return (
     <View className="bg-background-primary flex-1">
       {/* Header */}
@@ -29,13 +30,22 @@ const home = () => {
           {t("home.your_most_used_routines")}
         </Text>
         <View className="w-11/12 h-3/4 px-4 border-[0.5px] border-text-secondary rounded-lg pb-1 mb-2">
-          <FlatList
-            data={routines}
-            renderItem={({ item }) => (
-              <RoutineCard title={item.title} details={item.details} />
-            )}
-            keyExtractor={(item) => item.id}
-          />
+          {favoriteRoutines.length === 0 ? (
+            <Text className="text-text-primary text-center mt-10 font-extralight text-xl">
+              {t("home.no_favorite_routines")}
+            </Text>
+          ) : (
+            <FlatList
+              data={favoriteRoutines}
+              renderItem={({ item }) => (
+                <RoutineCard
+                  title={item.name}
+                  details={`${t("home.exercises_amount", { count: item.exercisesAmount })} , ${t("home.duration_minutes", { count: item.durationMinutes })}`}
+                />
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          )}
         </View>
         <TouchableOpacity
           className=" bg-primary rounded-xl p-4 items-center"
