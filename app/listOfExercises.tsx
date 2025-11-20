@@ -32,6 +32,7 @@ export default function listOfExercises() {
       title: params.blockTitle as string,
       exercises: selectedExercises,
     });
+    setSelectedExercises([]);
     router.push("/create-routine");
   };
 

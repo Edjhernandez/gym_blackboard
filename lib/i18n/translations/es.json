@@ -22,7 +22,8 @@
         "reset_label": "Resetear",
         "continue_label": "Continuar",
         "logout_button_label": "Cerrar sesión",
-        "discard_label": "Descartar"
+        "discard_label": "Descartar",
+        "setting_block_label": "Configuración {{block number}}"
     },
     "common": {
         "logo": "Logo del gimnasio",

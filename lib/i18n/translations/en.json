@@ -22,7 +22,8 @@
         "reset_label": "Reset",
         "continue_label": "Continue",
         "logout_button_label": "Log Out",
-        "discard_label": "Discard"
+        "discard_label": "Discard",
+        "setting_block_label": "Setting {{block number}}"
     },
     "common": {
         "logo": "Logo GYM",

@@ -1,6 +1,7 @@
 import OptionRoutineButton from "@/components/OptionRoutineButton";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
+import { Block } from "@/types/types";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
@@ -12,36 +13,24 @@ import {
 } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-interface ExerciseBlock {
-  id: number;
-  title: string;
-  targetRoute: string;
-}
-
 export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
 
   const { routine, setName, resetRoutine } = useRoutineStore();
 
-  const [exerciseBlocks, setExerciseBlocks] = useState<ExerciseBlock[]>([
+  const [exerciseBlocks, setExerciseBlocks] = useState<Block[]>([
     {
-      id: 1,
       title: t("routines.block_name", { number: 1 }),
-      targetRoute: "/listOfExercises",
+      exercises: [],
     },
   ]);
 
+  // Function to add a new exercise block
   const addBlock = () => {
-    const newBlockId =
-      exerciseBlocks.length > 0
-        ? exerciseBlocks[exerciseBlocks.length - 1].id + 1
-        : 1;
-
-    const newBlock: ExerciseBlock = {
-      id: newBlockId,
-      title: t("routines.block_name", { number: newBlockId }),
-      targetRoute: "/listOfExercises",
+    const newBlock: Block = {
+      title: t("routines.block_name", { number: exerciseBlocks.length + 1 }), //set a block number incrementally
+      exercises: [],
     };
 
     setExerciseBlocks([...exerciseBlocks, newBlock]);
@@ -50,7 +39,7 @@ export default function CreateRoutine() {
   const handleDiscard = () => {
     // Reset routine store to initial state
     resetRoutine();
-    // Navigate back to home or previous screen
+    // Navigate back to home
     router.push("/(tabs)/home");
   };
 
@@ -85,7 +74,7 @@ export default function CreateRoutine() {
         {/* Dynamic rendering of exercise blocks */}
         {exerciseBlocks.map((block) => (
           <OptionRoutineButton
-            key={block.id}
+            key={block.title}
             title={block.title}
             targetRoute="/listOfExercises"
           />
