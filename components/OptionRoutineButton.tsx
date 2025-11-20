@@ -11,11 +11,17 @@ type TypeOptionRoutineButton = {
 export default function OptionRoutineButton(props: TypeOptionRoutineButton) {
   const { title, targetRoute, Icon } = props;
   const router = useRouter();
+
+  const navigationPayload = {
+    pathname: targetRoute,
+    params: { blockTitle: title },
+  };
+
   return (
     <View className="w-full flex-col items-center justify-start border-b-[0.5px] border-secondary py-3">
       <Pressable
         className="flex-row items-center justify-between w-3/4 border-[0.5px] border-primary bg-secondary rounded-xl p-4"
-        onPress={() => router.push(targetRoute)}
+        onPress={() => router.push(navigationPayload as any)}
         accessibilityRole="button"
         accessibilityLabel={title}
       >

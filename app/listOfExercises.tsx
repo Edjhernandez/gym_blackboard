@@ -1,8 +1,9 @@
 import { DATAFunctional } from "@/DATA/data";
 import ExerciseCard from "@/components/ExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
+import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import {
@@ -12,8 +13,10 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function listOfExercises() {
+  const { setBlocks } = useRoutineStore();
   const { t } = useI18n();
   const router = useRouter();
+  const params = useLocalSearchParams();
   const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
     "functional"
   );
@@ -25,7 +28,11 @@ export default function listOfExercises() {
   );
 
   const handleSave = () => {
-    () => router.push("/create-routine");
+    setBlocks({
+      title: params.blockTitle as string,
+      exercises: selectedExercises,
+    });
+    router.push("/create-routine");
   };
 
   return (

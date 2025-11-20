@@ -5,11 +5,10 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import {
-  ArrowLeftIcon,
-  ArrowPathRoundedSquareIcon,
   ArrowRightIcon,
   FireIcon,
   PlusCircleIcon,
+  XMarkIcon,
 } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -23,7 +22,7 @@ export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
 
-  const { routine, setName } = useRoutineStore();
+  const { routine, setName, resetRoutine } = useRoutineStore();
 
   const [exerciseBlocks, setExerciseBlocks] = useState<ExerciseBlock[]>([
     {
@@ -48,18 +47,18 @@ export default function CreateRoutine() {
     setExerciseBlocks([...exerciseBlocks, newBlock]);
   };
 
+  const handleDiscard = () => {
+    // Reset routine store to initial state
+    resetRoutine();
+    // Navigate back to home or previous screen
+    router.push("/(tabs)/home");
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-background-primary items-center">
       {/* Header */}
-      <View className="w-full flex-row items-center justify-start py-4">
-        <Pressable
-          onPress={() => router.push("/(tabs)/home")}
-          className="ml-8"
-          accessibilityLabel={t("accessibility.go_back_label")}
-        >
-          <ArrowLeftIcon color="#E7EBDA" size={22} />
-        </Pressable>
-        <Text className="text-text-primary text-2xl font-bold ml-16">
+      <View className="w-full flex-row items-center justify-center py-4">
+        <Text className="text-text-primary text-2xl font-bold">
           {t("routines.create_new_routine")}
         </Text>
       </View>
@@ -111,11 +110,12 @@ export default function CreateRoutine() {
         <View className="w-full flex-row items-center justify-center mt-2 px-6 gap-3">
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
-            accessibilityLabel={t("accessibility.reset_label")}
+            accessibilityLabel={t("accessibility.discard_label")}
+            onPress={handleDiscard}
           >
-            <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
+            <XMarkIcon size={24} color={"#FFFF00"} />
             <Text className="text-primary text-base font-semibold">
-              {t("common.reset")}
+              {t("common.discard")}
             </Text>
           </Pressable>
           <Pressable

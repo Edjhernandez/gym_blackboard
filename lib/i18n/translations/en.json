@@ -21,7 +21,8 @@
         "abs_body_part_label": "Abs",
         "reset_label": "Reset",
         "continue_label": "Continue",
-        "logout_button_label": "Log Out"
+        "logout_button_label": "Log Out",
+        "discard_label": "Discard"
     },
     "common": {
         "logo": "Logo GYM",
@@ -32,7 +33,8 @@
         "cancel": "Cancel",
         "confirm": "Confirm",
         "example_sets_placeholder": "e.g. 4",
-        "example_reps_placeholder": "e.g. 12"
+        "example_reps_placeholder": "e.g. 12",
+        "discard": "Discard"
     },
     "navigation": {
         "home": "Home",

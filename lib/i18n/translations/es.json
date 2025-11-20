@@ -21,7 +21,8 @@
         "abs_body_part_label": "Abdomen",
         "reset_label": "Resetear",
         "continue_label": "Continuar",
-        "logout_button_label": "Cerrar sesión"
+        "logout_button_label": "Cerrar sesión",
+        "discard_label": "Descartar"
     },
     "common": {
         "logo": "Logo del gimnasio",
@@ -32,7 +33,8 @@
         "cancel": "Cancelar",
         "confirm": "Confirmar",
         "example_sets_placeholder": "Ej: 4",
-        "example_reps_placeholder": "Ej: 12"
+        "example_reps_placeholder": "Ej: 12",
+        "discard": "Descartar"
     },
     "navigation": {
         "home": "Inicio",

@@ -8,6 +8,11 @@ export type Exercise = {
   reps?: number;
 };
 
+export type Block = {
+  title: string;
+  exercises: Exercise[];
+};
+
 export type Routine = {
   id: string;
   name: string;
@@ -17,7 +22,7 @@ export type Routine = {
   category: "functional" | "bodybuilding";
   warmup: Exercise[];
   blocks: {
-    id: string;
+    title: string;
     exercises: Exercise[];
   }[];
 };
