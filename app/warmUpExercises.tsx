@@ -3,8 +3,8 @@ import ExerciseCard from "@/components/ExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
-import { useRouter } from "expo-router";
-import React from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, { useEffect } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import {
   ArrowDownOnSquareIcon,
@@ -19,10 +19,20 @@ export default function WarmUpExercises() {
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
     routine.warmup
   );
+  const params = useLocalSearchParams();
+
+  useEffect(() => {
+    setSelectedExercises(routine.warmup);
+  }, [routine.warmup]);
 
   const handleSave = () => {
-    router.push("/create-routine");
     setWarmup(selectedExercises);
+    setSelectedExercises([]);
+    if (params.origin === "warmupSettings") {
+      router.back();
+    } else {
+      router.push("/create-routine");
+    }
   };
 
   return (

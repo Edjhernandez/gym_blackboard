@@ -31,7 +31,8 @@
         "coach": "Coach",
         "cancel": "Cancel",
         "confirm": "Confirm",
-        "example_placeholder": "e.g. {{number}}"
+        "example_sets_placeholder": "e.g. 4",
+        "example_reps_placeholder": "e.g. 12"
     },
     "navigation": {
         "home": "Home",

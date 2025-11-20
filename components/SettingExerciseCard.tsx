@@ -90,9 +90,7 @@ export default function SettingExerciseCard(
               value={setsInput}
               onChangeText={(text) => setSetsInput(text)}
               keyboardType="number-pad"
-              placeholder={t("common.example_placeholder", {
-                number: Math.floor(Math.random() * 5) + 1,
-              })}
+              placeholder={t("common.example_sets_placeholder")}
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
@@ -113,9 +111,7 @@ export default function SettingExerciseCard(
               value={repsInput}
               onChangeText={(text) => setRepsInput(text)}
               keyboardType="number-pad"
-              placeholder={t("common.example_placeholder", {
-                number: Math.floor(Math.random() * 15) + 8,
-              })}
+              placeholder={t("common.example_reps_placeholder")}
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"

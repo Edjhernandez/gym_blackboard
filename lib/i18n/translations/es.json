@@ -31,7 +31,8 @@
         "coach": "Entrenador",
         "cancel": "Cancelar",
         "confirm": "Confirmar",
-        "example_placeholder": "Ej: {{number}}"
+        "example_sets_placeholder": "Ej: 4",
+        "example_reps_placeholder": "Ej: 12"
     },
     "navigation": {
         "home": "Inicio",
