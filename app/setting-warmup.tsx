@@ -31,8 +31,8 @@ export default function SettingWarmup() {
 
   const handleSave = () => {
     setWarmup(selectedExercises);
-    setSelectedExercises([]);
     router.push("/setting-routine");
+    setSelectedExercises([]);
   };
 
   const handleGoBackToTheList = () => {
