@@ -1,7 +1,7 @@
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Exercise } from "@/types/types";
 import Entypo from "@expo/vector-icons/Entypo";
-import React from "react";
+import React, { useEffect } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 import { TrashIcon, XMarkIcon } from "react-native-heroicons/outline";
 
@@ -48,7 +48,33 @@ export default function SettingExerciseCard(
     setSelectedExercises(newArray);
   };
 
-  const handleInput = () => {
+  useEffect(() => {
+    const newArray = [...selectedExercises];
+    const index = searchIndex(exercise.id);
+
+    const updatedExercise = {
+      ...newArray[index],
+      sets: parseInt(setsInput, 10),
+    };
+
+    newArray[index] = updatedExercise;
+    setSelectedExercises(newArray);
+  }, [setsInput]);
+
+  useEffect(() => {
+    const newArray = [...selectedExercises];
+    const index = searchIndex(exercise.id);
+
+    const updatedExercise = {
+      ...newArray[index],
+      reps: parseInt(repsInput, 10),
+    };
+
+    newArray[index] = updatedExercise;
+    setSelectedExercises(newArray);
+  }, [repsInput]);
+
+  /*  const handleInput = () => {
     const newArray = [...selectedExercises];
     const index = searchIndex(exercise.id);
 
@@ -60,7 +86,7 @@ export default function SettingExerciseCard(
 
     newArray[index] = updatedExercise;
     setSelectedExercises(newArray);
-  };
+  }; */
 
   return (
     <View className="w-full bg-background-secondary rounded-xl p-3 mb-3 shadow-sm flex-row justify-between items-center">
@@ -94,7 +120,7 @@ export default function SettingExerciseCard(
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
-              onBlur={handleInput}
+              //onBlur={handleInput}
             />
           </View>
 
@@ -115,7 +141,7 @@ export default function SettingExerciseCard(
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
-              onBlur={handleInput}
+              //onBlur={handleInput}
             />
           </View>
         </View>

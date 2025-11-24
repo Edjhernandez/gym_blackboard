@@ -22,6 +22,12 @@ export default function SettingRoutineScreen() {
     router.push("/(tabs)/home");
   };
 
+  const handleSave = () => {
+    // Here you would typically save the routine to persistent storage or backend
+    // For now, we just navigate back to home
+    router.push("/(tabs)/blackboard");
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-background-primary">
       {/* Header */}
@@ -57,7 +63,9 @@ export default function SettingRoutineScreen() {
         {/* Navigate to Blocks Settings Screen */}
         <FlatList
           data={routine.blocks}
-          renderItem={({ item }) => <SettingButton title={item.title} />}
+          renderItem={({ item }) => (
+            <SettingButton title={item.title} id={item.id} />
+          )}
           className="w-full"
           style={{ paddingBlockEnd: 1 }}
         />
@@ -82,6 +90,7 @@ export default function SettingRoutineScreen() {
           <Pressable
             className="flex-1 rounded-md px-4 py-3 items-center justify-center bg-primary"
             accessibilityLabel={t("accessibility.save_routine_label")}
+            onPress={handleSave}
           >
             <Text className="font-semibold text-secondary text-base">
               {t("routines.settings_routine_screen.save_routine")}

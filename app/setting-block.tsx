@@ -20,7 +20,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function SettingBlock() {
   const { t } = useI18n();
   const router = useRouter();
-  const { routine } = useRoutineStore();
+  const { routine, updateBlockById } = useRoutineStore();
   const params = useLocalSearchParams();
   const index = routine.blocks.findIndex(
     (block) => block.id === (params.blockId as string)
@@ -35,8 +35,9 @@ export default function SettingBlock() {
   }, [routine.blocks[index].exercises]);
 
   const handleSave = () => {
-    setSelectedExercises([]);
+    updateBlockById(params.blockId as string, selectedExercises);
     router.push("/setting-routine");
+    setSelectedExercises([]);
   };
 
   const handleGoBackToTheList = () => {

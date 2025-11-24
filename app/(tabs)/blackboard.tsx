@@ -3,7 +3,7 @@ import { useI18n } from "@/lib/hooks/useI18n";
 import React from "react";
 //import { Text, View } from "react-native";
 import useRoutineStore from "@/lib/stores/routineStore";
-import { Text } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LiveWaitScreen() {
@@ -24,7 +24,9 @@ export default function LiveWaitScreen() {
           {t("blackboard_screen.no_transmission_message")}
         </Text>
       </View> */}
-      <Text className="text-green-400">{zustandState}</Text>
+      <ScrollView>
+        <Text className="text-green-400">{zustandState}</Text>
+      </ScrollView>
     </SafeAreaView>
   );
 }

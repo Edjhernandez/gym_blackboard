@@ -4,11 +4,12 @@ import React from "react";
 import { Pressable, Text } from "react-native";
 
 type TypeSettingButtonProps = {
+  id: string;
   title: string;
 };
 
 export default function SettingButton(props: TypeSettingButtonProps) {
-  const { title } = props;
+  const { id, title } = props;
   const { t } = useI18n();
   const router = useRouter();
   return (
@@ -21,7 +22,7 @@ export default function SettingButton(props: TypeSettingButtonProps) {
       onPress={() =>
         router.push({
           pathname: "/setting-block",
-          params: { blockTitle: title },
+          params: { blockId: id },
         })
       }
     >
