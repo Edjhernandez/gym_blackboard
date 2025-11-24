@@ -31,8 +31,10 @@ export default function SettingBlock() {
   );
 
   useEffect(() => {
-    setSelectedExercises(routine.blocks[index].exercises);
-  }, [routine.blocks[index].exercises]);
+    if (routine.blocks[index] && routine.blocks[index].exercises) {
+      setSelectedExercises(routine.blocks[index].exercises);
+    }
+  }, [routine.blocks[index]?.exercises]);
 
   const handleSave = () => {
     updateBlockById(params.blockId as string, selectedExercises);

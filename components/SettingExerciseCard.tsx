@@ -74,20 +74,6 @@ export default function SettingExerciseCard(
     setSelectedExercises(newArray);
   }, [repsInput]);
 
-  /*  const handleInput = () => {
-    const newArray = [...selectedExercises];
-    const index = searchIndex(exercise.id);
-
-    const updatedExercise = {
-      ...newArray[index],
-      sets: parseInt(setsInput, 10),
-      reps: parseInt(repsInput, 10),
-    };
-
-    newArray[index] = updatedExercise;
-    setSelectedExercises(newArray);
-  }; */
-
   return (
     <View className="w-full bg-background-secondary rounded-xl p-3 mb-3 shadow-sm flex-row justify-between items-center">
       <View className="flex-1 mr-4">
@@ -120,7 +106,6 @@ export default function SettingExerciseCard(
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
-              //onBlur={handleInput}
             />
           </View>
 
@@ -141,7 +126,6 @@ export default function SettingExerciseCard(
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
-              //onBlur={handleInput}
             />
           </View>
         </View>

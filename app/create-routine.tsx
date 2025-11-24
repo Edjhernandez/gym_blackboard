@@ -36,6 +36,7 @@ export default function CreateRoutine() {
 
   const handleDiscard = () => {
     resetRoutine(); // Reset routine store to initial state
+
     router.push("/(tabs)/home"); // Navigate back to home screen
   };
 
