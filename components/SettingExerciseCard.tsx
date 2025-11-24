@@ -32,6 +32,7 @@ export default function SettingExerciseCard(
   const downPosition = (id: string, array: Exercise[]) => {
     const newArray = [...array];
     const index = searchIndex(id.toString());
+    if (index >= newArray.length - 1) return;
     const itemToMove = newArray[index];
     newArray.splice(index, 1);
     newArray.splice(index + 1, 0, itemToMove);
