@@ -55,7 +55,7 @@ export default function SettingBlock() {
       {/* Header */}
       <View className="w-full p-4 flex-row items-center justify-around">
         <Text className="text-text-primary font-semibold text-xl text-center">
-          {t("routines.setting_block", { title: params.blockTitle })}
+          {t("routines.setting_block", { title: routine.blocks[index]?.title })}
         </Text>
       </View>
       {/* Exercises List */}
