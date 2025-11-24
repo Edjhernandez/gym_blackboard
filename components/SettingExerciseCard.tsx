@@ -50,15 +50,14 @@ export default function SettingExerciseCard(
   const handleInput = () => {
     const newArray = [...selectedExercises];
     const index = searchIndex(exercise.id);
+
     const updatedExercise = {
-      ...newArray,
-      [index]: {
-        ...exercise,
-        sets: parseInt(setsInput, 10),
-        reps: parseInt(repsInput, 10),
-      },
+      ...newArray[index],
+      sets: parseInt(setsInput, 10),
+      reps: parseInt(repsInput, 10),
     };
-    newArray[index] = updatedExercise[index];
+
+    newArray[index] = updatedExercise;
     setSelectedExercises(newArray);
   };
 
