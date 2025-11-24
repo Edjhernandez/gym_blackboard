@@ -23,7 +23,7 @@ export default function SettingBlock() {
   const { routine } = useRoutineStore();
   const params = useLocalSearchParams();
   const index = routine.blocks.findIndex(
-    (block) => block.title === (params.blockTitle as string)
+    (block) => block.id === (params.blockId as string)
   );
 
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(

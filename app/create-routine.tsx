@@ -35,10 +35,8 @@ export default function CreateRoutine() {
   };
 
   const handleDiscard = () => {
-    // Reset routine store to initial state
-    resetRoutine();
-    // Navigate back to home
-    router.push("/(tabs)/home");
+    resetRoutine(); // Reset routine store to initial state
+    router.push("/(tabs)/home"); // Navigate back to home screen
   };
 
   const handleContinue = () => {
