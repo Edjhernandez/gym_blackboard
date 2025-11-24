@@ -28,8 +28,6 @@ export default function listOfExercises() {
   );
 
   const handleSave = () => {
-    console.log("Saving selected exercises to block:", params.blockId);
-    console.log(routine.blocks);
     updateBlockById(params.blockId as string, selectedExercises);
     setSelectedExercises([]);
     router.push("/create-routine");
