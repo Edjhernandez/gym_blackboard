@@ -29,7 +29,7 @@ export default function SettingRoutineScreen() {
         <Text className="text-text-primary text-xl font-semibold">
           {t("routines.settings_routine_screen.title")}
         </Text>
-        <View className="w-full flex-rcol items-center justify-center py-4">
+        <View className="w-full flex-col items-center justify-center py-4">
           <TextInput
             className="bg-background-secondary pl-3 text-xl font-bold text-text-primary border-[0.5px] border-text-secondary rounded-md w-3/4"
             value={routine.name}
