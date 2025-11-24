@@ -27,7 +27,7 @@ export default function ExerciseCard(props: TypeExerciseCardProps) {
     } else {
       if (isAlreadyAdded) {
         setSelectedExercises?.((prev) =>
-          prev.filter((item) => item.name !== exercise.name)
+          prev.filter((item) => item.id !== exercise.id)
         );
       }
     }
