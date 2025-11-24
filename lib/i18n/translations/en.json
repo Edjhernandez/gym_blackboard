@@ -21,7 +21,9 @@
         "abs_body_part_label": "Abs",
         "reset_label": "Reset",
         "continue_label": "Continue",
-        "logout_button_label": "Log Out"
+        "logout_button_label": "Log Out",
+        "discard_label": "Discard",
+        "setting_block_label": "Setting {{block number}}"
     },
     "common": {
         "logo": "Logo GYM",
@@ -30,7 +32,10 @@
         "save": "Save",
         "coach": "Coach",
         "cancel": "Cancel",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "example_sets_placeholder": "e.g. 4",
+        "example_reps_placeholder": "e.g. 12",
+        "discard": "Discard"
     },
     "navigation": {
         "home": "Home",
@@ -74,8 +79,11 @@
     },
     "home": {
         "greeting": "Hello coach, {{name}}",
-        "your_most_used_routines": "Your most used routines",
-        "create_new_routine": "Create New Routine"
+        "your_most_used_routines": "Your favorite routines",
+        "create_new_routine": "Create New Routine",
+        "no_favorite_routines": "You have no favorite routines yet.",
+        "exercises_amount": "{{count}} exercises",
+        "duration_minutes": "{{count}} minutes"
     },
     "routine_action_popup": {
         "project_to_tv_button": "Project to TV",
@@ -108,8 +116,9 @@
             "discard_routine": "Delete Routine",
             "warmup_settings": "Warm-up Settings"
         },
-        "block_name": "Block {{number}}",
-        "add_new_block": "Add Block"
+        "setting_block": "Setting of {{title}}",
+        "add_new_block": "Add Block",
+        "block_name": "Block {{number}}"
     },
     "warmup_exercises": {
         "title": "Warm-up Exercises",

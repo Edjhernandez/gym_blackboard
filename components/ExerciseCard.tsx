@@ -1,13 +1,37 @@
-import React from "react";
+import { Exercise } from "@/types/types";
+import React, { useEffect } from "react";
 import { Pressable, Text } from "react-native";
 import { CheckIcon, MinusIcon } from "react-native-heroicons/outline";
+
 type TypeExerciseCardProps = {
-  name: string;
+  exercise: Exercise;
+  setSelectedExercises?: React.Dispatch<React.SetStateAction<any[]>>;
+  isSelected: boolean;
+  selectedExercises: Exercise[];
 };
 
 export default function ExerciseCard(props: TypeExerciseCardProps) {
-  const { name } = props;
-  const [isChecked, setIsChecked] = React.useState(false);
+  const { exercise, setSelectedExercises, isSelected, selectedExercises } =
+    props;
+  const [isChecked, setIsChecked] = React.useState(isSelected);
+
+  const isAlreadyAdded = selectedExercises.some(
+    (item) => item.id === exercise.id
+  );
+
+  useEffect(() => {
+    if (isChecked) {
+      if (!isAlreadyAdded) {
+        setSelectedExercises?.((prev) => [...prev, exercise]);
+      }
+    } else {
+      if (isAlreadyAdded) {
+        setSelectedExercises?.((prev) =>
+          prev.filter((item) => item.id !== exercise.id)
+        );
+      }
+    }
+  }, [isChecked]);
 
   return (
     <Pressable
@@ -22,7 +46,7 @@ export default function ExerciseCard(props: TypeExerciseCardProps) {
       <Text
         className={`text-lg ml-3 ${isChecked ? "text-text-primary font-semibold" : "text-text-secondary font-normal"}`}
       >
-        {name}
+        {exercise.name}
       </Text>
     </Pressable>
   );

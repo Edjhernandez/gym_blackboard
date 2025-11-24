@@ -21,7 +21,9 @@
         "abs_body_part_label": "Abdomen",
         "reset_label": "Resetear",
         "continue_label": "Continuar",
-        "logout_button_label": "Cerrar sesión"
+        "logout_button_label": "Cerrar sesión",
+        "discard_label": "Descartar",
+        "setting_block_label": "Configuración {{block number}}"
     },
     "common": {
         "logo": "Logo del gimnasio",
@@ -30,7 +32,10 @@
         "save": "Guardar",
         "coach": "Entrenador",
         "cancel": "Cancelar",
-        "confirm": "Confirmar"
+        "confirm": "Confirmar",
+        "example_sets_placeholder": "Ej: 4",
+        "example_reps_placeholder": "Ej: 12",
+        "discard": "Descartar"
     },
     "navigation": {
         "home": "Inicio",
@@ -74,8 +79,11 @@
     },
     "home": {
         "greeting": "Hola coach, {{name}}",
-        "your_most_used_routines": "Tus rutinas más usadas",
-        "create_new_routine": "Crear Nueva Rutina"
+        "your_most_used_routines": "Tus rutinas favoritas",
+        "create_new_routine": "Crear Nueva Rutina",
+        "no_favorite_routines": "Aún no tienes rutinas favoritas.",
+        "exercises_amount": "{{count}} ejercicios",
+        "duration_minutes": "{{count}} minutos"
     },
     "routine_action_popup": {
         "project_to_tv_button": "Proyectar a TV",
@@ -108,8 +116,9 @@
             "discard_routine": "Descartar Rutina",
             "warmup_settings": "Configuración de Calentamiento"
         },
-        "block_name": "Bloque {{number}}",
-        "add_new_block": "Agregar Bloque"
+        "setting_block": "Configuracion de {{title}}",
+        "add_new_block": "Agregar Bloque",
+        "block_name": "Bloque {{title}}"
     },
     "warmup_exercises": {
         "title": "Ejercicios de Calentamiento",

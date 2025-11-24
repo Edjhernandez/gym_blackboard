@@ -34,7 +34,6 @@ const _layout = () => {
         ),
       }}
     >
-      <Tabs.Screen name="_layout" options={{ href: null }} />
       <Tabs.Screen
         name="home"
         options={{

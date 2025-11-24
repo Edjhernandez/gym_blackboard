@@ -1,7 +1,9 @@
 import { DATAFunctional } from "@/DATA/data";
 import ExerciseCard from "@/components/ExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
-import { useRouter } from "expo-router";
+import useRoutineStore from "@/lib/stores/routineStore";
+import { Exercise } from "@/types/types";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import {
@@ -11,17 +13,25 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function listOfExercises() {
+  const { routine, updateBlockById } = useRoutineStore();
   const { t } = useI18n();
   const router = useRouter();
+  const params = useLocalSearchParams();
   const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
     "functional"
   );
   const [bodyPart, setBodyPart] = useState<
     "chest" | "back" | "legs" | "arms" | "abs"
   >("chest");
-  const [selectedExercises, setSelectedExercises] = React.useState<string[]>(
+  const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
     []
   );
+
+  const handleSave = () => {
+    updateBlockById(params.blockId as string, selectedExercises);
+    setSelectedExercises([]);
+    router.push("/create-routine");
+  };
 
   return (
     <SafeAreaView className="w-full bg-background-primary pt-4 flex-1">
@@ -213,15 +223,23 @@ export default function listOfExercises() {
         <View className="w-full border-[0.5px] border-text-secondary max-h-screen p-4 rounded-e-xl">
           <FlatList
             data={DATAFunctional}
-            renderItem={({ item }) => <ExerciseCard name={item.name} />}
+            renderItem={({ item }) => (
+              <ExerciseCard
+                exercise={item}
+                selectedExercises={selectedExercises}
+                setSelectedExercises={setSelectedExercises}
+                isSelected={selectedExercises.some((ex) => ex.id === item.id)}
+              />
+            )}
             keyExtractor={(item) => item.id}
             contentContainerStyle={{ paddingBottom: 20 }}
           />
         </View>
       </View>
 
-      {/* number of selected exercises */}
+      {/* footer */}
       <View className="w-full flex-col items-center bg-background-primary mt-3">
+        {/* selected exercises count */}
         <View className="w-full flex-row justify-center gap-4">
           <Text className="text-text-primary font-bold">
             {selectedExercises.length}
@@ -230,6 +248,8 @@ export default function listOfExercises() {
             {t("warmup_exercises.selected_exercises")}
           </Text>
         </View>
+
+        {/* Buttons for save and reset */}
         <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3 mb-2">
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
@@ -242,7 +262,7 @@ export default function listOfExercises() {
           </Pressable>
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-primary px-4 py-3 rounded-md gap-3"
-            onPress={() => router.push("/create-routine")}
+            onPress={handleSave}
             accessibilityLabel={t("accessibility.save_label")}
           >
             <Text className="text-secondary text-base font-semibold">

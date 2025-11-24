@@ -1,24 +1,26 @@
-export type WarmupExercise = {
-  id: string;
-  name: string;
-  exerciseType: "warm-Up" | "functional" | "bodybuilding";
-  videoURL?: string;
-};
-
 export type Exercise = {
   id: string;
   name: string;
   exerciseType: "warm-Up" | "functional" | "bodybuilding";
-  bodyPart: "chest" | "back" | "legs" | "arms" | "abs";
+  bodyPart?: "chest" | "back" | "legs" | "arms" | "abs";
   videoURL?: string;
+  sets?: number;
+  reps?: number;
+};
+
+export type Block = {
+  id: string;
+  title: string;
+  exercises: Exercise[];
 };
 
 export type Routine = {
   id: string;
-  routineType: "functional" | "bodybuilding";
-  exercises: Exercise[];
   name: string;
-  details: string;
-  hasWarmup: boolean;
-  warmupExercises?: WarmupExercise[];
+  exercisesAmount: number;
+  durationMinutes: number;
+  isFavorite: boolean;
+  category: "functional" | "bodybuilding";
+  warmup: Exercise[];
+  blocks: Block[];
 };
