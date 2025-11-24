@@ -16,8 +16,13 @@ export default function SettingExerciseCard(
 ) {
   const { exercise, setSelectedExercises, selectedExercises } = props;
   const { t } = useI18n();
-  const [setsInput, setSetsInput] = React.useState<string>("");
-  const [repsInput, setRepsInput] = React.useState<string>("");
+  const index = selectedExercises.findIndex((item) => exercise.id === item.id);
+  const [setsInput, setSetsInput] = React.useState<string>(
+    selectedExercises[index]?.sets?.toString() || ""
+  );
+  const [repsInput, setRepsInput] = React.useState<string>(
+    selectedExercises[index]?.reps?.toString() || ""
+  );
 
   const handleDelete = () => {
     setSelectedExercises((prevExercises) =>

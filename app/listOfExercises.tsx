@@ -4,7 +4,7 @@ import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import {
   ArrowDownOnSquareIcon,
@@ -17,6 +17,9 @@ export default function listOfExercises() {
   const { t } = useI18n();
   const router = useRouter();
   const params = useLocalSearchParams();
+  const index = routine.blocks.findIndex(
+    (block) => block.id === (params.blockId as string)
+  );
   const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
     "functional"
   );
@@ -24,8 +27,14 @@ export default function listOfExercises() {
     "chest" | "back" | "legs" | "arms" | "abs"
   >("chest");
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    []
+    index !== -1 ? routine.blocks[index].exercises : []
   );
+
+  useEffect(() => {
+    if (routine.blocks[index] && routine.blocks[index].exercises) {
+      setSelectedExercises(routine.blocks[index].exercises);
+    }
+  }, [routine.blocks[index]?.exercises]);
 
   const handleSave = () => {
     updateBlockById(params.blockId as string, selectedExercises);
