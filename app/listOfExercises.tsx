@@ -39,7 +39,11 @@ export default function listOfExercises() {
   const handleSave = () => {
     updateBlockById(params.blockId as string, selectedExercises);
     setSelectedExercises([]);
-    router.push("/create-routine");
+    if (params.origin === "blockSettings") {
+      router.back();
+    } else {
+      router.push("/create-routine");
+    }
   };
 
   return (
