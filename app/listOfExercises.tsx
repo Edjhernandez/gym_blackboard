@@ -17,9 +17,7 @@ export default function listOfExercises() {
   const { t } = useI18n();
   const router = useRouter();
   const params = useLocalSearchParams();
-  const index = routine.blocks.findIndex(
-    (block) => block.id === (params.blockId as string)
-  );
+
   const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
     "functional"
   );
@@ -27,19 +25,25 @@ export default function listOfExercises() {
     "chest" | "back" | "legs" | "arms" | "abs"
   >("chest");
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    index !== -1 ? routine.blocks[index].exercises : []
+    routine.blocks[Number(params.index)]?.exercises
+      ? routine.blocks[Number(params.index)]!.exercises
+      : []
   );
 
   useEffect(() => {
-    if (routine.blocks[index] && routine.blocks[index].exercises) {
-      setSelectedExercises(routine.blocks[index].exercises);
+    if (
+      routine.blocks[Number(params.index)] &&
+      routine.blocks[Number(params.index)].exercises
+    ) {
+      setSelectedExercises(routine.blocks[Number(params.index)].exercises);
     }
-  }, [routine.blocks[index]?.exercises]);
+    console.log(selectedExercises);
+  }, [routine.blocks[Number(params.index)]?.exercises]);
 
   const handleSave = () => {
     updateBlockById(params.blockId as string, selectedExercises);
     setSelectedExercises([]);
-    if (params.origin === "blockSettings") {
+    if (params.origin === "/setting-block") {
       router.back();
     } else {
       router.push("/create-routine");
