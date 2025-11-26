@@ -24,29 +24,55 @@ export default function listOfExercises() {
   const [bodyPart, setBodyPart] = useState<
     "chest" | "back" | "legs" | "arms" | "abs"
   >("chest");
+
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    routine.blocks[Number(params.index)]?.exercises
-      ? routine.blocks[Number(params.index)]!.exercises
+    routine.blocks[Number(params.blockIndex)].exercises
+      ? routine.blocks[Number(params.blockIndex)]!.exercises
       : []
   );
 
   useEffect(() => {
     if (
-      routine.blocks[Number(params.index)] &&
-      routine.blocks[Number(params.index)].exercises
+      routine.blocks[Number(params.blockIndex)] &&
+      routine.blocks[Number(params.blockIndex)].exercises
     ) {
-      setSelectedExercises(routine.blocks[Number(params.index)].exercises);
+      setSelectedExercises(routine.blocks[Number(params.blockIndex)].exercises);
     }
-  }, [routine.blocks[Number(params.index)]?.exercises]);
+  }, [routine.blocks[Number(params.blockIndex)]?.exercises]);
+
+  const onToggleSelect = (exercise: Exercise) => {
+    const isAlreadyAdded = selectedExercises.some(
+      (item) => item.id === exercise.id
+    );
+
+    if (!isAlreadyAdded) {
+      setSelectedExercises?.((prev) => [...prev, exercise]);
+    } else {
+      if (isAlreadyAdded) {
+        setSelectedExercises?.((prev) =>
+          prev.filter((item) => item.id !== exercise.id)
+        );
+      }
+    }
+  };
 
   const handleSave = () => {
-    updateBlockById(routine.blocks[Number(params.index)].id, selectedExercises);
-    setSelectedExercises([]);
+    updateBlockById(
+      routine.blocks[Number(params.blockIndex)].id,
+      selectedExercises
+    );
+
     if (params.origin === "/setting-block") {
       router.back();
     } else {
       router.push("/create-routine");
     }
+
+    setSelectedExercises([]);
+  };
+
+  const handleReset = () => {
+    setSelectedExercises([]);
   };
 
   return (
@@ -242,8 +268,7 @@ export default function listOfExercises() {
             renderItem={({ item }) => (
               <ExerciseCard
                 exercise={item}
-                selectedExercises={selectedExercises}
-                setSelectedExercises={setSelectedExercises}
+                onToggleSelect={() => onToggleSelect(item)}
                 isSelected={selectedExercises.some((ex) => ex.id === item.id)}
               />
             )}
@@ -270,6 +295,7 @@ export default function listOfExercises() {
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
             accessibilityLabel={t("accessibility.reset_label")}
+            onPress={handleReset}
           >
             <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
             <Text className="text-primary text-base font-semibold">

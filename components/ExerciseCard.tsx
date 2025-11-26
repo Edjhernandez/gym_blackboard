@@ -1,40 +1,21 @@
 import { Exercise } from "@/types/types";
-import React, { useEffect } from "react";
+import React from "react";
 import { Pressable, Text } from "react-native";
 import { CheckIcon, MinusIcon } from "react-native-heroicons/outline";
 
 type TypeExerciseCardProps = {
   exercise: Exercise;
-  setSelectedExercises?: React.Dispatch<React.SetStateAction<any[]>>;
   isSelected: boolean;
-  selectedExercises: Exercise[];
+  onToggleSelect: () => void;
 };
 
 export default function ExerciseCard(props: TypeExerciseCardProps) {
-  const { exercise, setSelectedExercises, isSelected, selectedExercises } =
-    props;
-
-  const isAlreadyAdded = selectedExercises.some(
-    (item) => item.id === exercise.id
-  );
-
-  useEffect(() => {
-    if (isSelected) {
-      if (!isAlreadyAdded) {
-        setSelectedExercises?.((prev) => [...prev, exercise]);
-      }
-    } else {
-      if (isAlreadyAdded) {
-        setSelectedExercises?.((prev) =>
-          prev.filter((item) => item.id !== exercise.id)
-        );
-      }
-    }
-  }, [isSelected]);
+  const { exercise, isSelected, onToggleSelect } = props;
 
   return (
     <Pressable
       className={`w-full p-3 rounded-xl overflow-hidden my-2 flex-row justify-start items-center  ${isSelected ? "bg-secondary" : "bg-background-secondary"}`}
+      onPress={onToggleSelect}
     >
       {isSelected ? (
         <CheckIcon size={24} color="#34D399" />

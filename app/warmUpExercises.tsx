@@ -25,6 +25,22 @@ export default function WarmUpExercises() {
     setSelectedExercises(routine.warmup);
   }, [routine.warmup]);
 
+  const onToggleSelect = (exercise: Exercise) => {
+    const isAlreadyAdded = selectedExercises.some(
+      (item) => item.id === exercise.id
+    );
+
+    if (!isAlreadyAdded) {
+      setSelectedExercises?.((prev) => [...prev, exercise]);
+    } else {
+      if (isAlreadyAdded) {
+        setSelectedExercises?.((prev) =>
+          prev.filter((item) => item.id !== exercise.id)
+        );
+      }
+    }
+  };
+
   const handleSave = () => {
     setWarmup(selectedExercises);
     setSelectedExercises([]);
@@ -55,9 +71,8 @@ export default function WarmUpExercises() {
           renderItem={({ item }) => (
             <ExerciseCard
               exercise={item}
-              setSelectedExercises={setSelectedExercises}
               isSelected={selectedExercises.some((ex) => ex.id === item.id)}
-              selectedExercises={selectedExercises}
+              onToggleSelect={() => onToggleSelect(item)}
             />
           )}
           keyExtractor={(item) => item.id}

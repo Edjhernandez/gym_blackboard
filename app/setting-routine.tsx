@@ -16,9 +16,9 @@ export default function SettingRoutineScreen() {
   const { routine, setName, resetRoutine } = useRoutineStore();
 
   const handleDiscard = () => {
+    resetRoutine();
     router.push("/(tabs)/home");
     // Reset routine store to initial state
-    resetRoutine();
     // Navigate back to home
   };
 

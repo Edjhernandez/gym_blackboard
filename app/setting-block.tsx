@@ -22,32 +22,41 @@ export default function SettingBlock() {
   const router = useRouter();
   const { routine, updateBlockById } = useRoutineStore();
   const params = useLocalSearchParams();
-  const index = routine.blocks.findIndex(
-    (block) => block.id === (params.blockId as string)
-  );
 
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    index !== -1 ? routine.blocks[index].exercises : []
+    routine.blocks[Number(params.blockIndex)]?.exercises
+      ? routine.blocks[Number(params.blockIndex)]!.exercises
+      : []
   );
 
   useEffect(() => {
-    if (routine.blocks[index] && routine.blocks[index].exercises) {
-      setSelectedExercises(routine.blocks[index].exercises);
+    if (
+      routine.blocks[Number(params.blockIndex)] &&
+      routine.blocks[Number(params.blockIndex)].exercises
+    ) {
+      setSelectedExercises(routine.blocks[Number(params.blockIndex)].exercises);
     }
-  }, [routine.blocks[index]?.exercises]);
+  }, [routine.blocks[Number(params.blockIndex)]?.exercises]);
 
   const handleSave = () => {
-    updateBlockById(params.blockId as string, selectedExercises);
+    updateBlockById(
+      routine.blocks[Number(params.blockIndex)].id as string,
+      selectedExercises
+    );
     router.push("/setting-routine");
     setSelectedExercises([]);
   };
 
   const handleGoBackToTheList = () => {
-    setSelectedExercises([]);
+    updateBlockById(
+      routine.blocks[Number(params.blockIndex)].id as string,
+      selectedExercises
+    );
     router.push({
       pathname: "/listOfExercises",
-      params: { origin: "/setting-block", index: index },
+      params: { origin: "/setting-block", blockIndex: params.blockIndex },
     });
+    setSelectedExercises([]);
   };
 
   return (
@@ -55,9 +64,12 @@ export default function SettingBlock() {
       {/* Header */}
       <View className="w-full p-4 flex-row items-center justify-around">
         <Text className="text-text-primary font-semibold text-xl text-center">
-          {t("routines.setting_block", { title: routine.blocks[index]?.title })}
+          {t("routines.setting_block", {
+            title: routine.blocks[Number(params.blockIndex)]?.title,
+          })}
         </Text>
       </View>
+
       {/* Exercises List */}
       <KeyboardAvoidingView className="flex-1 px-3 pt-2" behavior="padding">
         <FlatList

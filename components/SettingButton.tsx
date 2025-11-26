@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/hooks/useI18n";
+import useRoutineStore from "@/lib/stores/routineStore";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, Text } from "react-native";
@@ -12,6 +13,8 @@ export default function SettingButton(props: TypeSettingButtonProps) {
   const { id, title } = props;
   const { t } = useI18n();
   const router = useRouter();
+  const { routine } = useRoutineStore();
+  const index = routine.blocks.findIndex((block) => block.id === id);
   return (
     <Pressable
       accessibilityRole="button"
@@ -22,7 +25,7 @@ export default function SettingButton(props: TypeSettingButtonProps) {
       onPress={() =>
         router.push({
           pathname: "/setting-block",
-          params: { blockId: id },
+          params: { blockIndex: index },
         })
       }
     >
