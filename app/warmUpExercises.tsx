@@ -35,6 +35,10 @@ export default function WarmUpExercises() {
     }
   };
 
+  const handleReset = () => {
+    setSelectedExercises([]);
+  };
+
   return (
     <SafeAreaView className="flex-1 w-full bg-background-primary flex-col items-center pt-8">
       {/* Header */}
@@ -75,6 +79,7 @@ export default function WarmUpExercises() {
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
             accessibilityLabel={t("accessibility.reset_label")}
+            onPress={handleReset}
           >
             <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
             <Text className="text-primary text-base font-semibold">

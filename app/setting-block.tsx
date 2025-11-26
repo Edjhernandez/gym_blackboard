@@ -46,7 +46,7 @@ export default function SettingBlock() {
     setSelectedExercises([]);
     router.push({
       pathname: "/listOfExercises",
-      params: { origin: "/setting-block", index: index.toString() },
+      params: { origin: "/setting-block", index: index },
     });
   };
 
