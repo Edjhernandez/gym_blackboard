@@ -37,11 +37,11 @@ export default function SettingWarmup() {
 
   const handleGoBackToTheList = () => {
     setWarmup(selectedExercises);
+    setSelectedExercises([]);
     router.push({
       pathname: "/warmUpExercises",
       params: { origin: "warmupSettings" },
     });
-    setSelectedExercises([]);
   };
 
   return (
