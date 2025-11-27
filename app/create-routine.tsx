@@ -1,3 +1,4 @@
+import AlertPopUp from "@/components/AlertPopUp";
 import OptionRoutineButton from "@/components/OptionRoutineButton";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
@@ -17,11 +18,10 @@ import { v4 as uuidv4 } from "uuid";
 export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
-
   const { routine, setName, resetRoutine, setEmptyBlock, updateBlockArray } =
     useRoutineStore();
-
   const [exerciseBlocks, setExerciseBlocks] = useState<Block[]>(routine.blocks);
+  const [visibleAlertEmptyBlock, setVisibleAlertEmptyBlock] = useState(false);
 
   // Function to add a new exercise block
   const addBlock = () => {
@@ -58,7 +58,17 @@ export default function CreateRoutine() {
   const handleContinue = () => {
     // Navigate to the routine settings screen
     updateBlockArray(exerciseBlocks);
-    router.push("/setting-routine");
+    console.log("Routine before continuing:", routine);
+    const checkEmptyBlocks = exerciseBlocks.some(
+      (block) => block.exercises.length === 0
+    );
+    const checkEmptyWarmup = routine.warmup.length === 0 ? true : false;
+
+    if (checkEmptyBlocks || checkEmptyWarmup) {
+      setVisibleAlertEmptyBlock(true);
+    } else {
+      router.push("/setting-routine");
+    }
   };
 
   return (
@@ -141,6 +151,13 @@ export default function CreateRoutine() {
           </Pressable>
         </View>
       </View>
+      {/* Alert PopUp for empty blocks */}
+      <AlertPopUp
+        visible={visibleAlertEmptyBlock}
+        alertTitle={t("alerts.warning")}
+        alertDetails={t("alerts.empty_blocks_details")}
+        setVisible={setVisibleAlertEmptyBlock}
+      />
     </SafeAreaView>
   );
 }

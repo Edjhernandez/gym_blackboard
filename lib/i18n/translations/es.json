@@ -36,7 +36,8 @@
         "confirm": "Confirmar",
         "example_sets_placeholder": "Ej: 4",
         "example_reps_placeholder": "Ej: 12",
-        "discard": "Descartar"
+        "discard": "Descartar",
+        "go_back": "Volver"
     },
     "navigation": {
         "home": "Inicio",
@@ -141,5 +142,9 @@
         "logout": "Cerrar Sesión",
         "confirm_logout_title": "Confirmar Cierre de Sesión",
         "confirm_logout_message": "¿Estás seguro de que deseas cerrar sesión?"
+    },
+    "alerts": {
+        "warning": "Advertencia",
+        "empty_blocks_details": "Algunos bloques en tu rutina están vacíos. Por favor, agrega ejercicios o elimina los bloques vacíos antes de continuar."
     }
 }

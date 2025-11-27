@@ -23,6 +23,10 @@ export default function SettingRoutineScreen() {
   };
 
   const handleSave = () => {
+    if (routine.name.trim() === "") {
+      // You might want to show an alert or notification here
+      return;
+    }
     // Here you would typically save the routine to persistent storage or backend
     // For now, we just navigate back to home
     router.push("/(tabs)/blackboard");
