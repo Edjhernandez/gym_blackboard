@@ -26,7 +26,8 @@ export default function SettingRoutineScreen() {
   };
 
   const handleSave = () => {
-    if (routine.name.trim() === "") {
+    //validate name is not empty and only letters and spaces
+    if (routine.name.trim() === "" || !/^[a-zA-Z\s]+$/.test(routine.name)) {
       setVisibleAlertEmptyName(true);
     } else {
       // Here you would typically save the routine to persistent storage or backend
