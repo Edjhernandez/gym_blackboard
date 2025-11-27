@@ -8,6 +8,7 @@ type RoutineStore = {
   setWarmup: (warmup: Exercise[]) => void;
   setEmptyBlock: (block: Block) => void;
   updateBlockById: (blockId: string, listOfExercises: Exercise[]) => void;
+  updateBlockArray: (blocks: Block[]) => void;
 };
 
 const initialRoutine: Routine = {
@@ -27,10 +28,13 @@ const useRoutineStore = create<RoutineStore>()((set) => ({
     set(() => ({
       routine: initialRoutine, // routine back to initial state
     })),
+
   setName: (name: string) =>
     set((state) => ({ ...state, routine: { ...state.routine, name } })),
+
   setWarmup: (warmup: Exercise[]) =>
     set((state) => ({ ...state, routine: { ...state.routine, warmup } })),
+
   setEmptyBlock: (block: Block) =>
     set((state) => ({
       ...state,
@@ -58,6 +62,12 @@ const useRoutineStore = create<RoutineStore>()((set) => ({
         },
       };
     }),
+
+  updateBlockArray: (blocks: Block[]) =>
+    set((state) => ({
+      ...state,
+      routine: { ...state.routine, blocks }, // Replace blocks array with new array
+    })),
 }));
 
 export default useRoutineStore;

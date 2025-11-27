@@ -73,8 +73,11 @@ export default function listOfExercises() {
     <SafeAreaView className="w-full bg-background-primary pt-4 flex-1">
       {/* exercises list */}
       <View className="mt-2 px-2 w-full flex-col justify-center items-center">
-        <Text className="text-text-primary font-semibold text-xl mb-4">
+        <Text className="text-text-primary font-semibold text-xl">
           {t("routines.select_exercises")}
+        </Text>
+        <Text className="text-text-primary mb-2 text-base">
+          {currentBlock?.title}
         </Text>
         <View className="w-full flex-row justify-between ">
           <Pressable

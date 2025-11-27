@@ -18,7 +18,8 @@ export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
 
-  const { routine, setName, resetRoutine, setEmptyBlock } = useRoutineStore();
+  const { routine, setName, resetRoutine, setEmptyBlock, updateBlockArray } =
+    useRoutineStore();
 
   const [exerciseBlocks, setExerciseBlocks] = useState<Block[]>(routine.blocks);
 
@@ -34,6 +35,20 @@ export default function CreateRoutine() {
     setEmptyBlock(newBlock);
   };
 
+  const deleteBlock = (blockId: string) => {
+    const updatedBlocks = exerciseBlocks.filter(
+      (block) => block.id !== blockId
+    );
+    const renamedBlocks = updatedBlocks.map((block, index) => {
+      return {
+        ...block,
+        title: t("routines.block_name", { title: index + 1 }),
+      };
+    });
+    setExerciseBlocks(renamedBlocks);
+    updateBlockArray(renamedBlocks);
+  };
+
   const handleDiscard = () => {
     resetRoutine(); // Reset routine store to initial state
     setExerciseBlocks([]);
@@ -42,6 +57,7 @@ export default function CreateRoutine() {
 
   const handleContinue = () => {
     // Navigate to the routine settings screen
+    updateBlockArray(exerciseBlocks);
     router.push("/setting-routine");
   };
 
@@ -81,6 +97,8 @@ export default function CreateRoutine() {
             id={block.id}
             title={block.title}
             targetRoute="/listOfExercises"
+            Icon={XMarkIcon}
+            onIconPress={() => deleteBlock(block.id)}
           />
         ))}
 

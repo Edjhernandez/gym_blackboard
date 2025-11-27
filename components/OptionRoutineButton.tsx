@@ -1,3 +1,4 @@
+import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Href, useRouter } from "expo-router";
 import React from "react";
@@ -8,30 +9,46 @@ type TypeOptionRoutineButton = {
   title: string;
   targetRoute: Href;
   Icon?: React.ComponentType<{ size?: number; color?: string }>;
+  onIconPress?: () => void;
 };
 
 export default function OptionRoutineButton(props: TypeOptionRoutineButton) {
-  const { title, targetRoute, Icon, id } = props;
+  const { title, targetRoute, Icon, id, onIconPress } = props;
   const router = useRouter();
   const { routine } = useRoutineStore();
-  const index = routine.blocks.findIndex((block) => block.id === id);
+  const blockIndex = routine.blocks.findIndex((block) => block.id === id);
+  const { t } = useI18n();
 
   const navigationPayload = {
     pathname: targetRoute,
-    params: { blockIndex: index },
+    params: { blockIndex: blockIndex },
   };
 
   return (
     <View className="w-full flex-col items-center justify-start border-b-[0.5px] border-secondary py-3">
-      <Pressable
-        className="flex-row items-center justify-between w-3/4 border-[0.5px] border-primary bg-secondary rounded-xl p-4"
-        onPress={() => router.push(navigationPayload as any)}
-        accessibilityRole="button"
-        accessibilityLabel={title}
-      >
-        <Text className="text-text-primary text-xl font-bold">{title}</Text>
-        {Icon && <Icon color="#E7EBDA" size={28} />}
-      </Pressable>
+      <View className="flex-row items-center justify-between w-3/4 border-[0.5px] border-primary bg-secondary rounded-xl">
+        <Pressable
+          className="w-3/4 flex-row items-center justify-between py-3"
+          onPress={() => router.push(navigationPayload as any)}
+          accessibilityRole="button"
+          accessibilityLabel={title}
+        >
+          <Text className="text-text-primary text-xl font-bold ml-3">
+            {title}
+          </Text>
+        </Pressable>
+        <Pressable
+          className="w-1/4 py-3 flex items-center justify-center"
+          onPress={onIconPress}
+          accessibilityRole="button"
+          accessibilityLabel={t("accessibility.delete_block_label", {
+            block: title,
+          })}
+          disabled={!onIconPress}
+        >
+          {Icon && <Icon color="#E7EBDA" size={28} />}
+        </Pressable>
+      </View>
     </View>
   );
 }

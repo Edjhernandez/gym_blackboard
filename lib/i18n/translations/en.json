@@ -23,7 +23,8 @@
         "continue_label": "Continue",
         "logout_button_label": "Log Out",
         "discard_label": "Discard",
-        "setting_block_label": "Setting {{block number}}"
+        "setting_block_label": "Setting {{block number}}",
+        "delete_block_label": "Delete Block {{block}}"
     },
     "common": {
         "logo": "Logo GYM",
