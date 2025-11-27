@@ -145,6 +145,8 @@
     },
     "alerts": {
         "warning": "Warning",
-        "empty_blocks_details": "Some blocks in your routine are empty. Please add exercises or remove the empty blocks before continuing."
+        "empty_blocks_details": "Some blocks in your routine are empty. Please add exercises or remove the empty blocks before continuing.",
+        "error": "Error",
+        "empty_name_error": "The routine name cannot be empty. Please enter a valid name before saving."
     }
 }

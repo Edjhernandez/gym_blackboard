@@ -145,6 +145,8 @@
     },
     "alerts": {
         "warning": "Advertencia",
-        "empty_blocks_details": "Algunos bloques en tu rutina están vacíos. Por favor, agrega ejercicios o elimina los bloques vacíos antes de continuar."
+        "empty_blocks_details": "Algunos bloques en tu rutina están vacíos. Por favor, agrega ejercicios o elimina los bloques vacíos antes de continuar.",
+        "error": "Error",
+        "empty_name_error": "El nombre de la rutina no puede estar vacío. Por favor, ingresa un nombre válido antes de guardar."
     }
 }

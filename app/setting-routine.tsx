@@ -1,3 +1,4 @@
+import AlertPopUp from "@/components/AlertPopUp";
 import SettingButton from "@/components/SettingButton";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
@@ -14,6 +15,8 @@ export default function SettingRoutineScreen() {
   const router = useRouter();
   const { t } = useI18n();
   const { routine, setName, resetRoutine } = useRoutineStore();
+  const [visibleAlertEmptyName, setVisibleAlertEmptyName] =
+    React.useState(false);
 
   const handleDiscard = () => {
     resetRoutine();
@@ -24,12 +27,11 @@ export default function SettingRoutineScreen() {
 
   const handleSave = () => {
     if (routine.name.trim() === "") {
-      // You might want to show an alert or notification here
-      return;
+      setVisibleAlertEmptyName(true);
+    } else {
+      // Here you would typically save the routine to persistent storage or backend
+      router.push("/(tabs)/blackboard");
     }
-    // Here you would typically save the routine to persistent storage or backend
-    // For now, we just navigate back to home
-    router.push("/(tabs)/blackboard");
   };
 
   return (
@@ -102,6 +104,14 @@ export default function SettingRoutineScreen() {
           </Pressable>
         </View>
       </View>
+
+      {/* Alert PopUp for empty routine name */}
+      <AlertPopUp
+        visible={visibleAlertEmptyName}
+        alertTitle={t("alerts.error")}
+        alertDetails={t("alerts.empty_name_error")}
+        setVisible={setVisibleAlertEmptyName}
+      />
     </SafeAreaView>
   );
 }
