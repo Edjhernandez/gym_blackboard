@@ -3,7 +3,7 @@ import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Block } from "@/types/types";
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import {
   ArrowRightIcon,
@@ -39,19 +39,15 @@ export default function CreateRoutine() {
     const updatedBlocks = exerciseBlocks.filter(
       (block) => block.id !== blockId
     );
-    setExerciseBlocks(updatedBlocks);
-  };
-
-  useEffect(() => {
-    const updatedBlocks = exerciseBlocks.map((block, index) => {
+    const renamedBlocks = updatedBlocks.map((block, index) => {
       return {
         ...block,
         title: t("routines.block_name", { title: index + 1 }),
       };
     });
-    setExerciseBlocks(updatedBlocks);
-    updateBlockArray(exerciseBlocks);
-  }, [exerciseBlocks.length]);
+    setExerciseBlocks(renamedBlocks);
+    updateBlockArray(renamedBlocks);
+  };
 
   const handleDiscard = () => {
     resetRoutine(); // Reset routine store to initial state
