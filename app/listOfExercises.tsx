@@ -4,7 +4,7 @@ import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import {
   ArrowDownOnSquareIcon,
@@ -17,20 +17,56 @@ export default function listOfExercises() {
   const { t } = useI18n();
   const router = useRouter();
   const params = useLocalSearchParams();
+  const index = Number(params.blockIndex as string);
+  const currentBlock = routine.blocks[index];
+
   const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
     "functional"
   );
   const [bodyPart, setBodyPart] = useState<
     "chest" | "back" | "legs" | "arms" | "abs"
   >("chest");
+
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    []
+    currentBlock?.exercises || []
   );
 
+  useEffect(() => {
+    if (currentBlock) {
+      setSelectedExercises(currentBlock.exercises);
+    } else {
+      setSelectedExercises([]);
+    }
+  }, [currentBlock]);
+
+  const onToggleSelect = (exercise: Exercise) => {
+    const isAlreadyAdded = selectedExercises.some(
+      (item) => item.id === exercise.id
+    );
+
+    if (!isAlreadyAdded) {
+      setSelectedExercises?.((prev) => [...prev, exercise]);
+    } else {
+      setSelectedExercises?.((prev) =>
+        prev.filter((item) => item.id !== exercise.id)
+      );
+    }
+  };
+
   const handleSave = () => {
-    updateBlockById(params.blockId as string, selectedExercises);
+    if (!currentBlock) return;
+    updateBlockById(currentBlock.id, selectedExercises);
     setSelectedExercises([]);
-    router.push("/create-routine");
+
+    if (params.origin === "/setting-block") {
+      router.back();
+    } else {
+      router.push("/create-routine");
+    }
+  };
+
+  const handleReset = () => {
+    setSelectedExercises([]);
   };
 
   return (
@@ -226,8 +262,7 @@ export default function listOfExercises() {
             renderItem={({ item }) => (
               <ExerciseCard
                 exercise={item}
-                selectedExercises={selectedExercises}
-                setSelectedExercises={setSelectedExercises}
+                onToggleSelect={() => onToggleSelect(item)}
                 isSelected={selectedExercises.some((ex) => ex.id === item.id)}
               />
             )}
@@ -254,6 +289,7 @@ export default function listOfExercises() {
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
             accessibilityLabel={t("accessibility.reset_label")}
+            onPress={handleReset}
           >
             <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
             <Text className="text-primary text-base font-semibold">

@@ -20,30 +20,37 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function SettingBlock() {
   const { t } = useI18n();
   const router = useRouter();
-  const { routine } = useRoutineStore();
+  const { routine, updateBlockById } = useRoutineStore();
   const params = useLocalSearchParams();
-  const index = routine.blocks.findIndex(
-    (block) => block.id === (params.blockId as string)
-  );
+  const blockIndex = Number(params.blockIndex as string);
+  const currentBlock = routine.blocks[blockIndex];
 
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    index !== -1 ? routine.blocks[index].exercises : []
+    currentBlock?.exercises || []
   );
 
   useEffect(() => {
-    setSelectedExercises(routine.blocks[index].exercises);
-  }, [routine.blocks[index].exercises]);
+    if (currentBlock) {
+      setSelectedExercises(currentBlock.exercises);
+    } else {
+      setSelectedExercises([]);
+    }
+  }, [currentBlock]);
 
   const handleSave = () => {
+    if (!currentBlock) return;
+    updateBlockById(currentBlock.id as string, selectedExercises);
     setSelectedExercises([]);
     router.push("/setting-routine");
   };
 
   const handleGoBackToTheList = () => {
+    if (!currentBlock) return;
+    updateBlockById(currentBlock.id as string, selectedExercises);
     setSelectedExercises([]);
     router.push({
       pathname: "/listOfExercises",
-      params: { origin: "blockSettings" },
+      params: { origin: "/setting-block", blockIndex: blockIndex },
     });
   };
 
@@ -52,9 +59,12 @@ export default function SettingBlock() {
       {/* Header */}
       <View className="w-full p-4 flex-row items-center justify-around">
         <Text className="text-text-primary font-semibold text-xl text-center">
-          {t("routines.setting_block", { title: params.blockTitle })}
+          {t("routines.setting_block", {
+            title: currentBlock?.title,
+          })}
         </Text>
       </View>
+
       {/* Exercises List */}
       <KeyboardAvoidingView className="flex-1 px-3 pt-2" behavior="padding">
         <FlatList

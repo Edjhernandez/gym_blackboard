@@ -1,7 +1,7 @@
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Exercise } from "@/types/types";
 import Entypo from "@expo/vector-icons/Entypo";
-import React from "react";
+import React, { useEffect } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 import { TrashIcon, XMarkIcon } from "react-native-heroicons/outline";
 
@@ -16,8 +16,13 @@ export default function SettingExerciseCard(
 ) {
   const { exercise, setSelectedExercises, selectedExercises } = props;
   const { t } = useI18n();
-  const [setsInput, setSetsInput] = React.useState<string>("");
-  const [repsInput, setRepsInput] = React.useState<string>("");
+  const index = selectedExercises.findIndex((item) => exercise.id === item.id);
+  const [setsInput, setSetsInput] = React.useState<string>(
+    selectedExercises[index]?.sets?.toString() || ""
+  );
+  const [repsInput, setRepsInput] = React.useState<string>(
+    selectedExercises[index]?.reps?.toString() || ""
+  );
 
   const handleDelete = () => {
     setSelectedExercises((prevExercises) =>
@@ -48,19 +53,31 @@ export default function SettingExerciseCard(
     setSelectedExercises(newArray);
   };
 
-  const handleInput = () => {
+  useEffect(() => {
     const newArray = [...selectedExercises];
     const index = searchIndex(exercise.id);
 
     const updatedExercise = {
       ...newArray[index],
       sets: parseInt(setsInput, 10),
+    };
+
+    newArray[index] = updatedExercise;
+    setSelectedExercises(newArray);
+  }, [setsInput]);
+
+  useEffect(() => {
+    const newArray = [...selectedExercises];
+    const index = searchIndex(exercise.id);
+
+    const updatedExercise = {
+      ...newArray[index],
       reps: parseInt(repsInput, 10),
     };
 
     newArray[index] = updatedExercise;
     setSelectedExercises(newArray);
-  };
+  }, [repsInput]);
 
   return (
     <View className="w-full bg-background-secondary rounded-xl p-3 mb-3 shadow-sm flex-row justify-between items-center">
@@ -94,7 +111,6 @@ export default function SettingExerciseCard(
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
-              onBlur={handleInput}
             />
           </View>
 
@@ -115,7 +131,6 @@ export default function SettingExerciseCard(
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
-              onBlur={handleInput}
             />
           </View>
         </View>

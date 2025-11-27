@@ -25,6 +25,20 @@ export default function WarmUpExercises() {
     setSelectedExercises(routine.warmup);
   }, [routine.warmup]);
 
+  const onToggleSelect = (exercise: Exercise) => {
+    const isAlreadyAdded = selectedExercises.some(
+      (item) => item.id === exercise.id
+    );
+
+    if (!isAlreadyAdded) {
+      setSelectedExercises?.((prev) => [...prev, exercise]);
+    } else {
+      setSelectedExercises?.((prev) =>
+        prev.filter((item) => item.id !== exercise.id)
+      );
+    }
+  };
+
   const handleSave = () => {
     setWarmup(selectedExercises);
     setSelectedExercises([]);
@@ -33,6 +47,10 @@ export default function WarmUpExercises() {
     } else {
       router.push("/create-routine");
     }
+  };
+
+  const handleReset = () => {
+    setSelectedExercises([]);
   };
 
   return (
@@ -51,9 +69,8 @@ export default function WarmUpExercises() {
           renderItem={({ item }) => (
             <ExerciseCard
               exercise={item}
-              setSelectedExercises={setSelectedExercises}
               isSelected={selectedExercises.some((ex) => ex.id === item.id)}
-              selectedExercises={selectedExercises}
+              onToggleSelect={() => onToggleSelect(item)}
             />
           )}
           keyExtractor={(item) => item.id}
@@ -75,6 +92,7 @@ export default function WarmUpExercises() {
           <Pressable
             className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
             accessibilityLabel={t("accessibility.reset_label")}
+            onPress={handleReset}
           >
             <ArrowPathRoundedSquareIcon size={24} color={"#FFFF00"} />
             <Text className="text-primary text-base font-semibold">

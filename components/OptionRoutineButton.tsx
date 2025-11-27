@@ -1,3 +1,4 @@
+import useRoutineStore from "@/lib/stores/routineStore";
 import { Href, useRouter } from "expo-router";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
@@ -12,10 +13,12 @@ type TypeOptionRoutineButton = {
 export default function OptionRoutineButton(props: TypeOptionRoutineButton) {
   const { title, targetRoute, Icon, id } = props;
   const router = useRouter();
+  const { routine } = useRoutineStore();
+  const index = routine.blocks.findIndex((block) => block.id === id);
 
   const navigationPayload = {
     pathname: targetRoute,
-    params: { blockId: id },
+    params: { blockIndex: index },
   };
 
   return (

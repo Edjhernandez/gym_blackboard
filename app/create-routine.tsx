@@ -36,12 +36,11 @@ export default function CreateRoutine() {
 
   const handleDiscard = () => {
     resetRoutine(); // Reset routine store to initial state
+    setExerciseBlocks([]);
     router.push("/(tabs)/home"); // Navigate back to home screen
   };
 
   const handleContinue = () => {
-    // Update the routine store with the current blocks
-    //setBlocks(exerciseBlocks);
     // Navigate to the routine settings screen
     router.push("/setting-routine");
   };
