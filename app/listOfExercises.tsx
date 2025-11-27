@@ -59,14 +59,13 @@ export default function listOfExercises() {
       routine.blocks[Number(params.blockIndex)].id,
       selectedExercises
     );
+    setSelectedExercises([]);
 
     if (params.origin === "/setting-block") {
       router.back();
     } else {
       router.push("/create-routine");
     }
-
-    setSelectedExercises([]);
   };
 
   const handleReset = () => {
