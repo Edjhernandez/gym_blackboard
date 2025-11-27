@@ -3,7 +3,7 @@ import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Block } from "@/types/types";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import {
   ArrowRightIcon,
@@ -18,7 +18,8 @@ export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
 
-  const { routine, setName, resetRoutine, setEmptyBlock } = useRoutineStore();
+  const { routine, setName, resetRoutine, setEmptyBlock, updateBlockArray } =
+    useRoutineStore();
 
   const [exerciseBlocks, setExerciseBlocks] = useState<Block[]>(routine.blocks);
 
@@ -34,6 +35,24 @@ export default function CreateRoutine() {
     setEmptyBlock(newBlock);
   };
 
+  const deleteBlock = (blockId: string) => {
+    const updatedBlocks = exerciseBlocks.filter(
+      (block) => block.id !== blockId
+    );
+    setExerciseBlocks(updatedBlocks);
+  };
+
+  useEffect(() => {
+    const updatedBlocks = exerciseBlocks.map((block, index) => {
+      return {
+        ...block,
+        title: t("routines.block_name", { title: index + 1 }),
+      };
+    });
+    setExerciseBlocks(updatedBlocks);
+    updateBlockArray(exerciseBlocks);
+  }, [exerciseBlocks.length]);
+
   const handleDiscard = () => {
     resetRoutine(); // Reset routine store to initial state
     setExerciseBlocks([]);
@@ -42,6 +61,7 @@ export default function CreateRoutine() {
 
   const handleContinue = () => {
     // Navigate to the routine settings screen
+    updateBlockArray(exerciseBlocks);
     router.push("/setting-routine");
   };
 
@@ -81,6 +101,8 @@ export default function CreateRoutine() {
             id={block.id}
             title={block.title}
             targetRoute="/listOfExercises"
+            Icon={XMarkIcon}
+            onIconPress={() => deleteBlock(block.id)}
           />
         ))}
 
