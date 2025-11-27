@@ -44,6 +44,7 @@ export default function OptionRoutineButton(props: TypeOptionRoutineButton) {
           accessibilityLabel={t("accessibility.delete_block_label", {
             block: title,
           })}
+          disabled={!onIconPress}
         >
           {Icon && <Icon color="#E7EBDA" size={28} />}
         </Pressable>
