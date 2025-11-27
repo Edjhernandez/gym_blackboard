@@ -17,6 +17,8 @@ export default function listOfExercises() {
   const { t } = useI18n();
   const router = useRouter();
   const params = useLocalSearchParams();
+  const index = Number(params.blockIndex as string);
+  const currentBlock = routine.blocks[index];
 
   const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
     "functional"
@@ -26,17 +28,16 @@ export default function listOfExercises() {
   >("chest");
 
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    routine.blocks[Number(params.blockIndex)]?.exercises || []
+    currentBlock?.exercises || []
   );
 
   useEffect(() => {
-    if (
-      routine.blocks[Number(params.blockIndex)] &&
-      routine.blocks[Number(params.blockIndex)].exercises
-    ) {
-      setSelectedExercises(routine.blocks[Number(params.blockIndex)].exercises);
+    if (currentBlock) {
+      setSelectedExercises(currentBlock.exercises);
+    } else {
+      setSelectedExercises([]);
     }
-  }, [routine.blocks[Number(params.blockIndex)]?.exercises]);
+  }, [currentBlock]);
 
   const onToggleSelect = (exercise: Exercise) => {
     const isAlreadyAdded = selectedExercises.some(
@@ -55,10 +56,8 @@ export default function listOfExercises() {
   };
 
   const handleSave = () => {
-    updateBlockById(
-      routine.blocks[Number(params.blockIndex)].id,
-      selectedExercises
-    );
+    if (!currentBlock) return;
+    updateBlockById(currentBlock.id, selectedExercises);
     setSelectedExercises([]);
 
     if (params.origin === "/setting-block") {
