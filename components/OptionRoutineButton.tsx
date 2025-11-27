@@ -1,3 +1,4 @@
+import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Href, useRouter } from "expo-router";
 import React from "react";
@@ -16,6 +17,7 @@ export default function OptionRoutineButton(props: TypeOptionRoutineButton) {
   const router = useRouter();
   const { routine } = useRoutineStore();
   const blockIndex = routine.blocks.findIndex((block) => block.id === id);
+  const { t } = useI18n();
 
   const navigationPayload = {
     pathname: targetRoute,
@@ -38,6 +40,10 @@ export default function OptionRoutineButton(props: TypeOptionRoutineButton) {
         <Pressable
           className="w-1/4 py-3 flex items-center justify-center"
           onPress={onIconPress}
+          accessibilityRole="button"
+          accessibilityLabel={t("accessibility.delete_block_label", {
+            block: title,
+          })}
         >
           {Icon && <Icon color="#E7EBDA" size={28} />}
         </Pressable>
