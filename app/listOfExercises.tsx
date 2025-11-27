@@ -26,9 +26,7 @@ export default function listOfExercises() {
   >("chest");
 
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    routine.blocks[Number(params.blockIndex)].exercises
-      ? routine.blocks[Number(params.blockIndex)]!.exercises
-      : []
+    routine.blocks[Number(params.blockIndex)]?.exercises || []
   );
 
   useEffect(() => {

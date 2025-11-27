@@ -22,39 +22,32 @@ export default function SettingBlock() {
   const router = useRouter();
   const { routine, updateBlockById } = useRoutineStore();
   const params = useLocalSearchParams();
+  const blockIndex = Number(params.blockIndex as string);
+  const currentBlock = routine.blocks[blockIndex];
 
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    routine.blocks[Number(params.blockIndex)]?.exercises
-      ? routine.blocks[Number(params.blockIndex)]!.exercises
-      : []
+    currentBlock?.exercises || []
   );
 
   useEffect(() => {
-    if (
-      routine.blocks[Number(params.blockIndex)] &&
-      routine.blocks[Number(params.blockIndex)].exercises
-    ) {
-      setSelectedExercises(routine.blocks[Number(params.blockIndex)].exercises);
+    if (currentBlock) {
+      setSelectedExercises(currentBlock.exercises);
+    } else {
+      setSelectedExercises([]);
     }
-  }, [routine.blocks[Number(params.blockIndex)]?.exercises]);
+  }, [currentBlock]);
 
   const handleSave = () => {
-    updateBlockById(
-      routine.blocks[Number(params.blockIndex)].id as string,
-      selectedExercises
-    );
+    updateBlockById(currentBlock.id as string, selectedExercises);
     router.push("/setting-routine");
     setSelectedExercises([]);
   };
 
   const handleGoBackToTheList = () => {
-    updateBlockById(
-      routine.blocks[Number(params.blockIndex)].id as string,
-      selectedExercises
-    );
+    updateBlockById(currentBlock.id as string, selectedExercises);
     router.push({
       pathname: "/listOfExercises",
-      params: { origin: "/setting-block", blockIndex: params.blockIndex },
+      params: { origin: "/setting-block", blockIndex: blockIndex },
     });
     setSelectedExercises([]);
   };
@@ -65,7 +58,7 @@ export default function SettingBlock() {
       <View className="w-full p-4 flex-row items-center justify-around">
         <Text className="text-text-primary font-semibold text-xl text-center">
           {t("routines.setting_block", {
-            title: routine.blocks[Number(params.blockIndex)]?.title,
+            title: currentBlock?.title,
           })}
         </Text>
       </View>
