@@ -38,18 +38,20 @@ export default function SettingBlock() {
   }, [currentBlock]);
 
   const handleSave = () => {
+    if (!currentBlock) return;
     updateBlockById(currentBlock.id as string, selectedExercises);
-    router.push("/setting-routine");
     setSelectedExercises([]);
+    router.push("/setting-routine");
   };
 
   const handleGoBackToTheList = () => {
+    if (!currentBlock) return;
     updateBlockById(currentBlock.id as string, selectedExercises);
+    setSelectedExercises([]);
     router.push({
       pathname: "/listOfExercises",
       params: { origin: "/setting-block", blockIndex: blockIndex },
     });
-    setSelectedExercises([]);
   };
 
   return (
