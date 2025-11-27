@@ -47,11 +47,9 @@ export default function listOfExercises() {
     if (!isAlreadyAdded) {
       setSelectedExercises?.((prev) => [...prev, exercise]);
     } else {
-      if (isAlreadyAdded) {
-        setSelectedExercises?.((prev) =>
-          prev.filter((item) => item.id !== exercise.id)
-        );
-      }
+      setSelectedExercises?.((prev) =>
+        prev.filter((item) => item.id !== exercise.id)
+      );
     }
   };
 
