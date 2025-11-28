@@ -24,7 +24,9 @@
         "logout_button_label": "Cerrar sesión",
         "discard_label": "Descartar",
         "setting_block_label": "Configuración {{block number}}",
-        "delete_block_label": "Eliminar Bloque {{block}}"
+        "delete_block_label": "Eliminar Bloque {{block}}",
+        "unmark_favorite_label": "Quitar de favoritos",
+        "mark_favorite_label": "Marcar como favorito"
     },
     "common": {
         "logo": "Logo del gimnasio",

@@ -1,3 +1,4 @@
+import { useI18n } from "@/lib/hooks/useI18n";
 import { usePathname } from "expo-router";
 import React from "react";
 import { Pressable, Text, TouchableOpacity, View } from "react-native";
@@ -19,6 +20,7 @@ const RoutineCard = (props: TypeRoutineCardProps) => {
   const [visiblePopUpOptions, setVisiblePopUpOptions] = React.useState(false);
   const [localFavorite, setLocalFavorite] = React.useState(isFavorite); // Local state to manage favorite status, change when set BBDD
   const currentPath = usePathname();
+  const { t } = useI18n();
 
   return (
     <>
@@ -31,7 +33,15 @@ const RoutineCard = (props: TypeRoutineCardProps) => {
         </View>
         <View className="flex-row justify-end gap-2">
           {currentPath === "/routines" && (
-            <Pressable onPress={() => setLocalFavorite(!localFavorite)}>
+            <Pressable
+              onPress={() => setLocalFavorite(!localFavorite)}
+              accessibilityRole="button"
+              accessibilityLabel={
+                localFavorite
+                  ? t("accessibility.unmark_favorite_label")
+                  : t("accessibility.mark_favorite_label")
+              }
+            >
               {!localFavorite ? (
                 <StarIconOutline size={30} color="#9CA3AF" />
               ) : (
