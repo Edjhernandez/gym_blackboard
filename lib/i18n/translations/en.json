@@ -36,7 +36,8 @@
         "confirm": "Confirm",
         "example_sets_placeholder": "e.g. 4",
         "example_reps_placeholder": "e.g. 12",
-        "discard": "Discard"
+        "discard": "Discard",
+        "go_back": "Go Back"
     },
     "navigation": {
         "home": "Home",
@@ -141,5 +142,14 @@
         "logout": "Log Out",
         "confirm_logout_title": "Confirm Log Out",
         "confirm_logout_message": "Are you sure you want to log out?"
+    },
+    "alerts": {
+        "warning": "Warning",
+        "empty_blocks_details": "Some blocks in your routine are empty. Please add exercises or remove the empty blocks before continuing.",
+        "error": "Error",
+        "empty_name_error": "The routine name cannot be empty or contain invalid characters, only letters and spaces are allowed. Please enter a valid name before saving.",
+        "invalid_input_error": "The routine contains invalid input. Please ensure all sets and reps are positive integers before saving.",
+        "empty_warmup_exercises": "The warm-up section cannot be empty. Please add at least one exercise to the warm-up before saving.",
+        "empty_block_exercises": "The block section cannot be empty. Please add at least one exercise to the block before saving."
     }
 }

@@ -1,6 +1,8 @@
+import AlertPopUp from "@/components/AlertPopUp";
 import SettingButton from "@/components/SettingButton";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
+import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
 import { useRouter } from "expo-router";
 import React from "react";
 import { FlatList, Pressable, Text, TextInput, View } from "react-native";
@@ -14,18 +16,42 @@ export default function SettingRoutineScreen() {
   const router = useRouter();
   const { t } = useI18n();
   const { routine, setName, resetRoutine } = useRoutineStore();
+  const [visibleAlertEmptyName, setVisibleAlertEmptyName] =
+    React.useState(false);
+  const [visibleAlertEmptyInput, setVisibleAlertEmptyInput] =
+    React.useState(false);
 
   const handleDiscard = () => {
-    resetRoutine();
-    router.push("/(tabs)/home");
-    // Reset routine store to initial state
-    // Navigate back to home
+    resetRoutine(); // Reset routine store to initial state
+    router.push("/(tabs)/home"); // Navigate back to home
   };
 
   const handleSave = () => {
-    // Here you would typically save the routine to persistent storage or backend
-    // For now, we just navigate back to home
-    router.push("/(tabs)/blackboard");
+    //validate any sets or reps is invalid into warmup
+    const isThereAnyInvalidSetsOrRepsIntoWarmup = hasInvalidSetsOrRepsInput(
+      routine.warmup
+    );
+    //validate any sets or reps is invalid into blocks
+    const isThereAnyInvalidSetsOrRepsIntoBlocks = hasInvalidSetsOrRepsInput(
+      routine.blocks.flatMap((block) => block.exercises)
+    );
+
+    //validate name is not empty and only letters and spaces
+    if (
+      routine.name.trim() === "" ||
+      !/^[a-zA-ZáéíóúñÁÉÍÓÚÑ\s]+$/.test(routine.name)
+    ) {
+      setVisibleAlertEmptyName(true);
+    } else if (
+      isThereAnyInvalidSetsOrRepsIntoWarmup ||
+      isThereAnyInvalidSetsOrRepsIntoBlocks
+    ) {
+      //validate any sets or reps is invalid
+      setVisibleAlertEmptyInput(true);
+    } else {
+      // Here save the routine to persistent storage or backend
+      router.push("/(tabs)/blackboard");
+    }
   };
 
   return (
@@ -98,6 +124,22 @@ export default function SettingRoutineScreen() {
           </Pressable>
         </View>
       </View>
+
+      {/* Alert PopUp for empty routine name */}
+      <AlertPopUp
+        visible={visibleAlertEmptyName}
+        alertTitle={t("alerts.error")}
+        alertDetails={t("alerts.empty_name_error")}
+        setVisible={setVisibleAlertEmptyName}
+      />
+
+      {/* Alert PopUp for empty input */}
+      <AlertPopUp
+        visible={visibleAlertEmptyInput}
+        alertTitle={t("alerts.error")}
+        alertDetails={t("alerts.invalid_input_error")}
+        setVisible={setVisibleAlertEmptyInput}
+      />
     </SafeAreaView>
   );
 }

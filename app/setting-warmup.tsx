@@ -1,3 +1,4 @@
+import AlertPopUp from "@/components/AlertPopUp";
 import SettingExerciseCard from "@/components/SettingExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
@@ -16,6 +17,7 @@ import {
   ArrowPathRoundedSquareIcon,
 } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { hasInvalidSetsOrRepsInput } from "../utils/validationInput";
 
 export default function SettingWarmup() {
   const { t } = useI18n();
@@ -24,15 +26,32 @@ export default function SettingWarmup() {
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
     routine.warmup
   );
+  const [visibleAlertInvalidInput, setVisibleAlertInvalidInput] =
+    React.useState(false);
+  const [visibleAlertEmptyExercises, setVisibleAlertEmptyExercises] =
+    React.useState(false);
 
   useEffect(() => {
     setSelectedExercises(routine.warmup);
   }, [routine.warmup]);
 
   const handleSave = () => {
-    setWarmup(selectedExercises);
-    router.push("/setting-routine");
-    setSelectedExercises([]);
+    const isThereAnyInvalidSetsOrRepsIntoWarmup =
+      hasInvalidSetsOrRepsInput(selectedExercises);
+
+    //validate warmup exercises is not empty
+    if (selectedExercises.length === 0) {
+      setVisibleAlertEmptyExercises(true);
+      return;
+      //validate any sets or reps is invalid
+    } else if (isThereAnyInvalidSetsOrRepsIntoWarmup) {
+      setVisibleAlertInvalidInput(true);
+      return;
+    } else {
+      setWarmup(selectedExercises);
+      router.push("/setting-routine");
+      setSelectedExercises([]);
+    }
   };
 
   const handleGoBackToTheList = () => {
@@ -66,7 +85,6 @@ export default function SettingWarmup() {
           keyExtractor={(item) => item.id}
         />
       </KeyboardAvoidingView>
-
       <View className="w-full flex-row items-center justify-center mt-4 px-6 gap-3 mb-2">
         <Pressable
           className="w-1/2 flex-row items-center justify-center bg-transparent border border-primary px-4 py-3 rounded-md gap-3"
@@ -89,6 +107,20 @@ export default function SettingWarmup() {
           <ArrowDownOnSquareIcon size={24} color={"#595959"} />
         </Pressable>
       </View>
+      {/* Alert PopUp for empty warmup exercises */}
+      <AlertPopUp
+        visible={visibleAlertEmptyExercises}
+        alertTitle={t("alerts.error")}
+        alertDetails={t("alerts.empty_warmup_exercises")}
+        setVisible={setVisibleAlertEmptyExercises}
+      />
+      {/* Alert PopUp for invalid input */}
+      <AlertPopUp
+        visible={visibleAlertInvalidInput}
+        alertTitle={t("alerts.error")}
+        alertDetails={t("alerts.invalid_input_error")}
+        setVisible={setVisibleAlertInvalidInput}
+      />
     </SafeAreaView>
   );
 }
