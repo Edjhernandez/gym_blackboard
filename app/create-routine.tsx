@@ -62,7 +62,7 @@ export default function CreateRoutine() {
     const checkEmptyBlocks = exerciseBlocks.some(
       (block) => block.exercises.length === 0
     );
-    const checkEmptyWarmup = routine.warmup.length === 0 ? true : false;
+    const checkEmptyWarmup = routine.warmup.length === 0;
 
     if (checkEmptyBlocks || checkEmptyWarmup) {
       setVisibleAlertEmptyBlock(true);
