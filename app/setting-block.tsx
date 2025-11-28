@@ -1,3 +1,4 @@
+import AlertPopUp from "@/components/AlertPopUp";
 import SettingExerciseCard from "@/components/SettingExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
@@ -24,10 +25,13 @@ export default function SettingBlock() {
   const params = useLocalSearchParams();
   const blockIndex = Number(params.blockIndex as string);
   const currentBlock = routine.blocks[blockIndex];
-
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
     currentBlock?.exercises || []
   );
+  const [visibleAlertInvalidInput, setVisibleAlertInvalidInput] =
+    React.useState(false);
+  const [visibleAlertEmptyExercises, setVisibleAlertEmptyExercises] =
+    React.useState(false);
 
   useEffect(() => {
     if (currentBlock) {
@@ -39,9 +43,30 @@ export default function SettingBlock() {
 
   const handleSave = () => {
     if (!currentBlock) return;
-    updateBlockById(currentBlock.id as string, selectedExercises);
-    setSelectedExercises([]);
-    router.push("/setting-routine");
+
+    //search for invalid sets or reps in blocks exercises
+    const isThereAnyInvalidSetsOrRepsIntoBlock = selectedExercises.some(
+      (exercise) => {
+        return (
+          !/^\d+$/.test(exercise.sets?.toString() || "") ||
+          !/^\d+$/.test(exercise.reps?.toString() || "")
+        );
+      }
+    );
+
+    //validate warmup exercises is not empty
+    if (selectedExercises.length === 0) {
+      setVisibleAlertEmptyExercises(true);
+      return;
+      //validate any sets or reps is invalid
+    } else if (isThereAnyInvalidSetsOrRepsIntoBlock) {
+      setVisibleAlertInvalidInput(true);
+      return;
+    } else {
+      updateBlockById(currentBlock.id as string, selectedExercises);
+      setSelectedExercises([]);
+      router.push("/setting-routine");
+    }
   };
 
   const handleGoBackToTheList = () => {
@@ -102,6 +127,22 @@ export default function SettingBlock() {
           <ArrowDownOnSquareIcon size={24} color={"#595959"} />
         </Pressable>
       </View>
+
+      {/* Alert PopUp for empty block exercises */}
+      <AlertPopUp
+        visible={visibleAlertEmptyExercises}
+        alertTitle={t("alerts.error")}
+        alertDetails={t("alerts.empty_block_exercises")}
+        setVisible={setVisibleAlertEmptyExercises}
+      />
+
+      {/* Alert PopUp for invalid input */}
+      <AlertPopUp
+        visible={visibleAlertInvalidInput}
+        alertTitle={t("alerts.error")}
+        alertDetails={t("alerts.invalid_input_error")}
+        setVisible={setVisibleAlertInvalidInput}
+      />
     </SafeAreaView>
   );
 }

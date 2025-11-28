@@ -17,20 +17,46 @@ export default function SettingRoutineScreen() {
   const { routine, setName, resetRoutine } = useRoutineStore();
   const [visibleAlertEmptyName, setVisibleAlertEmptyName] =
     React.useState(false);
+  const [visibleAlertEmptyInput, setVisibleAlertEmptyInput] =
+    React.useState(false);
 
   const handleDiscard = () => {
-    resetRoutine();
-    router.push("/(tabs)/home");
-    // Reset routine store to initial state
-    // Navigate back to home
+    resetRoutine(); // Reset routine store to initial state
+    router.push("/(tabs)/home"); // Navigate back to home
   };
 
   const handleSave = () => {
+    //validate any sets or reps is invalid into warmup
+    const isThereAnyInvalidSetsOrRepsIntoWarmup = routine.warmup.some(
+      (exercise) => {
+        return (
+          !/^\d+$/.test(exercise.sets?.toString() || "") ||
+          !/^\d+$/.test(exercise.reps?.toString() || "")
+        );
+      }
+    );
+    //validate any sets or reps is invalid into blocks
+    const isThereAnyInvalidSetsOrRepsIntoBlocks = routine.blocks.some(
+      (block) => {
+        return block.exercises.some(
+          (exercise) =>
+            !/^\d+$/.test(exercise.sets?.toString() || "") ||
+            !/^\d+$/.test(exercise.reps?.toString() || "")
+        );
+      }
+    );
+
     //validate name is not empty and only letters and spaces
     if (routine.name.trim() === "" || !/^[a-zA-Z\s]+$/.test(routine.name)) {
       setVisibleAlertEmptyName(true);
+    } else if (
+      isThereAnyInvalidSetsOrRepsIntoWarmup ||
+      isThereAnyInvalidSetsOrRepsIntoBlocks
+    ) {
+      //validate any sets or reps is invalid
+      setVisibleAlertEmptyInput(true);
     } else {
-      // Here you would typically save the routine to persistent storage or backend
+      // Here save the routine to persistent storage or backend
       router.push("/(tabs)/blackboard");
     }
   };
@@ -112,6 +138,14 @@ export default function SettingRoutineScreen() {
         alertTitle={t("alerts.error")}
         alertDetails={t("alerts.empty_name_error")}
         setVisible={setVisibleAlertEmptyName}
+      />
+
+      {/* Alert PopUp for empty input */}
+      <AlertPopUp
+        visible={visibleAlertEmptyInput}
+        alertTitle={t("alerts.error")}
+        alertDetails={t("alerts.invalid_input_error")}
+        setVisible={setVisibleAlertEmptyInput}
       />
     </SafeAreaView>
   );

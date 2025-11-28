@@ -58,7 +58,7 @@ export default function CreateRoutine() {
   const handleContinue = () => {
     // Navigate to the routine settings screen
     updateBlockArray(exerciseBlocks);
-    console.log("Routine before continuing:", routine);
+
     const checkEmptyBlocks = exerciseBlocks.some(
       (block) => block.exercises.length === 0
     );

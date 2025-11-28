@@ -147,6 +147,9 @@
         "warning": "Advertencia",
         "empty_blocks_details": "Algunos bloques en tu rutina están vacíos. Por favor, agrega ejercicios o elimina los bloques vacíos antes de continuar.",
         "error": "Error",
-        "empty_name_error": "El nombre de la rutina no puede estar vacío ni contener caracteres no permitidos, solo letras y espacios. Por favor, ingresa un nombre válido antes de guardar."
+        "empty_name_error": "El nombre de la rutina no puede estar vacío ni contener caracteres no permitidos, solo letras y espacios. Por favor, ingresa un nombre válido antes de guardar.",
+        "invalid_input_error": "La rutina contiene datos no válidos. Por favor, asegúrate de que todas las series y repeticiones sean números enteros positivos antes de guardar.",
+        "empty_warmup_exercises": "La sección de calentamiento no puede estar vacía. Por favor, agrega al menos un ejercicio al calentamiento antes de guardar.",
+        "empty_block_exercises": "La sección de bloques no puede estar vacía. Por favor, agrega al menos un ejercicio al bloque antes de guardar."
     }
 }
