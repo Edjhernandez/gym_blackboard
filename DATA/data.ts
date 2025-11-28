@@ -151,7 +151,7 @@ export const routines = [
     name: "Día de Pierna",
     exercisesAmount: 6,
     durationMinutes: 75,
-    isFavorite: false,
+    isFavorite: true,
     category: "functional",
     warmup: [],
     blocks: [],

@@ -79,7 +79,11 @@ const Routines = () => {
         <FlatList
           data={routines}
           renderItem={({ item }) => (
-            <RoutineCard title={item.title} details={item.details} />
+            <RoutineCard
+              title={item.name}
+              details={`${t("home.exercises_amount", { count: item.exercisesAmount })} , ${t("home.duration_minutes", { count: item.durationMinutes })}`}
+              isFavorite={item.isFavorite}
+            />
           )}
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={true}
