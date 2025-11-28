@@ -2,6 +2,7 @@ import AlertPopUp from "@/components/AlertPopUp";
 import SettingButton from "@/components/SettingButton";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
+import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
 import { useRouter } from "expo-router";
 import React from "react";
 import { FlatList, Pressable, Text, TextInput, View } from "react-native";
@@ -27,23 +28,12 @@ export default function SettingRoutineScreen() {
 
   const handleSave = () => {
     //validate any sets or reps is invalid into warmup
-    const isThereAnyInvalidSetsOrRepsIntoWarmup = routine.warmup.some(
-      (exercise) => {
-        return (
-          !/^\d+$/.test(exercise.sets?.toString() || "") ||
-          !/^\d+$/.test(exercise.reps?.toString() || "")
-        );
-      }
+    const isThereAnyInvalidSetsOrRepsIntoWarmup = hasInvalidSetsOrRepsInput(
+      routine.warmup
     );
     //validate any sets or reps is invalid into blocks
-    const isThereAnyInvalidSetsOrRepsIntoBlocks = routine.blocks.some(
-      (block) => {
-        return block.exercises.some(
-          (exercise) =>
-            !/^\d+$/.test(exercise.sets?.toString() || "") ||
-            !/^\d+$/.test(exercise.reps?.toString() || "")
-        );
-      }
+    const isThereAnyInvalidSetsOrRepsIntoBlocks = hasInvalidSetsOrRepsInput(
+      routine.blocks.flatMap((block) => block.exercises)
     );
 
     //validate name is not empty and only letters and spaces

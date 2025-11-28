@@ -3,6 +3,7 @@ import SettingExerciseCard from "@/components/SettingExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
+import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import {
@@ -45,14 +46,8 @@ export default function SettingBlock() {
     if (!currentBlock) return;
 
     //search for invalid sets or reps in blocks exercises
-    const isThereAnyInvalidSetsOrRepsIntoBlock = selectedExercises.some(
-      (exercise) => {
-        return (
-          !/^\d+$/.test(exercise.sets?.toString() || "") ||
-          !/^\d+$/.test(exercise.reps?.toString() || "")
-        );
-      }
-    );
+    const isThereAnyInvalidSetsOrRepsIntoBlock =
+      hasInvalidSetsOrRepsInput(selectedExercises);
 
     //validate warmup exercises is not empty
     if (selectedExercises.length === 0) {

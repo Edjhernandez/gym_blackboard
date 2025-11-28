@@ -17,6 +17,7 @@ import {
   ArrowPathRoundedSquareIcon,
 } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { hasInvalidSetsOrRepsInput } from "../utils/validationInput";
 
 export default function SettingWarmup() {
   const { t } = useI18n();
@@ -35,14 +36,8 @@ export default function SettingWarmup() {
   }, [routine.warmup]);
 
   const handleSave = () => {
-    const isThereAnyInvalidSetsOrRepsIntoWarmup = selectedExercises.some(
-      (exercise) => {
-        return (
-          !/^[1-9]\d*$/.test(exercise.sets?.toString() || "") ||
-          !/^[1-9]\d*$/.test(exercise.reps?.toString() || "")
-        );
-      }
-    );
+    const isThereAnyInvalidSetsOrRepsIntoWarmup =
+      hasInvalidSetsOrRepsInput(selectedExercises);
 
     //validate warmup exercises is not empty
     if (selectedExercises.length === 0) {
