@@ -16,9 +16,12 @@ const Routines = () => {
   const { t } = useI18n();
   const router = useRouter();
   const [tab, setTab] = useState<"functional" | "bodybuilding">("functional");
+  const filteredRoutines = routines.filter(
+    (routine) => routine.category === tab
+  );
 
   return (
-    <View className="flex-1 bg-background-primary px-4 pt-10 justify-center items-center">
+    <View className="flex-1 w-full bg-background-primary px-4 pt-10 justify-center items-center">
       {/* Header */}
 
       <View className="items-center mb-4 w-full">
@@ -75,9 +78,9 @@ const Routines = () => {
       </View>
 
       {/* List */}
-      <View className="w-full h-3/4 px-4 border-[0.5px] border-text-secondary rounded-e-lg pb-1 mb-3 pt-2">
+      <View className="w-full flex-1 px-4 border-[0.5px] border-text-secondary rounded-e-lg pb-1 mb-3 pt-2">
         <FlatList
-          data={routines}
+          data={filteredRoutines}
           renderItem={({ item }) => (
             <RoutineCard
               title={item.name}
@@ -91,7 +94,7 @@ const Routines = () => {
       </View>
       {/* Floating Action Button */}
       <TouchableOpacity
-        className="w-3/4 flex-row py-4 rounded-full items-center justify-center gap-3 bg-primary"
+        className="w-3/4 flex-row py-4 rounded-full items-center justify-center gap-3 bg-primary mb-4"
         onPress={() => router.push("/create-routine")}
       >
         <PlusIcon color="#595959" size={30} />
