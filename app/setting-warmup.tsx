@@ -38,8 +38,8 @@ export default function SettingWarmup() {
     const isThereAnyInvalidSetsOrRepsIntoWarmup = selectedExercises.some(
       (exercise) => {
         return (
-          !/^\d+$/.test(exercise.sets?.toString() || "") ||
-          !/^\d+$/.test(exercise.reps?.toString() || "")
+          !/^[1-9]\d*$/.test(exercise.sets?.toString() || "") ||
+          !/^[1-9]\d*$/.test(exercise.reps?.toString() || "")
         );
       }
     );
