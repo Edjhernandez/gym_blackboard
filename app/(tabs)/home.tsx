@@ -3,7 +3,7 @@ import { routines } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   FlatList,
   Pressable,
@@ -16,9 +16,7 @@ const home = () => {
   const { t } = useI18n();
   const router = useRouter();
   const favoriteRoutines = routines.filter((routine) => routine.isFavorite);
-  const [tab, setTab] = React.useState<"functional" | "bodybuilding">(
-    "functional"
-  );
+  const [tab, setTab] = useState<"functional" | "bodybuilding">("functional");
   const filteredRoutines = favoriteRoutines.filter(
     (routine) => routine.category === tab
   );
