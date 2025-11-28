@@ -37,7 +37,10 @@ export default function SettingRoutineScreen() {
     );
 
     //validate name is not empty and only letters and spaces
-    if (routine.name.trim() === "" || !/^[a-zA-Z\s]+$/.test(routine.name)) {
+    if (
+      routine.name.trim() === "" ||
+      !/^[a-zA-ZáéíóúñÁÉÍÓÚÑ\s]+$/.test(routine.name)
+    ) {
       setVisibleAlertEmptyName(true);
     } else if (
       isThereAnyInvalidSetsOrRepsIntoWarmup ||

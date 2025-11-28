@@ -49,7 +49,7 @@ export default function SettingBlock() {
     const isThereAnyInvalidSetsOrRepsIntoBlock =
       hasInvalidSetsOrRepsInput(selectedExercises);
 
-    //validate warmup exercises is not empty
+    //validate warmup list of exercises is not empty
     if (selectedExercises.length === 0) {
       setVisibleAlertEmptyExercises(true);
       return;
