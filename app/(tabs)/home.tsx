@@ -1,6 +1,7 @@
 import RoutineCard from "@/components/RoutineCard";
 import { routines } from "@/DATA/data";
 import { useI18n } from "@/lib/hooks/useI18n";
+import { formatRoutineDetails } from "@/utils/formatRoutineDetails";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -109,7 +110,12 @@ const home = () => {
             renderItem={({ item }) => (
               <RoutineCard
                 title={item.name}
-                details={`${t("home.exercises_amount", { count: item.exercisesAmount })} , ${t("home.duration_minutes", { count: item.durationMinutes })}`}
+                details={formatRoutineDetails(
+                  t,
+                  item.exercisesAmount,
+                  item.durationMinutes
+                )}
+                isFavorite={item.isFavorite}
               />
             )}
             keyExtractor={(item) => item.id}
