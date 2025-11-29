@@ -25,9 +25,15 @@ const home = () => {
     <View className="bg-background-primary flex-1 flex-col justify-start w-full items-center px-4">
       {/* Header */}
       <View className="w-full flex-row items-center justify-between mt-10">
-        <Text className="text-text-primary text-xl font-semibold ml-4">
-          {t("home.greeting", { name: "Jose Cano" })}
-        </Text>
+        <View className="flex-col items-start justify-center">
+          <Text className="text-text-secondary text-base font-light ml-4">
+            {t("home.greeting")}
+          </Text>
+          <Text className="text-text-primary text-2xl font-semibold ml-3">
+            Nombre usuario
+          </Text>
+        </View>
+
         <Image
           source={require("../../assets/images/coach.png")}
           style={{ width: 70, height: 70 }}

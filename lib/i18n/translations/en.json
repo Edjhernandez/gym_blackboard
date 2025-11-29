@@ -82,7 +82,7 @@
         }
     },
     "home": {
-        "greeting": "Hello coach, {{name}}",
+        "greeting": "Coach",
         "your_most_used_routines": "Your favorite routines",
         "create_new_routine": "Create New Routine",
         "no_favorite_routines": "You have no favorite routines yet.",
