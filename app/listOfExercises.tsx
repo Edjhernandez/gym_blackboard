@@ -1,4 +1,4 @@
-import { DATAFunctional } from "@/DATA/data";
+import { EXAMPLE_EXERCISES } from "@/DATA/data";
 import ExerciseCard from "@/components/ExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
@@ -29,6 +29,11 @@ export default function listOfExercises() {
 
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
     currentBlock?.exercises || []
+  );
+
+  const filteredExercises: Exercise[] = EXAMPLE_EXERCISES.filter(
+    (exercise) =>
+      exercise.exerciseType === routineType && exercise.bodyPart === bodyPart
   );
 
   useEffect(() => {
@@ -258,10 +263,10 @@ export default function listOfExercises() {
       </View>
 
       {/* Exercise list */}
-      <View className="w-full px-2">
-        <View className="w-full border-[0.5px] border-text-secondary max-h-screen p-4 rounded-e-xl">
+      <View className="w-full px-2 flex-1 ">
+        <View className="w-full h-full border-[0.5px] border-text-secondary px-4 rounded-e-xl">
           <FlatList
-            data={DATAFunctional}
+            data={filteredExercises}
             renderItem={({ item }) => (
               <ExerciseCard
                 exercise={item}
@@ -270,7 +275,7 @@ export default function listOfExercises() {
               />
             )}
             keyExtractor={(item) => item.id}
-            contentContainerStyle={{ paddingBottom: 20 }}
+            //contentContainerStyle={{ paddingBottom: 20 }}
           />
         </View>
       </View>

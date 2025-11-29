@@ -23,7 +23,8 @@ export default function ExerciseCard(props: TypeExerciseCardProps) {
         <MinusIcon size={24} color="#6B7280" />
       )}
       <Text
-        className={`text-lg ml-3 ${isSelected ? "text-text-primary font-semibold" : "text-text-secondary font-normal"}`}
+        className={`text-lg ml-3 overflow-hidden text-ellipsis whitespace-nowrap max-w-[90%] ${isSelected ? "text-text-primary font-semibold" : "text-text-secondary font-normal"}`}
+        numberOfLines={1}
       >
         {exercise.name}
       </Text>
