@@ -1,6 +1,6 @@
 import { useI18n } from "@/lib/hooks/useI18n";
 import { usePathname } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 import { Pressable, Text, TouchableOpacity, View } from "react-native";
 import {
   EllipsisVerticalIcon,
@@ -21,6 +21,10 @@ const RoutineCard = (props: TypeRoutineCardProps) => {
   const [localFavorite, setLocalFavorite] = React.useState(isFavorite); // Local state to manage favorite status, change when set BBDD
   const currentPath = usePathname();
   const { t } = useI18n();
+
+  useEffect(() => {
+    setLocalFavorite(isFavorite);
+  }, [isFavorite]);
 
   return (
     <>
