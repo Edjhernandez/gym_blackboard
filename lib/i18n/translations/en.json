@@ -122,7 +122,8 @@
         },
         "setting_block": "Setting of {{title}}",
         "add_new_block": "Add Block",
-        "block_name": "Block {{number}}"
+        "block_name": "Block {{number}}",
+        "select_category": "Select type of routine"
     },
     "warmup_exercises": {
         "title": "Warm-up Exercises",
