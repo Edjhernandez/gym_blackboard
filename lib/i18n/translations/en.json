@@ -24,7 +24,9 @@
         "logout_button_label": "Log Out",
         "discard_label": "Discard",
         "setting_block_label": "Setting {{block number}}",
-        "delete_block_label": "Delete Block {{block}}"
+        "delete_block_label": "Delete Block {{block}}",
+        "unmark_favorite_label": "Unmark as favorite",
+        "mark_favorite_label": "Mark as favorite"
     },
     "common": {
         "logo": "Logo GYM",
@@ -80,7 +82,7 @@
         }
     },
     "home": {
-        "greeting": "Hello coach, {{name}}",
+        "greeting": "Coach",
         "your_most_used_routines": "Your favorite routines",
         "create_new_routine": "Create New Routine",
         "no_favorite_routines": "You have no favorite routines yet.",

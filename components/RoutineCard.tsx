@@ -1,18 +1,30 @@
 import { useI18n } from "@/lib/hooks/useI18n";
-import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { EllipsisVerticalIcon } from "react-native-heroicons/outline";
+import { usePathname } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Pressable, Text, TouchableOpacity, View } from "react-native";
+import {
+  EllipsisVerticalIcon,
+  StarIcon as StarIconOutline,
+} from "react-native-heroicons/outline";
+import { StarIcon as StarIconSolid } from "react-native-heroicons/solid";
 import RoutineActionPopUp from "./RoutineActionPopUp";
 
 type TypeRoutineCardProps = {
   title: string;
   details: string;
+  isFavorite?: boolean;
 };
 
 const RoutineCard = (props: TypeRoutineCardProps) => {
-  const { title, details } = props;
+  const { title, details, isFavorite } = props;
+  const [visiblePopUpOptions, setVisiblePopUpOptions] = useState(false);
+  const [localFavorite, setLocalFavorite] = useState(isFavorite); // Local state to manage favorite status, change when set BBDD
+  const currentPath = usePathname();
   const { t } = useI18n();
-  const [visible, setVisible] = React.useState(false);
+
+  useEffect(() => {
+    setLocalFavorite(isFavorite);
+  }, [isFavorite]);
 
   return (
     <>
@@ -23,16 +35,35 @@ const RoutineCard = (props: TypeRoutineCardProps) => {
           </Text>
           <Text className="text-text-secondary text-xs">{details}</Text>
         </View>
-        <TouchableOpacity onPress={() => setVisible(true)}>
-          <EllipsisVerticalIcon size={30} color="#9CA3AF" />
-        </TouchableOpacity>
+        <View className="flex-row justify-end gap-2">
+          {currentPath === "/routines" && (
+            <Pressable
+              onPress={() => setLocalFavorite(!localFavorite)}
+              accessibilityRole="button"
+              accessibilityLabel={
+                localFavorite
+                  ? t("accessibility.unmark_favorite_label")
+                  : t("accessibility.mark_favorite_label")
+              }
+            >
+              {!localFavorite ? (
+                <StarIconOutline size={30} color="#9CA3AF" />
+              ) : (
+                <StarIconSolid size={30} color="#FFFF00" />
+              )}
+            </Pressable>
+          )}
+          <TouchableOpacity onPress={() => setVisiblePopUpOptions(true)}>
+            <EllipsisVerticalIcon size={30} color="#9CA3AF" />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <RoutineActionPopUp
-        visible={visible}
+        visible={visiblePopUpOptions}
         routineTitle={title}
         routineDetails={details}
-        setVisible={setVisible}
+        setVisible={setVisiblePopUpOptions}
       />
     </>
   );

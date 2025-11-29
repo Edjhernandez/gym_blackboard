@@ -24,7 +24,9 @@
         "logout_button_label": "Cerrar sesión",
         "discard_label": "Descartar",
         "setting_block_label": "Configuración {{block number}}",
-        "delete_block_label": "Eliminar Bloque {{block}}"
+        "delete_block_label": "Eliminar Bloque {{block}}",
+        "unmark_favorite_label": "Quitar de favoritos",
+        "mark_favorite_label": "Marcar como favorito"
     },
     "common": {
         "logo": "Logo del gimnasio",
@@ -80,7 +82,7 @@
         }
     },
     "home": {
-        "greeting": "Hola coach, {{name}}",
+        "greeting": "Entrenador",
         "your_most_used_routines": "Tus rutinas favoritas",
         "create_new_routine": "Crear Nueva Rutina",
         "no_favorite_routines": "Aún no tienes rutinas favoritas.",
