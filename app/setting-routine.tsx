@@ -1,4 +1,5 @@
 import AlertPopUp from "@/components/AlertPopUp";
+import CategorySegmentedControl from "@/components/CategorySegmentedControl";
 import SettingButton from "@/components/SettingButton";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
@@ -96,42 +97,11 @@ export default function SettingRoutineScreen() {
       </View>
 
       {/* Routine category selection */}
-      <View className="rounded-lg py-3 border-b-[0.5px] border-secondary w-full flex-col justify-center items-center">
-        {/* Segmented control */}
-        <View className="w-3/4 flex-row justify-center rounded-md bg-transparent overflow-hidden border-[0.5px] border-text-secondary mx-auto">
-          <Pressable
-            onPress={handleFunctionalCategory}
-            className={`w-1/2 py-2 ${routineCategory === "functional" ? "bg-primary" : ""}`}
-            accessibilityRole="button"
-            accessibilityState={{
-              selected: routineCategory === "functional",
-            }}
-          >
-            <Text
-              className={`text-center ${routineCategory === "functional" ? "text-gray-900 font-medium" : "text-gray-600"}`}
-            >
-              {t("navigation.functional")}
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={handleBodybuildingCategory}
-            className={`w-1/2 py-2 ${routineCategory === "bodybuilding" ? "bg-primary" : ""}`}
-            accessibilityRole="button"
-            accessibilityState={{
-              selected: routineCategory === "bodybuilding",
-            }}
-          >
-            <Text
-              className={`text-center ${routineCategory === "bodybuilding" ? "text-gray-900 font-medium" : "text-gray-600"}`}
-            >
-              {t("navigation.bodybuilding")}
-            </Text>
-          </Pressable>
-        </View>
-        <Text className="text-text-secondary text-sm mt-2">
-          {t("routines.routine_category")}
-        </Text>
-      </View>
+      <CategorySegmentedControl
+        routineCategory={routineCategory}
+        handleFunctionalCategory={handleFunctionalCategory}
+        handleBodybuildingCategory={handleBodybuildingCategory}
+      />
 
       <View className="w-full flex-col justify-center items-center">
         {/* Navigate to Warmup Settings Screen, this is static */}
