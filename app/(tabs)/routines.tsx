@@ -38,6 +38,8 @@ const Routines = () => {
           className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
             tab === "functional" ? "bg-secondary " : "bg-background-secondary"
           }`}
+          accessibilityRole="tab"
+          accessibilityState={{ selected: tab === "functional" }}
         >
           <Text
             className={`text-base my-2 ${
@@ -60,6 +62,8 @@ const Routines = () => {
           className={`items-center justify-end w-1/2 flex-1 rounded-s-xl border-[0.5px] border-text-secondary ${
             tab === "bodybuilding" ? "bg-secondary " : "bg-background-secondary"
           }`}
+          accessibilityRole="tab"
+          accessibilityState={{ selected: tab === "bodybuilding" }}
         >
           <Text
             className={`text-base my-2 ${
