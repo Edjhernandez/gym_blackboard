@@ -123,7 +123,8 @@
         "setting_block": "Setting of {{title}}",
         "add_new_block": "Add Block",
         "block_name": "Block {{number}}",
-        "select_category": "Select type of routine"
+        "select_category": "Select type of routine",
+        "routine_category": "Routine type"
     },
     "warmup_exercises": {
         "title": "Warm-up Exercises",
