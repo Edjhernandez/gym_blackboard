@@ -18,10 +18,19 @@ import { v4 as uuidv4 } from "uuid";
 export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
-  const { routine, setName, resetRoutine, setEmptyBlock, updateBlockArray } =
-    useRoutineStore();
+  const {
+    routine,
+    setName,
+    resetRoutine,
+    setEmptyBlock,
+    updateBlockArray,
+    setCategory,
+  } = useRoutineStore();
   const [exerciseBlocks, setExerciseBlocks] = useState<Block[]>(routine.blocks);
   const [visibleAlertEmptyBlock, setVisibleAlertEmptyBlock] = useState(false);
+  const [routineCategory, setRoutineCategory] = useState<
+    "functional" | "bodybuilding"
+  >(routine.category || "functional");
 
   // Function to add a new exercise block
   const addBlock = () => {
@@ -57,7 +66,6 @@ export default function CreateRoutine() {
 
   const handleContinue = () => {
     // Navigate to the routine settings screen
-    updateBlockArray(exerciseBlocks);
 
     const checkEmptyBlocks = exerciseBlocks.some(
       (block) => block.exercises.length === 0
@@ -67,8 +75,19 @@ export default function CreateRoutine() {
     if (checkEmptyBlocks || checkEmptyWarmup) {
       setVisibleAlertEmptyBlock(true);
     } else {
+      updateBlockArray(exerciseBlocks);
       router.push("/setting-routine");
     }
+  };
+
+  const handleFunctionalCategory = () => {
+    setRoutineCategory("functional");
+    setCategory("functional");
+  };
+
+  const handleBodybuildingCategory = () => {
+    setRoutineCategory("bodybuilding");
+    setCategory("bodybuilding");
   };
 
   return (
@@ -82,7 +101,7 @@ export default function CreateRoutine() {
 
       {/* Routine Name input */}
       <View className="w-full px-4 border-b-[0.5px] border-secondary">
-        <Text className="text-white mb-2">{t("routines.name")}</Text>
+        <Text className="text-text-primary mb-2">{t("routines.name")}</Text>
         <TextInput
           value={routine.name}
           onChangeText={(text) => setName(text)}
@@ -90,6 +109,44 @@ export default function CreateRoutine() {
           placeholderTextColor="#9CA3AF"
           className="bg-background-secondary text-text-secondary rounded-lg px-4 py-3 mb-4"
         />
+      </View>
+
+      {/* Routine category selection */}
+      <View className="rounded-lg py-3 border-b-[0.5px] border-secondary w-full flex-col justify-center items-start">
+        <Text className="text-text-primary mb-2 ml-4">
+          {t("routines.select_category")}
+        </Text>
+        {/* Segmented control */}
+        <View className="w-3/4 flex-row justify-center rounded-md bg-transparent overflow-hidden border-[0.5px] border-text-secondary mx-auto">
+          <Pressable
+            onPress={handleFunctionalCategory}
+            className={`w-1/2 py-2 ${routineCategory === "functional" ? "bg-primary" : ""}`}
+            accessibilityRole="button"
+            accessibilityState={{
+              selected: routineCategory === "functional",
+            }}
+          >
+            <Text
+              className={`text-center ${routineCategory === "functional" ? "text-gray-900 font-medium" : "text-gray-600"}`}
+            >
+              {t("navigation.functional")}
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={handleBodybuildingCategory}
+            className={`w-1/2 py-2 ${routineCategory === "bodybuilding" ? "bg-primary" : ""}`}
+            accessibilityRole="button"
+            accessibilityState={{
+              selected: routineCategory === "bodybuilding",
+            }}
+          >
+            <Text
+              className={`text-center ${routineCategory === "bodybuilding" ? "text-gray-900 font-medium" : "text-gray-600"}`}
+            >
+              {t("navigation.bodybuilding")}
+            </Text>
+          </Pressable>
+        </View>
       </View>
 
       {/* Warmup block always static */}

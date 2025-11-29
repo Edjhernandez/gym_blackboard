@@ -1,4 +1,4 @@
-import { DATAWarmUp } from "@/DATA/data";
+import { EXAMPLE_EXERCISES } from "@/DATA/data";
 import ExerciseCard from "@/components/ExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
@@ -20,6 +20,9 @@ export default function WarmUpExercises() {
     routine.warmup
   );
   const params = useLocalSearchParams();
+  const warmupExercises: Exercise[] = EXAMPLE_EXERCISES.filter(
+    (exercise) => exercise.exerciseType === "warm-Up"
+  );
 
   useEffect(() => {
     setSelectedExercises(routine.warmup);
@@ -65,7 +68,7 @@ export default function WarmUpExercises() {
       {/* Exercise List */}
       <View className="w-11/12 px-4 py-2 border-[0.5px] border-text-secondary rounded-lg flex-1">
         <FlatList
-          data={DATAWarmUp}
+          data={warmupExercises}
           renderItem={({ item }) => (
             <ExerciseCard
               exercise={item}
