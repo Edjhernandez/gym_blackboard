@@ -2,6 +2,7 @@ import AlertPopUp from "@/components/AlertPopUp";
 import SettingButton from "@/components/SettingButton";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
+import { calculateTotalExercises } from "@/utils/amountOfExercises";
 import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -15,7 +16,8 @@ export default function SettingRoutineScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { t } = useI18n();
-  const { routine, setName, resetRoutine, setCategory } = useRoutineStore();
+  const { routine, setName, resetRoutine, setCategory, setExercisesAmount } =
+    useRoutineStore();
   const [visibleAlertEmptyName, setVisibleAlertEmptyName] = useState(false);
   const [visibleAlertEmptyInput, setVisibleAlertEmptyInput] = useState(false);
   const [routineCategory, setRoutineCategory] = useState<
@@ -51,7 +53,7 @@ export default function SettingRoutineScreen() {
       setVisibleAlertEmptyInput(true);
     } else {
       // Here save the routine to persistent storage or backend
-      setCategory(routineCategory);
+      setExercisesAmount(calculateTotalExercises(routine.blocks));
       router.push("/(tabs)/blackboard");
     }
   };
