@@ -11,6 +11,7 @@ type RoutineStore = {
   updateBlockArray: (blocks: Block[]) => void;
   setCategory: (category: "functional" | "bodybuilding") => void;
   setExercisesAmount: (amount: number) => void;
+  setDurationMinutes: (duration: number) => void;
 };
 
 const initialRoutine: Routine = {
@@ -79,6 +80,11 @@ const useRoutineStore = create<RoutineStore>()((set) => ({
     set((state) => ({
       ...state,
       routine: { ...state.routine, exercisesAmount: amount },
+    })),
+  setDurationMinutes: (duration: number) =>
+    set((state) => ({
+      ...state,
+      routine: { ...state.routine, durationMinutes: duration },
     })),
 }));
 
