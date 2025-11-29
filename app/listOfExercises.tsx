@@ -264,7 +264,7 @@ export default function listOfExercises() {
 
       {/* Exercise list */}
       <View className="w-full px-2 flex-1 ">
-        <View className="w-full h-full border-[0.5px] border-text-secondary px-4 rounded-e-xl">
+        <View className="w-full h-full border-[0.5px] border-text-secondary px-4 rounded-e-xl py-2">
           <FlatList
             data={filteredExercises}
             renderItem={({ item }) => (
@@ -275,7 +275,6 @@ export default function listOfExercises() {
               />
             )}
             keyExtractor={(item) => item.id}
-            //contentContainerStyle={{ paddingBottom: 20 }}
           />
         </View>
       </View>
