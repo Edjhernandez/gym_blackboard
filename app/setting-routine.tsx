@@ -15,7 +15,7 @@ export default function SettingRoutineScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { t } = useI18n();
-  const { routine, setName, resetRoutine } = useRoutineStore();
+  const { routine, setName, resetRoutine, setCategory } = useRoutineStore();
   const [visibleAlertEmptyName, setVisibleAlertEmptyName] = useState(false);
   const [visibleAlertEmptyInput, setVisibleAlertEmptyInput] = useState(false);
   const [routineCategory, setRoutineCategory] = useState<
@@ -51,8 +51,19 @@ export default function SettingRoutineScreen() {
       setVisibleAlertEmptyInput(true);
     } else {
       // Here save the routine to persistent storage or backend
+      setCategory(routineCategory);
       router.push("/(tabs)/blackboard");
     }
+  };
+
+  const handleFunctionalCategory = () => {
+    setRoutineCategory("functional");
+    setCategory("functional");
+  };
+
+  const handleBodybuildingCategory = () => {
+    setRoutineCategory("bodybuilding");
+    setCategory("bodybuilding");
   };
 
   return (
@@ -79,7 +90,7 @@ export default function SettingRoutineScreen() {
         {/* Segmented control */}
         <View className="w-3/4 flex-row justify-center rounded-md bg-transparent overflow-hidden border-[0.5px] border-text-secondary mx-auto">
           <Pressable
-            onPress={() => setRoutineCategory("functional")}
+            onPress={handleFunctionalCategory}
             className={`w-1/2 py-2 ${routineCategory === "functional" ? "bg-primary" : ""}`}
             accessibilityRole="button"
             accessibilityState={{
@@ -93,7 +104,7 @@ export default function SettingRoutineScreen() {
             </Text>
           </Pressable>
           <Pressable
-            onPress={() => setRoutineCategory("bodybuilding")}
+            onPress={handleBodybuildingCategory}
             className={`w-1/2 py-2 ${routineCategory === "bodybuilding" ? "bg-primary" : ""}`}
             accessibilityRole="button"
             accessibilityState={{

@@ -9,6 +9,7 @@ type RoutineStore = {
   setEmptyBlock: (block: Block) => void;
   updateBlockById: (blockId: string, listOfExercises: Exercise[]) => void;
   updateBlockArray: (blocks: Block[]) => void;
+  setCategory: (category: "functional" | "bodybuilding") => void;
 };
 
 const initialRoutine: Routine = {
@@ -67,6 +68,11 @@ const useRoutineStore = create<RoutineStore>()((set) => ({
     set((state) => ({
       ...state,
       routine: { ...state.routine, blocks }, // Replace blocks array with new array
+    })),
+  setCategory: (category: "functional" | "bodybuilding") =>
+    set((state) => ({
+      ...state,
+      routine: { ...state.routine, category },
     })),
 }));
 
