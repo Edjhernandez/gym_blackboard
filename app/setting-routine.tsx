@@ -1,6 +1,7 @@
 import AlertPopUp from "@/components/AlertPopUp";
 import CategorySegmentedControl from "@/components/CategorySegmentedControl";
 import SettingButton from "@/components/SettingButton";
+import { useCategorySelector } from "@/lib/hooks/useChangeCategory";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { calculateTotalExercises } from "@/utils/amountOfExercises";
@@ -67,10 +68,10 @@ export default function SettingRoutineScreen() {
     }
   };
 
-  const handleCategoryChange = (category: "functional" | "bodybuilding") => {
-    setRoutineCategory(category);
-    setCategory(category);
-  };
+  const handleCategoryChange = useCategorySelector(
+    setCategory,
+    setRoutineCategory
+  );
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary">

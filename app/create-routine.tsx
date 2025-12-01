@@ -1,6 +1,7 @@
 import AlertPopUp from "@/components/AlertPopUp";
 import CategorySegmentedControl from "@/components/CategorySegmentedControl";
 import OptionRoutineButton from "@/components/OptionRoutineButton";
+import { useCategorySelector } from "@/lib/hooks/useChangeCategory";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Block } from "@/types/types";
@@ -81,10 +82,10 @@ export default function CreateRoutine() {
     }
   };
 
-  const handleCategoryChange = (category: "functional" | "bodybuilding") => {
-    setRoutineCategory(category);
-    setCategory(category);
-  };
+  const handleCategoryChange = useCategorySelector(
+    setCategory,
+    setRoutineCategory
+  );
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary items-center">

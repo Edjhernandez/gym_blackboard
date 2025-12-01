@@ -1,12 +1,18 @@
-import { useState } from "react";
-import useRoutineStore from "../stores/routineStore";
+import { Routine } from "@/types/types";
+import { useCallback } from "react";
 
-export const useChangeCategory = () => {
-  const { setCategory } = useRoutineStore();
-  const [routineCategory, setRoutineCategory] = useState<
-    "functional" | "bodybuilding"
-  >("functional");
+export const useCategorySelector = (
+  setCategoryInStore: (category: Routine["category"]) => void,
+  setCategoryLocalState: (category: Routine["category"]) => void
+): ((category: Routine["category"]) => void) => {
+  const handleCategoryChange = useCallback(
+    (category: Routine["category"]) => {
+      setCategoryInStore(category);
 
-  setCategory(routineCategory);
-  setRoutineCategory(routineCategory);
+      setCategoryLocalState(category);
+    },
+    [setCategoryInStore, setCategoryLocalState]
+  );
+
+  return handleCategoryChange;
 };
