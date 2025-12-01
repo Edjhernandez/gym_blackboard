@@ -1,5 +1,7 @@
 import AlertPopUp from "@/components/AlertPopUp";
+import CategorySegmentedControl from "@/components/CategorySegmentedControl";
 import OptionRoutineButton from "@/components/OptionRoutineButton";
+import { useCategorySelector } from "@/lib/hooks/useChangeCategory";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Block } from "@/types/types";
@@ -18,10 +20,19 @@ import { v4 as uuidv4 } from "uuid";
 export default function CreateRoutine() {
   const { t } = useI18n();
   const router = useRouter();
-  const { routine, setName, resetRoutine, setEmptyBlock, updateBlockArray } =
-    useRoutineStore();
+  const {
+    routine,
+    setName,
+    resetRoutine,
+    setEmptyBlock,
+    updateBlockArray,
+    setCategory,
+  } = useRoutineStore();
   const [exerciseBlocks, setExerciseBlocks] = useState<Block[]>(routine.blocks);
   const [visibleAlertEmptyBlock, setVisibleAlertEmptyBlock] = useState(false);
+  const [routineCategory, setRoutineCategory] = useState<
+    "functional" | "bodybuilding"
+  >(routine.category || "functional");
 
   // Function to add a new exercise block
   const addBlock = () => {
@@ -57,7 +68,6 @@ export default function CreateRoutine() {
 
   const handleContinue = () => {
     // Navigate to the routine settings screen
-    updateBlockArray(exerciseBlocks);
 
     const checkEmptyBlocks = exerciseBlocks.some(
       (block) => block.exercises.length === 0
@@ -67,9 +77,15 @@ export default function CreateRoutine() {
     if (checkEmptyBlocks || checkEmptyWarmup) {
       setVisibleAlertEmptyBlock(true);
     } else {
+      updateBlockArray(exerciseBlocks);
       router.push("/setting-routine");
     }
   };
+
+  const handleCategoryChange = useCategorySelector(
+    setCategory,
+    setRoutineCategory
+  );
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary items-center">
@@ -82,7 +98,7 @@ export default function CreateRoutine() {
 
       {/* Routine Name input */}
       <View className="w-full px-4 border-b-[0.5px] border-secondary">
-        <Text className="text-white mb-2">{t("routines.name")}</Text>
+        <Text className="text-text-primary mb-2">{t("routines.name")}</Text>
         <TextInput
           value={routine.name}
           onChangeText={(text) => setName(text)}
@@ -91,6 +107,12 @@ export default function CreateRoutine() {
           className="bg-background-secondary text-text-secondary rounded-lg px-4 py-3 mb-4"
         />
       </View>
+
+      {/* Routine category selection */}
+      <CategorySegmentedControl
+        routineCategory={routineCategory}
+        handleCategoryChange={handleCategoryChange}
+      />
 
       {/* Warmup block always static */}
       <OptionRoutineButton

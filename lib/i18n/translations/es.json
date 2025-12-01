@@ -122,7 +122,9 @@
         },
         "setting_block": "Configuracion de {{title}}",
         "add_new_block": "Agregar Bloque",
-        "block_name": "Bloque {{title}}"
+        "block_name": "Bloque {{number}}",
+        "select_category": "Selecciona el tipo de rutina",
+        "routine_category": "Tipo de rutina"
     },
     "warmup_exercises": {
         "title": "Ejercicios de Calentamiento",

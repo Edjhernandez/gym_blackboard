@@ -1,10 +1,14 @@
 import AlertPopUp from "@/components/AlertPopUp";
+import CategorySegmentedControl from "@/components/CategorySegmentedControl";
 import SettingButton from "@/components/SettingButton";
+import { useCategorySelector } from "@/lib/hooks/useChangeCategory";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
+import { calculateTotalExercises } from "@/utils/amountOfExercises";
+import { estimateRoutineDuration } from "@/utils/routineTime";
 import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { FlatList, Pressable, Text, TextInput, View } from "react-native";
 import {
   SafeAreaView,
@@ -15,11 +19,19 @@ export default function SettingRoutineScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { t } = useI18n();
-  const { routine, setName, resetRoutine } = useRoutineStore();
-  const [visibleAlertEmptyName, setVisibleAlertEmptyName] =
-    React.useState(false);
-  const [visibleAlertEmptyInput, setVisibleAlertEmptyInput] =
-    React.useState(false);
+  const {
+    routine,
+    setName,
+    resetRoutine,
+    setCategory,
+    setExercisesAmount,
+    setDurationMinutes,
+  } = useRoutineStore();
+  const [visibleAlertEmptyName, setVisibleAlertEmptyName] = useState(false);
+  const [visibleAlertEmptyInput, setVisibleAlertEmptyInput] = useState(false);
+  const [routineCategory, setRoutineCategory] = useState<
+    "functional" | "bodybuilding"
+  >(routine.category || "functional");
 
   const handleDiscard = () => {
     resetRoutine(); // Reset routine store to initial state
@@ -50,18 +62,25 @@ export default function SettingRoutineScreen() {
       setVisibleAlertEmptyInput(true);
     } else {
       // Here save the routine to persistent storage or backend
+      setExercisesAmount(calculateTotalExercises(routine.blocks));
+      setDurationMinutes(estimateRoutineDuration(routine));
       router.push("/(tabs)/blackboard");
     }
   };
 
+  const handleCategoryChange = useCategorySelector(
+    setCategory,
+    setRoutineCategory
+  );
+
   return (
     <SafeAreaView className="flex-1 bg-background-primary">
       {/* Header */}
-      <View className="w-full flex-col items-center mt-4">
+      <View className="w-full flex-col items-center mt-4 border-b-[0.5px] border-secondary">
         <Text className="text-text-primary text-xl font-semibold">
           {t("routines.settings_routine_screen.title")}
         </Text>
-        <View className="w-full flex-col items-center justify-center py-4">
+        <View className="w-full flex-col items-center justify-center py-2 border-t-[0.5px] border-secondary mt-2">
           <TextInput
             className="bg-background-secondary pl-3 text-xl font-bold text-text-primary border-[0.5px] border-text-secondary rounded-md w-3/4"
             value={routine.name}
@@ -72,6 +91,12 @@ export default function SettingRoutineScreen() {
           </Text>
         </View>
       </View>
+
+      {/* Routine category selection */}
+      <CategorySegmentedControl
+        routineCategory={routineCategory}
+        handleCategoryChange={handleCategoryChange}
+      />
 
       <View className="w-full flex-col justify-center items-center">
         {/* Navigate to Warmup Settings Screen, this is static */}
