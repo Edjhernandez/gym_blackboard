@@ -81,14 +81,9 @@ export default function CreateRoutine() {
     }
   };
 
-  const handleFunctionalCategory = () => {
-    setRoutineCategory("functional");
-    setCategory("functional");
-  };
-
-  const handleBodybuildingCategory = () => {
-    setRoutineCategory("bodybuilding");
-    setCategory("bodybuilding");
+  const handleCategoryChange = (category: "functional" | "bodybuilding") => {
+    setRoutineCategory(category);
+    setCategory(category);
   };
 
   return (
@@ -115,8 +110,7 @@ export default function CreateRoutine() {
       {/* Routine category selection */}
       <CategorySegmentedControl
         routineCategory={routineCategory}
-        handleFunctionalCategory={handleFunctionalCategory}
-        handleBodybuildingCategory={handleBodybuildingCategory}
+        handleCategoryChange={handleCategoryChange}
       />
 
       {/* Warmup block always static */}

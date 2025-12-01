@@ -4,14 +4,12 @@ import { Pressable, Text, View } from "react-native";
 
 type TypeCategorySegmentedControlProps = {
   routineCategory: "functional" | "bodybuilding";
-  handleFunctionalCategory: () => void;
-  handleBodybuildingCategory: () => void;
+  handleCategoryChange: (category: "functional" | "bodybuilding") => void;
 };
 
 export default function CategorySegmentedControl({
   routineCategory,
-  handleFunctionalCategory,
-  handleBodybuildingCategory,
+  handleCategoryChange,
 }: TypeCategorySegmentedControlProps) {
   const { t } = useI18n();
   return (
@@ -22,7 +20,7 @@ export default function CategorySegmentedControl({
       {/* Segmented control */}
       <View className="w-3/4 flex-row justify-center rounded-md bg-transparent overflow-hidden border-[0.5px] border-text-secondary mx-auto">
         <Pressable
-          onPress={handleFunctionalCategory}
+          onPress={() => handleCategoryChange("functional")}
           className={`w-1/2 py-2 ${routineCategory === "functional" ? "bg-primary" : ""}`}
           accessibilityRole="button"
           accessibilityState={{
@@ -36,7 +34,7 @@ export default function CategorySegmentedControl({
           </Text>
         </Pressable>
         <Pressable
-          onPress={handleBodybuildingCategory}
+          onPress={() => handleCategoryChange("bodybuilding")}
           className={`w-1/2 py-2 ${routineCategory === "bodybuilding" ? "bg-primary" : ""}`}
           accessibilityRole="button"
           accessibilityState={{

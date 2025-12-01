@@ -67,14 +67,9 @@ export default function SettingRoutineScreen() {
     }
   };
 
-  const handleFunctionalCategory = () => {
-    setRoutineCategory("functional");
-    setCategory("functional");
-  };
-
-  const handleBodybuildingCategory = () => {
-    setRoutineCategory("bodybuilding");
-    setCategory("bodybuilding");
+  const handleCategoryChange = (category: "functional" | "bodybuilding") => {
+    setRoutineCategory(category);
+    setCategory(category);
   };
 
   return (
@@ -99,8 +94,7 @@ export default function SettingRoutineScreen() {
       {/* Routine category selection */}
       <CategorySegmentedControl
         routineCategory={routineCategory}
-        handleFunctionalCategory={handleFunctionalCategory}
-        handleBodybuildingCategory={handleBodybuildingCategory}
+        handleCategoryChange={handleCategoryChange}
       />
 
       <View className="w-full flex-col justify-center items-center">
