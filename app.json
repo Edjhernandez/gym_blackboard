@@ -17,9 +17,6 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "plugins": [
-        "react-native-google-cast"
-      ],
       "package": "com.anonymous.gymblackboard"
     },
     "web": {
@@ -40,10 +37,22 @@
       ],
       "expo-video",
       "expo-font",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "react-native-google-cast",
+        {
+          "receiverAppId": "CC1AD845"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f6b48ee1-29ee-44cf-a8cd-bbc9a7607e7c"
+      }
     }
   }
 }
