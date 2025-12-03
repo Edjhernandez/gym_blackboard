@@ -16,7 +16,11 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "plugins": [
+        "react-native-google-cast"
+      ],
+      "package": "com.anonymous.gymblackboard"
     },
     "web": {
       "bundler": "metro",
