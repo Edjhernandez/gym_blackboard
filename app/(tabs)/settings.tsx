@@ -1,20 +1,33 @@
 import { useI18n } from "@/lib/hooks/useI18n";
 import Octicons from "@expo/vector-icons/Octicons";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
+import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { Modal, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { auth } from "../../firebaseConfig";
 
 type ThemeMode = "system" | "light" | "dark";
 type Lang = "es" | "en";
 
 export default function SettingsScreen() {
   const { t } = useI18n();
-
+  const router = useRouter();
   const [themeMode, setThemeMode] = useState<ThemeMode>("system");
   const [lang, setLang] = useState<Lang>("es");
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+
+  const handleSignOut = async () => {
+    setLogoutModalVisible(false);
+    try {
+      await signOut(auth);
+      router.push("/login");
+    } catch (error) {
+      alert("No se pudo cerrar la sesión. Por favor, intenta de nuevo.");
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary px-4">
@@ -206,7 +219,10 @@ export default function SettingsScreen() {
                 </Text>
               </Pressable>
 
-              <Pressable className="px-4 py-2 rounded-md bg-primary">
+              <Pressable
+                className="px-4 py-2 rounded-md bg-primary"
+                onPress={handleSignOut}
+              >
                 <Text className="text-background-secondary font-medium">
                   {t("settings.logout")}
                 </Text>
