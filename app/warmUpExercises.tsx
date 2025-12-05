@@ -1,11 +1,18 @@
-import { EXAMPLE_EXERCISES } from "@/DATA/data";
 import ExerciseCard from "@/components/ExerciseCard";
+import { db } from "@/firebaseConfig";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import React, { useEffect } from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 import {
   ArrowDownOnSquareIcon,
   ArrowPathRoundedSquareIcon,
@@ -20,9 +27,38 @@ export default function WarmUpExercises() {
     routine.warmup
   );
   const params = useLocalSearchParams();
-  const warmupExercises: Exercise[] = EXAMPLE_EXERCISES.filter(
-    (exercise) => exercise.exerciseType === "warm-Up"
-  );
+
+  const [dataExercises, setDataExercises] = React.useState<Exercise[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+
+  useEffect(() => {
+    const q = query(collection(db, "exercises"));
+
+    const unsubscribe = onSnapshot(
+      q,
+      (querySnapshot) => {
+        const exercisesFromDB: Exercise[] = [];
+        querySnapshot.forEach((doc) => {
+          exercisesFromDB.push({
+            id: doc.id,
+            ...(doc.data() as Omit<Exercise, "id">),
+          });
+        });
+        setDataExercises(
+          exercisesFromDB.filter(
+            (exercise) => exercise.exerciseType === "warmup"
+          )
+        );
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Error al obtener ejercicios:", error);
+        setLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     setSelectedExercises(routine.warmup);
@@ -67,8 +103,13 @@ export default function WarmUpExercises() {
 
       {/* Exercise List */}
       <View className="w-11/12 px-4 py-2 border-[0.5px] border-text-secondary rounded-lg flex-1">
+        {loading && (
+          <View className="flex-1 justify-center items-center">
+            <ActivityIndicator size="large" color="#FFFF00" />
+          </View>
+        )}
         <FlatList
-          data={warmupExercises}
+          data={dataExercises}
           renderItem={({ item }) => (
             <ExerciseCard
               exercise={item}

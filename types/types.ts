@@ -1,7 +1,7 @@
 export type Exercise = {
   id: string;
   name: string;
-  exerciseType: "warm-Up" | "functional" | "bodybuilding";
+  exerciseType: "warmup" | "functional" | "bodybuilding";
   bodyPart?: "chest" | "back" | "legs" | "arms" | "abs";
   videoURL?: string;
   sets?: number;
