@@ -51,6 +51,7 @@ const home = () => {
 
     return () => unsubscribe();
   }, []);
+
   return (
     <View className="bg-background-primary flex-1 flex-col justify-start w-full items-center px-4">
       {/* Header */}
