@@ -1,10 +1,13 @@
 import RoutineCard from "@/components/RoutineCard";
-import { routines } from "@/DATA/data";
+import { auth, db } from "@/firebaseConfig";
 import { useI18n } from "@/lib/hooks/useI18n";
+import { Routine } from "@/types/types";
 import { formatRoutineDetails } from "@/utils/formatRoutineDetails";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   Pressable,
   Text,
@@ -17,9 +20,37 @@ const Routines = () => {
   const { t } = useI18n();
   const router = useRouter();
   const [tab, setTab] = useState<"functional" | "bodybuilding">("functional");
-  const filteredRoutines = routines.filter(
-    (routine) => routine.category === tab
-  );
+  const [dataRoutines, setDataRoutines] = React.useState<Routine[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "routines"),
+      where("userId", "==", auth.currentUser?.uid)
+    );
+
+    const unsubscribe = onSnapshot(
+      q,
+      (querySnapshot) => {
+        const routinesFromDB: Routine[] = [];
+        querySnapshot.forEach((doc) => {
+          routinesFromDB.push({
+            ...(doc.data() as Omit<Routine, "id">),
+            id: doc.id,
+          });
+        });
+
+        setDataRoutines(routinesFromDB);
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Error fetching routines:", error);
+        setLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <View className="flex-1 w-full bg-background-primary px-4 pt-10 justify-center items-center">
@@ -84,10 +115,16 @@ const Routines = () => {
 
       {/* List */}
       <View className="w-full flex-1 px-4 border-[0.5px] border-text-secondary rounded-e-lg pb-1 mb-3 pt-2">
+        {loading && (
+          <View className="flex-1 justify-center items-center">
+            <ActivityIndicator size="large" color="#FFFF00" />
+          </View>
+        )}
         <FlatList
-          data={filteredRoutines}
+          data={dataRoutines.filter((routine) => routine.category === tab)}
           renderItem={({ item }) => (
             <RoutineCard
+              id={item.id}
               title={item.name}
               details={formatRoutineDetails(
                 t,

@@ -38,7 +38,7 @@ export default function CreateRoutine() {
   const addBlock = () => {
     const newBlock: Block = {
       id: uuidv4(),
-      title: t("routines.block_name", { title: exerciseBlocks.length + 1 }), //set a block number incrementally
+      title: t("routines.block_name", { number: exerciseBlocks.length + 1 }), //set a block number incrementally
       exercises: [],
     };
 
@@ -53,7 +53,7 @@ export default function CreateRoutine() {
     const renamedBlocks = updatedBlocks.map((block, index) => {
       return {
         ...block,
-        title: t("routines.block_name", { title: index + 1 }),
+        title: t("routines.block_name", { number: index + 1 }),
       };
     });
     setExerciseBlocks(renamedBlocks);
