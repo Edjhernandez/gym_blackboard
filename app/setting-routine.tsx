@@ -58,7 +58,7 @@ export default function SettingRoutineScreen() {
       saveNewRoutine(routine)
         .then(() => {
           resetRoutine(); // Reset routine store to initial state
-          router.push("/(tabs)/home"); // Navigate back to home
+          router.push("/(tabs)/routines"); // Navigate back to routines list
         })
         .catch((error) => {
           console.error("Error saving routine:", error);
