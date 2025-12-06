@@ -8,6 +8,8 @@ import {
 } from "firebase/firestore";
 import { db } from "./../firebaseConfig";
 import { Routine } from "./../types/types";
+import { calculateTotalExercises } from "./amountOfExercises";
+import { estimateRoutineDuration } from "./routineTime";
 
 export const saveNewRoutine = async (routine: Routine) => {
   try {
@@ -18,10 +20,14 @@ export const saveNewRoutine = async (routine: Routine) => {
       throw new Error("Usuario no autenticado. No se puede guardar la rutina.");
     }
 
+    const { id, ...routineWithoutId } = routine;
+
     const newRoutine: Omit<Routine, "id"> = {
-      ...routine,
+      ...routineWithoutId,
       userId: currentUser.uid,
       createdAt: serverTimestamp() as Timestamp,
+      exercisesAmount: calculateTotalExercises(routine.blocks),
+      durationMinutes: estimateRoutineDuration(routine),
     };
 
     await addDoc(collection(db, "routines"), newRoutine);

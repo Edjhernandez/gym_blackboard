@@ -32,10 +32,11 @@ const Routines = () => {
         const routinesFromDB: Routine[] = [];
         querySnapshot.forEach((doc) => {
           routinesFromDB.push({
-            id: doc.id,
             ...(doc.data() as Omit<Routine, "id">),
+            id: doc.id,
           });
         });
+
         setDataRoutines(routinesFromDB);
         setLoading(false);
       },
@@ -120,6 +121,7 @@ const Routines = () => {
           data={dataRoutines.filter((routine) => routine.category === tab)}
           renderItem={({ item }) => (
             <RoutineCard
+              id={item.id}
               title={item.name}
               details={formatRoutineDetails(
                 t,

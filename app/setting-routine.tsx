@@ -4,8 +4,6 @@ import SettingButton from "@/components/SettingButton";
 import { useCategorySelector } from "@/lib/hooks/useChangeCategory";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
-import { calculateTotalExercises } from "@/utils/amountOfExercises";
-import { estimateRoutineDuration } from "@/utils/routineTime";
 import { saveNewRoutine } from "@/utils/saveRoutineInDB";
 import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
 import { useRouter } from "expo-router";
@@ -20,14 +18,7 @@ export default function SettingRoutineScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { t } = useI18n();
-  const {
-    routine,
-    setName,
-    resetRoutine,
-    setCategory,
-    setExercisesAmount,
-    setDurationMinutes,
-  } = useRoutineStore();
+  const { routine, setName, resetRoutine, setCategory } = useRoutineStore();
   const [visibleAlertEmptyName, setVisibleAlertEmptyName] = useState(false);
   const [visibleAlertEmptyInput, setVisibleAlertEmptyInput] = useState(false);
   const [routineCategory, setRoutineCategory] = useState<
@@ -63,8 +54,6 @@ export default function SettingRoutineScreen() {
       setVisibleAlertEmptyInput(true);
     } else {
       // Here save the routine to persistent storage or backend
-      setExercisesAmount(calculateTotalExercises(routine.blocks));
-      setDurationMinutes(estimateRoutineDuration(routine));
       //router.push("/(tabs)/blackboard");
       saveNewRoutine(routine)
         .then(() => {
