@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/hooks/useI18n";
+import { updateFavoriteField } from "@/utils/updateFavoriteField";
 import { usePathname } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Pressable, Text, TouchableOpacity, View } from "react-native";
@@ -10,13 +11,14 @@ import { StarIcon as StarIconSolid } from "react-native-heroicons/solid";
 import RoutineActionPopUp from "./RoutineActionPopUp";
 
 type TypeRoutineCardProps = {
+  id: string;
   title: string;
   details: string;
   isFavorite?: boolean;
 };
 
 const RoutineCard = (props: TypeRoutineCardProps) => {
-  const { title, details, isFavorite } = props;
+  const { title, details, isFavorite, id } = props;
   const [visiblePopUpOptions, setVisiblePopUpOptions] = useState(false);
   const [localFavorite, setLocalFavorite] = useState(isFavorite); // Local state to manage favorite status, change when set BBDD
   const currentPath = usePathname();
@@ -25,6 +27,18 @@ const RoutineCard = (props: TypeRoutineCardProps) => {
   useEffect(() => {
     setLocalFavorite(isFavorite);
   }, [isFavorite]);
+
+  const handleFavorite = async () => {
+    const newFavoriteStatus = !localFavorite;
+    setLocalFavorite(newFavoriteStatus);
+    try {
+      await updateFavoriteField(id, newFavoriteStatus);
+    } catch (error) {
+      // If there's an error, revert the local state change
+      setLocalFavorite(!newFavoriteStatus);
+      console.error("Error updating favorite status:", error);
+    }
+  };
 
   return (
     <>
@@ -38,7 +52,7 @@ const RoutineCard = (props: TypeRoutineCardProps) => {
         <View className="flex-row justify-end gap-2">
           {currentPath === "/routines" && (
             <Pressable
-              onPress={() => setLocalFavorite(!localFavorite)}
+              onPress={handleFavorite}
               accessibilityRole="button"
               accessibilityLabel={
                 localFavorite

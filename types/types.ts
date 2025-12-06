@@ -1,7 +1,9 @@
+import { Timestamp } from "firebase/firestore";
+
 export type Exercise = {
   id: string;
   name: string;
-  exerciseType: "warm-Up" | "functional" | "bodybuilding";
+  exerciseType: "warmup" | "functional" | "bodybuilding";
   bodyPart?: "chest" | "back" | "legs" | "arms" | "abs";
   videoURL?: string;
   sets?: number;
@@ -23,4 +25,6 @@ export type Routine = {
   category: "functional" | "bodybuilding";
   warmup: Exercise[];
   blocks: Block[];
+  userId: string;
+  createdAt: Timestamp;
 };

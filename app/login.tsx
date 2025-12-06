@@ -3,6 +3,7 @@ import { images } from "@/constants/images";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Image } from "expo-image";
 import { Link, useRouter } from "expo-router";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import {
   Pressable,
@@ -11,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { auth } from "../firebaseConfig";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -24,11 +26,22 @@ export default function LoginScreen() {
   const onSubmit = async () => {
     // TODO: replace this stub with real auth (Firebase / Supabase) integration
     setLoading(true);
+    if (!email || !password) {
+      setLoading(false);
+      setIsErrorModalVisible(true);
+      return;
+    }
 
     try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log("the user is logged in and authenticated:", user.uid);
+
       router.push("/(tabs)/home");
-      console.log("Signin with", { email, password }); // await signInWithEmail(email, password)
-      //throw new Error("Invalid credentials"); // Simulate invalid credentials error
     } catch (err) {
       //console.error(err);
       setIsErrorModalVisible(true);

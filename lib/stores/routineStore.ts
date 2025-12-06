@@ -1,4 +1,5 @@
 import { Block, Exercise, Routine } from "@/types/types";
+import { serverTimestamp, Timestamp } from "firebase/firestore";
 import { create } from "zustand";
 
 type RoutineStore = {
@@ -10,8 +11,6 @@ type RoutineStore = {
   updateBlockById: (blockId: string, listOfExercises: Exercise[]) => void;
   updateBlockArray: (blocks: Block[]) => void;
   setCategory: (category: "functional" | "bodybuilding") => void;
-  setExercisesAmount: (amount: number) => void;
-  setDurationMinutes: (duration: number) => void;
 };
 
 const initialRoutine: Routine = {
@@ -23,6 +22,8 @@ const initialRoutine: Routine = {
   category: "functional",
   warmup: [],
   blocks: [],
+  createdAt: serverTimestamp() as Timestamp,
+  userId: "",
 };
 
 const useRoutineStore = create<RoutineStore>()((set) => ({
@@ -75,16 +76,6 @@ const useRoutineStore = create<RoutineStore>()((set) => ({
     set((state) => ({
       ...state,
       routine: { ...state.routine, category },
-    })),
-  setExercisesAmount: (amount: number) =>
-    set((state) => ({
-      ...state,
-      routine: { ...state.routine, exercisesAmount: amount },
-    })),
-  setDurationMinutes: (duration: number) =>
-    set((state) => ({
-      ...state,
-      routine: { ...state.routine, durationMinutes: duration },
     })),
 }));
 
