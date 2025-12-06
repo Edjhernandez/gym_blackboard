@@ -1,4 +1,3 @@
-// En tu componente o un servicio de datos
 import { getAuth } from "firebase/auth";
 import {
   addDoc,
@@ -17,7 +16,7 @@ export const saveNewRoutine = async (routine: Routine) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      throw new Error("Usuario no autenticado. No se puede guardar la rutina.");
+      throw new Error("User not authenticated. Cannot save routine.");
     }
 
     const { id, ...routineWithoutId } = routine;
@@ -32,7 +31,7 @@ export const saveNewRoutine = async (routine: Routine) => {
 
     await addDoc(collection(db, "routines"), newRoutine);
   } catch (error) {
-    console.error("Error al guardar la rutina:", error);
+    console.error("Error saving routine:", error);
     throw error;
   }
 };

@@ -14,10 +14,9 @@ export default function Index() {
       if (initializing) {
         setInitializing(false);
       }
-      return subscriber;
     });
     return subscriber;
-  }, []);
+  }, [initializing]);
 
   if (initializing) {
     return (

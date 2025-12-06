@@ -20,7 +20,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// Obtén la instancia de Authentication
+
 export const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 });
@@ -28,5 +28,4 @@ export const auth = initializeAuth(app, {
 const db = getFirestore(app);
 export { db };
 
-// Puedes exportar el 'app' si lo necesitas para otros servicios
 export default app;

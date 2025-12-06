@@ -1,11 +1,11 @@
 import RoutineCard from "@/components/RoutineCard";
-import { db } from "@/firebaseConfig";
+import { auth, db } from "@/firebaseConfig";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Routine } from "@/types/types";
 import { formatRoutineDetails } from "@/utils/formatRoutineDetails";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -26,7 +26,10 @@ const home = () => {
   const [loading, setLoading] = React.useState<boolean>(true);
 
   useEffect(() => {
-    const q = query(collection(db, "routines"));
+    const q = query(
+      collection(db, "routines"),
+      where("userId", "==", auth.currentUser?.uid)
+    );
 
     const unsubscribe = onSnapshot(
       q,
@@ -44,7 +47,7 @@ const home = () => {
         setLoading(false);
       },
       (error) => {
-        console.error("Error al obtener ejercicios:", error);
+        console.error("Error fetching routines:", error);
         setLoading(false);
       }
     );
@@ -148,6 +151,7 @@ const home = () => {
               )}
               renderItem={({ item }) => (
                 <RoutineCard
+                  id={item.id}
                   title={item.name}
                   details={formatRoutineDetails(
                     t,

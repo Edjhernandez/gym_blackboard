@@ -58,7 +58,7 @@ export default function listOfExercises() {
         setLoading(false);
       },
       (error) => {
-        console.error("Error al obtener ejercicios:", error);
+        console.error("Error fetching exercises:", error);
         setLoading(false);
       }
     );

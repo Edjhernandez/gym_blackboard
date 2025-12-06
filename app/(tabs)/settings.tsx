@@ -25,7 +25,7 @@ export default function SettingsScreen() {
       await signOut(auth);
       router.push("/login");
     } catch (error) {
-      alert("No se pudo cerrar la sesión. Por favor, intenta de nuevo.");
+      alert("It could not sign out. Please try again.");
     }
   };
 

@@ -27,6 +27,7 @@ export default function LoginScreen() {
     // TODO: replace this stub with real auth (Firebase / Supabase) integration
     setLoading(true);
     if (!email || !password) {
+      setLoading(false);
       setIsErrorModalVisible(true);
       return;
     }
@@ -37,15 +38,10 @@ export default function LoginScreen() {
         email,
         password
       );
-      // Si todo sale bien, el usuario se ha creado y ¡ya está autenticado!
       const user = userCredential.user;
-      console.log("Usuario registrado y autenticado:", user.uid);
+      console.log("the user is logged in and authenticated:", user.uid);
 
-      // Aquí podrías navegar a la pantalla principal de tu app
-      // navigation.navigate('Dashboard');
       router.push("/(tabs)/home");
-      // console.log("Signin with", { email, password }); // await signInWithEmail(email, password)
-      //throw new Error("Invalid credentials"); // Simulate invalid credentials error
     } catch (err) {
       //console.error(err);
       setIsErrorModalVisible(true);
