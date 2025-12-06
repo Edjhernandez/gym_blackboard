@@ -28,6 +28,7 @@ export default function LiveWaitScreen() {
 import React from "react";
 import { Pressable, Text } from "react-native";
 import { CastButton, useRemoteMediaClient } from "react-native-google-cast";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function MyComponent() {
   // This will automatically rerender when client is connected to a device
@@ -68,7 +69,7 @@ function MyComponent() {
   // This will render native Cast button.
   // When a user presses it, a Cast dialog will prompt them to select a Cast device to connect to.
   return (
-    <>
+    <SafeAreaView className="flex-1 bg-white justify-center items-center">
       <Text className="mt-20">Google Cast Button:</Text>
       <Pressable onPress={() => console.log("Cast button pressed")}>
         <CastButton
@@ -80,7 +81,7 @@ function MyComponent() {
           }}
         />
       </Pressable>
-    </>
+    </SafeAreaView>
   );
 }
 
