@@ -6,6 +6,7 @@ import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { calculateTotalExercises } from "@/utils/amountOfExercises";
 import { estimateRoutineDuration } from "@/utils/routineTime";
+import { saveNewRoutine } from "@/utils/saveRoutineInDB";
 import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -64,7 +65,16 @@ export default function SettingRoutineScreen() {
       // Here save the routine to persistent storage or backend
       setExercisesAmount(calculateTotalExercises(routine.blocks));
       setDurationMinutes(estimateRoutineDuration(routine));
-      router.push("/(tabs)/blackboard");
+      //router.push("/(tabs)/blackboard");
+      saveNewRoutine(routine)
+        .then(() => {
+          resetRoutine(); // Reset routine store to initial state
+          router.push("/(tabs)/home"); // Navigate back to home
+        })
+        .catch((error) => {
+          console.error("Error saving routine:", error);
+          // Optionally show an error alert to the user
+        });
     }
   };
 
