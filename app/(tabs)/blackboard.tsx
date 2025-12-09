@@ -26,30 +26,11 @@ export default function LiveWaitScreen() {
 } */
 
 import React from "react";
-import { Pressable, Text } from "react-native";
-import {
-  CastButton,
-  useCastChannel,
-  useCastSession,
-  useCastState,
-  useDevices,
-  useRemoteMediaClient,
-} from "react-native-google-cast";
+import { Text } from "react-native";
+import { CastButton } from "react-native-google-cast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function MyComponent() {
-  const client = useRemoteMediaClient();
-  const session = useCastSession();
-  const channel = useCastChannel("urn:x-cast:com.google.cast.demo.helloworld");
-  const devices = useDevices();
-  const castState = useCastState();
-
-  const handlePressable = async () => {
-    if (client) {
-      //await channel?.sendMessage({ greeting: "Hola Mundo" });
-    }
-  };
-
   return (
     <SafeAreaView className="flex-1 bg-background-primary justify-center items-center">
       <Text className="mt-20 text-text-primary">Google Cast Button:</Text>
@@ -61,11 +42,6 @@ function MyComponent() {
           marginBottom: 50,
         }}
       />
-      <Pressable onPress={handlePressable}>
-        <Text className="text-text-primary underline">
-          Enviar "Hola Mundo" al Chromecast
-        </Text>
-      </Pressable>
     </SafeAreaView>
   );
 }

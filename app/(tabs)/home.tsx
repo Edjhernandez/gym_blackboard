@@ -133,6 +133,12 @@ const home = () => {
 
       {/* Most Used Routines */}
       <View className="flex-1 px-4 mx-4 border-[0.5px] border-text-secondary rounded-b-lg mb-3 pb-2 w-full">
+        {loading && (
+          <View className="flex-1 justify-center items-center">
+            <ActivityIndicator size="large" color="#FFFF00" />
+          </View>
+        )}
+
         {dataFavoriteRoutines.filter((routine) => routine.category === tab)
           .length === 0 ? (
           <Text className="text-text-primary text-center mt-10 font-extralight text-xl">
@@ -140,11 +146,6 @@ const home = () => {
           </Text>
         ) : (
           <>
-            {loading && (
-              <View className="flex-1 justify-center items-center">
-                <ActivityIndicator size="large" color="#FFFF00" />
-              </View>
-            )}
             <FlatList
               data={dataFavoriteRoutines.filter(
                 (routine) => routine.category === tab
