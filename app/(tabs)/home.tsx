@@ -55,6 +55,12 @@ const home = () => {
     return () => unsubscribe();
   }, []);
 
+  const filteredRoutines = dataFavoriteRoutines.filter(
+    (routine) => routine.category === tab
+  );
+
+  const hasRoutines = filteredRoutines.length > 0;
+
   return (
     <View className="bg-background-primary flex-1 flex-col justify-start w-full items-center px-4">
       {/* Header */}
@@ -139,17 +145,16 @@ const home = () => {
           </View>
         )}
 
-        {dataFavoriteRoutines.filter((routine) => routine.category === tab)
-          .length === 0 ? (
+        {!loading && !hasRoutines && (
           <Text className="text-text-primary text-center mt-10 font-extralight text-xl">
             {t("home.no_favorite_routines")}
           </Text>
-        ) : (
+        )}
+
+        {!loading && hasRoutines && (
           <>
             <FlatList
-              data={dataFavoriteRoutines.filter(
-                (routine) => routine.category === tab
-              )}
+              data={filteredRoutines}
               renderItem={({ item }) => (
                 <RoutineCard
                   id={item.id}

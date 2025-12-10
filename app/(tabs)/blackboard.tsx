@@ -26,11 +26,19 @@ export default function LiveWaitScreen() {
 } */
 
 import React from "react";
-import { Text } from "react-native";
-import { CastButton } from "react-native-google-cast";
+import { Pressable, Text } from "react-native";
+import { CastButton, useCastSession } from "react-native-google-cast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function MyComponent() {
+  const castSession = useCastSession();
+
+  const handleTests = () => {
+    if (castSession) {
+      console.log(castSession.getApplicationStatus());
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-background-primary justify-center items-center">
       <Text className="mt-20 text-text-primary">Google Cast Button:</Text>
@@ -42,6 +50,9 @@ function MyComponent() {
           marginBottom: 50,
         }}
       />
+      <Pressable className="border border-primary" onPress={handleTests}>
+        <Text className="text-text-primary">boton de pruebas</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
