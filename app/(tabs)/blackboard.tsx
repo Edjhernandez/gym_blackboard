@@ -31,7 +31,6 @@ import { CastButton, useCastSession } from "react-native-google-cast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function MyComponent() {
-  const deviceId = "84f575ce05f83ebb9e7721221ffe9ef6";
   const castSession = useCastSession();
 
   useEffect(() => {
@@ -49,13 +48,18 @@ function MyComponent() {
   }, [castSession]);
 
   const handleTests = () => {
-    /*  .then((info) => {
-          console.log("✅ Respuesta:");
-          console.log(info);
+    console.log(castSession);
+    if (castSession) {
+      const promise = castSession.getApplicationMetadata();
+      promise
+        .then((metadata) => {
+          console.log("✅ Application Metadata:");
+          console.log(metadata);
         })
         .catch((error) => {
-          console.error("❌ Error:", error);
-        }); */
+          console.error("❌ Error fetching application metadata:", error);
+        });
+    }
   };
 
   return (
@@ -75,5 +79,4 @@ function MyComponent() {
     </SafeAreaView>
   );
 }
-
 export default MyComponent;
