@@ -25,30 +25,16 @@ export default function LiveWaitScreen() {
   );
 } */
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Pressable, Text } from "react-native";
 import { CastButton, useCastSession } from "react-native-google-cast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function MyComponent() {
   const castSession = useCastSession();
-
-  useEffect(() => {
-    if (castSession) {
-      const promise = castSession.getApplicationMetadata();
-      promise
-        .then((metadata) => {
-          console.log("✅ Application Metadata:");
-          console.log(metadata);
-        })
-        .catch((error) => {
-          console.error("❌ Error fetching application metadata:", error);
-        });
-    }
-  }, [castSession]);
-
+  console.log("castSession", castSession);
   const handleTests = () => {
-    console.log(castSession);
+    console.log("castSession", castSession);
     if (castSession) {
       const promise = castSession.getApplicationMetadata();
       promise
