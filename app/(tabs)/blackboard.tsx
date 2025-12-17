@@ -43,6 +43,15 @@ function MyComponent() {
       .catch((error) => {
         console.error("Error starting session:", error);
       });
+
+    GoogleCast.getSessionManager()
+      .startSession(deviceID)
+      .then(() => {
+        console.log("Session started successfully");
+      })
+      .catch((error) => {
+        console.error("Error starting session:", error);
+      });
   };
 
   const handleDisconnect = () => {
