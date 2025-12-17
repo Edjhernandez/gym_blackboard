@@ -27,15 +27,14 @@ export default function LiveWaitScreen() {
 
 import React from "react";
 import { Pressable, Text, View } from "react-native";
-import GoogleCast, { useDevices } from "react-native-google-cast";
+import GoogleCast, { CastButton } from "react-native-google-cast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function MyComponent() {
   const deviceID = "84f575ce05f83ebb9e7721221ffe9ef6";
-  const devices = useDevices();
 
   const handleConnect = () => {
-    /* GoogleCast.getDiscoveryManager()
+    GoogleCast.getDiscoveryManager()
       .getDevices()
 
       .then((devices) => {
@@ -43,8 +42,7 @@ function MyComponent() {
       })
       .catch((error) => {
         console.error("Error starting session:", error);
-      }); */
-    console.log(devices);
+      });
   };
 
   const handleDisconnect = () => {
@@ -60,6 +58,7 @@ function MyComponent() {
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary justify-center items-center">
+      <CastButton style={{ width: 48, height: 48, tintColor: "white" }} />
       <Pressable
         className="border border-primary p-5 mt-10"
         onPress={handleConnect}
