@@ -26,42 +26,54 @@ export default function LiveWaitScreen() {
 } */
 
 import React from "react";
-import { Pressable, Text } from "react-native";
-import { CastButton, useCastSession } from "react-native-google-cast";
+import { Pressable, Text, View } from "react-native";
+import GoogleCast, { useDevices } from "react-native-google-cast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function MyComponent() {
-  const castSession = useCastSession();
-  console.log("castSession", castSession);
-  const handleTests = () => {
-    console.log("castSession", castSession);
-    if (castSession) {
-      const promise = castSession.getApplicationMetadata();
-      promise
-        .then((metadata) => {
-          console.log("✅ Application Metadata:");
-          console.log(metadata);
-        })
-        .catch((error) => {
-          console.error("❌ Error fetching application metadata:", error);
-        });
-    }
+  const deviceID = "84f575ce05f83ebb9e7721221ffe9ef6";
+  const devices = useDevices();
+
+  const handleConnect = () => {
+    /* GoogleCast.getDiscoveryManager()
+      .getDevices()
+
+      .then((devices) => {
+        console.log(devices);
+      })
+      .catch((error) => {
+        console.error("Error starting session:", error);
+      }); */
+    console.log(devices);
+  };
+
+  const handleDisconnect = () => {
+    GoogleCast.getSessionManager()
+      .endCurrentSession(true)
+      .then(() => {
+        console.log("Session ended successfully");
+      })
+      .catch((error) => {
+        console.error("Error ending session:", error);
+      });
   };
 
   return (
     <SafeAreaView className="flex-1 bg-background-primary justify-center items-center">
-      <Text className="mt-20 text-text-primary">Google Cast Button:</Text>
-      <CastButton
-        style={{
-          width: 24,
-          height: 24,
-          tintColor: "#E7EBDA",
-          marginBottom: 50,
-        }}
-      />
-      <Pressable className="border border-primary" onPress={handleTests}>
-        <Text className="text-text-primary">boton de pruebas</Text>
+      <Pressable
+        className="border border-primary p-5 mt-10"
+        onPress={handleConnect}
+      >
+        <Text className="text-text-primary">CONECTAR</Text>
       </Pressable>
+      <View style={{ marginTop: 40 }}></View>
+      <Pressable
+        className="border border-primary p-5"
+        onPress={handleDisconnect}
+      >
+        <Text className="text-text-primary">DESCONECTAR</Text>
+      </Pressable>
+      <View style={{ marginTop: 40 }}></View>
     </SafeAreaView>
   );
 }

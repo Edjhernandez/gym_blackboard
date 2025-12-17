@@ -9,8 +9,8 @@
     <style>
       /* Estilos básicos y responsivos para la TV */
       body {
-        background-color: #1f2937; /* Gris oscuro para el fondo */
-        color: #f3f4f6;
+        background-color: #0d0d0d;
+        color: #e7ebda;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -21,30 +21,30 @@
         text-align: center;
       }
       #message-box {
-        background-color: #374151; /* Gris más claro para la caja */
+        background-color: #1a1a1a;
         padding: 40px 60px;
         border-radius: 16px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
         width: 90%;
         max-width: 800px;
-        border: 2px solid #10b981;
+        border: 2px solid #e7ebda;
       }
       h1 {
-        color: #10b981; /* Verde brillante */
+        color: #e7ebda; /* Verde brillante */
         font-size: 4em;
         margin-bottom: 0.2em;
       }
       p {
         font-size: 1.6em;
-        color: #9ca3af;
+        color: #d9d9d9;
       }
       #wod-id-display {
         font-size: 3em;
         font-weight: 700;
-        color: #facc15; /* Amarillo para resaltar el ID */
+        color: #ffff00; /* Amarillo para resaltar el ID */
         margin: 30px 0;
         padding: 15px 30px;
-        background-color: #111827;
+        background-color: #1a1a1a;
         border-radius: 10px;
         transition: all 0.3s ease-in-out;
       }
@@ -58,9 +58,7 @@
   <body>
     <div id="message-box">
       <h1>🏋️ WOD Trainer</h1>
-      <p>
-        Receptor de Rutinas de Entrenamiento. ID de Canal: el que diga alfonso
-      </p>
+      <p>Receptor de Rutinas de Entrenamiento. ID de Canal: NO SE</p>
       <p>WOD ID Recibido:</p>
       <div id="wod-id-display">Esperando Documento...</div>
       <p id="status-message">Conectado. Iniciando el contexto del receptor.</p>
@@ -69,63 +67,6 @@
     <script>
       // El Application ID para el canal de mensajes personalizado.
       const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
-
-      const context = cast.framework.CastReceiverContext.getInstance();
-
-      function updateDisplay(id, status) {
-        document.getElementById("wod-id-display").textContent = id;
-        document.getElementById("status-message").textContent = status;
-      }
-
-      // Listener para mensajes personalizados enviados desde el móvil
-      context.addMessageListener(CUSTOM_NAMESPACE, (event) => {
-        const senderId = event.senderId;
-        const message = event.data;
-
-        console.log(`[RECEPTOR] Mensaje recibido de ${senderId}:`, message);
-
-        try {
-          if (message && message.type === "LOAD_WOD" && message.wodId) {
-            const receivedWodId = message.wodId;
-
-            updateDisplay(
-              receivedWodId,
-              `¡WOD cargado con éxito! Buscando detalles en Firestore...`
-            );
-
-            context.sendCustomMessage(CUSTOM_NAMESPACE, senderId, {
-              type: "WOD_ACK",
-              status: "RECEIVED",
-              wodId: receivedWodId,
-            });
-          } else {
-            updateDisplay(
-              "Comando desconocido",
-              `Recibido: ${JSON.stringify(message)}`
-            );
-          }
-        } catch (e) {
-          updateDisplay(
-            "Error de mensaje",
-            `Error al procesar el mensaje: ${e.message}`
-          );
-          console.error("Error al procesar mensaje personalizado:", e);
-        }
-      });
-
-      // Iniciar el contexto.
-      context.start({
-        statusText: "WOD Trainer listo para recibir comandos.",
-        disableIdleTimeout: true,
-      });
-
-      console.log(
-        "Cast Receiver Context iniciado. Esperando conexión del remitente."
-      );
-      updateDisplay(
-        "Esperando Documento...",
-        "Aplicación receptora iniciada. Por favor, conéctate desde tu móvil."
-      );
     </script>
   </body>
 </html>
