@@ -27,11 +27,21 @@ export default function LiveWaitScreen() {
 
 import React from "react";
 import { Pressable, Text, View } from "react-native";
-import GoogleCast, { CastButton } from "react-native-google-cast";
+import GoogleCast, { CastButton, CastChannel } from "react-native-google-cast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function MyComponent() {
   const deviceID = "84f575ce05f83ebb9e7721221ffe9ef6";
+
+  const sendMessageFunction = async (message: string) => {
+    const myChannel = await CastChannel.add("urn:x-cast:1F7E2448");
+    try {
+      await myChannel.sendMessage(message);
+      console.log("Message sent:", message);
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
 
   const handleConnect = () => {
     GoogleCast.getDiscoveryManager()
@@ -82,6 +92,12 @@ function MyComponent() {
         <Text className="text-text-primary">DESCONECTAR</Text>
       </Pressable>
       <View style={{ marginTop: 40 }}></View>
+      <Pressable
+        className="border border-primary p-5"
+        onPress={() => sendMessageFunction("este es un mensaje de prueba")}
+      >
+        <Text className="text-text-primary">ENVIAR</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }

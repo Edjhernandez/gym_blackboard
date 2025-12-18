@@ -57,27 +57,39 @@
   <body>
     <div id="message-box">
       <h1>🏋️ WOD Trainer</h1>
-      <p>Receptor de Rutinas de Entrenamiento. ID de Canal: NO SE</p>
+      <p>Receptor de Rutinas de Entrenamiento. PRUEBA 8 nunca para</p>
       <p>WOD ID Recibido:</p>
       <div id="wod-id-display">Esperando Documento...</div>
       <p id="status-message">Conectado. Iniciando el contexto del receptor.</p>
+      <div>LOG DE EVENTOS:</div>
+      <hr />
+      <div id="console">Esperando primer mensaje...</div>
     </div>
 
     <script>
-      // Application ID for channel of custom messages.
-      const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
       const context = cast.framework.CastReceiverContext.getInstance();
 
-      // Listen when the sender requests to close the session
+      // CONFIGURACIÓN PARA EVITAR CIERRE POR INACTIVIDAD
+      // Esto evita que el Chromecast cierre la app si no hay cambios en la pantalla
+      const options = new cast.framework.CastReceiverOptions();
+      //options.maxInactivity = 3600; // Tiempo en segundos (1 hora) antes de cerrar por inactividad
+      // Si quieres que NUNCA se cierre (no recomendado por salud de la TV, pero posible):
+      options.disableIdleTimeout = true;
+
+      // ESTO ES VITAL: Escucha cuando el sender pide cerrar la sesión
       context.addEventListener(
         cast.framework.system.EventType.SENDER_DISCONNECTED,
         (event) => {
+          console.log("Sender desconectado, cerrando...");
+          // Si el sender pidió detener la app, el SDK lo hace solo,
+          // pero si está colgado, podemos forzarlo:
           if (context.getSenders().length === 0) {
             window.close();
           }
         }
       );
-      context.start();
+
+      context.start(options);
     </script>
   </body>
 </html>
