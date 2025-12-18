@@ -57,7 +57,7 @@
   <body>
     <div id="message-box">
       <h1>🏋️ WOD Trainer</h1>
-      <p>Receptor de Rutinas de Entrenamiento. PRUEBA 11</p>
+      <p>Receptor de Rutinas de Entrenamiento. PRUEBA 12</p>
       <p>WOD ID Recibido:</p>
       <div id="wod-id-display">Esperando Documento...</div>
       <p id="status-message">Conectado. Iniciando el contexto del receptor.</p>
@@ -97,8 +97,8 @@
 
         try {
           const displayData =
-            typeof event.data === "string"
-              ? event.data
+            typeof event.data.text === "string"
+              ? event.data.text
               : JSON.stringify(event.data, null, 2);
 
           console.log("Datos para mostrar:", displayData);

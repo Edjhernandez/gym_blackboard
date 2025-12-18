@@ -55,7 +55,11 @@ function MyComponent() {
   const sendMessageFunction = async (message: string) => {
     if (customChannel.current) {
       try {
-        await customChannel.current.sendMessage(message);
+        const payload = {
+          text: message,
+          timestamp: new Date().getTime(),
+        };
+        await customChannel.current.sendMessage(payload);
         console.log("Message sent:", message);
       } catch (error) {
         console.error("Error sending message:", error);
