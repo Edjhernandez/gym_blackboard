@@ -25,7 +25,7 @@ export default function LiveWaitScreen() {
   );
 } */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Pressable, Text, View } from "react-native";
 import GoogleCast, {
   CastButton,
@@ -37,12 +37,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 function MyComponent() {
   const deviceID = "84f575ce05f83ebb9e7721221ffe9ef6";
   const castSession = useCastSession();
+  const customChannel = useRef<CastChannel>(null);
 
   useEffect(() => {
-    console.log("castSession changed:", castSession);
     const configChannel = async () => {
       try {
-        await CastChannel.add("urn:x-cast:1F7E2448");
+        customChannel.current = await CastChannel.add("urn:x-cast:1F7E2448");
       } catch (error) {
         console.error("Error connecting to device:", error);
       }
@@ -52,14 +52,16 @@ function MyComponent() {
     }
   }, [castSession]);
 
-  /* const sendMessageFunction = async (message: string) => {
-    try {
-      await myChannel.sendMessage(message);
-      console.log("Message sent:", message);
-    } catch (error) {
-      console.error("Error sending message:", error);
+  const sendMessageFunction = async (message: string) => {
+    if (customChannel.current) {
+      try {
+        await customChannel.current.sendMessage(message);
+        console.log("Message sent:", message);
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
     }
-  }; */
+  };
 
   const handleDisconnect = () => {
     GoogleCast.getSessionManager()
@@ -84,12 +86,12 @@ function MyComponent() {
         <Text className="text-text-primary">DESCONECTAR</Text>
       </Pressable>
       <View style={{ marginTop: 40 }}></View>
-      {/* <Pressable
+      <Pressable
         className="border border-primary p-5"
         onPress={() => sendMessageFunction("este es un mensaje de prueba")}
       >
         <Text className="text-text-primary">ENVIAR</Text>
-      </Pressable> */}
+      </Pressable>
     </SafeAreaView>
   );
 }
