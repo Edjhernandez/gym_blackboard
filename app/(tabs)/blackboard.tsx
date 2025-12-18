@@ -25,44 +25,41 @@ export default function LiveWaitScreen() {
   );
 } */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Pressable, Text, View } from "react-native";
-import GoogleCast, { CastButton, CastChannel } from "react-native-google-cast";
+import GoogleCast, {
+  CastButton,
+  CastChannel,
+  useCastSession,
+} from "react-native-google-cast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function MyComponent() {
   const deviceID = "84f575ce05f83ebb9e7721221ffe9ef6";
+  const castSession = useCastSession();
 
-  const sendMessageFunction = async (message: string) => {
-    const myChannel = await CastChannel.add("urn:x-cast:1F7E2448");
+  useEffect(() => {
+    console.log("castSession changed:", castSession);
+    const configChannel = async () => {
+      try {
+        await CastChannel.add("urn:x-cast:1F7E2448");
+      } catch (error) {
+        console.error("Error connecting to device:", error);
+      }
+    };
+    if (castSession) {
+      configChannel();
+    }
+  }, [castSession]);
+
+  /* const sendMessageFunction = async (message: string) => {
     try {
       await myChannel.sendMessage(message);
       console.log("Message sent:", message);
     } catch (error) {
       console.error("Error sending message:", error);
     }
-  };
-
-  const handleConnect = () => {
-    GoogleCast.getDiscoveryManager()
-      .getDevices()
-
-      .then((devices) => {
-        console.log(devices);
-      })
-      .catch((error) => {
-        console.error("Error starting session:", error);
-      });
-
-    GoogleCast.getSessionManager()
-      .startSession(deviceID)
-      .then(() => {
-        console.log("Session started successfully");
-      })
-      .catch((error) => {
-        console.error("Error starting session:", error);
-      });
-  };
+  }; */
 
   const handleDisconnect = () => {
     GoogleCast.getSessionManager()
@@ -78,12 +75,7 @@ function MyComponent() {
   return (
     <SafeAreaView className="flex-1 bg-background-primary justify-center items-center">
       <CastButton style={{ width: 48, height: 48, tintColor: "white" }} />
-      <Pressable
-        className="border border-primary p-5 mt-10"
-        onPress={handleConnect}
-      >
-        <Text className="text-text-primary">CONECTAR</Text>
-      </Pressable>
+
       <View style={{ marginTop: 40 }}></View>
       <Pressable
         className="border border-primary p-5"
@@ -92,12 +84,12 @@ function MyComponent() {
         <Text className="text-text-primary">DESCONECTAR</Text>
       </Pressable>
       <View style={{ marginTop: 40 }}></View>
-      <Pressable
+      {/* <Pressable
         className="border border-primary p-5"
         onPress={() => sendMessageFunction("este es un mensaje de prueba")}
       >
         <Text className="text-text-primary">ENVIAR</Text>
-      </Pressable>
+      </Pressable> */}
     </SafeAreaView>
   );
 }
