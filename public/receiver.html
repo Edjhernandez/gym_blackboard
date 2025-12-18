@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WOD Trainer Receiver</title>
-    <!-- 1. CARGA OBLIGATORIA del framework del receptor de Cast -->
+    <!-- Mandatory loading of the Cast receiver framework -->
     <script src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
     <style>
-      /* Estilos básicos y responsivos para la TV */
       body {
         background-color: #0d0d0d;
         color: #e7ebda;
@@ -65,23 +64,19 @@
     </div>
 
     <script>
-      // El Application ID para el canal de mensajes personalizado.
+      // Application ID for channel of custom messages.
       const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
       const context = cast.framework.CastReceiverContext.getInstance();
 
-      // ESTO ES VITAL: Escucha cuando el sender pide cerrar la sesión
+      // Listen when the sender requests to close the session
       context.addEventListener(
         cast.framework.system.EventType.SENDER_DISCONNECTED,
         (event) => {
-          console.log("Sender desconectado, cerrando...");
-          // Si el sender pidió detener la app, el SDK lo hace solo,
-          // pero si está colgado, podemos forzarlo:
           if (context.getSenders().length === 0) {
             window.close();
           }
         }
       );
-
       context.start();
     </script>
   </body>
