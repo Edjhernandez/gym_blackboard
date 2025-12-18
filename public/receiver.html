@@ -67,6 +67,22 @@
     <script>
       // El Application ID para el canal de mensajes personalizado.
       const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
+      const context = cast.framework.CastReceiverContext.getInstance();
+
+      // ESTO ES VITAL: Escucha cuando el sender pide cerrar la sesión
+      context.addEventListener(
+        cast.framework.system.EventType.SENDER_DISCONNECTED,
+        (event) => {
+          console.log("Sender desconectado, cerrando...");
+          // Si el sender pidió detener la app, el SDK lo hace solo,
+          // pero si está colgado, podemos forzarlo:
+          if (context.getSenders().length === 0) {
+            window.close();
+          }
+        }
+      );
+
+      context.start();
     </script>
   </body>
 </html>
