@@ -13,11 +13,11 @@ import {
 } from "react-native-heroicons/solid";
 
 type RoutineActionPopUpProps = {
+  routineId: string;
   routineTitle: string;
   routineDetails: string;
   setVisible?: (visible: boolean) => void;
   visible: boolean;
-  routineId: string;
 };
 
 export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
@@ -27,9 +27,11 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
   const router = useRouter();
 
   const handleProjectToTV = () => {
-    console.log("Projecting routine to TV with ID:", routineId);
     setVisible?.(false);
-    router.push("/(tabs)/blackboard");
+    router.push({
+      pathname: "/(tabs)/blackboard",
+      params: { routineId: routineId },
+    });
   };
 
   return (

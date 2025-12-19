@@ -131,7 +131,10 @@
         "selected_exercises": "Selected Exercises"
     },
     "blackboard_screen": {
-        "no_transmission_message": "The transmission has not yet started"
+        "no_transmission_message": "No routine has been selected, please select one and connect the transmitter.",
+        "title": "Blackboard",
+        "selected_routine_title": "Selected Routine",
+        "connect_device": "Connect device"
     },
     "settings": {
         "appearance": "Appearance",
