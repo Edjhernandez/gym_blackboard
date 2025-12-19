@@ -37,8 +37,8 @@ const home = () => {
         const routinesFromDB: Routine[] = [];
         querySnapshot.forEach((doc) => {
           routinesFromDB.push({
-            id: doc.id,
             ...(doc.data() as Omit<Routine, "id">),
+            id: doc.id,
           });
         });
         setDataFavoriteRoutines(

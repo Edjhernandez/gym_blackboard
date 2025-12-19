@@ -17,14 +17,17 @@ type RoutineActionPopUpProps = {
   routineDetails: string;
   setVisible?: (visible: boolean) => void;
   visible: boolean;
+  routineId: string;
 };
 
 export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
-  const { routineTitle, routineDetails, setVisible, visible } = props;
+  const { routineTitle, routineDetails, setVisible, visible, routineId } =
+    props;
   const { t } = useI18n();
   const router = useRouter();
 
   const handleProjectToTV = () => {
+    console.log("Projecting routine to TV with ID:", routineId);
     setVisible?.(false);
     router.push("/(tabs)/blackboard");
   };
