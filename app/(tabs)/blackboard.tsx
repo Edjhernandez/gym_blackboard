@@ -1,25 +1,3 @@
-/* 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React from "react";
-import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-export default function LiveWaitScreen() {
-  
-
-  return (
-    <SafeAreaView className="flex-1 bg-background-primary justify-center">
-      <View className="flex-1 items-center justify-center px-6">
-        
-
-        <Text className="mt-6 text-2xl font-semibold text-text-primary text-center">
-          {t("blackboard_screen.no_transmission_message")}
-        </Text>
-      </View>
-    </SafeAreaView>
-  );
-} */
-
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Routine } from "@/types/types";
 import { formatRoutineDetails } from "@/utils/formatRoutineDetails";
@@ -42,6 +20,7 @@ function Blackboard() {
   const params = useLocalSearchParams();
   const [routine, setRoutine] = useState<Routine | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isThereSession, setIsThereSession] = useState(false);
 
   useEffect(() => {
     if (params.routineId) {
@@ -71,18 +50,17 @@ function Blackboard() {
     };
     if (castSession) {
       configChannel();
+      setIsThereSession(true);
     }
   }, [castSession]);
 
-  const sendMessageFunction = async (message: string) => {
+  const sendMessageFunction = async (routine: Routine) => {
     if (customChannel.current) {
       try {
         const payload = {
-          text: message,
-          timestamp: new Date().getTime(),
+          text: routine,
         };
         await customChannel.current.sendMessage(payload);
-        console.log("Message sent:", message);
       } catch (error) {
         console.error("Error sending message:", error);
       }
@@ -98,6 +76,7 @@ function Blackboard() {
       .catch((error) => {
         console.error("Error ending session:", error);
       });
+    setIsThereSession(false);
   };
 
   return (
@@ -109,6 +88,7 @@ function Blackboard() {
         </Text>
       </View>
 
+      {/* box for routine selected and cast button */}
       <View className="px-4 mx-4 border-[0.5px] border-text-secondary rounded-lg mb-3 pb-2 w-full h-72">
         {!loading && !routine && (
           <View className="w-full flex-col items-center justify-start py-4">
@@ -147,28 +127,45 @@ function Blackboard() {
                 )}
               </Text>
             </View>
-            <Text className="text-text-primary font-light text-lg mt-5 mb-3">
-              {t("blackboard_screen.connect_device")}
-            </Text>
-            <CastButton style={{ width: 48, height: 48, tintColor: "white" }} />
+            {isThereSession ? (
+              <Text className="text-primary text-2xl font-semibold text-center mt-12">
+                {t("blackboard_screen.device_connected")}
+              </Text>
+            ) : (
+              <View className="w-full flex-col justify-center items-center">
+                <Text className="text-text-primary font-light text-lg mt-5 mb-3">
+                  {t("blackboard_screen.connect_device")}
+                </Text>
+                <CastButton
+                  style={{ width: 48, height: 48, tintColor: "#FFFF00" }}
+                />
+              </View>
+            )}
           </View>
         )}
       </View>
 
-      <View style={{ marginTop: 40 }}></View>
-      <Pressable
-        className="border border-primary p-5"
-        onPress={handleDisconnect}
-      >
-        <Text className="text-text-primary">DESCONECTAR</Text>
-      </Pressable>
-      <View style={{ marginTop: 40 }}></View>
-      <Pressable
-        className="border border-primary p-5"
-        onPress={() => sendMessageFunction("este es un mensaje de prueba")}
-      >
-        <Text className="text-text-primary">ENVIAR</Text>
-      </Pressable>
+      {/* Buttons to disconnect and send routine */}
+      {isThereSession && routine && (
+        <View className="w-full flex-1 flex-col justify-start items-center">
+          <Pressable
+            className="bg-secondary rounded-full p-5 mt-10"
+            onPress={() => sendMessageFunction(routine)}
+          >
+            <Text className="text-text-primary text-xl font-semibold">
+              {t("blackboard_screen.send_button")}
+            </Text>
+          </Pressable>
+          <Pressable
+            className="bg-secondary rounded-full p-5 mt-10"
+            onPress={handleDisconnect}
+          >
+            <Text className="text-text-primary text-xl font-semibold">
+              {t("blackboard_screen.disconnect_button")}
+            </Text>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 }

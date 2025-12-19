@@ -134,7 +134,10 @@
         "no_transmission_message": "No routine has been selected, please select one and connect the transmitter.",
         "title": "Blackboard",
         "selected_routine_title": "Selected Routine",
-        "connect_device": "Connect device"
+        "connect_device": "Connect device",
+        "device_connected": "Device connected",
+        "send_button": "Send routine to TV",
+        "disconnect_button": "Disconnect Device"
     },
     "settings": {
         "appearance": "Appearance",
