@@ -1,5 +1,6 @@
 import { useI18n } from "@/lib/hooks/useI18n";
 import { BlurView } from "expo-blur";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 import {
@@ -21,6 +22,12 @@ type RoutineActionPopUpProps = {
 export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
   const { routineTitle, routineDetails, setVisible, visible } = props;
   const { t } = useI18n();
+  const router = useRouter();
+
+  const handleProjectToTV = () => {
+    setVisible?.(false);
+    router.push("/(tabs)/blackboard");
+  };
 
   return (
     <Modal
@@ -46,12 +53,12 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
           <Text className="text-text-secondary text-sm mb-4">
             {routineDetails}
           </Text>
-          {/* Button 1: Proyectar a TV */}
+          {/* Button 1: project to TV */}
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.project_to_tv_label")}
             className="w-11/12 flex-row items-center justify-center rounded-xl py-3 bg-primary mb-3"
-            onPress={() => setVisible?.(false)}
+            onPress={handleProjectToTV}
           >
             <RssIcon size={25} color="#595959" className="mr-4" />
             <Text className="text-secondary font-extrabold text-xl ml-4">
@@ -59,7 +66,7 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
             </Text>
           </TouchableOpacity>
 
-          {/* Button 2: Editar Rutina */}
+          {/* Button 2: edit routine */}
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.edit_routine_label")}
@@ -72,7 +79,7 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
             </Text>
           </TouchableOpacity>
 
-          {/* Button 3: Duplicar Rutina */}
+          {/* Button 3: duplicate routine */}
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.duplicate_routine_label")}
@@ -85,7 +92,7 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
             </Text>
           </TouchableOpacity>
 
-          {/* Button 4: Eliminar Rutina */}
+          {/* Button 4: delete routine */}
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.delete_routine_label")}
@@ -98,7 +105,7 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
             </Text>
           </TouchableOpacity>
 
-          {/* Button 5: Volver */}
+          {/* Button 5: go back */}
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.go_back_label")}
