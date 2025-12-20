@@ -13,7 +13,6 @@ import GoogleCast, {
 } from "react-native-google-cast";
 
 function Blackboard() {
-  const deviceID = "84f575ce05f83ebb9e7721221ffe9ef6";
   const { t } = useI18n();
   const castSession = useCastSession();
   const customChannel = useRef<CastChannel>(null);
