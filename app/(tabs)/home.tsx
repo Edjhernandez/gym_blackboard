@@ -37,8 +37,8 @@ const home = () => {
         const routinesFromDB: Routine[] = [];
         querySnapshot.forEach((doc) => {
           routinesFromDB.push({
-            id: doc.id,
             ...(doc.data() as Omit<Routine, "id">),
+            id: doc.id,
           });
         });
         setDataFavoriteRoutines(
@@ -54,6 +54,12 @@ const home = () => {
 
     return () => unsubscribe();
   }, []);
+
+  const filteredRoutines = dataFavoriteRoutines.filter(
+    (routine) => routine.category === tab
+  );
+
+  const hasRoutines = filteredRoutines.length > 0;
 
   return (
     <View className="bg-background-primary flex-1 flex-col justify-start w-full items-center px-4">
@@ -133,22 +139,22 @@ const home = () => {
 
       {/* Most Used Routines */}
       <View className="flex-1 px-4 mx-4 border-[0.5px] border-text-secondary rounded-b-lg mb-3 pb-2 w-full">
-        {dataFavoriteRoutines.filter((routine) => routine.category === tab)
-          .length === 0 ? (
+        {loading && (
+          <View className="flex-1 justify-center items-center">
+            <ActivityIndicator size="large" color="#FFFF00" />
+          </View>
+        )}
+
+        {!loading && !hasRoutines && (
           <Text className="text-text-primary text-center mt-10 font-extralight text-xl">
             {t("home.no_favorite_routines")}
           </Text>
-        ) : (
+        )}
+
+        {!loading && hasRoutines && (
           <>
-            {loading && (
-              <View className="flex-1 justify-center items-center">
-                <ActivityIndicator size="large" color="#FFFF00" />
-              </View>
-            )}
             <FlatList
-              data={dataFavoriteRoutines.filter(
-                (routine) => routine.category === tab
-              )}
+              data={filteredRoutines}
               renderItem={({ item }) => (
                 <RoutineCard
                   id={item.id}

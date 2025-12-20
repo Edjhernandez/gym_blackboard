@@ -131,7 +131,13 @@
         "selected_exercises": "Ejercicios Seleccionados"
     },
     "blackboard_screen": {
-        "no_transmission_message": "La transmisión aún no ha comenzado"
+        "no_transmission_message": "No se ha seleccionado ninguna rutina, por favor seleccione una y conecte el transmisor.",
+        "title": "Pizarra",
+        "selected_routine_title": "Rutina Seleccionada",
+        "connect_device": "Conectar dispositivo",
+        "device_connected": "Dispositivo conectado",
+        "send_button": "Enviar rutina al TV",
+        "disconnect_button": "Desconectar dispositivo"
     },
     "settings": {
         "appearance": "Apariencia",

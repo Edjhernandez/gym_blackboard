@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.gymblackboard"
     },
     "web": {
       "bundler": "metro",
@@ -36,10 +37,22 @@
       ],
       "expo-video",
       "expo-font",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "react-native-google-cast",
+        {
+          "androidReceiverAppId": "1F7E2448"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f6b48ee1-29ee-44cf-a8cd-bbc9a7607e7c"
+      }
     }
   }
 }

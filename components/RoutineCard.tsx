@@ -78,6 +78,7 @@ const RoutineCard = (props: TypeRoutineCardProps) => {
         routineTitle={title}
         routineDetails={details}
         setVisible={setVisiblePopUpOptions}
+        routineId={id}
       />
     </>
   );
