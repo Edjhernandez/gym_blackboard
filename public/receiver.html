@@ -16,42 +16,33 @@
     </div>
 
     <script>
-      const consoleElement = document.getElementById("console");
       const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
       const context = cast.framework.CastReceiverContext.getInstance();
 
-      // CONFIGURACIÓN PARA EVITAR CIERRE POR INACTIVIDAD
-      // Esto evita que el Chromecast cierre la app si no hay cambios en la pantalla
+      // Config to avoid auto-shutdown
       const options = new cast.framework.CastReceiverOptions();
-      //options.maxInactivity = 3600; // Tiempo en segundos (1 hora) antes de cerrar por inactividad
-      // Si quieres que NUNCA se cierre (no recomendado por salud de la TV, pero posible):
       options.disableIdleTimeout = true;
       options.resumeSavedSession = true;
 
-      // ESTO ES VITAL: Escucha cuando el sender pide cerrar la sesión
+      // Listener for sender disconnection
       context.addEventListener(
         cast.framework.system.EventType.SENDER_DISCONNECTED,
         (event) => {
           console.log("Sender desconectado, cerrando...");
-          // Si el sender pidió detener la app, el SDK lo hace solo,
-          // pero si está colgado, podemos forzarlo:
           if (context.getSenders().length === 0) {
             window.close();
           }
         }
       );
 
+      // Listener for sent routines
       context.addCustomMessageListener(CUSTOM_NAMESPACE, (event) => {
-        console.log("Mensaje recibido:", event);
-
         try {
           const displayData =
             typeof event.data.text === "string"
               ? event.data.text
               : JSON.stringify(event.data, null, 2);
-
-          console.log("Datos para mostrar:", displayData);
-          consoleElement.textContent = displayData;
+          // here Update the message box with the received routine
         } catch (e) {
           console.error("Error al procesar el mensaje recibido:");
         }
