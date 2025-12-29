@@ -42,3 +42,19 @@ h1 {
   padding: 15px 30px;
   transition: all 0.3s ease-in-out;
 }
+button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #e7ebda;
+  color: #0d0d0d;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.is-hidden {
+  display: none !important;
+}

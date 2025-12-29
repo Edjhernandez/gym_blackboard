@@ -10,14 +10,104 @@
   </head>
   <body>
     <div id="message-box">
-      <img src="./../assets/images/180logo.png" alt="Center Fitness Logo" />
+      <img src="/assets/images/180logo.png" alt="Center Fitness Logo" />
       <h1>Center Fitness</h1>
       <div id="waiting">Esperando rutina</div>
     </div>
+    <div id="routine-container" class="is-hidden"></div>
+    <button id="close-button">boton</button>
 
     <script>
-      const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
-      const context = cast.framework.CastReceiverContext.getInstance();
+      const routineOfTest = {
+        name: "Ruti tres",
+        createdAt: {
+          type: "firestore/timestamp/1.0",
+          seconds: 1765030552,
+          nanoseconds: 259000000,
+        },
+        userId: "y8eDfuav5cOGpBgTDgIbtscreLq2",
+        isFavorite: false,
+        durationMinutes: 22,
+        id: "4FSPlJAU8iBResksFZrw",
+        exercisesAmount: 4,
+        warmup: [
+          {
+            reps: 20,
+            name: "Torso twist",
+            sets: 1,
+            id: "2esO3IceqSAm9asCcKjN",
+            exerciseType: "warmup",
+          },
+        ],
+        category: "functional",
+        blocks: [
+          {
+            exercises: [
+              {
+                id: "Xuv4WBTEr233on8t5FZS",
+                reps: 10,
+                sets: 1,
+                videoURL: "gs://gymblackboard.firebasestorage.app/pushUp.mp4",
+                name: "Push-up",
+                exerciseType: "functional",
+                bodyPart: "chest",
+              },
+              {
+                bodyPart: "back",
+                name: "Remo con liga",
+                reps: 20,
+                sets: 1,
+                exerciseType: "functional",
+                id: "14gtBPclrLYmbwVgsIdd",
+              },
+            ],
+            id: "2cdbfa46-e929-4d1b-af70-b73893bf9823",
+            title: "Bloque 1",
+          },
+          {
+            id: "32203a26-f219-4661-bc33-9757ef454999",
+            title: "Bloque 2",
+            exercises: [
+              {
+                reps: 10,
+                exerciseType: "functional",
+                name: "Plank",
+                videoURL: "gs://gymblackboard.firebasestorage.app/plank.mp4",
+                bodyPart: "abs",
+                sets: 2,
+                id: "9WMDYoM28vYYLIPMy1j8",
+              },
+              {
+                name: "Air squat",
+                id: "ShwBVJHUUhYroKDE5qBr",
+                sets: 1,
+                bodyPart: "legs",
+                reps: 20,
+                exerciseType: "functional",
+              },
+            ],
+          },
+        ],
+      };
+
+      function renderRoutine(routine) {
+        const messageBox = document.getElementById("message-box");
+        const routineContainer = document.getElementById("routine-container");
+        messageBox.classList.add("is-hidden");
+        routineContainer.classList.remove("is-hidden");
+        routineContainer.innerHTML = `
+          <h1>${routine.name}</h1>
+        `;
+      }
+
+      const button = document.getElementById("close-button");
+
+      button.addEventListener("click", () => {
+        console.log("Botón presionado");
+        renderRoutine(routineOfTest);
+      });
+      //const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
+      //const context = cast.framework.CastReceiverContext.getInstance();
 
       // Config to avoid auto-shutdown
       const options = new cast.framework.CastReceiverOptions();
@@ -37,15 +127,16 @@
 
       // Listener for sent routines
       context.addCustomMessageListener(CUSTOM_NAMESPACE, (event) => {
-        try {
-          const displayData =
-            typeof event.data.text === "string"
-              ? event.data.text
-              : JSON.stringify(event.data, null, 2);
-          // here Update the message box with the received routine
-        } catch (e) {
-          console.error("Error al procesar el mensaje recibido:");
+        let routine = event.data.text;
+        if (typeof routine === "string") {
+          try {
+            routine = JSON.parse(routine);
+          } catch (e) {
+            console.error("Error al parsear la rutina recibida:", e);
+            return;
+          }
         }
+        renderRoutine(routine);
       });
 
       context.start(options);
