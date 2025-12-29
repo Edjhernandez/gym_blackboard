@@ -19,75 +19,77 @@
 
     <script>
       const routineOfTest = {
-        name: "Ruti tres",
+        userId: "y8eDfuav5cOGpBgTDgIbtscreLq2",
+        warmup: [
+          {
+            sets: 1,
+            name: "Torso twist",
+            exerciseType: "warmup",
+            reps: 20,
+            id: "2esO3IceqSAm9asCcKjN",
+          },
+        ],
+        durationMinutes: 22,
+        id: "4FSPlJAU8iBResksFZrw",
+        isFavorite: false,
+        blocks: [
+          {
+            title: "Bloque 1",
+            id: "2cdbfa46-e929-4d1b-af70-b73893bf9823",
+            exercises: [
+              {
+                exerciseType: "functional",
+                sets: 1,
+                videoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/pushUp.mp4?alt=media&token=4e4a9401-16bd-4b0d-82bc-12d1aad27005",
+                id: "Xuv4WBTEr233on8t5FZS",
+                reps: 10,
+                name: "Push-up",
+                bodyPart: "chest",
+              },
+              {
+                sets: 1,
+                bodyPart: "back",
+                reps: 20,
+                id: "14gtBPclrLYmbwVgsIdd",
+                name: "Remo con liga",
+                exerciseType: "functional",
+              },
+            ],
+          },
+          {
+            title: "Bloque 2",
+            id: "32203a26-f219-4661-bc33-9757ef454999",
+            exercises: [
+              {
+                sets: 2,
+                name: "Plank",
+                reps: 10,
+                bodyPart: "abs",
+                id: "9WMDYoM28vYYLIPMy1j8",
+                exerciseType: "functional",
+                videoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/plank.mp4?alt=media&token=ddf97c85-190e-4818-a389-fead6a212b90",
+              },
+              {
+                reps: 20,
+                exerciseType: "functional",
+                id: "ShwBVJHUUhYroKDE5qBr",
+                bodyPart: "legs",
+                sets: 1,
+                name: "Air squat",
+              },
+            ],
+          },
+        ],
+        exercisesAmount: 4,
         createdAt: {
           type: "firestore/timestamp/1.0",
           seconds: 1765030552,
           nanoseconds: 259000000,
         },
-        userId: "y8eDfuav5cOGpBgTDgIbtscreLq2",
-        isFavorite: false,
-        durationMinutes: 22,
-        id: "4FSPlJAU8iBResksFZrw",
-        exercisesAmount: 4,
-        warmup: [
-          {
-            reps: 20,
-            name: "Torso twist",
-            sets: 1,
-            id: "2esO3IceqSAm9asCcKjN",
-            exerciseType: "warmup",
-          },
-        ],
+        name: "Ruti tres",
         category: "functional",
-        blocks: [
-          {
-            exercises: [
-              {
-                id: "Xuv4WBTEr233on8t5FZS",
-                reps: 10,
-                sets: 1,
-                videoURL: "gs://gymblackboard.firebasestorage.app/pushUp.mp4",
-                name: "Push-up",
-                exerciseType: "functional",
-                bodyPart: "chest",
-              },
-              {
-                bodyPart: "back",
-                name: "Remo con liga",
-                reps: 20,
-                sets: 1,
-                exerciseType: "functional",
-                id: "14gtBPclrLYmbwVgsIdd",
-              },
-            ],
-            id: "2cdbfa46-e929-4d1b-af70-b73893bf9823",
-            title: "Bloque 1",
-          },
-          {
-            id: "32203a26-f219-4661-bc33-9757ef454999",
-            title: "Bloque 2",
-            exercises: [
-              {
-                reps: 10,
-                exerciseType: "functional",
-                name: "Plank",
-                videoURL: "gs://gymblackboard.firebasestorage.app/plank.mp4",
-                bodyPart: "abs",
-                sets: 2,
-                id: "9WMDYoM28vYYLIPMy1j8",
-              },
-              {
-                name: "Air squat",
-                id: "ShwBVJHUUhYroKDE5qBr",
-                sets: 1,
-                bodyPart: "legs",
-                reps: 20,
-                exerciseType: "functional",
-              },
-            ],
-          },
-        ],
       };
 
       function renderRoutine(routine) {
@@ -97,7 +99,40 @@
         routineContainer.classList.remove("is-hidden");
         routineContainer.innerHTML = `
           <h1>${routine.name}</h1>
-        `;
+          <h2>${routine.exercisesAmount} Ejercicios - ${routine.durationMinutes} minutos</h2>
+          ${routine.blocks
+            .map(
+              (block) => `
+            <div class="block">
+              <h3>${block.title}</h3>
+              <ul>
+                ${block.exercises
+                  .map((exercise) => {
+                    let videoHtml = "";
+                    if (exercise.videoURL) {
+                      videoHtml = `
+                                    <div class="video-container shadow-xl border border-slate-700">
+                                        <video autoplay loop muted playsinline with="20" height="20">
+                                            <source src="${exercise.videoURL}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                `;
+                    }
+                    return `
+                          <li>
+                            <strong>${exercise.name}</strong> - ${exercise.sets} sets de ${exercise.reps} reps
+                            ${videoHtml}
+                          </li>
+                        `;
+                  })
+                  .join("")}
+                  
+                      </ul>
+                    </div>
+                  `
+            )
+            .join("")}
+                `;
       }
 
       const button = document.getElementById("close-button");

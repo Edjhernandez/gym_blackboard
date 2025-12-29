@@ -58,3 +58,14 @@ button {
 .is-hidden {
   display: none !important;
 }
+#routine-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  background-color: #1a1a1a;
+  padding: 40px 60px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  border: 2px solid #e7ebda;
+}

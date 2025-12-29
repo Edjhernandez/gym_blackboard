@@ -28,6 +28,7 @@ function Blackboard() {
           setLoading(true);
           const data = await getRoutineById(params.routineId as string);
           setRoutine(data);
+          console.log("Rutina completa:", JSON.stringify(data, null, 2));
         } catch (err) {
           console.error("Error fetching routine:", err);
         } finally {
