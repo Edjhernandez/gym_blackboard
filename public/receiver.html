@@ -11,7 +11,7 @@
   <body>
     <div id="message-box">
       <img src="/assets/images/180logo.png" alt="Center Fitness Logo" />
-      <h1>Center Fitness</h1>
+      <h1>Gym Fitness Center</h1>
       <div id="waiting">Esperando rutina</div>
     </div>
     <div id="routine-container" class="is-hidden"></div>
@@ -98,6 +98,12 @@
         messageBox.classList.add("is-hidden");
         routineContainer.classList.remove("is-hidden");
         routineContainer.innerHTML = `
+        <div class="routine-header">
+          <div class="logo-container">
+          <img src="/assets/images/180logo.png" alt="Center Fitness Logo" />
+          <h3>GFC</h3>
+          </div>
+          </div>
           <h1>${routine.name}</h1>
           <h2>${routine.exercisesAmount} Ejercicios - ${routine.durationMinutes} minutos</h2>
           ${routine.blocks
