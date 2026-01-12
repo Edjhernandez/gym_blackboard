@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { Block, Exercise, Routine } from "../types/types";
-import { db } from "./../firebaseConfig"; // Asegúrate de importar tu db
+import { db } from "./../firebaseConfig";
 
 const storage = getStorage();
 
@@ -22,7 +22,6 @@ export const getRoutineById = async (
 
           const updatedExercises = await Promise.all(
             block.exercises.map(async (exercise: Exercise) => {
-              // Si el ejercicio tiene una videoUrl y es de tipo storage (gs://)
               if (exercise.videoURL && exercise.videoURL.startsWith("gs://")) {
                 try {
                   const videoRef = ref(storage, exercise.videoURL);

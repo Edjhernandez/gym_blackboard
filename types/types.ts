@@ -28,3 +28,9 @@ export type Routine = {
   userId: string;
   createdAt: Timestamp;
 };
+
+export type User = {
+  id: string;
+  name: string;
+  photoURL: string;
+};

@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/hooks/useI18n";
+import useUserStore from "@/lib/stores/userStore";
 import Octicons from "@expo/vector-icons/Octicons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
@@ -18,6 +19,7 @@ export default function SettingsScreen() {
   const [lang, setLang] = useState<Lang>("es");
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+  const { user } = useUserStore();
 
   const handleSignOut = async () => {
     setLogoutModalVisible(false);
@@ -34,7 +36,7 @@ export default function SettingsScreen() {
       {/* Header */}
       <View className="mt-5 rounded-lg bg-background-secondary p-3 flex-row items-center">
         <Image
-          source={require("../../assets/images/coach.png")}
+          source={user.photoURL}
           style={{ width: 70, height: 70 }}
           className="rounded-full"
         />
@@ -44,7 +46,7 @@ export default function SettingsScreen() {
             {t("common.coach")}
           </Text>
           <Text className="text-xl text-text-primary font-bold">
-            Eduardo Hernandez
+            {user.name}
           </Text>
         </View>
       </View>
