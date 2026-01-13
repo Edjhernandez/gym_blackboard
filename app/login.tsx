@@ -40,15 +40,13 @@ export default function LoginScreen() {
         email,
         password
       );
-      const getUser = await getUserById(userCredential.user.uid);
-      if (getUser) {
-        setUser(getUser);
-        console.log("Logged in user:", user);
+      const getUserData = await getUserById(userCredential.user.uid);
+      if (getUserData) {
+        setUser(getUserData);
       }
 
       router.push("/(tabs)/home");
     } catch (err) {
-      //console.error(err);
       setIsErrorModalVisible(true);
     } finally {
       setLoading(false);

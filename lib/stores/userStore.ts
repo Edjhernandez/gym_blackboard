@@ -1,5 +1,6 @@
 import { User } from "@/types/types";
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 type UserStore = {
   user: User;
@@ -13,19 +14,16 @@ const initialUser: User = {
   photoURL: "",
 };
 
-const useUserStore = create<UserStore>()((set) => ({
-  user: initialUser,
+const useUserStore = create<UserStore>()(
+  persist(
+    (set) => ({
+      user: initialUser,
+      resetUser: () => set({ user: initialUser }),
 
-  resetUser: () => set({ user: initialUser }),
-
-  setUser: (user) =>
-    set({
-      user: {
-        id: user.id,
-        name: user.name,
-        photoURL: user.photoURL,
-      },
+      setUser: (user: User) => set({ user }),
     }),
-}));
+    { name: "user-storage" }
+  )
+);
 
 export default useUserStore;

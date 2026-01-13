@@ -26,11 +26,9 @@ const home = () => {
   >([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const { user } = useUserStore();
-  // console.log("User in home screen:", user);
 
   useEffect(() => {
     const q = query(collection(db, "routines"), where("userId", "==", user.id));
-
     const unsubscribe = onSnapshot(
       q,
       (querySnapshot) => {
@@ -41,6 +39,7 @@ const home = () => {
             id: doc.id,
           });
         });
+
         setDataFavoriteRoutines(
           routinesFromDB.filter((routine) => routine.isFavorite)
         );
