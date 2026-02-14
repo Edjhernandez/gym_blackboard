@@ -19,77 +19,107 @@
 
     <script>
       const routineOfTest = {
-        userId: "y8eDfuav5cOGpBgTDgIbtscreLq2",
+        durationMinutes: 36,
+        category: "functional",
+        name: "Nueva rutina",
+        userId: "JcXXssklDiUbZqIn2f6paYa3mwn1",
+        coachPhotoURL:
+          "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/profilePhotos%2FmoisesLopez.png?alt=media&token=12fe51bb-9ee0-44e3-acb0-712e7e554ad6",
         warmup: [
           {
-            sets: 1,
-            name: "Torso twist",
+            name: "Jumping Jacks",
+            id: "pJuBnoeylFNqZ8rCsZH4",
             exerciseType: "warmup",
+            sets: 2,
             reps: 20,
-            id: "2esO3IceqSAm9asCcKjN",
+          },
+          {
+            reps: 20,
+            id: "scntzjTW9G0p22SRqAse",
+            name: "Balanceo de piernas",
+            sets: 2,
+            exerciseType: "warmup",
           },
         ],
-        durationMinutes: 22,
-        id: "4FSPlJAU8iBResksFZrw",
-        isFavorite: false,
         blocks: [
           {
             title: "Bloque 1",
-            id: "2cdbfa46-e929-4d1b-af70-b73893bf9823",
             exercises: [
               {
                 exerciseType: "functional",
-                sets: 1,
-                videoURL:
-                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/pushUp.mp4?alt=media&token=4e4a9401-16bd-4b0d-82bc-12d1aad27005",
-                id: "Xuv4WBTEr233on8t5FZS",
-                reps: 10,
-                name: "Push-up",
                 bodyPart: "chest",
+                sets: 4,
+                id: "Xuv4WBTEr233on8t5FZS",
+                name: "Push-up",
+                videoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/exercises%2FpushUp.mp4?alt=media&token=b19b89b3-f0a9-4eb1-9f44-58ee32316754",
+                reps: 20,
               },
               {
-                sets: 1,
-                bodyPart: "back",
-                reps: 20,
-                id: "14gtBPclrLYmbwVgsIdd",
-                name: "Remo con liga",
                 exerciseType: "functional",
+                bodyPart: "chest",
+                sets: 4,
+                id: "Xuv4WBTEr233on8t5FZS",
+                name: "Push-up",
+                videoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/exercises%2FpushUp.mp4?alt=media&token=b19b89b3-f0a9-4eb1-9f44-58ee32316754",
+                reps: 20,
+              },
+              {
+                sets: 4,
+                bodyPart: "back",
+                id: "14gtBPclrLYmbwVgsIdd",
+                reps: 50,
+                exerciseType: "functional",
+                name: "Remo con liga",
               },
             ],
+            id: "1285bf39-c4f0-4b3c-9f80-96c2cbbf5f88",
           },
           {
-            title: "Bloque 2",
-            id: "32203a26-f219-4661-bc33-9757ef454999",
+            title: "Bloque 1",
             exercises: [
               {
-                sets: 2,
-                name: "Plank",
-                reps: 10,
-                bodyPart: "abs",
-                id: "9WMDYoM28vYYLIPMy1j8",
                 exerciseType: "functional",
+                bodyPart: "chest",
+                sets: 4,
+                id: "Xuv4WBTEr233on8t5FZS",
+                name: "Push-up",
                 videoURL:
-                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/plank.mp4?alt=media&token=ddf97c85-190e-4818-a389-fead6a212b90",
+                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/exercises%2FpushUp.mp4?alt=media&token=b19b89b3-f0a9-4eb1-9f44-58ee32316754",
+                reps: 20,
               },
               {
-                reps: 20,
                 exerciseType: "functional",
-                id: "ShwBVJHUUhYroKDE5qBr",
-                bodyPart: "legs",
-                sets: 1,
-                name: "Air squat",
+                bodyPart: "chest",
+                sets: 4,
+                id: "Xuv4WBTEr233on8t5FZS",
+                name: "Push-up",
+                videoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/exercises%2FpushUp.mp4?alt=media&token=b19b89b3-f0a9-4eb1-9f44-58ee32316754",
+                reps: 20,
+              },
+              {
+                sets: 4,
+                bodyPart: "back",
+                id: "14gtBPclrLYmbwVgsIdd",
+                reps: 50,
+                exerciseType: "functional",
+                name: "Remo con liga",
               },
             ],
+            id: "1285bf39-c4f0-4b3c-9f80-96c2cbbf5f88",
           },
         ],
         exercisesAmount: 4,
         createdAt: {
           type: "firestore/timestamp/1.0",
-          seconds: 1765030552,
-          nanoseconds: 259000000,
+          seconds: 1770991953,
+          nanoseconds: 882000000,
         },
-        name: "Ruti tres",
-        category: "functional",
+        coachName: "Moisés López",
+        isFavorite: false,
+        id: "qDTUpI1CvTA3P3xZEkcp",
       };
 
       function renderRoutine(routine) {
@@ -99,13 +129,32 @@
         routineContainer.classList.remove("is-hidden");
         routineContainer.innerHTML = `
         <div class="routine-header">
-          <div class="logo-container">
+            <div class="coach-info">
+              <img src="${routine.coachPhotoURL}" alt="${routine.coachName}" class="coach-photo" />
+              <span class="coach-name">${routine.coachName}</span>
+            </div>
           <img src="/assets/images/180logo.png" alt="Center Fitness Logo" />
-          <h3>GFC</h3>
-          </div>
-          </div>
+        </div>
+
+        
           <h1>${routine.name}</h1>
           <h2>${routine.exercisesAmount} Ejercicios - ${routine.durationMinutes} minutos</h2>
+          <div class="warmup-section">
+            <h2>Acondicionamiento</h2>
+            <ul>
+              ${routine.warmup
+                .map(
+                  (exercise) => `
+                  <li>
+                    <div>
+                      <strong>${exercise.name}</strong> - ${exercise.sets} X ${exercise.reps} reps
+                    </div>
+                  </li>
+                `,
+                )
+                .join("")}
+            </ul>
+          </div>
           ${routine.blocks
             .map(
               (block) => `
@@ -117,8 +166,8 @@
                     let videoHtml = "";
                     if (exercise.videoURL) {
                       videoHtml = `
-                                    <div class="video-container shadow-xl border border-slate-700">
-                                        <video autoplay loop muted playsinline with="20" height="20">
+                                    <div class="video-container">
+                                        <video autoplay loop muted playsinline>
                                             <source src="${exercise.videoURL}" type="video/mp4">
                                         </video>
                                     </div>
@@ -126,8 +175,13 @@
                     }
                     return `
                           <li>
-                            <strong>${exercise.name}</strong> - ${exercise.sets} sets de ${exercise.reps} reps
-                            ${videoHtml}
+                            <div>
+                              <strong>${exercise.name}</strong> - ${exercise.sets} X ${exercise.reps} reps
+                              </div>
+                            <div>
+                              
+                              ${videoHtml}
+                              </div>
                           </li>
                         `;
                   })
@@ -135,7 +189,7 @@
                   
                       </ul>
                     </div>
-                  `
+                  `,
             )
             .join("")}
                 `;
@@ -163,7 +217,7 @@
           if (context.getSenders().length === 0) {
             window.close();
           }
-        }
+        },
       );
 
       // Listener for sent routines

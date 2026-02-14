@@ -22,12 +22,14 @@ function Blackboard() {
   const [isThereSession, setIsThereSession] = useState(false);
 
   useEffect(() => {
+    console.log("Params received:", params);
     if (params.routineId) {
       const fetchRoutine = async () => {
         try {
           setLoading(true);
           const data = await getRoutineById(params.routineId as string);
           setRoutine(data);
+          console.log("pasa por aqui");
           console.log("Rutina completa:", JSON.stringify(data, null, 2));
         } catch (err) {
           console.error("Error fetching routine:", err);

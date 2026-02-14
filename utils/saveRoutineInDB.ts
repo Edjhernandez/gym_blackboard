@@ -1,3 +1,4 @@
+import useUserStore from "@/lib/stores/userStore";
 import { getAuth } from "firebase/auth";
 import {
   addDoc,
@@ -11,6 +12,8 @@ import { calculateTotalExercises } from "./amountOfExercises";
 import { estimateRoutineDuration } from "./routineTime";
 
 export const saveNewRoutine = async (routine: Routine) => {
+  const storeState = useUserStore.getState();
+  const user = storeState.user;
   try {
     const auth = getAuth();
     const currentUser = auth.currentUser;
@@ -27,6 +30,8 @@ export const saveNewRoutine = async (routine: Routine) => {
       createdAt: serverTimestamp() as Timestamp,
       exercisesAmount: calculateTotalExercises(routine.blocks),
       durationMinutes: estimateRoutineDuration(routine),
+      coachName: user.name,
+      coachPhotoURL: user.photoURL,
     };
 
     await addDoc(collection(db, "routines"), newRoutine);
