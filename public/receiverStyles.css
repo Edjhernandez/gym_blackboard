@@ -71,7 +71,7 @@ button {
 
 #routine-container {
   position: absolute;
-  width: 50vw;
+  width: 54vw; /*TV 42"*/
   min-width: 42vw;
   max-width: 95vw;
   top: 0;
@@ -228,12 +228,12 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.25vw;
+  border-radius: 0.5vw;
   overflow: hidden;
 }
 
 .video-container video {
-  width: 8.5vw;
+  width: 10vw;
   height: auto;
-  border-radius: 0.25vw;
+  border-radius: 0.5vw;
 }
