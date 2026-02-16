@@ -15,7 +15,7 @@
       <div id="waiting">Esperando rutina</div>
     </div>
     <div id="routine-container" class="is-hidden"></div>
-    <button id="close-button">boton</button>
+    <!-- <button id="close-button">boton</button> -->
 
     <script>
       const routineOfTest = {
@@ -127,6 +127,7 @@
         const routineContainer = document.getElementById("routine-container");
         messageBox.classList.add("is-hidden");
         routineContainer.classList.remove("is-hidden");
+
         routineContainer.innerHTML = `
         <div class="routine-header">
             <div class="coach-info">
@@ -195,14 +196,13 @@
                 `;
       }
 
-      const button = document.getElementById("close-button");
-
+      /* const button = document.getElementById("close-button");
       button.addEventListener("click", () => {
-        console.log("Botón presionado");
         renderRoutine(routineOfTest);
-      });
-      //const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
-      //const context = cast.framework.CastReceiverContext.getInstance();
+      }); */
+
+      const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
+      const context = cast.framework.CastReceiverContext.getInstance();
 
       // Config to avoid auto-shutdown
       const options = new cast.framework.CastReceiverOptions();

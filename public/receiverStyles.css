@@ -71,8 +71,8 @@ button {
 
 #routine-container {
   position: absolute;
-  width: 42vw;
-  min-width: 30vw;
+  width: 50vw;
+  min-width: 42vw;
   max-width: 95vw;
   top: 0;
   right: 0;

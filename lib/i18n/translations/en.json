@@ -160,6 +160,9 @@
         "empty_name_error": "The routine name cannot be empty or contain invalid characters, only letters and spaces are allowed. Please enter a valid name before saving.",
         "invalid_input_error": "The routine contains invalid input. Please ensure all sets and reps are positive integers before saving.",
         "empty_warmup_exercises": "The warm-up section cannot be empty. Please add at least one exercise to the warm-up before saving.",
-        "empty_block_exercises": "The block section cannot be empty. Please add at least one exercise to the block before saving."
+        "empty_block_exercises": "The block section cannot be empty. Please add at least one exercise to the block before saving.",
+        "delete_routine_message": "Are you sure you want to delete this routine? This action cannot be undone.",
+        "affirmative_button": "Yes",
+        "negative_button": "No"
     }
 }

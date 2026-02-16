@@ -160,6 +160,9 @@
         "empty_name_error": "El nombre de la rutina no puede estar vacío ni contener caracteres no permitidos, solo letras y espacios. Por favor, ingresa un nombre válido antes de guardar.",
         "invalid_input_error": "La rutina contiene datos no válidos. Por favor, asegúrate de que todas las series y repeticiones sean números enteros positivos antes de guardar.",
         "empty_warmup_exercises": "La sección de calentamiento no puede estar vacía. Por favor, agrega al menos un ejercicio al calentamiento antes de guardar.",
-        "empty_block_exercises": "La sección de bloques no puede estar vacía. Por favor, agrega al menos un ejercicio al bloque antes de guardar."
+        "empty_block_exercises": "La sección de bloques no puede estar vacía. Por favor, agrega al menos un ejercicio al bloque antes de guardar.",
+        "delete_routine_message": "¿Estás seguro de que deseas eliminar esta rutina? Esta acción no se puede deshacer.",
+        "affirmative_button": "Sí",
+        "negative_button": "No"
     }
 }

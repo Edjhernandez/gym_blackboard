@@ -6,7 +6,7 @@ import { db } from "./../firebaseConfig";
 const storage = getStorage();
 
 export const getRoutineById = async (
-  routineId: string
+  routineId: string,
 ): Promise<Routine | null> => {
   try {
     const routineRef = doc(db, "routines", routineId);
@@ -30,17 +30,17 @@ export const getRoutineById = async (
                 } catch (vError) {
                   console.error(
                     `Error descargando video para ${exercise.name}:`,
-                    vError
+                    vError,
                   );
                   return exercise;
                 }
               }
               return exercise;
-            })
+            }),
           );
 
           return { ...block, exercises: updatedExercises };
-        })
+        }),
       );
 
       return {
