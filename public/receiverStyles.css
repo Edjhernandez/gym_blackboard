@@ -71,7 +71,7 @@ button {
 
 #routine-container {
   position: absolute;
-  width: 51vw; /*TV 42"*/
+  width: 52.5vw; /*TV 42"*/
   min-width: 42vw;
   max-width: 95vw;
   top: 0;
