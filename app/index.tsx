@@ -22,12 +22,12 @@ export default function Index() {
         const getUserData = await getUserById(firebaseUser.uid);
         if (getUserData) {
           setUser(getUserData);
+          setIsThereUser(true);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
 
-      setIsThereUser(true);
       if (initializing) {
         setInitializing(false);
       }
