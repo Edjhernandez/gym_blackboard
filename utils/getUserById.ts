@@ -33,7 +33,7 @@ export const getUserById = async (userId: string): Promise<User | null> => {
       photoURL: finalPhotoURL,
     };
   } catch (error) {
-    console.error("Error getting routine:", error);
+    console.error("Error getting user:", error);
     throw error;
   }
 };
