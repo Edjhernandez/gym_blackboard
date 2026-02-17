@@ -27,4 +27,12 @@ export type Routine = {
   blocks: Block[];
   userId: string;
   createdAt: Timestamp;
+  coachName: string;
+  coachPhotoURL: string;
+};
+
+export type User = {
+  id: string;
+  name: string;
+  photoURL: string;
 };

@@ -1,6 +1,8 @@
 import InvalidCredentialsModal from "@/components/InvalidCredentialsModal";
 import { images } from "@/constants/images";
 import { useI18n } from "@/lib/hooks/useI18n";
+import useUserStore from "@/lib/stores/userStore";
+import { getUserById } from "@/utils/getUserById";
 import { Image } from "expo-image";
 import { Link, useRouter } from "expo-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -22,9 +24,9 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  const { setUser } = useUserStore();
 
   const onSubmit = async () => {
-    // TODO: replace this stub with real auth (Firebase / Supabase) integration
     setLoading(true);
     if (!email || !password) {
       setLoading(false);
@@ -36,14 +38,15 @@ export default function LoginScreen() {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
-      const user = userCredential.user;
-      console.log("the user is logged in and authenticated:", user.uid);
+      const getUserData = await getUserById(userCredential.user.uid);
+      if (getUserData) {
+        setUser(getUserData);
+      }
 
       router.push("/(tabs)/home");
     } catch (err) {
-      //console.error(err);
       setIsErrorModalVisible(true);
     } finally {
       setLoading(false);

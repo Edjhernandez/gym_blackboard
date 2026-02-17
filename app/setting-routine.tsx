@@ -33,11 +33,11 @@ export default function SettingRoutineScreen() {
   const handleSave = () => {
     //validate any sets or reps is invalid into warmup
     const isThereAnyInvalidSetsOrRepsIntoWarmup = hasInvalidSetsOrRepsInput(
-      routine.warmup
+      routine.warmup,
     );
     //validate any sets or reps is invalid into blocks
     const isThereAnyInvalidSetsOrRepsIntoBlocks = hasInvalidSetsOrRepsInput(
-      routine.blocks.flatMap((block) => block.exercises)
+      routine.blocks.flatMap((block) => block.exercises),
     );
 
     //validate name is not empty and only letters and spaces
@@ -69,7 +69,7 @@ export default function SettingRoutineScreen() {
 
   const handleCategoryChange = useCategorySelector(
     setCategory,
-    setRoutineCategory
+    setRoutineCategory,
   );
 
   return (

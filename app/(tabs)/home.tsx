@@ -1,6 +1,7 @@
 import RoutineCard from "@/components/RoutineCard";
-import { auth, db } from "@/firebaseConfig";
+import { db } from "@/firebaseConfig";
 import { useI18n } from "@/lib/hooks/useI18n";
+import useUserStore from "@/lib/stores/userStore";
 import { Routine } from "@/types/types";
 import { formatRoutineDetails } from "@/utils/formatRoutineDetails";
 import { Image } from "expo-image";
@@ -24,13 +25,10 @@ const home = () => {
     Routine[]
   >([]);
   const [loading, setLoading] = React.useState<boolean>(true);
+  const { user } = useUserStore();
 
   useEffect(() => {
-    const q = query(
-      collection(db, "routines"),
-      where("userId", "==", auth.currentUser?.uid)
-    );
-
+    const q = query(collection(db, "routines"), where("userId", "==", user.id));
     const unsubscribe = onSnapshot(
       q,
       (querySnapshot) => {
@@ -41,22 +39,23 @@ const home = () => {
             id: doc.id,
           });
         });
+
         setDataFavoriteRoutines(
-          routinesFromDB.filter((routine) => routine.isFavorite)
+          routinesFromDB.filter((routine) => routine.isFavorite),
         );
         setLoading(false);
       },
       (error) => {
         console.error("Error fetching routines:", error);
         setLoading(false);
-      }
+      },
     );
 
     return () => unsubscribe();
   }, []);
 
   const filteredRoutines = dataFavoriteRoutines.filter(
-    (routine) => routine.category === tab
+    (routine) => routine.category === tab,
   );
 
   const hasRoutines = filteredRoutines.length > 0;
@@ -70,12 +69,14 @@ const home = () => {
             {t("home.greeting")}
           </Text>
           <Text className="text-text-primary text-2xl font-semibold ml-3">
-            Nombre usuario
+            {user.name && user.name.trim().length > 0
+              ? user.name
+              : "Loading..."}
           </Text>
         </View>
 
         <Image
-          source={require("../../assets/images/coach.png")}
+          source={user.photoURL}
           style={{ width: 70, height: 70 }}
           className="rounded-full"
         />
@@ -162,7 +163,7 @@ const home = () => {
                   details={formatRoutineDetails(
                     t,
                     item.exercisesAmount,
-                    item.durationMinutes
+                    item.durationMinutes,
                   )}
                   isFavorite={item.isFavorite}
                 />

@@ -28,6 +28,7 @@ function Blackboard() {
           setLoading(true);
           const data = await getRoutineById(params.routineId as string);
           setRoutine(data);
+          /* console.log(JSON.stringify(data, null, 2)); */
         } catch (err) {
           console.error("Error fetching routine:", err);
         } finally {
@@ -122,7 +123,7 @@ function Blackboard() {
                 {formatRoutineDetails(
                   t,
                   routine?.exercisesAmount,
-                  routine?.durationMinutes
+                  routine?.durationMinutes,
                 )}
               </Text>
             </View>

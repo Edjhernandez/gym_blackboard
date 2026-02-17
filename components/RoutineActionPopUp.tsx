@@ -1,4 +1,5 @@
 import { useI18n } from "@/lib/hooks/useI18n";
+import { deleteRoutineById } from "@/utils/deleteRoutineInDB";
 import { BlurView } from "expo-blur";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -11,6 +12,7 @@ import {
   RssIcon,
   TrashIcon,
 } from "react-native-heroicons/solid";
+import SecurityQuestionBeforeActionModal from "./SecurityQuestionBeforeActionModal";
 
 type RoutineActionPopUpProps = {
   routineId: string;
@@ -25,6 +27,8 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
     props;
   const { t } = useI18n();
   const router = useRouter();
+  const [showDeleteConfirmation, setShowDeleteConfirmation] =
+    React.useState(false);
 
   const handleProjectToTV = () => {
     setVisible?.(false);
@@ -32,6 +36,11 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
       pathname: "/(tabs)/blackboard",
       params: { routineId: routineId },
     });
+  };
+
+  const handleDeleteRoutine = async (routineId: string) => {
+    await deleteRoutineById(routineId);
+    setVisible?.(false);
   };
 
   return (
@@ -102,7 +111,7 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
             accessibilityRole="button"
             accessibilityLabel={t("accessibility.delete_routine_label")}
             className="w-11/12 flex-row items-center justify-center rounded-xl py-3 bg-primary mb-3"
-            onPress={() => setVisible?.(false)}
+            onPress={() => setShowDeleteConfirmation(true)}
           >
             <TrashIcon size={25} color="#595959" className="mr-4" />
             <Text className="text-secondary font-extrabold text-xl ml-4">
@@ -123,6 +132,12 @@ export default function RoutineActionPopUp(props: RoutineActionPopUpProps) {
             </Text>
           </TouchableOpacity>
         </View>
+        <SecurityQuestionBeforeActionModal
+          visible={showDeleteConfirmation}
+          affirmative={() => handleDeleteRoutine(routineId)}
+          negative={() => setShowDeleteConfirmation(false)}
+          message={t("alerts.delete_routine_message")}
+        />
       </BlurView>
     </Modal>
   );
