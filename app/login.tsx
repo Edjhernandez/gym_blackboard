@@ -24,7 +24,7 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
-  const { setUser, user } = useUserStore();
+  const { setUser } = useUserStore();
 
   const onSubmit = async () => {
     setLoading(true);
@@ -38,7 +38,7 @@ export default function LoginScreen() {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       const getUserData = await getUserById(userCredential.user.uid);
       if (getUserData) {
