@@ -11,7 +11,7 @@ export const getUserById = async (userId: string): Promise<User | null> => {
     const userSnap = await getDoc(userRef);
 
     if (!userSnap.exists()) {
-      console.log("Don't find user with ID:", userId);
+      console.log("Can't find user with ID:", userId);
       return null;
     }
 

@@ -41,21 +41,21 @@ const home = () => {
         });
 
         setDataFavoriteRoutines(
-          routinesFromDB.filter((routine) => routine.isFavorite)
+          routinesFromDB.filter((routine) => routine.isFavorite),
         );
         setLoading(false);
       },
       (error) => {
         console.error("Error fetching routines:", error);
         setLoading(false);
-      }
+      },
     );
 
     return () => unsubscribe();
   }, []);
 
   const filteredRoutines = dataFavoriteRoutines.filter(
-    (routine) => routine.category === tab
+    (routine) => routine.category === tab,
   );
 
   const hasRoutines = filteredRoutines.length > 0;
@@ -69,7 +69,9 @@ const home = () => {
             {t("home.greeting")}
           </Text>
           <Text className="text-text-primary text-2xl font-semibold ml-3">
-            {user.name}
+            {user.name && user.name.trim().length > 0
+              ? user.name
+              : "Loading..."}
           </Text>
         </View>
 
@@ -161,7 +163,7 @@ const home = () => {
                   details={formatRoutineDetails(
                     t,
                     item.exercisesAmount,
-                    item.durationMinutes
+                    item.durationMinutes,
                   )}
                   isFavorite={item.isFavorite}
                 />

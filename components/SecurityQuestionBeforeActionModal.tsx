@@ -26,7 +26,7 @@ const SecurityQuestionBeforeActionModal: React.FC<
         <View className="w-11/12 max-w-sm bg-background-secondary rounded-lg p-6 items-center border-[0.5px] border-text-primary">
           {/* Icon */}
           <View className="w-20 h-20 bg-primary rounded-full items-center justify-center border-2 border-background-primary mb-4">
-            {<ExclamationCircleIcon size={48} color="black" />}
+            <ExclamationCircleIcon size={48} color="black" />
           </View>
 
           {/* Message */}
