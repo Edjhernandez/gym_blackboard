@@ -18,7 +18,7 @@
     <!-- <button id="close-button">boton</button> -->
 
     <script>
-      function renderRoutine(routine) {
+      /* function renderRoutine(routine) {
         const messageBox = document.getElementById("message-box");
         const routineContainer = document.getElementById("routine-container");
         messageBox.classList.add("is-hidden");
@@ -52,6 +52,7 @@
                 .join("")}
             </ul>
           </div>
+          
           ${routine.blocks
             .map(
               (block) => `
@@ -90,12 +91,147 @@
             )
             .join("")}
                 `;
-      }
+      } */
 
       /* const button = document.getElementById("close-button");
       button.addEventListener("click", () => {
         renderRoutine(routineOfTest);
       }); */
+
+      function createVideoElement(videoURL) {
+        const videoCont = document.createElement("div");
+        videoCont.className = "video-container";
+
+        const video = document.createElement("video");
+        video.autoplay = true;
+        video.loop = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute("preload", "auto");
+        video.style.width = "100%";
+        video.style.height = "auto";
+
+        // Manejo de errores de video
+        video.onerror = () => {
+          videoCont.innerHTML = "";
+          const errorDiv = document.createElement("div");
+          errorDiv.className = "error-placeholder";
+          errorDiv.textContent = "ERROR VIDEO";
+          videoCont.appendChild(errorDiv);
+        };
+
+        const source = document.createElement("source");
+        source.src = videoURL;
+        source.type = "video/mp4";
+
+        video.appendChild(source);
+        videoCont.appendChild(video);
+        return videoCont;
+      }
+
+      function createExerciseItem(ex) {
+        const li = document.createElement("li");
+
+        const infoDiv = document.createElement("div");
+        const strong = document.createElement("strong");
+        strong.textContent = ex.name || "Ejercicio";
+
+        infoDiv.appendChild(strong);
+        infoDiv.append(` - ${ex.sets || 0} X ${ex.reps || 0} reps`);
+
+        li.appendChild(infoDiv);
+
+        if (ex.videoURL) {
+          const videoDiv = document.createElement("div");
+          videoDiv.appendChild(createVideoElement(ex.videoURL));
+          li.appendChild(videoDiv);
+        }
+
+        return li;
+      }
+
+      function renderRoutine(routine) {
+        const messageBox = document.getElementById("message-box");
+        const routineContainer = document.getElementById("routine-container");
+
+        messageBox.classList.add("is-hidden");
+        routineContainer.classList.remove("is-hidden");
+        routineContainer.innerHTML = ""; // Limpieza inicial única
+
+        // 1. Header de la Rutina
+        const header = document.createElement("div");
+        header.className = "routine-header";
+
+        const coachInfo = document.createElement("div");
+        coachInfo.className = "coach-info";
+
+        const coachImg = document.createElement("img");
+        coachImg.src = routine.coachPhotoURL || "";
+        coachImg.alt = routine.coachName || "Coach";
+        coachImg.className = "coach-photo";
+
+        const coachName = document.createElement("span");
+        coachName.className = "coach-name";
+        coachName.textContent = routine.coachName || "";
+
+        coachInfo.appendChild(coachImg);
+        coachInfo.appendChild(coachName);
+
+        const logoImg = document.createElement("img");
+        logoImg.src = "/assets/images/180logo.png";
+        logoImg.alt = "Center Fitness Logo";
+
+        header.appendChild(coachInfo);
+        header.appendChild(logoImg);
+        routineContainer.appendChild(header);
+
+        // 2. Títulos Principales
+        const h1 = document.createElement("h1");
+        h1.textContent = routine.name || "RUTINA";
+
+        const h2Stats = document.createElement("h2");
+        h2Stats.textContent = `${routine.exercisesAmount || 0} Ejercicios - ${routine.durationMinutes || 0} minutos`;
+
+        routineContainer.appendChild(h1);
+        routineContainer.appendChild(h2Stats);
+
+        // 3. Sección de Acondicionamiento (Warmup)
+        if (routine.warmup && routine.warmup.length > 0) {
+          const warmupSection = document.createElement("div");
+          warmupSection.className = "warmup-section";
+
+          const warmupTitle = document.createElement("h2");
+          warmupTitle.textContent = "Acondicionamiento";
+          warmupSection.appendChild(warmupTitle);
+
+          const ul = document.createElement("ul");
+          routine.warmup.forEach((ex) => {
+            ul.appendChild(createExerciseItem(ex));
+          });
+          warmupSection.appendChild(ul);
+          routineContainer.appendChild(warmupSection);
+        }
+
+        // 4. Bloques de ejercicios
+        if (routine.blocks) {
+          routine.blocks.forEach((block) => {
+            const blockDiv = document.createElement("div");
+            blockDiv.className = "block";
+
+            const blockTitle = document.createElement("h3");
+            blockTitle.textContent = block.title || "BLOQUE";
+            blockDiv.appendChild(blockTitle);
+
+            const ul = document.createElement("ul");
+            block.exercises?.forEach((ex) => {
+              ul.appendChild(createExerciseItem(ex));
+            });
+
+            blockDiv.appendChild(ul);
+            routineContainer.appendChild(blockDiv);
+          });
+        }
+      }
 
       const CUSTOM_NAMESPACE = "urn:x-cast:1F7E2448";
       const context = cast.framework.CastReceiverContext.getInstance();
