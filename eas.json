@@ -11,6 +11,13 @@
         "image": "latest"
       }
     },
+    "expo-go": {
+      "developmentClient": false,
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
     "preview": {
       "distribution": "internal",
       "developmentClient": false,
