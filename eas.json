@@ -14,14 +14,16 @@
     },
     "preview": {
       "channel": "preview",
+      "distribution": "internal",
+      "packageManager": "npm",
       "android": {
-        "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "apk"
       }
     },
     "production": {
       "channel": "production",
       "autoIncrement": true,
+      "packageManager": "npm",
       "android": {
         "buildType": "app-bundle"
       }
