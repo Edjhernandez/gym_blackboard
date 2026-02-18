@@ -11,30 +11,11 @@
         "image": "latest"
       }
     },
-    "expo-go": {
-      "developmentClient": false,
-      "distribution": "internal",
-      "android": {
-        "buildType": "apk"
-      }
-    },
     "preview": {
-      "distribution": "internal",
-      "developmentClient": false,
-      "android": {
-        "buildType": "apk",
-        "image": "latest"
-      },
-      "channel": "preview"
+      "distribution": "internal"
     },
     "production": {
-      "autoIncrement": true,
-      "developmentClient": false,
-      "android": {
-        "buildType": "app-bundle",
-        "image": "latest"
-      },
-      "channel": "production"
+      "autoIncrement": true
     }
   },
   "submit": {
