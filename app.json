@@ -43,7 +43,8 @@
         {
           "androidReceiverAppId": "1F7E2448"
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true
