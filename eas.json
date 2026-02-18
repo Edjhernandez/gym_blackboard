@@ -12,10 +12,22 @@
       }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "developmentClient": false,
+      "android": {
+        "buildType": "apk",
+        "image": "latest"
+      },
+      "channel": "preview"
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "developmentClient": false,
+      "android": {
+        "buildType": "app-bundle",
+        "image": "latest"
+      },
+      "channel": "production"
     }
   },
   "submit": {
