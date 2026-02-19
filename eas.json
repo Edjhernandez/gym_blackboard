@@ -4,6 +4,7 @@
     "appVersionSource": "remote"
   },
   "build": {
+    "packageManager": "npm",
     "development": {
       "developmentClient": true,
       "distribution": "internal",
