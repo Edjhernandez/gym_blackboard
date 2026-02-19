@@ -73,5 +73,8 @@
   "private": true,
   "overrides": {
     "@expo/prebuild-config": "latest"
+  },
+  "optionalDependencies": {
+    "lightningcss": "^1.31.1"
   }
 }
