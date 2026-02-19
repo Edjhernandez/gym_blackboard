@@ -10,9 +10,6 @@ module.exports = function (api) {
       ],
       "nativewind/babel", // Asegúrate de tener este preset si usas NativeWind v4+
     ],
-    plugins: [
-      // Reanimated siempre debe ir al final de la lista de plugins
-      "react-native-reanimated/plugin",
-    ],
+    plugins: [],
   };
 };
