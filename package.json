@@ -70,5 +70,8 @@
     "tailwindcss": "^3.4.17",
     "typescript": "~5.9.2"
   },
-  "private": true
+  "private": true,
+  "overrides": {
+    "@expo/prebuild-config": "latest"
+  }
 }
