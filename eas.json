@@ -1,10 +1,10 @@
 {
   "cli": {
     "version": ">= 3.16.0",
-    "appVersionSource": "remote"
+    "appVersionSource": "remote",
+    "packageManager": "npm"
   },
   "build": {
-    "packageManager": "npm",
     "development": {
       "developmentClient": true,
       "distribution": "internal",
