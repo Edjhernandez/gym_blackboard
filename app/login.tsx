@@ -49,8 +49,6 @@ export default function LoginScreen() {
       router.push("/(tabs)/home");
     } catch (err) {
       setIsErrorModalVisible(true);
-      console.log("CÓDIGO DE ERROR:", err);
-      console.log("MENSAJE:", err);
       Alert.alert("Error de Firebase", `Código: ${err}\nMensaje: ${err}`);
     } finally {
       setLoading(false);
