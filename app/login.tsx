@@ -8,6 +8,7 @@ import { Link, useRouter } from "expo-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import {
+  Alert,
   Pressable,
   Text,
   TextInput,
@@ -50,6 +51,7 @@ export default function LoginScreen() {
       setIsErrorModalVisible(true);
       console.log("CÓDIGO DE ERROR:", err);
       console.log("MENSAJE:", err);
+      Alert.alert("Error de Firebase", `Código: ${err}\nMensaje: ${err}`);
     } finally {
       setLoading(false);
     }
