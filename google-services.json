@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "974072573218",
+    "project_id": "gymblackboard",
+    "storage_bucket": "gymblackboard.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974072573218:android:1d6c9331678bdc314a897b",
+        "android_client_info": {
+          "package_name": "com.anonymous.gymblackboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyP0mENwEqQQ65yEmhCGOHKNZ2LejX7WY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

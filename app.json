@@ -52,7 +52,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "f6b48ee1-29ee-44cf-a8cd-bbc9a7607e7c"
+        "projectId": "84fa6de3-02fe-4112-aa9d-2cfbb7e2ac5e"
       }
     },
     "runtimeVersion": {
@@ -60,6 +60,7 @@
     },
     "updates": {
       "url": "https://u.expo.dev/f6b48ee1-29ee-44cf-a8cd-bbc9a7607e7c"
-    }
+    },
+    "owner": "hernandezar"
   }
 }
