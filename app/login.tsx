@@ -8,7 +8,6 @@ import { Link, useRouter } from "expo-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import {
-  Alert,
   Pressable,
   Text,
   TextInput,
@@ -25,7 +24,7 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
-  const { setUser } = useUserStore();
+  const { setUser, user } = useUserStore();
 
   const onSubmit = async () => {
     setLoading(true);
@@ -41,7 +40,9 @@ export default function LoginScreen() {
         email,
         password,
       );
+
       const getUserData = await getUserById(userCredential.user.uid);
+
       if (getUserData) {
         setUser(getUserData);
       }
@@ -49,7 +50,6 @@ export default function LoginScreen() {
       router.push("/(tabs)/home");
     } catch (err) {
       setIsErrorModalVisible(true);
-      Alert.alert("Error de Firebase", `Código: ${err}\nMensaje: ${err}`);
     } finally {
       setLoading(false);
     }
