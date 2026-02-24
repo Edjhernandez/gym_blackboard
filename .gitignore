@@ -2,8 +2,9 @@
 node_modules/
 npm-debug.log
 yarn-error.log
-
+package-lock
 pnpm-lock.yaml
+google-services
 
 # Expo / React Native
 .expo/
