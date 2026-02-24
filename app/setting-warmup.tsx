@@ -24,7 +24,7 @@ export default function SettingWarmup() {
   const router = useRouter();
   const { routine, setWarmup } = useRoutineStore();
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    routine.warmup
+    routine.warmup,
   );
   const [visibleAlertInvalidInput, setVisibleAlertInvalidInput] =
     React.useState(false);

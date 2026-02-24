@@ -36,7 +36,7 @@
         "coach": "Entrenador",
         "cancel": "Cancelar",
         "confirm": "Confirmar",
-        "example_sets_placeholder": "Ej: 4",
+        "example_weight_placeholder": "Ej: 4",
         "example_reps_placeholder": "Ej: 12",
         "discard": "Descartar",
         "go_back": "Volver"
@@ -69,7 +69,7 @@
         "forgot_password_screen": {
             "title": "Recuperar tu Contraseña",
             "instruction": "Por favor ingresa tu dirección de correo electrónico para recibir un enlace de restablecimiento de contraseña.",
-            "email_input": "Email",
+            "email_input": "Correo Electrónico",
             "email_placeholder": "tu-email@ejemplo.com",
             "submit_button": "Enviar enlace",
             "back_to_login": "Volver a Iniciar Sesión"
@@ -112,7 +112,7 @@
             "abs": "Abdomen"
         },
         "settings_routine_screen": {
-            "sets": "Series",
+            "weight": "Peso",
             "reps": "Repeticiones",
             "come_back_to_list": "Volver a la lista",
             "save_routine": "Guardar Rutina",

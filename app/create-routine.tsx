@@ -40,6 +40,7 @@ export default function CreateRoutine() {
       id: uuidv4(),
       title: t("routines.block_name", { number: exerciseBlocks.length + 1 }), //set a block number incrementally
       exercises: [],
+      rounds: 1,
     };
 
     setExerciseBlocks([...exerciseBlocks, newBlock]);
@@ -48,7 +49,7 @@ export default function CreateRoutine() {
 
   const deleteBlock = (blockId: string) => {
     const updatedBlocks = exerciseBlocks.filter(
-      (block) => block.id !== blockId
+      (block) => block.id !== blockId,
     );
     const renamedBlocks = updatedBlocks.map((block, index) => {
       return {
@@ -70,7 +71,7 @@ export default function CreateRoutine() {
     // Navigate to the routine settings screen
 
     const checkEmptyBlocks = exerciseBlocks.some(
-      (block) => block.exercises.length === 0
+      (block) => block.exercises.length === 0,
     );
     const checkEmptyWarmup = routine.warmup.length === 0;
 
@@ -84,7 +85,7 @@ export default function CreateRoutine() {
 
   const handleCategoryChange = useCategorySelector(
     setCategory,
-    setRoutineCategory
+    setRoutineCategory,
   );
 
   return (

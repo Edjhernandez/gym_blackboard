@@ -36,7 +36,7 @@
         "coach": "Coach",
         "cancel": "Cancel",
         "confirm": "Confirm",
-        "example_sets_placeholder": "e.g. 4",
+        "example_weight_placeholder": "e.g. 4",
         "example_reps_placeholder": "e.g. 12",
         "discard": "Discard",
         "go_back": "Go Back"
@@ -112,7 +112,7 @@
             "abs": "Abs"
         },
         "settings_routine_screen": {
-            "sets": "Sets",
+            "weight": "Weight",
             "reps": "Reps",
             "come_back_to_list": "Come back to list",
             "save_routine": "Save Routine",

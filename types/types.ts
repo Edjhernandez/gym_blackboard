@@ -6,7 +6,7 @@ export type Exercise = {
   exerciseType: "warmup" | "functional" | "bodybuilding";
   bodyPart?: "chest" | "back" | "legs" | "arms" | "abs";
   videoURL?: string;
-  sets?: number;
+  weight?: number;
   reps?: number;
 };
 

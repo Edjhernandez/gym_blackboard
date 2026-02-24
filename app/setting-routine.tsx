@@ -54,7 +54,6 @@ export default function SettingRoutineScreen() {
       setVisibleAlertEmptyInput(true);
     } else {
       // Here save the routine to persistent storage or backend
-      //router.push("/(tabs)/blackboard");
       saveNewRoutine(routine)
         .then(() => {
           resetRoutine(); // Reset routine store to initial state

@@ -1,9 +1,10 @@
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Exercise } from "@/types/types";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import React, { useEffect } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
-import { TrashIcon, XMarkIcon } from "react-native-heroicons/outline";
+import { TrashIcon } from "react-native-heroicons/outline";
 
 type TypeSettingExerciseCardProps = {
   exercise: Exercise;
@@ -12,21 +13,21 @@ type TypeSettingExerciseCardProps = {
 };
 
 export default function SettingExerciseCard(
-  props: TypeSettingExerciseCardProps
+  props: TypeSettingExerciseCardProps,
 ) {
   const { exercise, setSelectedExercises, selectedExercises } = props;
   const { t } = useI18n();
   const index = selectedExercises.findIndex((item) => exercise.id === item.id);
-  const [setsInput, setSetsInput] = React.useState<string>(
-    selectedExercises[index]?.sets?.toString() || ""
+  const [weightInput, setWeightInput] = React.useState<string>(
+    selectedExercises[index]?.weight?.toString() || "",
   );
   const [repsInput, setRepsInput] = React.useState<string>(
-    selectedExercises[index]?.reps?.toString() || ""
+    selectedExercises[index]?.reps?.toString() || "",
   );
 
   const handleDelete = () => {
     setSelectedExercises((prevExercises) =>
-      prevExercises.filter((ex) => ex.id !== exercise.id)
+      prevExercises.filter((ex) => ex.id !== exercise.id),
     );
   };
 
@@ -59,12 +60,12 @@ export default function SettingExerciseCard(
 
     const updatedExercise = {
       ...newArray[index],
-      sets: parseInt(setsInput, 10),
+      weight: parseInt(weightInput, 10),
     };
 
     newArray[index] = updatedExercise;
     setSelectedExercises(newArray);
-  }, [setsInput]);
+  }, [weightInput]);
 
   useEffect(() => {
     const newArray = [...selectedExercises];
@@ -98,26 +99,6 @@ export default function SettingExerciseCard(
         </View>
 
         <View className="w-full flex-row mt-1 items-center justify-center gap-4">
-          {/* Series input */}
-          <View className="flex-1">
-            <Text className="text-xs text-text-secondary mb-1">
-              {t("routines.settings_routine_screen.sets")}
-            </Text>
-            <TextInput
-              value={setsInput}
-              onChangeText={(text) => setSetsInput(text)}
-              keyboardType="number-pad"
-              placeholder={t("common.example_sets_placeholder")}
-              className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
-              placeholderTextColor="#a8a29e"
-              returnKeyType="done"
-            />
-          </View>
-
-          <View className="mt-4">
-            <XMarkIcon color="#a8a29e" size={32} />
-          </View>
-
           {/* Reps input */}
           <View className="flex-1">
             <Text className="text-xs text-text-secondary mb-1">
@@ -128,6 +109,26 @@ export default function SettingExerciseCard(
               onChangeText={(text) => setRepsInput(text)}
               keyboardType="number-pad"
               placeholder={t("common.example_reps_placeholder")}
+              className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
+              placeholderTextColor="#a8a29e"
+              returnKeyType="done"
+            />
+          </View>
+
+          <View className="mt-4">
+            <AntDesign name="minus" size={32} color="#a8a29e" />
+          </View>
+
+          {/* Weight input */}
+          <View className="flex-1">
+            <Text className="text-xs text-text-secondary mb-1">
+              {t("routines.settings_routine_screen.weight")}
+            </Text>
+            <TextInput
+              value={weightInput}
+              onChangeText={(text) => setWeightInput(text)}
+              keyboardType="number-pad"
+              placeholder={t("common.example_weight_placeholder")}
               className="px-3 py-2 border border-secondary rounded-md bg-background-primary text-text-primary"
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
