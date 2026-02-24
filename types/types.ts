@@ -14,6 +14,7 @@ export type Block = {
   id: string;
   title: string;
   exercises: Exercise[];
+  rounds: number;
 };
 
 export type Routine = {

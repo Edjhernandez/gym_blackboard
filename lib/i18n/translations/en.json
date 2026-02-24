@@ -118,7 +118,8 @@
             "save_routine": "Save Routine",
             "title": "Routine Settings",
             "discard_routine": "Delete Routine",
-            "warmup_settings": "Warm-up Settings"
+            "warmup_settings": "Warm-up Settings",
+            "block_rounds": "Block Rounds"
         },
         "setting_block": "Setting of {{title}}",
         "add_new_block": "Add Block",

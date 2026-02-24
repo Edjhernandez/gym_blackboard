@@ -8,7 +8,11 @@ type RoutineStore = {
   setName: (name: string) => void;
   setWarmup: (warmup: Exercise[]) => void;
   setEmptyBlock: (block: Block) => void;
-  updateBlockById: (blockId: string, listOfExercises: Exercise[]) => void;
+  updateBlockById: (
+    blockId: string,
+    listOfExercises: Exercise[],
+    rounds: number,
+  ) => void;
   updateBlockArray: (blocks: Block[]) => void;
   setCategory: (category: "functional" | "bodybuilding") => void;
 };
@@ -24,6 +28,8 @@ const initialRoutine: Routine = {
   blocks: [],
   createdAt: serverTimestamp() as Timestamp,
   userId: "",
+  coachName: "",
+  coachPhotoURL: "",
 };
 
 const useRoutineStore = create<RoutineStore>()((set) => ({
@@ -45,13 +51,14 @@ const useRoutineStore = create<RoutineStore>()((set) => ({
       routine: { ...state.routine, blocks: [...state.routine.blocks, block] }, // Add a new block to the blocks array
     })),
 
-  updateBlockById: (id: string, listOfExercises: Exercise[]) =>
+  updateBlockById: (id: string, listOfExercises: Exercise[], rounds: number) =>
     set((state) => {
       const updatedBlocks = state.routine.blocks.map((block) => {
         if (block.id === id) {
           return {
             ...block,
             exercises: listOfExercises,
+            rounds: rounds,
           };
         }
 

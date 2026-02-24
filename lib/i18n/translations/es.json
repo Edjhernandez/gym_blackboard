@@ -118,7 +118,8 @@
             "save_routine": "Guardar Rutina",
             "title": "Configuración de la Rutina",
             "discard_routine": "Descartar Rutina",
-            "warmup_settings": "Configuración de Calentamiento"
+            "warmup_settings": "Configuración de Calentamiento",
+            "block_rounds": "Repeticiones del bloque"
         },
         "setting_block": "Configuracion de {{title}}",
         "add_new_block": "Agregar Bloque",
