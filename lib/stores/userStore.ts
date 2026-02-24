@@ -1,6 +1,7 @@
 import { User } from "@/types/types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 type UserStore = {
   user: User;
@@ -20,10 +21,19 @@ const useUserStore = create<UserStore>()(
       user: initialUser,
       resetUser: () => set({ user: initialUser }),
 
-      setUser: (user: User) => set({ user }),
+      setUser: (user: User) => {
+        try {
+          set({ user });
+        } catch (error) {
+          console.error("Error persistiendo el usuario:", error);
+        }
+      },
     }),
-    { name: "user-storage" }
-  )
+    {
+      name: "user-storage",
+      storage: createJSONStorage(() => AsyncStorage),
+    },
+  ),
 );
 
 export default useUserStore;

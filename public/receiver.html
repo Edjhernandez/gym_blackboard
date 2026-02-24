@@ -102,14 +102,15 @@
         const videoCont = document.createElement("div");
         videoCont.className = "video-container";
 
-        const video = document.createElement("video");
-        video.autoplay = true;
+        const video = document.createElement("img");
+        /* video.autoplay = true;
         video.loop = true;
         video.muted = true;
         video.playsInline = true;
-        video.setAttribute("preload", "auto");
+        video.setAttribute("preload", "auto"); */
         video.style.width = "100%";
         video.style.height = "auto";
+        video.style.display = "block";
 
         // Manejo de errores de video
         video.onerror = () => {
@@ -120,11 +121,13 @@
           videoCont.appendChild(errorDiv);
         };
 
-        const source = document.createElement("source");
+        /* const source = document.createElement("source");
         source.src = videoURL;
         source.type = "video/mp4";
-
-        video.appendChild(source);
+ */
+        video.src = videoURL;
+        video.alt = "Animación de ejercicio";
+        /* video.appendChild(source); */
         videoCont.appendChild(video);
         return videoCont;
       }
