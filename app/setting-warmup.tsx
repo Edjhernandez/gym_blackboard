@@ -1,4 +1,5 @@
 import AlertPopUp from "@/components/AlertPopUp";
+import BlockRoundsCard from "@/components/BlockRoundsCard";
 import SettingExerciseCard from "@/components/SettingExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
@@ -24,15 +25,19 @@ export default function SettingWarmup() {
   const router = useRouter();
   const { routine, setWarmup } = useRoutineStore();
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    routine.warmup,
+    routine.warmup.exercises,
   );
   const [visibleAlertInvalidInput, setVisibleAlertInvalidInput] =
     React.useState(false);
   const [visibleAlertEmptyExercises, setVisibleAlertEmptyExercises] =
     React.useState(false);
+  const [warmupRounds, setWarmupRounds] = React.useState<number>(
+    routine.warmup.rounds || 1,
+  );
 
   useEffect(() => {
-    setSelectedExercises(routine.warmup);
+    setSelectedExercises(routine.warmup.exercises);
+    setWarmupRounds(routine.warmup.rounds || 1);
   }, [routine.warmup]);
 
   const handleSave = () => {
@@ -48,14 +53,14 @@ export default function SettingWarmup() {
       setVisibleAlertInvalidInput(true);
       return;
     } else {
-      setWarmup(selectedExercises);
+      setWarmup({ exercises: selectedExercises, rounds: warmupRounds });
       router.push("/setting-routine");
       setSelectedExercises([]);
     }
   };
 
   const handleGoBackToTheList = () => {
-    setWarmup(selectedExercises);
+    setWarmup({ exercises: selectedExercises, rounds: warmupRounds });
     setSelectedExercises([]);
     router.push({
       pathname: "/warmUpExercises",
@@ -64,15 +69,19 @@ export default function SettingWarmup() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background-primary">
+    <SafeAreaView className="flex-1 bg-background-primary px-3">
       {/* Header */}
-      <View className="w-full p-4 flex-row items-center justify-around">
+      <View className="w-full p-4 flex-row items-center justify-around border-b border-primary mb-4">
         <Text className="text-text-primary font-semibold text-xl text-center">
           {t("routines.settings_routine_screen.warmup_settings")}
         </Text>
       </View>
+
+      {/* Block Rounds Card */}
+      <BlockRoundsCard rounds={warmupRounds} setBlockRounds={setWarmupRounds} />
+
       {/* Exercises List */}
-      <KeyboardAvoidingView className="flex-1 px-3 pt-2" behavior="padding">
+      <KeyboardAvoidingView className="flex-1 pt-2" behavior="padding">
         <FlatList
           data={selectedExercises}
           renderItem={({ item }) => (

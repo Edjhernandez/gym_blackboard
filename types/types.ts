@@ -24,7 +24,7 @@ export type Routine = {
   durationMinutes: number;
   isFavorite: boolean;
   category: "functional" | "bodybuilding";
-  warmup: Exercise[];
+  warmup: { exercises: Exercise[]; rounds: number };
   blocks: Block[];
   userId: string;
   createdAt: Timestamp;

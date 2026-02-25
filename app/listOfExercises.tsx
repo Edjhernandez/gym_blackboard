@@ -28,14 +28,14 @@ export default function listOfExercises() {
   const currentBlock = routine.blocks[index];
 
   const [routineType, setRoutineType] = useState<"functional" | "bodybuilding">(
-    "functional"
+    "functional",
   );
   const [bodyPart, setBodyPart] = useState<
     "chest" | "back" | "legs" | "arms" | "abs"
   >("chest");
 
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    currentBlock?.exercises || []
+    currentBlock?.exercises || [],
   );
 
   const [dataExercises, setDataExercises] = React.useState<Exercise[]>([]);
@@ -60,7 +60,7 @@ export default function listOfExercises() {
       (error) => {
         console.error("Error fetching exercises:", error);
         setLoading(false);
-      }
+      },
     );
 
     return () => unsubscribe();
@@ -76,21 +76,21 @@ export default function listOfExercises() {
 
   const onToggleSelect = (exercise: Exercise) => {
     const isAlreadyAdded = selectedExercises.some(
-      (item) => item.id === exercise.id
+      (item) => item.id === exercise.id,
     );
 
     if (!isAlreadyAdded) {
       setSelectedExercises?.((prev) => [...prev, exercise]);
     } else {
       setSelectedExercises?.((prev) =>
-        prev.filter((item) => item.id !== exercise.id)
+        prev.filter((item) => item.id !== exercise.id),
       );
     }
   };
 
   const handleSave = () => {
     if (!currentBlock) return;
-    updateBlockById(currentBlock.id, selectedExercises);
+    updateBlockById(currentBlock.id, selectedExercises, currentBlock.rounds);
     setSelectedExercises([]);
 
     if (params.origin === "/setting-block") {
@@ -304,7 +304,7 @@ export default function listOfExercises() {
             data={dataExercises.filter(
               (exercise) =>
                 exercise.exerciseType === routineType &&
-                exercise.bodyPart === bodyPart
+                exercise.bodyPart === bodyPart,
             )}
             renderItem={({ item }) => (
               <ExerciseCard

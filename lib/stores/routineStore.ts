@@ -6,7 +6,7 @@ type RoutineStore = {
   routine: Routine;
   resetRoutine: () => void;
   setName: (name: string) => void;
-  setWarmup: (warmup: Exercise[]) => void;
+  setWarmup: (warmup: { exercises: Exercise[]; rounds: number }) => void;
   setEmptyBlock: (block: Block) => void;
   updateBlockById: (
     blockId: string,
@@ -24,7 +24,7 @@ const initialRoutine: Routine = {
   durationMinutes: 0,
   isFavorite: false,
   category: "functional",
-  warmup: [],
+  warmup: { exercises: [], rounds: 1 },
   blocks: [],
   createdAt: serverTimestamp() as Timestamp,
   userId: "",
@@ -42,7 +42,7 @@ const useRoutineStore = create<RoutineStore>()((set) => ({
   setName: (name: string) =>
     set((state) => ({ ...state, routine: { ...state.routine, name } })),
 
-  setWarmup: (warmup: Exercise[]) =>
+  setWarmup: (warmup: { exercises: Exercise[]; rounds: number }) =>
     set((state) => ({ ...state, routine: { ...state.routine, warmup } })),
 
   setEmptyBlock: (block: Block) =>
