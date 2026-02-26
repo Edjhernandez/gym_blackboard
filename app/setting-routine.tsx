@@ -33,7 +33,7 @@ export default function SettingRoutineScreen() {
   const handleSave = () => {
     //validate any sets or reps is invalid into warmup
     const isThereAnyInvalidSetsOrRepsIntoWarmup = hasInvalidSetsOrRepsInput(
-      routine.warmup,
+      routine.warmup.exercises,
     );
     //validate any sets or reps is invalid into blocks
     const isThereAnyInvalidSetsOrRepsIntoBlocks = hasInvalidSetsOrRepsInput(

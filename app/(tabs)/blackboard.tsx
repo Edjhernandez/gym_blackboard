@@ -4,18 +4,18 @@ import { formatRoutineDetails } from "@/utils/formatRoutineDetails";
 import { getRoutineById } from "@/utils/getRoutineById";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLocalSearchParams } from "expo-router";
-import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Pressable, Text, View } from "react-native";
-import GoogleCast, {
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
+/* import GoogleCast, {
   CastButton,
   CastChannel,
   useCastSession,
-} from "react-native-google-cast";
+} from "react-native-google-cast"; */
 
 function Blackboard() {
   const { t } = useI18n();
-  const castSession = useCastSession();
-  const customChannel = useRef<CastChannel>(null);
+  //const castSession = useCastSession();
+  //const customChannel = useRef<CastChannel>(null);
   const params = useLocalSearchParams();
   const [routine, setRoutine] = useState<Routine | null>(null);
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ function Blackboard() {
           setLoading(true);
           const data = await getRoutineById(params.routineId as string);
           setRoutine(data);
-          /* console.log(JSON.stringify(data, null, 2)); */
+          //console.log(JSON.stringify(data, null, 2));
         } catch (err) {
           console.error("Error fetching routine:", err);
         } finally {
@@ -40,7 +40,7 @@ function Blackboard() {
     }
   }, [params.routineId]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const configChannel = async () => {
       try {
         customChannel.current = await CastChannel.add("urn:x-cast:1F7E2448");
@@ -52,7 +52,7 @@ function Blackboard() {
       configChannel();
       setIsThereSession(true);
     }
-  }, [castSession]);
+  }, [castSession]); 
 
   const sendMessageFunction = async (routine: Routine) => {
     if (customChannel.current) {
@@ -77,7 +77,7 @@ function Blackboard() {
         console.error("Error ending session:", error);
       });
     setIsThereSession(false);
-  };
+  };*/
 
   return (
     <View className="flex-1 w-full bg-background-primary px-4 pt-10 justify-start items-center">
@@ -136,9 +136,9 @@ function Blackboard() {
                 <Text className="text-text-primary font-light text-lg mt-5 mb-3">
                   {t("blackboard_screen.connect_device")}
                 </Text>
-                <CastButton
+                {/* <CastButton
                   style={{ width: 48, height: 48, tintColor: "#FFFF00" }}
-                />
+                /> */}
               </View>
             )}
           </View>
@@ -146,7 +146,7 @@ function Blackboard() {
       </View>
 
       {/* Buttons to disconnect and send routine */}
-      {isThereSession && routine && (
+      {/* {isThereSession && routine && (
         <View className="w-full flex-1 flex-col justify-start items-center">
           <Pressable
             className="bg-secondary rounded-full p-5 mt-10"
@@ -165,7 +165,7 @@ function Blackboard() {
             </Text>
           </Pressable>
         </View>
-      )}
+      )} */}
     </View>
   );
 }

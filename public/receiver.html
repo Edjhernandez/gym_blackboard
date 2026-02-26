@@ -15,104 +15,89 @@
       <div id="waiting">Esperando rutina</div>
     </div>
     <div id="routine-container" class="is-hidden"></div>
-    <!-- <button id="close-button">boton</button> -->
+    <button id="close-button">boton</button>
 
     <script>
-      /* function renderRoutine(routine) {
-        const messageBox = document.getElementById("message-box");
-        const routineContainer = document.getElementById("routine-container");
-        messageBox.classList.add("is-hidden");
-        routineContainer.classList.remove("is-hidden");
+      const routineOfTest = {
+        coachPhotoURL:
+          "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/profilePhotos%2FmoisesLopez.png?alt=media&token=12fe51bb-9ee0-44e3-acb0-712e7e554ad6",
+        userId: "JcXXssklDiUbZqIn2f6paYa3mwn1",
+        exercisesAmount: 2,
+        name: "Rutina",
+        durationMinutes: 57,
+        category: "functional",
+        warmup: {
+          exercises: [
+            {
+              reps: 20,
+              name: "Torso twist",
+              id: "2esO3IceqSAm9asCcKjN",
+              weight: 20,
+              exerciseType: "warmup",
+            },
+            {
+              weight: 20,
+              exerciseType: "warmup",
+              name: "Jumping Jacks",
+              id: "pJuBnoeylFNqZ8rCsZH4",
+              reps: 20,
+            },
+          ],
+          rounds: 2,
+        },
+        createdAt: {
+          type: "firestore/timestamp/1.0",
+          seconds: 1772111174,
+          nanoseconds: 261000000,
+        },
+        blocks: [
+          {
+            rounds: 3,
+            id: "5594f047-7e8c-4b6b-b01a-a616d7a8eb9b",
+            title: "Bloque 1",
+            exercises: [
+              {
+                id: "Xuv4WBTEr233on8t5FZS",
+                name: "Push-up",
+                reps: 20,
+                bodyPart: "chest",
+                weight: 10,
+                exerciseType: "functional",
+                videoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/exercises%2FpushUp-webp.webp?alt=media&token=c1a03f78-1bdf-4dda-a770-72540d513418",
+              },
+              {
+                id: "14gtBPclrLYmbwVgsIdd",
+                name: "Remo con liga",
+                bodyPart: "back",
+                reps: 20,
+                videoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/gymblackboard.firebasestorage.app/o/exercises%2Fremo.webp?alt=media&token=49b6263f-5348-4279-a25f-2a0eded5b7b6",
+                exerciseType: "functional",
+                weight: 20,
+              },
+            ],
+          },
+        ],
+        coachName: "Moisés López",
+        isFavorite: false,
+        id: "m97vTFpzfl3uWcV0zbKw",
+      };
 
-        routineContainer.innerHTML = `
-        <div class="routine-header">
-            <div class="coach-info">
-              <img src="${routine.coachPhotoURL}" alt="${routine.coachName}" class="coach-photo" />
-              <span class="coach-name">${routine.coachName}</span>
-            </div>
-          <img src="/assets/images/180logo.png" alt="Center Fitness Logo" />
-        </div>
-
-        
-          <h1>${routine.name}</h1>
-          <h2>${routine.exercisesAmount} Ejercicios - ${routine.durationMinutes} minutos</h2>
-          <div class="warmup-section">
-            <h2>Acondicionamiento</h2>
-            <ul>
-              ${routine.warmup
-                .map(
-                  (exercise) => `
-                  <li>
-                    <div>
-                      <strong>${exercise.name}</strong> - ${exercise.sets} X ${exercise.reps} reps
-                    </div>
-                  </li>
-                `,
-                )
-                .join("")}
-            </ul>
-          </div>
-          
-          ${routine.blocks
-            .map(
-              (block) => `
-            <div class="block">
-              <h3>${block.title}</h3>
-              <ul>
-                ${block.exercises
-                  .map((exercise) => {
-                    let videoHtml = "";
-                    if (exercise.videoURL) {
-                      videoHtml = `
-                                    <div class="video-container">
-                                        <video autoplay loop muted playsinline preload="auto" width="100%" height="auto" onerror="this.parentElement.innerHTML='<div class=\'error-placeholder\'>ERROR VIDEO</div>'">
-                                            <source src="${exercise.videoURL}" type="video/mp4">
-                                        </video>
-                                    </div>
-                                `;
-                    }
-                    return `
-                          <li>
-                            <div>
-                              <strong>${exercise.name}</strong> - ${exercise.sets} X ${exercise.reps} reps
-                              </div>
-                            <div>
-                              
-                              ${videoHtml}
-                              </div>
-                          </li>
-                        `;
-                  })
-                  .join("")}
-                  
-                      </ul>
-                    </div>
-                  `,
-            )
-            .join("")}
-                `;
-      } */
-
-      /* const button = document.getElementById("close-button");
+      const button = document.getElementById("close-button");
       button.addEventListener("click", () => {
         renderRoutine(routineOfTest);
-      }); */
+      });
 
       function createVideoElement(videoURL) {
         const videoCont = document.createElement("div");
         videoCont.className = "video-container";
-
         const video = document.createElement("img");
-        /* video.autoplay = true;
-        video.loop = true;
-        video.muted = true;
-        video.playsInline = true;
-        video.setAttribute("preload", "auto"); */
         video.style.width = "100%";
         video.style.height = "auto";
         video.style.display = "block";
 
-        // Manejo de errores de video
+        // handle error loading video
         video.onerror = () => {
           videoCont.innerHTML = "";
           const errorDiv = document.createElement("div");
@@ -121,26 +106,20 @@
           videoCont.appendChild(errorDiv);
         };
 
-        /* const source = document.createElement("source");
-        source.src = videoURL;
-        source.type = "video/mp4";
- */
         video.src = videoURL;
         video.alt = "Animación de ejercicio";
-        /* video.appendChild(source); */
         videoCont.appendChild(video);
         return videoCont;
       }
 
       function createExerciseItem(ex) {
         const li = document.createElement("li");
-
         const infoDiv = document.createElement("div");
         const strong = document.createElement("strong");
         strong.textContent = ex.name || "Ejercicio";
 
         infoDiv.appendChild(strong);
-        infoDiv.append(` - ${ex.sets || 0} X ${ex.reps || 0} reps`);
+        infoDiv.append(` x ${ex.reps || 0} reps - ${ex.weight || 0} kg`);
 
         li.appendChild(infoDiv);
 
@@ -161,13 +140,11 @@
         routineContainer.classList.remove("is-hidden");
         routineContainer.innerHTML = ""; // Limpieza inicial única
 
-        // 1. Header de la Rutina
+        // Header with coach info and logo
         const header = document.createElement("div");
         header.className = "routine-header";
-
         const coachInfo = document.createElement("div");
         coachInfo.className = "coach-info";
-
         const coachImg = document.createElement("img");
         coachImg.src = routine.coachPhotoURL || "";
         coachImg.alt = routine.coachName || "Coach";
@@ -188,7 +165,7 @@
         header.appendChild(logoImg);
         routineContainer.appendChild(header);
 
-        // 2. Títulos Principales
+        // Main title and stats
         const h1 = document.createElement("h1");
         h1.textContent = routine.name || "RUTINA";
 
@@ -198,31 +175,32 @@
         routineContainer.appendChild(h1);
         routineContainer.appendChild(h2Stats);
 
-        // 3. Sección de Acondicionamiento (Warmup)
-        if (routine.warmup && routine.warmup.length > 0) {
+        // Warmup section
+        if (routine.warmup.exercises && routine.warmup.exercises.length > 0) {
           const warmupSection = document.createElement("div");
           warmupSection.className = "warmup-section";
 
           const warmupTitle = document.createElement("h2");
-          warmupTitle.textContent = "Acondicionamiento";
+          warmupTitle.textContent = `Acondicionamiento x ${routine.warmup.rounds || 0}`;
           warmupSection.appendChild(warmupTitle);
 
           const ul = document.createElement("ul");
-          routine.warmup.forEach((ex) => {
+          routine.warmup.exercises.forEach((ex) => {
             ul.appendChild(createExerciseItem(ex));
           });
           warmupSection.appendChild(ul);
           routineContainer.appendChild(warmupSection);
         }
 
-        // 4. Bloques de ejercicios
+        // Exercise blocks
         if (routine.blocks) {
           routine.blocks.forEach((block) => {
             const blockDiv = document.createElement("div");
             blockDiv.className = "block";
 
             const blockTitle = document.createElement("h3");
-            blockTitle.textContent = block.title || "BLOQUE";
+            blockTitle.textContent =
+              `${block.title} x ${block.rounds || 1}` || "BLOQUE";
             blockDiv.appendChild(blockTitle);
 
             const ul = document.createElement("ul");
