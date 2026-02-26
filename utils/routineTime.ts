@@ -13,9 +13,10 @@ export function estimateRoutineDuration(routine: Routine): number {
   });
 
   const variableTimeMinutes =
-    ((secondsPerRep + secondsPerRest) * totalReps * totalRounds) / 60;
+    (secondsPerRep * totalReps * totalRounds + secondsPerRest * totalRounds) /
+    60;
 
-  const totalDuration = 15 + variableTimeMinutes; // 15 minutes base time for warmup and its rest
+  const totalDuration = 10 + variableTimeMinutes; // 10 minutes base time for warmup and its rest
 
   return Math.round(totalDuration);
 }
