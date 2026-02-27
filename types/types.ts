@@ -6,7 +6,7 @@ export type Exercise = {
   exerciseType: "warmup" | "functional" | "bodybuilding";
   bodyPart?: "chest" | "back" | "legs" | "arms" | "abs";
   videoURL?: string;
-  sets?: number;
+  weight?: number;
   reps?: number;
 };
 
@@ -14,6 +14,7 @@ export type Block = {
   id: string;
   title: string;
   exercises: Exercise[];
+  rounds: number;
 };
 
 export type Routine = {
@@ -23,7 +24,7 @@ export type Routine = {
   durationMinutes: number;
   isFavorite: boolean;
   category: "functional" | "bodybuilding";
-  warmup: Exercise[];
+  warmup: { exercises: Exercise[]; rounds: number };
   blocks: Block[];
   userId: string;
   createdAt: Timestamp;

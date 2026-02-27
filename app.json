@@ -7,7 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "gymblackboard",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
       "supportsTablet": true
     },
@@ -38,12 +38,6 @@
       "expo-video",
       "expo-font",
       "expo-web-browser",
-      [
-        "react-native-google-cast",
-        {
-          "androidReceiverAppId": "1F7E2448"
-        }
-      ],
       "expo-localization"
     ],
     "experiments": {

@@ -24,7 +24,7 @@ export default function WarmUpExercises() {
   const { t } = useI18n();
   const router = useRouter();
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    routine.warmup
+    routine.warmup.exercises,
   );
   const params = useLocalSearchParams();
 
@@ -46,40 +46,40 @@ export default function WarmUpExercises() {
         });
         setDataExercises(
           exercisesFromDB.filter(
-            (exercise) => exercise.exerciseType === "warmup"
-          )
+            (exercise) => exercise.exerciseType === "warmup",
+          ),
         );
         setLoading(false);
       },
       (error) => {
         console.error("Error fetching exercises:", error);
         setLoading(false);
-      }
+      },
     );
 
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    setSelectedExercises(routine.warmup);
+    setSelectedExercises(routine.warmup.exercises);
   }, [routine.warmup]);
 
   const onToggleSelect = (exercise: Exercise) => {
     const isAlreadyAdded = selectedExercises.some(
-      (item) => item.id === exercise.id
+      (item) => item.id === exercise.id,
     );
 
     if (!isAlreadyAdded) {
       setSelectedExercises?.((prev) => [...prev, exercise]);
     } else {
       setSelectedExercises?.((prev) =>
-        prev.filter((item) => item.id !== exercise.id)
+        prev.filter((item) => item.id !== exercise.id),
       );
     }
   };
 
   const handleSave = () => {
-    setWarmup(selectedExercises);
+    setWarmup({ exercises: selectedExercises, rounds: routine.warmup.rounds });
     setSelectedExercises([]);
     if (params.origin === "warmupSettings") {
       router.back();

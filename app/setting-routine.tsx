@@ -5,7 +5,6 @@ import { useCategorySelector } from "@/lib/hooks/useChangeCategory";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { saveNewRoutine } from "@/utils/saveRoutineInDB";
-import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, Pressable, Text, TextInput, View } from "react-native";
@@ -13,6 +12,10 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import {
+  hasInvalidRepsInput,
+  hasInvalidWeightInput,
+} from "../utils/validationInput";
 
 export default function SettingRoutineScreen() {
   const insets = useSafeAreaInsets();
@@ -31,12 +34,15 @@ export default function SettingRoutineScreen() {
   };
 
   const handleSave = () => {
-    //validate any sets or reps is invalid into warmup
-    const isThereAnyInvalidSetsOrRepsIntoWarmup = hasInvalidSetsOrRepsInput(
-      routine.warmup,
+    //validate any reps is invalid into warmup
+    const isThereAnyInvalidRepsIntoWarmup = hasInvalidRepsInput(
+      routine.warmup.exercises,
     );
-    //validate any sets or reps is invalid into blocks
-    const isThereAnyInvalidSetsOrRepsIntoBlocks = hasInvalidSetsOrRepsInput(
+    //validate any weight or reps is invalid into blocks
+    const isThereAnyInvalidWeighIntoBlocks = hasInvalidWeightInput(
+      routine.blocks.flatMap((block) => block.exercises),
+    );
+    const isThereAnyInvalidRepsIntoBlocks = hasInvalidRepsInput(
       routine.blocks.flatMap((block) => block.exercises),
     );
 
@@ -47,14 +53,14 @@ export default function SettingRoutineScreen() {
     ) {
       setVisibleAlertEmptyName(true);
     } else if (
-      isThereAnyInvalidSetsOrRepsIntoWarmup ||
-      isThereAnyInvalidSetsOrRepsIntoBlocks
+      isThereAnyInvalidRepsIntoWarmup ||
+      isThereAnyInvalidWeighIntoBlocks ||
+      isThereAnyInvalidRepsIntoBlocks
     ) {
       //validate any sets or reps is invalid
       setVisibleAlertEmptyInput(true);
     } else {
       // Here save the routine to persistent storage or backend
-      //router.push("/(tabs)/blackboard");
       saveNewRoutine(routine)
         .then(() => {
           resetRoutine(); // Reset routine store to initial state

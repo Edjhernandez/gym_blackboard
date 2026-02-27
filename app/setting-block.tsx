@@ -1,9 +1,13 @@
 import AlertPopUp from "@/components/AlertPopUp";
+import BlockRoundsCard from "@/components/BlockRoundsCard";
 import SettingExerciseCard from "@/components/SettingExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
-import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
+import {
+  hasInvalidRepsInput,
+  hasInvalidWeightInput,
+} from "@/utils/validationInput";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import {
@@ -27,38 +31,52 @@ export default function SettingBlock() {
   const blockIndex = Number(params.blockIndex as string);
   const currentBlock = routine.blocks[blockIndex];
   const [selectedExercises, setSelectedExercises] = React.useState<Exercise[]>(
-    currentBlock?.exercises || []
+    currentBlock?.exercises || [],
   );
   const [visibleAlertInvalidInput, setVisibleAlertInvalidInput] =
     React.useState(false);
   const [visibleAlertEmptyExercises, setVisibleAlertEmptyExercises] =
     React.useState(false);
+  const [blockRounds, setBlockRounds] = React.useState<number>(1);
 
   useEffect(() => {
     if (currentBlock) {
       setSelectedExercises(currentBlock.exercises);
+      setBlockRounds(currentBlock.rounds || 1);
     } else {
       setSelectedExercises([]);
+      setBlockRounds(1);
     }
   }, [currentBlock]);
 
   const handleSave = () => {
     if (!currentBlock) return;
 
-    //search for invalid sets or reps in blocks exercises
-    const isThereAnyInvalidSetsOrRepsIntoBlock =
-      hasInvalidSetsOrRepsInput(selectedExercises);
+    //search for invalid reps in blocks exercises
+    const isThereAnyInvalidRepsIntoBlock =
+      hasInvalidRepsInput(selectedExercises);
 
-    //validate warmup list of exercises is not empty
+    //search for invalid weight in blocks exercises
+    const isThereAnyInvalidWeightIntoBlock =
+      hasInvalidWeightInput(selectedExercises);
+
+    //validate if block list of exercises is not empty
     if (selectedExercises.length === 0) {
       setVisibleAlertEmptyExercises(true);
       return;
-      //validate any sets or reps is invalid
-    } else if (isThereAnyInvalidSetsOrRepsIntoBlock) {
+      //validate if any reps input is invalid
+    } else if (isThereAnyInvalidRepsIntoBlock) {
+      setVisibleAlertInvalidInput(true);
+      return;
+    } else if (isThereAnyInvalidWeightIntoBlock) {
       setVisibleAlertInvalidInput(true);
       return;
     } else {
-      updateBlockById(currentBlock.id as string, selectedExercises);
+      updateBlockById(
+        currentBlock.id as string,
+        selectedExercises,
+        blockRounds,
+      );
       setSelectedExercises([]);
       router.push("/setting-routine");
     }
@@ -66,7 +84,7 @@ export default function SettingBlock() {
 
   const handleGoBackToTheList = () => {
     if (!currentBlock) return;
-    updateBlockById(currentBlock.id as string, selectedExercises);
+    updateBlockById(currentBlock.id as string, selectedExercises, blockRounds);
     setSelectedExercises([]);
     router.push({
       pathname: "/listOfExercises",
@@ -75,9 +93,9 @@ export default function SettingBlock() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background-primary">
+    <SafeAreaView className="flex-1 bg-background-primary px-3">
       {/* Header */}
-      <View className="w-full p-4 flex-row items-center justify-around">
+      <View className="w-full p-4 flex-row items-center justify-around border-b border-primary mb-4">
         <Text className="text-text-primary font-semibold text-xl text-center">
           {t("routines.setting_block", {
             title: currentBlock?.title,
@@ -85,8 +103,11 @@ export default function SettingBlock() {
         </Text>
       </View>
 
+      {/* Block Rounds Card */}
+      <BlockRoundsCard rounds={blockRounds} setBlockRounds={setBlockRounds} />
+
       {/* Exercises List */}
-      <KeyboardAvoidingView className="flex-1 px-3 pt-2" behavior="padding">
+      <KeyboardAvoidingView className="flex-1 pt-2" behavior="padding">
         <FlatList
           data={selectedExercises}
           renderItem={({ item }) => (
