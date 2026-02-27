@@ -2,7 +2,7 @@ import { Routine } from "@/types/types";
 
 export function estimateRoutineDuration(routine: Routine): number {
   const secondsPerRep = routine.category === "functional" ? 1.2 : 2.2;
-  const secondsPerRest = routine.category === "functional" ? 20 : 120;
+  const secondsPerRest = routine.category === "functional" ? 90 : 120;
   let totalReps = 0;
   let totalRounds = 0;
   routine.blocks.forEach((block) => {

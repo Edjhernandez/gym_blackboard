@@ -5,10 +5,6 @@ import { useCategorySelector } from "@/lib/hooks/useChangeCategory";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { saveNewRoutine } from "@/utils/saveRoutineInDB";
-import {
-  hasInvalidRepsInput,
-  hasInvalidWeightInput,
-} from "@/utils/validationInput";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, Pressable, Text, TextInput, View } from "react-native";
@@ -16,6 +12,10 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import {
+  hasInvalidRepsInput,
+  hasInvalidWeightInput,
+} from "../utils/validationInput";
 
 export default function SettingRoutineScreen() {
   const insets = useSafeAreaInsets();
@@ -39,9 +39,12 @@ export default function SettingRoutineScreen() {
       routine.warmup.exercises,
     );
     //validate any weight or reps is invalid into blocks
-    const isThereAnyInvalidWeightOrRepsIntoBlocks =
-      hasInvalidRepsInput(routine.blocks.flatMap((block) => block.exercises)) ||
-      hasInvalidWeightInput(routine.blocks.flatMap((block) => block.exercises));
+    const isThereAnyInvalidWeighIntoBlocks = hasInvalidWeightInput(
+      routine.blocks.flatMap((block) => block.exercises),
+    );
+    const isThereAnyInvalidRepsIntoBlocks = hasInvalidRepsInput(
+      routine.blocks.flatMap((block) => block.exercises),
+    );
 
     //validate name is not empty and only letters and spaces
     if (
@@ -51,7 +54,8 @@ export default function SettingRoutineScreen() {
       setVisibleAlertEmptyName(true);
     } else if (
       isThereAnyInvalidRepsIntoWarmup ||
-      isThereAnyInvalidWeightOrRepsIntoBlocks
+      isThereAnyInvalidWeighIntoBlocks ||
+      isThereAnyInvalidRepsIntoBlocks
     ) {
       //validate any sets or reps is invalid
       setVisibleAlertEmptyInput(true);

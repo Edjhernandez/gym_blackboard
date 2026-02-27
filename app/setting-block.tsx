@@ -4,7 +4,10 @@ import SettingExerciseCard from "@/components/SettingExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
-import { hasInvalidSetsOrRepsInput } from "@/utils/validationInput";
+import {
+  hasInvalidRepsInput,
+  hasInvalidWeightInput,
+} from "@/utils/validationInput";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import {
@@ -47,16 +50,23 @@ export default function SettingBlock() {
   const handleSave = () => {
     if (!currentBlock) return;
 
-    //search for invalid sets or reps in blocks exercises
-    const isThereAnyInvalidSetsOrRepsIntoBlock =
-      hasInvalidSetsOrRepsInput(selectedExercises);
+    //search for invalid reps in blocks exercises
+    const isThereAnyInvalidRepsIntoBlock =
+      hasInvalidRepsInput(selectedExercises);
+
+    //search for invalid weight in blocks exercises
+    const isThereAnyInvalidWeightIntoBlock =
+      hasInvalidWeightInput(selectedExercises);
 
     //validate warmup list of exercises is not empty
     if (selectedExercises.length === 0) {
       setVisibleAlertEmptyExercises(true);
       return;
-      //validate any sets or reps is invalid
-    } else if (isThereAnyInvalidSetsOrRepsIntoBlock) {
+      //validate any reps is invalid
+    } else if (isThereAnyInvalidRepsIntoBlock) {
+      setVisibleAlertInvalidInput(true);
+      return;
+    } else if (isThereAnyInvalidWeightIntoBlock) {
       setVisibleAlertInvalidInput(true);
       return;
     } else {
