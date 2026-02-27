@@ -1,6 +1,5 @@
 import { useI18n } from "@/lib/hooks/useI18n";
 import { Exercise } from "@/types/types";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import React, { useEffect } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
@@ -82,7 +81,7 @@ export default function SettingWarmupExerciseCard(
           </Pressable>
         </View>
 
-        <View className="w-full flex-row mt-1 items-center justify-center gap-4">
+        <View className="w-5/12 flex-row mt-1 items-center justify-center gap-4">
           {/* Reps input */}
           <View className="flex-1">
             <Text className="text-xs text-text-secondary mb-1">
@@ -97,10 +96,6 @@ export default function SettingWarmupExerciseCard(
               placeholderTextColor="#a8a29e"
               returnKeyType="done"
             />
-          </View>
-
-          <View className="mt-4">
-            <AntDesign name="minus" size={32} color="#a8a29e" />
           </View>
         </View>
       </View>

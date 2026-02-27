@@ -1,6 +1,5 @@
 import AlertPopUp from "@/components/AlertPopUp";
 import BlockRoundsCard from "@/components/BlockRoundsCard";
-import SettingExerciseCard from "@/components/SettingExerciseCard";
 import { useI18n } from "@/lib/hooks/useI18n";
 import useRoutineStore from "@/lib/stores/routineStore";
 import { Exercise } from "@/types/types";
@@ -18,7 +17,8 @@ import {
   ArrowPathRoundedSquareIcon,
 } from "react-native-heroicons/outline";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { hasInvalidSetsOrRepsInput } from "../utils/validationInput";
+import SettingWarmupExerciseCard from "../components/SettingWarmupExerciseCard";
+import { hasInvalidRepsInput } from "../utils/validationInput";
 
 export default function SettingWarmup() {
   const { t } = useI18n();
@@ -41,15 +41,15 @@ export default function SettingWarmup() {
   }, [routine.warmup]);
 
   const handleSave = () => {
-    const isThereAnyInvalidSetsOrRepsIntoWarmup =
-      hasInvalidSetsOrRepsInput(selectedExercises);
+    const isThereAnyInvalidRepsIntoWarmup =
+      hasInvalidRepsInput(selectedExercises);
 
     //validate warmup exercises is not empty
     if (selectedExercises.length === 0) {
       setVisibleAlertEmptyExercises(true);
       return;
       //validate any sets or reps is invalid
-    } else if (isThereAnyInvalidSetsOrRepsIntoWarmup) {
+    } else if (isThereAnyInvalidRepsIntoWarmup) {
       setVisibleAlertInvalidInput(true);
       return;
     } else {
@@ -85,7 +85,7 @@ export default function SettingWarmup() {
         <FlatList
           data={selectedExercises}
           renderItem={({ item }) => (
-            <SettingExerciseCard
+            <SettingWarmupExerciseCard
               exercise={item}
               setSelectedExercises={setSelectedExercises}
               selectedExercises={selectedExercises}
