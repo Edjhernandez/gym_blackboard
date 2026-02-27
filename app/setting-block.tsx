@@ -42,8 +42,10 @@ export default function SettingBlock() {
   useEffect(() => {
     if (currentBlock) {
       setSelectedExercises(currentBlock.exercises);
+      setBlockRounds(currentBlock.rounds || 1);
     } else {
       setSelectedExercises([]);
+      setBlockRounds(1);
     }
   }, [currentBlock]);
 
