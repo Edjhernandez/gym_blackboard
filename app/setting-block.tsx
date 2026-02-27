@@ -58,11 +58,11 @@ export default function SettingBlock() {
     const isThereAnyInvalidWeightIntoBlock =
       hasInvalidWeightInput(selectedExercises);
 
-    //validate warmup list of exercises is not empty
+    //validate if block list of exercises is not empty
     if (selectedExercises.length === 0) {
       setVisibleAlertEmptyExercises(true);
       return;
-      //validate any reps is invalid
+      //validate if any reps input is invalid
     } else if (isThereAnyInvalidRepsIntoBlock) {
       setVisibleAlertInvalidInput(true);
       return;

@@ -7,14 +7,13 @@ export function estimateRoutineDuration(routine: Routine): number {
   let totalRounds = 0;
   routine.blocks.forEach((block) => {
     block.exercises.forEach((exercise) => {
-      totalReps += exercise.reps || 0;
+      totalReps += (exercise.reps || 0) * block.rounds;
     });
     totalRounds += block.rounds || 0;
   });
 
   const variableTimeMinutes =
-    (secondsPerRep * totalReps * totalRounds + secondsPerRest * totalRounds) /
-    60;
+    (secondsPerRep * totalReps + secondsPerRest * totalRounds) / 60;
 
   const totalDuration = 10 + variableTimeMinutes; // 10 minutes base time for warmup and its rest
 
